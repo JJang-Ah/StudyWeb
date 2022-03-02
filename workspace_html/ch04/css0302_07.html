@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가상 클래스 3번 - 요소의 특정 위치 지정</title>
+    <style>
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+            padding: 20px;
+        }
+        tr {
+            height: 50px;
+        }
+        td {
+            width: 150px;
+            border: 1px solid black;
+            padding: 20px;
+        }
+        /* n은 숫자로 지정, 짝수: 2n , 홀: 2n-1*/
+        table tr:nth-child(odd){
+            background-color: lightgray;
+            color: blue;
+            font-weight: bold;
+        }
+        table tr:nth-last-child(1){
+            color: red;
+            font-weight: bold;
+        }
+        
+        p:nth-of-type(even) {
+            font-size: 1.5em;
+        }
+        p:nth-last-of-type(odd){
+            color: blueviolet;
+        }
+        ul li:first-child {
+            background: pink;
+        }
+        ul li:last-child {
+            background: yellow;
+        }
+        p:first-of-type {
+            background: orange;
+        }
+        p:last-of-type {
+            background: green;
+        }
+        h5 span:only-child {
+            background-color: cyan;
+        }
+        h4:only-of-type {
+            background: orange;
+        }
+    </style>
+
+    <!-- 
+        < 가상 클래스 3번 - 요소의 특정 위치 지정 >
+        1. root : 문서 전체에 적용
+        2. nth-child(n) : 앞에서부터 n번째의 자식 요소에 스타일 지정, 반드시 부모 요소가 존재해야함
+        3. nth-last-child(n) : 뒤에서부터 n번째의 자식 요소에 스타일 지정, 반드시 부모 요소가 존재해야함
+        4. nth-of-type(n) : 같은 종류의 태그로부터 n번째 요소에 스타일 지정
+        5. nth-last-of-type(n) : 끝에서 부터 같은 종류의 태그의 n번째 요소에 스타일 지정
+        6. first-child : 첫번째 자식 요소엣 스타일 지정
+        7. last-child : 마지막 자식 요소에 스타일 지정
+        8. first-of-type : 같은 종류의 태그로부터 첫번째 요소에 스타일 지정
+        9. last-of-type : 끝에서부터 같은 종류의 태그로부터 마지막 요소에 스타일 지정
+        10. only-child : 부모 안의 자식 요소가 하나일 때 스타일 적용
+        11. only-of-type : 해당 요소가 하나일 때 스타일 적용
+     -->
+</head>
+<body>
+    
+    <h1>건강에 좋은 음식</h1>
+    <table>
+        <tr><td>블루베리</td></tr>
+        <tr><td>귀리</td></tr>
+        <tr><td>시금치</td></tr>
+        <tr><td>적포도주</td></tr>
+        <tr><td>견과류</td></tr>
+        <tr><td>브로콜리</td></tr>
+        <tr><td>연어</td></tr>
+        <tr><td>마늘</td></tr>
+        <tr><td>녹차</td></tr>
+        <tr><td>민트</td></tr>
+    </table>
+    <hr>
+    <p>구척정신</p>
+    <p>액셔니스타</p>
+    <p>개벤져스</p>
+    <p>원더우먼</p>
+    <p>아나콘다</p>
+    <p>탑걸</p>
+    <hr>
+    <ul>
+        <li><a href="#">HTML5</a></li>
+        <li><a href="#">CSS3</a></li>
+        <li><a href="#">Javascript</a></li>
+        <li><a href="#">jQuery</a></li>
+    </ul>
+    <hr>
+    <div>
+        <h3><span>김연경</span></h3>
+        <h3><span>김수지</span></h3>
+        <h3>표승주</h3>
+        <h3><span>김하경</span></h3>
+        <h4><span>임수향</span></h4>
+        <h5><span>김주형</span></h3>
+        <h5>최성민</h5>
+    </div>
+
+</body>
+</html>

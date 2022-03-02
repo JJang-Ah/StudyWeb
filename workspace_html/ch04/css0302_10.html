@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자의 다양한 종류 2</title>
+</head>
+<style>
+    /* h2 태그에 인접하는 형제 태그 ul을 선택 */
+    h1 + ul {
+        color: blue;
+        font-weight: bold;
+    }
+    
+    /* 모든 형제 태그에 스타일 지정 */
+    h2 ~ ul {
+        color: green;
+    }
+    
+</style>
+
+<!-- 
+    < 선택자의 다양한 종류 2>
+    5. 인접 형제 선잭자 : +
+    - 가장 가까운 형제 요소에 스타일을 지정하는 선택자
+    6. 형제 선택자 : ~
+    - 모든 형제 요소에 스타일을 지정하는 선택자
+ -->
+<body>
+    
+    <h1>IBK 여자배구 선수단</h2>
+    <ul>
+        <li>김수지</li>
+        <li>표승주</li>
+        <li>신연경</li>
+        <li>산티나</li>
+        <li>김하경</li>
+        <li>김주향</li>
+    </ul>
+    <ul>
+        <li>정대영</li>
+        <li>배유나</li>
+        <li>김고은</li>
+        <li>박정아</li>
+        <li>켈시</li>
+        <li>이윤정</li>
+    </ul>
+
+    <h2>IBK 여자배구 선수단</h2>
+    <ul>
+        <li>김수지</li>
+        <li>표승주</li>
+        <li>신연경</li>
+        <li>산티나</li>
+        <li>김하경</li>
+        <li>김주향</li>
+    </ul>
+
+    <ul>
+        <li>정대영</li>
+        <li>배유나</li>
+        <li>김고은</li>
+        <li>박정아</li>
+        <li>켈시</li>
+        <li>이윤정</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디와 클래스 선택자의 차이점</title>
+    <style>
+        #fc1{
+            color: orange;
+        }
+        .a1{
+            color: red;
+        }
+        .b1 {
+            background-color: yellow;
+        }
+        h3 {
+            color: red;
+        }
+        h3 {
+            /* color: red; 인라인 방식이 먼저적용 */
+            /*  */
+            color: green !important;
+            /* 
+            !important >> 우선순위를 최우선으로 해준다. 인라인방식보다 먼저 적용
+            원래라면 아래 아이디의 style에 맞춰 head의 style이 적용되지않고
+             blue로 출력되지만 !important를 붙여줘 green으로 출력된다.
+             */
+        }
+
+    </style>
+    
+    <!-- 
+        <아이디와 클래스 선택자의 공통점>
+         - 웹문서의 특정 부분에 스타일을 지정할 때 사용
+
+        <아이디와 클래스 선택자의 차이>
+        1. 아이디 선택자
+         - 웹문서의 특정 부분에 스타일을 지정할 때 사용
+        
+         2. 클래스 선택자
+          - 웹문서의 태그 안에서 여러 개의 이름을 지정해서 사용할 수 없음.
+
+        <선택자의 우선순위>
+        - 아이디 > 클래스 > 태그
+
+     -->
+</head>
+<body>
+    <h3 style="color: blue;">골때리는 그녀들</h3>
+    <ul>
+        <li id="fc1 s1">구척정신</li> 
+        <!-- id는 한태그에 여러개의 이름 사용이 불가능하다 -->
+        <li>액셔니스타</li>
+        <li>원더우먼</li>
+        <li>개벤져스</li>
+        <li>탑걸</li>
+        <li>아나콘다</li>
+    </ul>
+    <hr>
+    <h3>강철부대2</h3>
+    <ul>
+        <li class="a1 b1">특전사</li>
+        <!-- 클래스는 한 태그에 여러개의 이름 사용가능 -->
+        <li>707</li>
+        <li>UDT</li>
+        <li>SSU</li>
+        <li>해수색</li>
+        <li>SDT</li>
+
+    </ul>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자의 종류</title>
+</head>
+<style>
+
+    * {
+        color: green;
+        font-size: 16px;
+    }
+    h3,h5 {
+        color: blue;
+
+    }
+    /* ol의 모든 자손, ol태그 안에 있는 모든 li태그 */
+    ol li {
+        color: red;
+    }
+    /* ol 태그의 바로 밑 자식만 지정 */
+    ol > li {
+        color: purple;
+    }
+</style>
+
+<!-- 
+    < 선택자의 다양한 종류 >
+    1. 전체 선택자 : *
+    - 웹문서의 모든 태그들에 같은 스타일을 지정할 때 사용하는 선택자
+    - 웹문서에 공통적으로 적용되는 출력스타일을 지정하여 웹문서의 통일성과 일관성을 유지하고자 할 때 사용.
+    2. 다중 선택자 : ,
+    - 여러 선택자들을 콤마로 구분하여 나열하는 선택자
+    3. 후손 선택자 : 공백
+    - 부모의 모든 후손을 선택하는 선택자
+    4. 자식 선택자 : >
+    - 부모의 바로 밑의 자식만 선택하는 선택자
+ -->
+<body>
+
+    <h3>웹프로그래밍을 위해서 배워야 할 과목</h3>
+    <ul>
+        <li>HTML5/CSS3</li>
+        <li>Javascript/jQuery</li>
+        <li>java</li>
+        <li>RDBMS</li>
+        <li>JSP</li>
+        <li>Spring</li>
+    </ul>
+    <div>
+        <h3>김하경</h3>
+        <h4>표승주</h4>
+        <h4>산타나</h4>
+        <h5>김수지</h5>
+    </div>
+    <hr>
+    <h3>HTML5/CSS3 프로그래밍</h3>
+    <ol>
+        <li>HTML5</li>
+        <ul>
+            <li>입력양식</li>
+            <li>테이블</li>
+            <li>하이퍼링크</li>
+        </ul>
+        <li>CSS3</li>
+        <ul>
+            <li>선택자</li>
+            <li>기본 속성</li>
+            <li>고급 속성</li>
+            <li>레이아웃</li>
+        </ul>
+    </ol>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가상 클래스와 가상 요소 선택자</title>
+    
+    <style>
+
+        .a1 a:link { 
+            /* : 뒤에 가상요소 */
+            font-size: 1.5em;
+
+            text-decoration: none; 
+            /* 하이퍼링크 밑줄 제거 */
+
+        }
+        .a1 a:visited {
+            /* 방문을 했을 때 */
+            font-weight: 700;
+        }
+        .a2 a:hover {
+            /* 많이 쓴다.!! */
+            background-color: red;
+        }
+        .a2 a:active {
+            background-color: yellow;
+        }
+        .a2 a:focus {
+            background-color: pink;
+            /* tab으로 포커싱 됬을때 색이 나온다. */
+        }
+    </style>
+    <!-- 
+        < 가상 클래스와 가상 요소 선택자 >
+        1. 가상 클래스
+        - 사용자의 행동이나 시스템의 상태 등의 외부적인 요인으로 웹문서와
+        태그에 발생할 수 있는 특정한 상태를 css로 정의해 놓은 것
+        - 예) 사용자가 마우스를 특정 태그의 영역에 위치시킨 상태,
+        사용자가 특정 영역에서 마우스를 누른상태
+
+        2. 가상 클래스의 종류 1번 - 사용자 동작에 반응
+        - link: 방문하지 않은 링크에 스타일을 적용
+        - visited: 방문한 링크에 스타일 적용
+        - hover: 웹요소에 마우스 커서를 올려놓았을 때 스타일 적용 (자주 쓰인다.!!)
+        - active: 웹요소를 활성화했을 때 스타일 적용, 클릭했을때 스타일 적용
+        - focus: 웹요소에 초점이 맞추어졌을 때 스타일 적용
+     -->
+
+
+</head>
+
+<body>
+    
+    <h3>골때리는 그녀들</h3>
+    <ul class="a1">
+        <li><a href="#">구척정신</a></li> 
+        <li><a href="#">액셔니스타</a></li>
+        <li>원더우먼</li>
+        <li>개벤져스</li>
+        <li>탑걸</li>
+        <li>아나콘다</li>
+    </ul>
+    <hr>
+    <h3>강철부대2</h3>
+    <ul class="a2">
+        <li><a href="#">특전사</a></li>
+        <li><a href="#">707</a></li>
+        <li>UDT</li>
+        <li>SSU</li>
+        <li>해수색</li>
+        <li>SDT</li>
+    </ul>
+    
+</body>
+</html>

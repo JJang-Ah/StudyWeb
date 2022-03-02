@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS의 선택자</title>
+    <style>
+
+        /* 1. 선택자 : 태그 */
+        h3{
+            background: cyan;
+        }            
+        /* 1. 선택자 : id */
+        #s1, #s2{
+            background: yellow;
+        }
+        /* 3. 선택자 : 클래스 */
+        .c1, .c2{
+            color: red;
+        }
+        /* 응용 하는 방법*/
+        /*  1. 선택자1, 선잭자2 : ,는 선잭자를 나열하는 방법
+            2. 선택자1 선잭자2 :한칸띄우기는 선택자1의 안에 있는 선택자2를 선택하는 방법
+            3. 선잭자1 > 선잭자 2 : 선택자1의 자식인 선택자2를 선택하는 방법
+
+            
+            */
+
+        #fc1 #s1{
+            background: pink;
+        }
+        /* ul태그 안에 있는 아이디 */
+        ul#s3{
+            font-style: italic;
+        }
+        /* ul 태그 안에 있는 클래스 */
+        ul.c3{
+            color: orange;
+        }
+    </style>
+        
+    <!-- 
+        CSS 선택자 : 태그, 아이디, 클래스
+
+
+     -->
+</head>
+<body>
+    <h3>CSS 선택자</h3>
+    <hr>
+    <ul>
+        <li>HTML5</li>
+        <li id="s1">CSS3</li>
+        <li>JavaScript</li>
+        <li>RDBMS</li>
+        <li id="s2">JSP</li>
+        <li>Spring</li>
+    </ul>
+    <hr>
+    <ul>
+        <li class="c1">데이터베이스</li>
+        <li>자료구조</li>
+        <li class="c2">알고리즘</li>
+        <li>빅데이터 분석</li>
+    </ul>
+    <hr>
+    <ul id="fc1">
+        <li id="s1">구척장신</li>
+        <li>액션니스타</li>
+        <li>개벤져스</li>
+        <li>탑걸</li>
+        <li id="s3">원더우먼</li>
+        <li class="c3">아나콘다</li>
+    </ul>
+    
+</body>
+</html>

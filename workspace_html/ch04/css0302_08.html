@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가상 클래스 4번 - 그 외의 가상 클래스</title>
+    <style>
+        p:not(#ibk) {
+            color: red;
+        }
+        #t1::first-line {
+            background-color: yellow;
+        }
+        #t1::first-letter {
+            font-size: 3em;
+        }
+        ul li {
+            margin: 20px;
+        }
+        li.s1::after {
+            content: "최고의 클래식 하윙";
+            color: green;
+            background-color: orange;
+            margin: 0 10px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 0.7em;
+        }
+        li.s2::before {
+            content: "트라이메라이";
+            background-color: brown;
+            color: white;
+            margin: 0 10px;
+            padding: 2px 4px;
+            border-radius: 5px;
+            font-size: x-small;
+        }
+    </style>
+    <!-- 
+        < 가상 클래스 4번 - 그 외 >
+        1. not : 특정 요소가 아닐 때 스타일을 지정
+
+        < 가상 요소 >
+        - 가상 클래스는 여러 태그 중에서 원하는 태그를 선택하여 스타일을 지정하는 것이고,
+        가상 요소는 내용의 일부만 선택하여 스타일을 지정하는 것
+        - 가상 클래스 콜론 1개 사용(:), 가상 요소는 콜론 2개(::)를 사용
+        1. first-line : 내용 중에서 첫번째 줄에 스타일 지정
+        2. first-letter : 내용 중에서 첫번째 글자에 스타일 지정
+        3. before : 특정 요소의 내용 뒤에 원하는 내용을 추가할 때 사용
+        4. after : 특정 요소의 내용 전에
+
+     -->
+     
+</head>
+<body>
+    <h2>IBK 여자배구 선수단</h2>
+    <div>
+        <p id="ibk">김수지</p>
+        <p id="ibk">표승주p</p>
+        <p id="ibk">신연경</p>
+        <p id="ibk">김하경</p>
+        <p id="ibk">김수향</p>
+        <p id="ibk">최정민</p>
+    </div>
+    <hr>
+    <!-- 로램 입숨(lorem ipsum) : 웹에서 내용을 채워서 다루어야 할 때 사용하는 문장 -->
+    <p>
+        lorem
+    </p>
+    <p id="t1">법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 
+        법률이 정하는 바에 의하여 퇴직하게 할 수 있다.
+         제안된 헌법개정안은 대통령이 20일 이상의 기간 이를 공고하여야 한다.
+        <br>
+    국무총리는 국무위원의 해임을 대통령에게 건의할 수 있다.
+     대통령은 법률안의 일부에 대하여 또는 법률안을 수정하여 재의를 
+     요구할 수 없다.
+      국가는 모성의 보호를 위하여 노력하여야 한다.
+      <br>
+    대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 
+    법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다.
+     </p>
+     <hr>
+     <ul>
+         <li>하이든</li>
+         <li>모차르트</li>
+         <li class="s1">베토벤</li>
+         <li>쇼팽</li>
+         <li class="s2">슈베르트</li>
+         <li>슈만</li>
+         <li>브람스</li>
+     </ul>
+
+    
+</body>
+</html>

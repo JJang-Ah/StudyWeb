@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자의 다양한 종류 3 - 속성 선택자</title>
+</head>
+<style>
+    ul {
+        list-style: none;
+    }
+    li {
+        display: inline;
+        float: left;
+        width: 150px;
+        height: 50px;
+        margin: 10px;
+        /* background-color: gray; */
+        line-height: 50px;
+        text-align: center;
+        /* 가운데 정렬 */
+    }
+    li a {
+        text-decoration: none;
+        color: black;
+        padding: 5px 20px;
+        
+    }
+    a[href] {
+        background-color: gray;
+    }
+    /* a 태그의 target속성이 _blank인 태그만 선택 */
+    a[target="_blank"]{
+        color: red;
+        font-weight: bold;
+    }
+    [class="menu"]{
+        color: orange;
+    }
+    [class~="menu"]{
+        color: blueviolet;
+    }
+</style>
+<!-- 
+    < 선택자의 다양한 종류 3 - 속성 선택자 >
+    속성 선택자 : 지정한 속성에 스타일을 적용하는 선택자
+    (ex) a의 속성 > href)
+    1. [속성] 선택자 : []
+    - 지정한 속성에 스타일을 적용하는 선택자
+    2. [속성 = 값] 선택자
+    - 지정한 속성이 특정한 값을 가질때 적용하는 선택자
+    3. [속성 ~= 값] 선택자
+    - 여러 값들 중에서 특정값이 포함된 속성에 스타일을 적용
+
+    [참고]
+    a태그의 target 속성 : _blank(새창), _self(현재창, 기본값),
+     _parent(프레임 사용시에 부모프레임에 표시),
+      _top(프레임 사용시에 프레임을 벗어나 전체화면에 표시)
+ -->
+
+<body>
+    <h2>간단한 메뉴 만들기</h2>
+    <ul>
+        <li><a href="#" class="menu">로켓배송</a></li>
+        <li><a href="#" class="fresh menu">로켓프리시</a></li>
+        <li><a>쿠팡비즈</a></li>
+        <li><a href="#">로켓직구</a></li>
+        <li><a href="http://www.coupang.com" target="_blank">골드박스</a></li>
+        <li><a href="http://www.coupang.com" target="_self">쿠파아앙</a></li>
+
+    </ul>
+</body>
+</html>
