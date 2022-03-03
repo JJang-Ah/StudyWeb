@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS의 색상 표현</title>
+    <style>
+        #wrapper div {
+            width: 120px;
+            height: 50px;
+            padding: 10px;
+            margin: 10px;
+        }
+        #b1 {
+            background-color: lavender;
+        }
+        #b2 {
+            background-color: #e6e6fa;
+        }
+        #b3 {
+            background-color: rgb(230, 230, 250);
+        }
+        #b4 {
+            background-color: rgba(230, 230, 250, 1);
+        }
+        #b5 {
+            background-color: rgba(230, 230, 250, 0.3);
+        }
+        #b6 {
+            background-color: rgba(230, 230, 250, 0.5);
+        }
+        #b7 {
+            background-color: rgba(230, 230, 250, 0.8);
+        }
+
+    </style>
+    <!-- 
+        < CSS의 색상 표현 방법 >
+        1. 색상 예약어 : 이름을 예약어로 정함 140개 정도있다, www.w3xchools.com
+        - ex) red, green, blue, yellow, orange, gold, silver, gray ...
+        2. 16진수 색상 코드 : #RRGGBB, 각 자리가 16진수로 표현, 
+            색의 3원색인 RGB가 0부터 255의 값을 가짐
+        - ex) #ff0000(red), #00ff00(green), #0000ff(blue), #ffffff(white)
+        3. rgb() 함수 : rgb(R,G,B), 각각의 값은 0~255의 값을 가짐.
+        - ex) rgb(255,0,0)-red, rgb(0,255,0)-green,...
+        4. rgba() 함수 : rgba(R,G,B,a), a: 투명도, 0:투명, 1:불투명, 0.5:반투명
+        - a : 알파(투명도)
+
+
+
+     -->
+</head>
+<body>
+    <div id="wrapper">
+        <div id="b1">box1</div>
+        <div id="b2">box2</div>
+        <div id="b3">box3</div>
+        <div id="b4">box4</div>
+        <div id="b5">box5</div>
+        <div id="b6">box6</div>
+        <div id="b7">box7</div>
+        <div id="b8">box8</div>
+    </div>
+    
+</body>
+</html>

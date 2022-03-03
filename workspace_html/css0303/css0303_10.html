@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글꼴 속성</title>
+
+    <style>
+        
+    @import url('https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Nanum+Pen+Script&display=swap');
+
+        p {font-size: 3em;}
+        p:nth-of-type(1) {
+            font-family: "맑은 고딕";
+            font-style: italic;
+            
+        }
+        p:nth-of-type(2) {
+            font-family: "굴림";
+            font-weight: bold;
+        }
+        p:nth-of-type(3) {font-family: "궁서";}
+        p:nth-of-type(4) {
+            font-family: serif;
+            font-variant: small-caps;
+        }
+        p:nth-of-type(5) {font-family: sans-serif;}
+        p:nth-of-type(6) {font-family: monospace;}
+        p:nth-of-type(7) {font-family: 'Nanum Pen Script', cursive;}
+        p:nth-of-type(8) {font-family: 'BhuTuka Expanded One', cursive;}
+
+    </style>
+
+    <!-- 
+        < 글꼴 속성 >
+        1. font-family : 글꼴의 종류를 지정
+        - 한글 글꼴 : 맑은 고딕, 굴림, 돋움
+        - serif, sans-serif, monospace ...
+        - 구글 웹폰트
+        - http://fonts.google.com
+        2. font-size : 글꼴 크기를 지정
+        - 절대 크기 : px, 상대크기 : em, rem, %
+        3. font-style : 글꼴 스타일을 지정
+        - normal : 기본값, italic: 이탤릭체(기울임꼴), oblique: 이태릭체(거의 쓰지않음)
+        4. font-weight : 글꼴 굵기
+        - normal : 기본값(400, bold:굴게(700))
+        - lighter, bolder : 원래의 굵기보다 더 가늘게, 더 굵게
+        - 100 ~ 900까지 100단위로 지정
+        *** 기타 알아두면 아주 가끔 쓰일지도 모르는 속성
+        5. font-variant : 작은 대문자로 표시
+        -- normal: 기본값, small-caps: 작은 대문자
+        
+     -->
+</head>
+<body>
+    
+    <h1>글꼴 속성</h1>
+    <p>웹 프로그래밍</p>
+    <p>웹 프로그래밍</p>
+    <p>웹 프로그래밍</p>
+    <p>Javascrpit</p>
+    <p>Javascrpit</p>
+    <p>Javascrpit</p>
+    <p>웹 프로그래밍</p>
+    <p>Javascript</p>
+</body>
+</html>

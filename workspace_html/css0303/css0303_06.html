@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 배경 속성</title>
+    <style>
+        body {
+            background-color: lavender;
+            background-image: url(images/bg1.png);
+            /* 기본으로 반복 속성이 있다. */
+            background-repeat: no-repeat;
+            background-position: 30% 60%;
+        }
+    </style>
+
+    <!-- 
+        < CSS 배경 속성 >
+        1. 배경 속성
+        - background-color : 배경 색상값
+        - background-image : 배경 이미지, url()함수를 사용하여 이미지를 링크함.
+        2. 배경 이미지와 관련된 속성
+        - background-repeat : repeat(반복, 기본값), no-repeat(반복 안함),
+            repeat-x(가로축만 반복), repeat-y(세로축만 반복)
+        - background-position : 가로위치 세로위치 , left top; > 생략했을 때 기본값
+        - 위치 예약어 : left, center, right, top, center, bottom
+        - 백분율(상대위치) 표시 : 30% 60%
+        - 절대위치 표시 : 50px 30px > 좌측 상단을 기준으로 이동시킨 위치
+     -->
+</head>
+<body>
+
+    <h1>HTML5 프로그래밍 입문</h1>
+    <hr>
+    <ul>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>Javascript</li>
+        <li>jQuery</li>
+    </ul>
+    
+</body>
+</html>

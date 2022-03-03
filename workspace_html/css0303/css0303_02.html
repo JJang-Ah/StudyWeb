@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS의 기본 속성</title>
+    <style>
+        #p1 {
+            font-size: 40px;
+        }
+        #c1 {
+            font-size: 20px;
+        }
+        #c2 {
+            font-size: 150%; /* 60px*/
+        }
+        #c3 {
+            font-size: 75%; /* 30px*/
+        }
+        #c4 {
+            font-size: 1.5em;
+        }
+        #c5 {
+            font-size: 0.5em;
+        }
+        
+        #cs1 {font-size: xx-small;}
+        #cs2 {font-size: x-small;}
+        #cs3 {font-size: small;}
+        #cs4 {font-size: large;}
+        #cs5 {font-size: x-large;}
+        #cs6 {font-size: xx-large;}
+        /* smaller와 larger는 부모요소의 크기에 따라 상대적으로 더 작은, 더큰 크기를 갖는다. */
+        #cs7 {font-size: smaller;}
+        #cs8 {font-size: larger;}
+    </style>
+    <!-- 
+        < CSS의 기본 속성 >
+        1. 크기, 단위
+        - 절대 크기 : px(pixel, 화소), in(inch, 인치), cm(centimeter), 
+                    mm(milimeter), pt(point) 거의 대부분 px 사용
+        - 상대 크기 : em(기존크기의 배수 ), ex) 2em(기준크기의 2배), 
+                   %(percent) ex) 200% (2배)
+        2. 예약어로 지정된 크기의 단위
+        - xx-small(9px) < x-small(10px) < small(13px) < medium(16px) 
+            < large(18px) < x-large(24px) < xx-large(32px)
+        - 디폴트 글자 크기 : 16px = medium
+        - smller, larger : 부모요소보다 상대적 더 작은, 더 큰 크기를 지정
+        3. 상대 크기에서 em과 rem의 차이
+        - em : 부모요소의 크기를 기준으로 함. 중첩된 부모요소의 영향을 받는다.
+        - rem : 최상위부모의 크기만 영향을 받음.
+
+     -->
+</head>
+<body>
+    <div id="p1">
+        웹프로그래밍0 <br>
+        <div id="c1">웹프로그래밍1</div>
+        <div id="c2">웹프로그래밍2</div>
+        <div id="c3">웹프로그래밍3</div>
+        <div id="c4">웹프로그래밍4</div>
+        <div id="c5">웹프로그래밍5</div>
+    </div>
+    <hr>
+    <div id="p2">
+        HTML 프로그래밍0 <br>
+        <div id="cs1">HTML 프로그래밍1</div>
+        <div id="cs2">HTML 프로그래밍2</div>
+        <div id="cs3">HTML 프로그래밍3</div>
+        <div id="cs4">HTML 프로그래밍4</div>
+        <div id="cs5">HTML 프로그래밍5</div>
+        <div id="cs6">HTML 프로그래밍6</div>
+        <hr>
+        <div id="cs7">HTML 프로그래밍7</div>
+        <div id="cs8">HTML 프로그래밍8</div>
+
+
+
+    </div>
+
+    
+</body>
+</html>
