@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표(테이블) 속성</title>
+    <style>
+
+        table {
+            /* border : 선굵기 선스타일 선색상 */
+            /* 선스타일 : solid(실선), dotted(점선), dashed(대시선), double(이중선) */
+
+            border: 1px solid black;
+            border-collapse: collapse;
+            /* collapse : 붕괴하다 무너지다
+                border-collapse 두줄을 한줄로 만들어준다.
+             */
+             width: 500px;
+        }
+        th {
+            background-color: rgb(72, 167, 167);
+        }
+        th, td {
+            border: 1px solid black;
+        }
+        tr {
+            height: 40px;
+        }
+        td {
+            text-align: center;
+            vertical-align: top;
+        }
+        tr:last-of-type {
+            background-color: yellow;
+        }
+    </style>
+
+    <!-- 
+        < 표 속성 >
+        table 태그 복습
+        - table, tr(행, row), td(table data), th(table header)
+        - colspan(열 합치기), rowspan(행 합치기)
+        - thead(제목), tbody(본문), tfoot(바닥글)을 구분하는 용도로 사용, 선택적으로 사용
+
+        1. border: 선굵기 선스타일 선색상
+        -- table과 td, td 모두에서 지정
+        2. width: 테이블 전체의 크기, 첫해의 td 또는 th에서 각 열의 너비를 지정
+        3. height: tr에서 각 행의 크기를 지정
+        4. border-collapse: table과 th 또는 td에서 지정한 두 줄을 한 줄로 변경
+        - collapse(1줄), seperate(2줄, 기본값)
+        5. text-align: 가로 정렬, 다른 박스 모델에서도 사용
+        - left, center, right
+        6. vertical-align : 수직 정렬, 표에서만 사용
+        - top, center, bottom
+
+
+     -->
+</head>
+<body>
+    <h1>이젠 하우스 객실 안내</h1>
+    <table>
+        <colgroup>
+            <!-- 열방향으로 효과 적용 -->
+            <col span="2" style="background-color: pink;">
+            <col style="background-color: orange;">
+        </colgroup>
+        <caption>하우스 이용 방법</caption>
+        <!-- 표 제목 -->
+        <thead>
+            <th width="30%">방 이름</th>
+            <th width="30%">대상</th>
+            <th width="10%">크기</th>
+            <th >가격</th>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>유채방</td>
+                <td>여성전용</td>
+                <td rowspan="3">4인실</td>
+                <td rowspan="4">1인 30000원</td>
+            </tr>
+            <tr>
+                <td rowspan="2">동백방</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>가족 1팀</td>
+            </tr>
+            <tr>
+                <td>천혜향 방</td>
+                <td>-</td>
+                <td>2인실</td>
+            </tr>
+            <tr>
+                <td colspan="4">바깥채 전체를 렌트합니다.</td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+
+
+    </table>
+    
+</body>
+</html>

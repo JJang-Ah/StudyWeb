@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 모델의 기본 개념</title>
+    <style>
+        h3 {
+            background-color: gray;
+            color: white;
+        }
+        div {
+            width: 150px;
+            height: 50px;
+            border: 20px solid gray;
+        }
+        #b1 {
+            background-color: red;
+            margin-top: 100px;
+            margin-bottom: 50px;
+            margin-left: 200px;
+            margin-right: 100px;
+            padding: 20px;
+            
+        }
+        #b2 {
+            background-color: blue;
+            margin: 50px 30px 30px 80px;
+            /* top right bottom left 순서대로 적용 */
+            /* top 부터 시계방향 순으로 적용된다. */
+        }
+    </style>
+    <!-- 
+        1. 4방향 똑같은 마진 적용
+            margin: 30px;
+        2. 4방향ㅎ 각각 다른 마진 적용 - 각각 따로 기술
+            margin-top: 100px;
+            margin-bottom: 50px;
+            margin-left: 200px;
+            margin-right: 100px;
+        3. 4방향 각각 다른 마진 적용 - 한꺼번에 기술
+            margin: 50px 30px 30px 80px;
+        4. 상하 와 좌우 에 다른 마직 적용
+            margin: 50px 100px; 
+     -->
+</head>
+<body>
+    <h3>Previous Line</h3>
+    <div id="b1">박스1</div>
+    <div id="b2">박스2</div>
+    <h3>Next Line</h3>
+</body>
+</html>

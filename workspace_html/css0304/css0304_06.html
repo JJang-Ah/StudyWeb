@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마진의 속성 2</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: #0099ff;
+        }
+
+        .box1 {
+            margin: 30px 50px;
+        }
+        .box2 {
+            margin: 30px 50px;
+        }
+        .box3 {
+            margin: 50px;
+        }
+        .box4 {
+            margin: 30px 5px 10px;
+            /* 상: 30 , 우 : 5, 하 : 10, 좌 : 마주보는 값을 가짐 */
+        }
+        /* 
+        마진 중첩 효과, 마진 상쇄 효과
+        - 박스 모델을 새로로 배치하여 마진과 마진이 중첩될 때, 마진이 큰 쪽으로 맞춰지는 특성
+        - 
+        
+         */
+
+    </style>
+
+    <!-- 
+
+
+     -->
+</head>
+<body>
+    
+    <div class="box1">박스1</div>
+    <div class="box2">박스2</div>
+    <div class="box3">박스3</div>
+    <div class="box4">박스4</div>
+</body>
+</html>

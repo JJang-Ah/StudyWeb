@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 모델의 크기</title>
+    <style>
+
+        div {
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            padding: 30px;
+            border: 20px solid gray;
+            background-color: aqua;
+        }
+        #box2 {
+            /* 콘텐트 박스 : 기본값, width와 height에 padding과 border가 포함되지 않음 */
+            box-sizing: content-box;
+        }
+        #box3 {
+            /* 보더 박스 : width와 height에 padding과 border의 값이 포함되어 있음 */
+            /* 가로길이 = width = 300 = padding*2+border*2+본문width */
+            box-sizing: border-box;
+        }
+    </style>
+
+    <!-- 
+
+        < 박스 모델의 크기 >
+        가로크기 : width + padding*2 + border*2
+        -- 박스1과 박스2는 content-box로 계산
+        박스1의 가로크기 : 300 + 30*2 + 20*2 = 400
+        박스1의 세로크기 : 200 + 30*2 + 20*2 = 200
+
+        -- 박스3은 border-box로 계싼
+        박스3의 가로크기: 300
+        박스3의 세로크기: 200
+     -->
+</head>
+<body>
+    <div id="box1">박스1</div>
+    <div id="box2">박스2</div>
+    <div id="box3">박스3</div>
+
+    
+    
+</body>
+</html>
