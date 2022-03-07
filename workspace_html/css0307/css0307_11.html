@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스의 가시성 속성</title>
+    <style>
+        #img2 {
+/* 
+            visibility: hidden;
+            영역은 유지하고, 내용은 화면에서 보이지 않도록 한다.
+             */
+
+             display: none;
+        }
+    </style>
+
+    <!-- 
+        < 박스의 가시성 속성 >
+        1. visibility 속성: 요소를 화면에 보이게 또는 보이지 않게 하는 속성
+        - visible값 : 기본값, 화면에 보이게 하는 값
+        - invisible값 : 화면에 보이지 않도록 하는 값
+        - collapse값 : 표에서 겹치도록 하는 값, 표 이외의 요소에서 사용하면 hidden으로 처리한다.
+
+        2. display 속성 : 박스의 유형을 변경하는 속성
+        - block, inline, inline-block, none
+        - none : 요소를 화면에서 사라지게 하는 값
+        
+        3. visibility속성의 hidden값과 display속성의 none의 차이점
+        - visibility소겅의 hidden값 : 영역은 존재하고, 화면에서 보이지 않도록 하는 것
+        - display속성의 none값 : 요소 자체를 화면에서 제거하는 것
+        
+
+
+     -->
+</head>
+<body>
+    <img src="images/pic1.jpg" alt="1" id="img1">
+    <img src="images/pic2.jpg" alt="2" id="img2">
+    <img src="images/pic3.jpg" alt="3" id="img3">
+    
+</body>
+</html>

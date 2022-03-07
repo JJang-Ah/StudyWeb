@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스의 배치방법 3</title>
+    <style>
+
+        div {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid gray;
+        }
+        .box1, .box2 {
+            width: 100px;
+            height: 60px;
+
+        }
+        .box3, .box4 {
+            width: 500px;
+            height: 60px;
+        }
+        
+        .box1 {
+            background: #ffa800;
+            float: left;
+        }
+        .box2 {
+            background: #0094ff;
+            float: left;
+        }
+        .box3 {
+            background: #00ff21;
+            /* float 속성을 주지 않으면 겹쳐보임 */
+            /* box1과 box2의 영향을 받음 - float 속성을 주지 않으면 겹쳐보임 */
+            /* clear: both; */
+        }
+        .box4 {
+            background: #ff3333;
+            /* 앞에서 지정한 float속성을 제거함 - 앞에서 지정한 float 속성을 무효화*/
+            clear: both;
+        }
+        
+    </style>
+
+    <!-- 
+        < 박스의 배치방법 >
+        2. clear 속성
+        - 앞에서 지정한 float 속성을 뮤효화하는 속성
+        - left : float에서 지정한 left 속성만 무효화,
+        - right : float에서 지정한 right 속성만 무효화
+        - both : float에서 지정한 left와 right 속성 둘다 무효화한다.
+        
+
+     -->
+</head>
+<body>
+    <div class="box1">박스1</div>
+    <div class="box2">박스2</div>
+    <div class="box3">박스3</div>
+    <div class="box4">박스4</div>
+    
+</body>
+</html>

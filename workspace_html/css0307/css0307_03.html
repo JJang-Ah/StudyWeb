@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 모델의 크기</title>
+
+    <style>
+        div {
+            width: 300px;
+            height: 150px;
+            /* border: 1px solid black; */
+            margin: 20px;
+            /* 패딩과 보더를 설정하여 content-box와 border의 차이점을 이행 */
+            padding: 30px;
+            border: 20px solid purple;
+
+            
+        }
+
+        .box1 {
+            background: skyblue;
+            box-sizing: content-box;
+            /* content-box : 기본값, 박스 크기를 설정할 때 패딩과 보더를 따로 계산하는 방법*/
+
+        }
+        .box2 {
+            background: pink;
+            /* border-box : 박스 크기를 설정할 때, 박스크기에 패딩과 보더가 포함되어 계산하는 방법 */
+            /* 가로크기 : 300 (박스모델안에 패딩과 보더가 포함) */
+            /* 세로크기 : 150 (박스모델 안에 패딩과 보더가 포함) */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">box-sizing="content-box"</div>
+    <hr>
+    <div class="box2">box-sizing="border-box"</div>
+
+
+    
+</body>
+</html>

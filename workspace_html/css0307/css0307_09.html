@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position 속성을 활용한 배치방법 2</title>
+    <style>
+
+        #wrapper {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            background: #0070ff;
+            position: absolute
+        }
+        #a1 {
+            top: 0;
+            left: 0;
+        }
+        #a2 {
+            top: 0;
+            right: 0;
+        }
+        #a3 {
+            bottom : 0;
+            left: 0;
+            
+        }
+        #a4 {
+            bottom: 0;
+            right: 0;
+        }
+        #a5 {
+            /* 부모(#wrapper)의 정 가운데 배치*/
+            /* 부모크기절반 - 자식크기 절반 */
+            top: 125px;
+            /* 150-(50/2) = 125*/
+            left: 125px;
+        }
+    </style>
+
+    <!-- 
+        < position 속성을 활용한 배치방법 >
+        3. absolute : 원하는 위치에 절대적으로 배치하는 방법
+        - 기준이 되는 부모의 position속성의 값이 relative로 설정되어야 함.
+        - 부모의 위치로 부터 top, bottom, left, right를 사용하여 배치함.
+        - top : 위로부터 얼마나 떨어져 있는지에 정도
+        - left : 왼쪽으로 얼마나 떨어져 있는지의 정도
+        - right : 오른쪽으로부터 얼마나 떨어져 있는지의 정도
+
+
+
+     -->
+</head>
+<body>
+
+    <div id="wrapper">
+        <div class="box" id="a1">박스1</div>
+        <div class="box" id="a2">박스2</div>
+        <div class="box" id="a3">박스3</div>
+        <div class="box" id="a4">박스4</div>
+        <div class="box" id="a5">박스5</div>
+    </div>
+    
+</body>
+</html>

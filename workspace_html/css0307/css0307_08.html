@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position 속성을 활용한 배치방법 1</title>
+    <style>
+
+        div {
+            width: 150px;
+            height: 75px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px dotted gray;
+        }
+        .box1 {
+            background: yellow;
+            float: left;
+
+        }
+        .box2 {
+            background: green;
+            float: left;
+             /* position: static;   */
+             /* 기본값*/ 
+
+            position: relative;
+            /* box1 을 기준으로 적용 */
+            left: 50px;
+            top: 30px;
+
+        }
+    </style>
+    <!-- 
+        < position 속성을 활용한 배치방법 >
+        - 웹 문서 안의 모든 요소들을 자유자재로 배치해 주는 속성
+        1. static : 기본값, 요소를 나열한 수서대로 배치,
+        - top, bottom, left, right를 사용할 수 없음
+        - float속성을 사용하여 좌우로 배치할 수 있음.
+        2. relative : 상대적인 배치방법, 문서의 흐름에 따라 위치를 정하는 방법
+        - top, bottom, left, right를 사용하여 배치할 수 있음
+
+
+     -->
+</head>
+<body>
+    <div class="box1">박스1</div>
+    <div class="box2">박스2</div>
+    
+</body>
+</html>

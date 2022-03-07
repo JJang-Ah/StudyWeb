@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스를 쌓는(겹치는) 속성</title>
+    <style>
+
+        #wrapper {
+            position: relative;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            float: left;
+            position: absolute;
+        }
+        #b1 {
+            background: red;
+            z-index: 5;
+        }
+        #b2 {
+            background: yellow;
+            left: 60px;
+            top: 30px;
+            z-index: 10;
+        }
+        #b3 {
+            background: blue;
+            left: 30px;
+            top: 60px;
+
+        }
+        
+    </style>
+
+    <!-- 
+        < 박스를 쌓는 (겹치는) 순서 변경 >
+        1. z-index : 요소 위에 요소를 쌓는 순서를 지정하는 속성
+        -z-index의 값을 명시하지 않았을 때는
+        맨 처음 요소가 1, 그 다음부터 차례대로 1씩 증가하는 값을 가진다.
+        - z-index의 값이 큰 요소가 위에 올라오게 된다.
+        - 웹 페이지에서 항상 맨 위에 배치되어야 하는 요소는 z-index의 값을 아주 큰 값으로 설정한다.
+        ex) z-index: 1000; -- 항상 맨 위에 위치하는 요소
+        
+
+
+     -->
+</head>
+<body>
+    <div id="wrapper">
+        <div class="box" id="b1">박스1</div>
+        <div class="box" id="b2">박스2</div>
+        <div class="box" id="b3">박스3</div>
+    </div>
+    
+</body>
+</html>

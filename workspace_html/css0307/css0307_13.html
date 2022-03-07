@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display속성을 활용한 배치방법</title>
+    <style>
+        #block img {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+<!-- 
+
+    < display 속성을 활용한 배치방법 >
+    1. display속성 : 박스의 유형을 바꾸는 속성, 박스의 배치 속성을 바꾸는 속성
+    - block : 블럭 유형으로 바꾸는 값
+    - inline : 인라인 유형으로 바꾸는 값, 한 라인에 1개, 너비, 높이, 패딩을 가짐
+    - inline-block : 인라인-블럭 유형으로 바꾸는 값, 한 라인에 여러개 가능, 너비, 높이를 가진다.
+    - none : 영역 자체를 사라지게 함.
+
+
+ -->
+</head>
+<body>
+    <div id="inline">
+        <img src="images/pic1.jpg" alt="pic1">
+        <img src="images/pic2.jpg" alt="pic2">
+        <img src="images/pic3.jpg" alt="pic3">
+    </div>
+    
+    <div id="block">
+        <img src="images/pic1.jpg" alt="pic1">
+        <img src="images/pic2.jpg" alt="pic2">
+        <img src="images/pic3.jpg" alt="pic3">
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>색상의 그라디언트 2 - 응용</title>
+    <style>
+
+        div {
+            width: 300px;
+            height: 200px;
+        }
+
+        .g1 {
+
+            /* background: radial-gradient(red 0%, yellow 50%, skyblue 100%); */
+
+
+            background: radial-gradient(red 0%, yellow 20%, skyblue);
+            /* 중지점 변경 */
+            
+
+        }
+
+        .g2 {
+            /* 반복되는 패턴의 그라디언트는 크기를 지정함. */
+            /* background: repeating-linear-gradient(yellow, red 20px); */
+
+            background: repeating-linear-gradient(yellow, yellow 20px, red, red 40px);
+            /* 시작색상, 시작색상 위치, 두번째 색상 우치, 두번째 색상 위치 */
+
+        }
+        .g3 {
+            /* 원형 - 반복되는 패턴의 크기를 지정함 */
+            /* background: repeating-radial-gradient(circle, yellow, red 20px); */
+
+            background: repeating-radial-gradient(circle, yellow, yellow 10%, red 10%, red 20%);
+
+        }
+
+    </style>
+
+    <!-- 
+        < 반복 패턴의 그라디언트 효과 >
+        1. repeating-linear-gradient()
+        - 색상에 크기를 지정하면, 반복되는 패턴이 됨
+
+     -->
+</head>
+<body>
+
+    <div class="g1"></div>
+    <hr>
+    <div class="g2"></div>
+    <hr>
+    <div class="g3"></div>
+
+    
+</body>
+</html>
