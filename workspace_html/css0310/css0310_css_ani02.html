@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 기본 2번</title>
+    <style>
+        .rotate {
+            perspective: 200px;
+            display: inline-block;
+        }
+        .rotatex:hover {
+            transform: rotateX(45deg);
+            /* 3차원으로 돌린다. */
+        }
+        .rotatey:hover {
+            transform: rotatey(45deg);
+            /* 3차원으로 돌린다. */
+        }
+        .rotatez:hover {
+            transform: rotatez(45deg);
+            /* 3차원으로 돌린다. */
+        }
+        .rotatexyz:hover {
+            transform: rotate3d(2.5, 1.2, -1.5, 45deg);
+            /* x, y, z 축으로 각각 2.5, 1.2, -1.5만큼 방향 벡터를
+            갖고 45도만큼 회전함. */
+        }
+    </style>
+    <!-- 
+        2. 3차원 회전 효과
+        - perspective : 3차원으로 원래 위치에서 사용자가 있는 방향으로
+        잡아 당기거나 밀어내는 효과
+        - 양수: 잡아 당기는 효과, 음수: 밀어내는 효과
+
+     -->
+</head>
+<body>
+    <div class="rotate">
+        <div class="rotatex">
+            <img src="images/fruit.jpg">
+        </div>
+    </div>
+    <div class="rotate">
+        <div class="rotatey">
+            <img src="images/fruit.jpg">
+        </div>
+    </div>
+    <div class="rotate">
+        <div class="rotatez">
+            <img src="images/fruit.jpg">
+        </div>
+    </div>
+    <div class="rotate">
+        <div class="rotatexyz">
+            <img src="images/fruit.jpg">
+        </div>
+    </div>
+    
+</body>
+</html>

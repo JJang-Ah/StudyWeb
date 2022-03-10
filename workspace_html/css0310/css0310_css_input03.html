@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input 응용문제 선생님 버전</title>
+
+    <style>
+        .container {
+            width: 550px;
+            margin: 20px auto;
+            border: 1px solid black;
+            padding: 50px;
+        }
+        /* 상단 타이틀 */
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            font-weight: normal;
+            font-size: 1em;
+        }
+
+        /* 중단 내용 */
+        fieldset {
+            margin-bottom: 20px;
+
+        }
+        fieldset legend {
+            color: navy;
+            font-weight: bold;
+        }
+        ul {
+            list-style: none;
+            
+        }
+        ul li {
+            margin-bottom: 10px;
+            
+
+        }
+        label .l_title {
+            width: 100px;
+            float: left;
+            font-weight: bold;
+        }
+        /* 하단 버튼 */
+        .btns {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btns input {
+            width: 100px;
+            height: 35px;
+            background: black;
+            color: white;
+            border: 0;
+        }
+        .btns input:hover {
+            background: white;
+            color: black;
+            border: 1px solid black;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px gray;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>프런트엔드 개발자 지원서</h1>
+        <h3>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</h3>
+        <hr>
+        <form action="test02.jsp" method="post">
+            <fieldset>
+                <legend>개인정보</legend>
+                    <ul>
+                        <li>
+                            <label for="name" class="l_title">이름</label>
+                            <input type="text" id="name" placeholder="공백없이 입력하세요." required size="30">
+                        </li>
+                        <li>
+                            <label for="name" class="l_title">연락처</label>
+                            <input type="tel" id="tel" size="30">
+                        </li>
+                    </ul>
+               
+            </fieldset>
+            <fieldset>
+                <legend>지원 분야</legend>
+                <ul>
+                    <li>
+                        <label><input type="radio" name="part" id="part">웹 퍼블리싱</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="part" id="part">웹 애플리케이션</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="part" id="part">개발 환경 개선</label>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>지원동기</legend>
+                <ul>
+                    <li>
+                        <textarea name="memo" id="memo" cols="50" rows="5" placeholder="본사 지원 동기를 간략히 써 주세요." required></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <div class="btns">
+                <input type="submit" value="접수하기">
+                <input type="reset" value="다시쓰기">
+
+            </div>
+        </form>
+
+    </div>
+    
+</body>
+</html>

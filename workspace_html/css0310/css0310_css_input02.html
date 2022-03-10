@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input응용 문제 내가해본거</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+        
+    </style>
+    <!-- 
+        프런트엔ㅇ드 개발자 지원서를 구성하시오.
+        - 개인정보, 지원 분야, 지원 동기 이 3가지 영역을 fieldset으로 묶어
+        - 입력정보는 label, input을 묶어서 가지런히 정렬하여 구성하시오.
+        - 하단의 버튼은 가운데 배치하고, 버튼을 꾸며서 구성
+        - 완성시간 20분
+     -->
+</head>
+<body>
+
+    <div class="container">
+        <h1>프런트엔드 개발자 지원서</h1>
+        <form action="">
+            <caption>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</caption>
+
+            <fieldset>
+                
+
+                <ul>
+                    <dt>개인정보</dt>
+                    <dd>
+                        <label for="name">이름</label>
+                        <input type="text" name="name" id="name" required>
+                    </dd>
+                    <dd>
+                        <label for="tel">연락처</label>
+                        <input type="tel" name="tel" id="tel" required>
+
+                    </dd>
+                </ul>
+
+
+            </fieldset>
+            <fieldset>
+                <ul>
+                    <dt>지원 분야</dt>
+                    <dd>
+                        <input type="radio" class="ch1" name="choice" id="choice1">
+                        <label for="choice1">웹퍼블리싱</label>
+                    </dd>
+                    <dd>
+                        <input type="radio" class="ch1" name="choice" id="choice2">
+                        <label for="choice2">웹 애플리케이션 개방</label>
+                    </dd>
+                    <dd>
+                        <input type="radio" class="ch1" name="choice" id="choice3">
+                        <label for="choice3">개발 환경 개선</label>
+                    </dd>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <ul>
+                    <dt>지원 동기</dt>
+                    <dt>
+                        <textarea cols="40" rows="10"></textarea>
+                    </dt>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <input type="submit" name="" id="" value="접수하기">
+                <input type="reset" name="" id="" value="다시쓰기">
+            </fieldset>
+
+
+        </form>
+    </div>
+    
+</body>
+</html>

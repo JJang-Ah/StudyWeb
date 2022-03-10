@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력화면 응용 연습 1번</title>
+   <style>
+       /* 전체 적용 */
+       .container {
+           width: 500px;
+           margin: 20px auto;
+       }
+       /* 상단 제목 */
+       h1 {
+           text-align: center;
+       }
+       /* 중단 입력화면 */
+       fieldset {
+           margin-bottom: 10px;
+       }
+       fieldset legend {
+           color: purple;
+           font-weight: bold;
+       }
+       ul {
+           list-style: none;
+       }
+       ul li {
+           margin-bottom: 10px;
+
+       }
+       label.title {
+           width: 100px;
+           float: left;
+           font-weight: bold;
+           
+       }
+       input[type="text"], input[type="tel"] {
+           padding-left: 20px;
+
+       }
+       .title2 {
+           width: 250px;
+       }
+       input[type="number"]{
+           width: 40px;
+           margin-left: 110px;
+           text-align: right;
+       }
+       /* 하단 버튼 */
+       .btns {
+           text-align: center;
+           margin-top: 20px;
+       }
+       .btns input {
+           width: 150px;
+           height: 50px ;
+           background: black;
+           color: white;
+           border: 0;
+       }
+       .btns input:hover {
+           background: white;
+           color: black;
+           border: 1px solid black;
+           font-weight: bold;
+           cursor: pointer;
+           text-shadow: 1px 1px 2px gray;
+       }
+
+   </style> 
+</head>
+<body>
+    <div class="container">
+        <h1>상품 주문서</h1>
+        <!-- 
+            form 태그 속성
+            action: 이동할 페이지, method: 이동 방법, get, post
+
+         -->
+        <form action="test01.jsp" method="">
+
+            <fieldset>
+                <legend>개인정보</legend>
+                <ul>
+                    <li>
+                        <label for="name" class="title">이름</label>
+                        <input type="text" id="name" placeholder="여백없이 입력" required>
+                    </li>
+                    <li>
+                        <label for="tel" class="title">연락처</label>
+                        <input type="text" id="tel" placeholder="연락가능한 번호" required>
+                    </li>
+                </ul>
+
+            </fieldset>
+            <fieldset>
+                <legend>배송지 정보</legend>
+                <ul>
+                    <li>
+                        <label for="address" class="title">주소</label>
+                        <input type="text" id="address" required size="28">
+                    </li>
+                    <li>
+                        <label for="tel2" class="title">전화번호</label>
+                        <input type="text" id="tel2">
+                    </li>
+                    <li>
+                        <label for="memo" class="title">메모</label>
+                        <textarea name="memo" id="memo" cols="40" rows="3"></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>주문 정보</legend>
+                <ul>
+                    <li>
+                        <label class="title2"><input type="checkbox"> 과테말라 안티구이(100g)</label>
+                        <input type="number" value="0" min="0" max="10">개
+                    </li>
+                    <li>
+                        <label class="title2"><input type="checkbox"> 인도네시아 만델링(100g)</label>
+                        <input type="number" value="0" min="0" max="10">개
+                    </li>
+                    <li>
+                        <label class="title2"><input type="checkbox"> 탐라는도다(블렌딩)(100g)</label>
+                        <input type="number" value="0" min="0" max="10">개
+
+                    </li>
+                </ul>
+            </fieldset>
+            <div class="btns">
+                <input type="submit" value="주문하기">
+                &emsp;&emsp;&emsp;&emsp;&emsp;
+                <input type="reset" value="다시 작성">
+
+
+            </div>
+
+        </form>
+
+    </div>
+    
+</body>
+</html>

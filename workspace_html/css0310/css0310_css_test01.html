@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 종합 테스트 01</title>
+
+    <style>
+        body {
+            font-family: 바탕;
+        }
+        .container {
+            width: 1000px;
+            margin: 10px auto;
+        }
+        #top_title {
+            text-align: right;
+            font-size: 0.9em;
+
+        }
+        #sub_title, #main_title {
+            text-align: center;
+            font-family: 궁서체;
+        }
+        #sub_title {
+            text-align: center;
+            font-size: 0.9em;
+        }
+        #main_title {
+            margin-top: 0;
+            margin-bottom: 40px;
+
+        }
+        mark {
+            font-family: 궁서체;
+            font-size: 2.3em;
+            padding: 3px;
+            float: left;
+            margin-right: 10px;
+        }
+        .img1 {
+            float: right;
+            margin-left: 10px;
+        }
+        #content1, #content2 {
+            text-align: justify;
+            /* 문단을 좌우 정렬 */
+            line-height: 1.5em;
+        }
+        #content1 {
+            margin-bottom: 0;
+
+        }
+        #content2 {
+            text-indent: 20px;
+            /* 들여쓰기 */
+            margin-top: 0;
+        }
+
+        /* 중단 리스트 */
+        #mid_title1, #mid_title2 {
+            font-family: 굴림;
+            font-weight: 100;
+            font-size: 1.2em;
+        }
+        #mid_title1 {
+            background: #f00;
+            color: white;
+        }
+        #mid_title2 {
+            font-style: italic;
+        }
+        table{
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            border-top: 1px double black;
+            border-bottom: 1px double black;
+            border-left: hidden;
+            border-right: hidden;
+        }
+        tr {
+            height: 30px;
+        }
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+        table tr:first-child {
+            border-bottom: 3px double black;
+            background: linear-gradient(to bottom, white, yellow);
+        }
+        /* 하단 타이틀 */
+        #bottom_title {
+            text-align: right;
+            margin-top: 30px;
+            font-family:굴림;
+            font-size: 2em;
+        }
+
+
+    </style>
+    <!-- 
+
+
+     -->
+</head>
+<body>
+    <div class="container">
+        <p id="top_title">공공 데이터</p>
+        <p id="sub_title">공공 데이터 포털</p>
+        <h2 id="main_title">공공, 민간 공공데이터 허브</h2>
+        <img class="img1" src="images/image01.png" alt="img1">
+        <p id="content1">
+          <mark>공</mark>공데이터포털은 공공기관이 생성 또는 취득하여 관리하는 공공데이터를 한 곳에서 제공하는 통합 창구이다. 포털에서는 국민이 쉽고 편리하게 공공데이터 설치 및 운영 근거 : 공공데이터의
+          제공 및 이용 활성화에
+          관한 법률 제21조
+          를 이용할 수 있도록 파일데이터, 오픈 API, 시각화 등 다양한 방식으로 제공하고 있으며 누구라도 쉽고 편리한 검색을 통해 원하는 공공데이터를 빠르고 정확하게 찾을 수 있다.
+        </p>
+        <p id="content2">
+          공공데이터포털을 통해 제공 중인 공공데이터는 별도의 신청 절차 없이 이용 가능하며, 제공되는 공공데이터의 목록은 각 공공기관의 홈페이지에서도 확인할 수 있다. 공공데이터포털에서 제공하고 있지 않은 데이터의
+          경우 제공신청을 통해 이용할 수 있다. 다만, 공공데이터법 제17조 상의 제외대상 정보가 포함된 경우 제공이 거부될 수 있으며, 이 경우 공공데이터 제공 분쟁 조정위원회에 조정을 신청할 수 있다.
+          공공데이터의 이용 허락범위에 관련하여 ‘이용 허락범위 제한 없음’일 경우 자유로운 이용이 가능(可能)하다. 공공기관이 보유한 공공데이터는 최근 들어 민간 공개를 통한 다양한 정보서비스 발굴 및 제공 등
+          국가정보화를 선진화하는 중요한 자원(資源)으로 인식되고 있으므로 품질관리를 통해 원활한 활용을 하도록 해야 한다.
+        </p>
+        <h3>🇰🇷 <span id="mid_title1">공공 데이터 활용 지원센터의 업무와 조직</span></h3>
+        <ol type="A">
+          <li>공공데이터 활용지원센터 업무</li>
+          <ol type="a">
+            <li>제공대상 공공데이터 목록공표 지원 및 목록정보서비스</li>
+            <li>공공데이터의 품질진단, 평가 및 개선의 지원</li>
+          </ol>
+          <li>공공데이터 활용지원센터 조직</li>
+          <ol type="a">
+            <li>공공데이터 기획팀과 개방팀</li>
+            <li>공공데이터 품질팀과 데이터기반 행정팀</li>
+          </ol>
+        </ol>
+        <h3>🇰🇷 <span id="mid_title2">공공데이터의 활용사례</span></h3>
+        <table>
+          <tr>
+            <td width="18%">구분</td>
+            <td width="37%">사례</td>
+            <td width="18%">개발유형</td>
+            <td width="27%">제공기관</td>
+          </tr>
+          <tr>
+            <td>공공행정</td>
+            <td>실시간 전력 수급 현황</td>
+            <td>웹 사이트</td>
+            <td>한국수력원자력</td>
+          </tr>
+          <tr>
+            <td rowspan="2">문화관광</td>
+            <td>하이 캠프-전국 캠핑장 정보</td>
+            <td rowspan="3">모바일 앱</td>
+            <td>한국관광공사</td>
+          </tr>
+          <tr>
+            <td>전주시 문화 관광정보 서비스</td>
+            <td>전라북도 전주시</td>
+          </tr>
+          <tr>
+            <td>보건의료</td>
+            <td>이 병원 어디야</td>
+            <td>건강보험심사평가원</td>
+          </tr>
+          <tr>
+            <td>국토관리</td>
+            <td>전국 아파트 매매 실거래가 정보</td>
+            <td>웹사이트</td>
+            <td>국토교통부</td>
+          </tr>
+        </table>
+        <p id="bottom_title">공공데이터포털</p>
+      </div>
+    
+</body>
+</html>
