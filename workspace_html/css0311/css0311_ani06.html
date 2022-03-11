@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 기본 6번 - transition</title>
+    <style>
+        #fn div {
+            width: 100px;
+            height: 100px;
+            background: #006aff;
+            color: white;
+            text-align: center;
+            line-height: 92px;
+            font-weight: bold;
+            padding: 5px;
+            margin: 10px;
+            float: left;
+            /* 공통: 애니메이션 진행 시간 3초 */
+            transition-property: height;
+            transition-duration: 3s;
+        }
+        .f1 {
+            transition-timing-function: linear;
+        }
+
+        .f2 {
+            transition-timing-function: ease;
+        }
+
+        .f3 {
+            transition-timing-function: ease-in;
+        }
+
+        .f4 {
+            transition-timing-function: ease-out;
+        }
+
+        .f5 {
+            transition-timing-function: ease-in-out;
+        }
+        #fn:hover div {
+            height: 800px;
+        }
+
+
+        /* transition-delay 연습 */
+        hr {
+            clear: both;
+        }
+        #delay {
+            margin-top: 50px;
+            width: 500px;
+            height: 150px;
+            border: 1px solid gray;
+        }
+        #delay div {
+            width: 60px;
+            height: 60px;
+            background: #eee;
+            margin-bottom: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-align: center;
+            line-height: 57px ;
+            transition-duration: 3s;
+            transition-property: all;
+        }
+        .d1 {
+            border: 3px solid red;
+        }
+        .d2 {
+            border: 3px solid blue;
+            transition-delay: 1s;
+        }
+        #delay:hover div {
+            transform: translateX(400px) rotate(720deg);
+        }
+
+
+        /* 퀴즈 3 
+            tr박스가 3초동안 애니메이션 효과가 적용되고
+            1초의 지연시간을 가지고
+
+            크기가 100으로 바뀌면서,
+            배경색은 파랑색으로 바뀌면서,
+            3바귀를 회전하고
+        */
+        #tr {
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            margin: 50px;
+            border: 1px solid black;
+            background: red;
+            /* transition-delay: 1s;
+            transition-property: all;
+            transition-duration: 3s;
+            transition-timing-function: ease-in-out; */
+            /* 위 코드를 압출해서 아래로 할 수있다.
+                시간이 두개일 때에는 먼저 쓴것이 duration, 나중에 쓴것이 delay로 적용
+                transition-property값은 주로 생략, 생략하면 모든 속성이 대상
+            */
+            transition:3s ease-in-out 1s;
+        }
+        #tr:hover{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            transform: rotate(1080deg);
+
+
+        }
+
+        /* 퀴즈4 - tr2는 500*500 으로 설정
+             tr2에 마우스를 올렸을 때, 
+         */
+        /* 
+            tr2의 배경이미지가 해바라기 이미지로 채워지고,
+            이미지가 동그랗게 변형되고,
+            테두리가 3px의 orange색상의 실선이 그려지는
+            애니메이션 효과를 3초동안 진행하고, 1초의 지연시간을 가지고
+            느리게 끝나도록
+            설정하시오.
+
+        */
+        #tr2 {
+            width: 500px;
+            height: 500px;
+
+        }
+
+
+    </style>
+
+    <!-- 
+        < 애니메이션의 속성 >
+        3. transition-timing-function: 트랜지션의 속도 지정
+        - linear: 시작부터 끝까지 일정한 속도로 진행
+        - ease: 처음에는 천천히, 점점 빨라지다가끝날 때 천천히 끝냄, 기본값
+        - ease-in : 처음에는 느리게 시작하고, 일저한 속도로 진행
+        - ease-out : 일정한 속도를 진행하고, 느리게 끝냄
+        - ease-in-out : 느리게 시작하고, 일정한 속도로 진행하다가 느리게 끝남
+
+        4. transition-delay: 트랜지션의 지연시간 지정
+        - 단위는 s(초) 또는 ms(밀리초, 1000분의 1초)로 지정
+
+        5. transition : 트랜지션의 단축 속성
+        - transition-property, transition-duration, transition-timing-funtion,
+            transition-delay 를 한번에 지정할 수 있다.
+
+     -->
+</head>
+<body>
+    <!-- 3. transition-timing-function -->
+    <div id="fn">
+        <div class="f1">linear</div>
+        <div class="f2">ease</div>
+        <div class="f3">ease-in</div>
+        <div class="f4">ease-out</div>
+        <div class="f5">ease-in-out</div>
+    </div>
+
+    <!-- 4. transition-delay -->
+    <hr>
+    <div id="delay">
+            <div class="d1">no-delay</div>
+            <div class="d2">delay</div>
+    </div>
+    <hr>
+
+    <!-- 5. transition 단축 속성 -->
+    <div id="tr">
+    </div>
+
+    <!-- 6. 퀴즈 -->
+    <div id="tr2">
+        
+    </div>
+
+
+    
+</body>
+</html>

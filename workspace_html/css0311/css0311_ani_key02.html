@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 효과 - keyframe 효과</title>
+    <style>
+        #box1 {
+            text-align: center;
+            background-color: orange;
+            animation: size_up 3s infinite;
+
+        }
+
+        /* 
+        퀴즈6 
+        진행시간의 4분의 1지점씩 진행할때마다
+        너비는 100씩, 높이는 10씩, 줄간격은 10씩, 폰트크기는 20씩 커지도록
+
+
+        */
+        @keyframes size_up {
+            0% {
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                font-size: 20px;
+            } 25% {
+                width: 200px;
+                height: 110px;
+                line-height: 110px;
+                font-size: 40px;
+            } 75% {
+                width: 300px;
+                height: 120px;
+                line-height: 120px;
+                font-size: 60px;
+            }
+            100% {
+                width: 500px;
+                height: 140px;
+                line-height: 140px;
+                font-size: 100px;
+
+            }
+        }
+
+    </style>
+
+
+
+    <!-- 
+        < keyframes와 animation속성을 활용한 애니메이션 효과의 장점 >
+        1. 애니메이션 효과의 중지점을 사용자 마음대로 지정할 수 있음.
+        2. 애니메이션의 이름을 붙여놓아서 필요한 곳에서 반복 사용할 수 있음.
+        3. 애니메이션 효과의 반복횟수를 마음대로 정할 수 있음.
+        4. 애니메이션이 끝나고 났을떄의 효과도 마음대로 지정할 수 있음.
+
+
+        - keyframes에서 from과 to대신에 0%와100% 사용해도 됨
+        - 중지점은 %를 사용하여 원하는 만큼 만들 수 있음
+        
+
+     -->
+</head>
+<body>
+    
+    <div id="box1">HTML5</div>
+
+</body>
+</html>

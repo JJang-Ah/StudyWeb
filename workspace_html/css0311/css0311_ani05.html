@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 기본 5번 - transition</title>
+
+    <style>
+        .tr1 {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            border: 1px solid black;
+            /* 트랜지션 효과를 설정: 크기, 생성, 시간 */
+            transition-property: width, height;
+            transition-duration: 2s, 1s;
+        }
+        .tr2 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border: 1px solid black;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            line-height: 92px;
+            transition-property: background-color, transform, width, height;
+            transition-duration: 2s, 3s, 2s, 3s;
+
+        
+        }
+
+        .tr2:hover {
+            background-color: yellow;
+            transform: rotate(180deg);
+            width: 200px;
+            height: 200px;
+        }
+        /* 
+        트랜티션 효과 설정
+        퀴즈1
+        배경색, 회전, 너비, 높이를 각각 2초, 3초, 2초, 3초 동안 변형
+         */
+
+    </style>
+
+    <!-- 
+        < 애니메이션의 속성 >
+        1. transform : 요소의 이동, 크기변환, 회전
+        2. transition: 시간에 따른 크기, 색상의 변환
+        - transition-property: 트랜지션을 적용할 속성을 지정.
+            all을 쓰거나 생략하면, 모든 속성이 트랜지션 대상이 됨.
+        - transition-duration: 트랜지션을 적용할 시간을 지정
+            단위로는 s(초), ms(ㅁㄹ리초, 1000분의 1초)로 지정
+            트랜지션의 속성의 개수에 따라 여러개를 나열할 수 있음
+     -->
+</head>
+<body>
+    <div class="tr1">
+
+    </div>
+    <hr>
+    <div class="tr2">
+        <h2>captain</h2>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스박스 레이아웃</title>
+    <style>
+        #container {
+            display: flex;
+            height: 500px;
+            border: 1px solid black;
+            /* flex-direction: column-reverse; */
+            /* flex-wrap: wrap; */
+            flex-flow: row wrap;
+            /* flex-direction과 flex-wrap을 함께 지정 */
+
+            justify-content: flex-start;
+            align-items:  baseline;
+            align-content: space-around;
+
+        }
+        #container div {
+            width: 200px;
+            background-color: #ccc;
+            border: 1px solid black;
+        }
+
+        #box5 {
+            order: 1;
+        }
+        #box3 {
+            order: 2;
+        }
+        #box6 {
+            order: 3;
+        }
+
+        /* flex속성으로 크기 조절 */
+        #box4 {
+            flex: 2 2 0;
+        }
+        #box2 {
+            flex: 3 1 0;
+        }
+    </style>
+
+    <!-- 
+        < 플렉스박스 레이아웃 >
+        - flex box layout : 그리드 레이아웃을 기본으로 하여 플렉스 박스를 원하는
+         위치에 배치하는 것 
+         플렉스 박스를 이요하면 여유공간에 따라서 너비, 높이, 위치를 자유롭게 변형할 수 있음
+         - 주축: 플렉스 항목을 배치하는 기본 방향, 가로축, 왼쪽에서 오른쪽으로 수평하게 배치.
+         - 교차축: 주축과 교차하는 축, 세로축, 위쪽에서 아래쪽으로
+
+         1. display: flex
+         - 플렉스 박스 컨테이너로 지정
+
+         2. flex-direction: 플렉스의 방향을 지정
+         - row: 기본값, 주축: 가로, 교차축: 세로, 왼쪽에서 오른쪽으로 배치
+         - row-reverse: 주출: 가로, 교차축: 세로, 오른쪽에서 왼쪽으로 배치
+         - column:
+         - column-reverse:
+
+         3. flex-wrap: 플렉스 항목을 한줄 또는 여러줄에 배치
+         - no-wrap: 한줄에 배치, 기본값
+         - wrap: 공간을 벗어났을 때 여러줄에 배치
+         - wrap-reverse: 공간을 벗어났을 때 여러줄에 배치하는데, 원래방향의
+         반대로 배치하는 방법
+
+         4. flex-flow: flex-wrap과 flex-direction을 한꺼번에 지정하는 속성
+
+         5. order: 항목의 배치 순서를 지정
+         - order속성에서 지정한 번호 순서대로 배치
+         - order속성의 값을 정하지 않으면 0번,
+
+         6. flex: 플렉스 항목의 크기를 조절
+         - flex: 늘릴비율 줄일비율 기본값 순서
+         - flex: 1 1 0; >> 늘ㄹ거나 줄이지 않음
+         - flex: 2 2 0; >> 2배로 늘리거나 줄일수 있음.
+         - 숫자를 쓰지 않지 않았을 때는 initial값을 가짐.
+         - initial은 항목의 크기에 의해서 결정되고, 공간이 부족할 경우에는 최소크기까지 축소
+
+         7. justfy-content: 주축의 배치 방법을 지정
+         - flex-start : 주축의 시작점을 기준으로 배치
+         - flex-end : 주축의 끝점을 기준으로 배치
+         - center : 주축의 중앙을 기준으로 배치
+         - space-between : 첫 항목과 끝 항목을 시작점과 끝점에 배치한 후 나머지 항목을 균등하게 배치
+         - space-around: 모든 항목을 균등하게 배치
+
+        8. align-item, align-self: 교차축 배치 방법을 지정
+        - stretch: 기본값, 플렉스 항목을 확장해서 교차축을 꽉 채움.
+        - flex-start : 교차축의 시작점을 기준으로 배치
+        - flex-end : 교차축의 끝점을 기준으로 배치
+        - center: 교차축의 중앙을 기준으로 배치
+        - baseline : 
+
+        9. align-content: 여러줄일때의 배치 방법을 지정
+        - flex-start: 교차축의 시작점을 기준으로 배치
+        - flex-end: 교차축의 끝점을 기준으로 배치
+        - center: 교차축의 중앙을 기준으로 배치
+        - space-between: 첫 항목과 끝 항목을 시작점과 끝점에 배치한 후 나머지 항목을 균등하게 배치
+        - space-around: 모든 항목을 균등하게 배치
+
+
+     -->
+</head>
+<body>
+    <div id="container">
+        <div id="box1"><h1>박스1</h1></div>
+        <div id="box2"><h1>박스2</h1></div>
+        <div id="box3"><h1>박스3</h1></div>
+        <div id="box4"><h1>박스4</h1></div>
+        <div id="box5"><h1>박스5</h1></div>
+        <div id="box6"><h1>박스6</h1></div>
+        <div id="box7"><h1>박스7</h1></div>
+        <div id="box8"><h1>박스8</h1></div>
+    </div>
+    
+</body>
+</html>

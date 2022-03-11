@@ -10,6 +10,40 @@
             width: 800px;
             margin: 0 auto;
         }
+        /* 상단 부분 */
+        h1 {
+            text-align: center;
+        }
+        h3 {
+            font-weight: none;
+            font-size: 1em;
+            text-align: center;
+        }
+        #cap1 {
+            text-align: right;
+            font-size: 2px;
+            margin: 4px;
+            padding: 2px;
+        }
+        fieldset {
+            border: none;
+            width: 600px;
+            border: 1px solid black;
+        }
+        form {
+            border: 1px solid black;
+            text-align: left;
+
+            
+        }
+        ul {
+            margin-left: 200px;
+        }
+
+        fieldset:last-child {
+            text-align: center;
+        }
+
         
     </style>
     <!-- 
@@ -24,10 +58,10 @@
 
     <div class="container">
         <h1>프런트엔드 개발자 지원서</h1>
-        <form action="">
-            <caption>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</caption>
+        <h3>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</h3>
 
-            <fieldset>
+        <form action="">
+            <fieldset class="box1">
                 
 
                 <ul>
@@ -45,7 +79,7 @@
 
 
             </fieldset>
-            <fieldset>
+            <fieldset class="box2">
                 <ul>
                     <dt>지원 분야</dt>
                     <dd>
@@ -62,7 +96,7 @@
                     </dd>
                 </ul>
             </fieldset>
-            <fieldset>
+            <fieldset class="box3">
                 <ul>
                     <dt>지원 동기</dt>
                     <dt>

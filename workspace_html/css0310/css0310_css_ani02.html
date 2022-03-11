@@ -27,13 +27,28 @@
             /* x, y, z 축으로 각각 2.5, 1.2, -1.5만큼 방향 벡터를
             갖고 45도만큼 회전함. */
         }
+
+        .skew {
+            display: inline-block;
+        }
+        .skewx {
+            transform: skewX(30deg);
+        }
+        .skewy {
+            transform: skewY(15deg);
+        }
+        .skewxy {
+            transform: skew(-25deg, -15deg);
+        }
     </style>
     <!-- 
-        2. 3차원 회전 효과
+        2. 3차원 회전 효과 : 단위로는 deg를 사용
         - perspective : 3차원으로 원래 위치에서 사용자가 있는 방향으로
-        잡아 당기거나 밀어내는 효과
+        잡아 당기거나 밀어내는 효과, 원근감을 주는 효과
         - 양수: 잡아 당기는 효과, 음수: 밀어내는 효과
 
+        3. 2차원 왜곡 효과: 단위로는 deg를 사용
+        - 2차원 변형만 가능, 양쪽방향이나 한쪽방향으로 비틀어서 왜곡하는 효과
      -->
 </head>
 <body>
@@ -55,6 +70,22 @@
     <div class="rotate">
         <div class="rotatexyz">
             <img src="images/fruit.jpg">
+        </div>
+    </div>
+    <hr>
+    <div class="skew">
+        <div class="skewx">
+            <img src="images/fruit.jpg" alt="">
+        </div>
+    </div>
+    <div class="skew">
+        <div class="skewy">
+            <img src="images/fruit.jpg" alt="">
+        </div>
+    </div>
+    <div class="skew">
+        <div class="skewxy">
+            <img src="images/fruit.jpg" alt="">
         </div>
     </div>
     

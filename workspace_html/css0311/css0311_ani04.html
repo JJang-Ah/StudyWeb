@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+        }
+        #wrapper {
+            border: 1px solid black;
+            float: left;
+            margin-top: 100px;
+            margin-left: 100px;
+            perspective: 300px;
+        }
+        .box1 {
+            background: #82cbd8;
+            transform: rotateY(45deg);
+        }
+        .box2 {
+            background: #0d6097;
+            transform-origin: left top ;
+            transform: rotateX(45deg);
+        }
+        #b2 {
+            transform-style: flat;
+        }
+        #b2 {
+            transform-style: preserve-3d ;
+        }
+
+
+        /* 2번 */
+        .box {
+            background: #82cbd8;
+            transform: rotateY(135deg);
+
+        }
+        #back1 {
+            backface-visibility: hidden;
+        }
+        #back2 {
+            backface-visibility: visible;
+        }
+
+
+    </style>
+
+    <!-- 
+        < 변형과 관련된 속성 >
+        3. transform-style : 3D 변형 설정
+        - flat : 하위 요소를 평면으로 처리
+        - preserve-3d : 하위요소에 3D효과를 적용
+        4. backface-visibility : 요소의 뒷면을 표시/감춤
+        - visible: 요소의 뒷면을 보여줌, 기본값
+        - hidden : 요소의 뒷면을 감춤
+        
+
+     -->
+</head>
+<body>
+    <!-- 3번 -->
+    <div id="wrapper">
+        <div class="box1" id="b1">
+            <div class="box2"></div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="box1" id="b2">
+            <div class="box2"></div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="wrapper">
+        <div class="box" id="back1">
+            <h1>EZEN</h1>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="box" id="back2">
+            <h1>EZEN</h1>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

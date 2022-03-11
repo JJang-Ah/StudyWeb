@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 효과 - keyframe 효과</title>
+    <style>
+
+        #a1 {
+            width: 100px;
+            height: 100px;
+            /* 애니메이션 적용 */
+            animation-name: change_box;
+            animation-duration: 3s;
+        }
+
+        /* @keyframes 속성을 사용하여 애니메이션을 설정 */
+        @keyframes change_box {
+            from {
+                background-color: cyan;
+                border: 5px solid red;
+            }
+            to {
+                background-color: pink;
+                border: 5px dotted blue;
+                border-radius: 50%;
+            }
+        }
+
+        /* 2번 : a2 박스 */
+        /* 퀴즈5 - a2박스의 배경색을 녹색에서 보라색으로 변경하고,
+            정원으로 변경하고, 45도 시계방향으로 회전하는 애니메이션 효과를
+            3초동안 지속하는 change_box2 애니메이션을 설정하여 a2에 적용하시오.
+             */
+        #a2 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: green;
+            margin: 20px;
+            animation-delay: 1s;
+            animation-name: change_box2;
+            animation-duration: 3s;
+            animation-iteration-count: 4;
+            /* 애니메이션을 4번 돌리겠다는 의미 */
+        }
+
+        @keyframes change_box2 {
+            from {
+                background-color: green;
+            }
+            to {
+                background-color: purple;
+                border-radius: 50%;
+                transform: rotate(45deg);
+            }
+        }
+
+        /* a3 박스 */
+        #a3 {
+            width: 200px;
+            height: 40px;
+            padding: 20px;
+            margin: 50px 100px;
+            border: 1px solid black;
+            background-color: beige;
+/*             
+            animation-name: change_box3;
+            animation-duration: 3s;
+            animation-delay: 1s;
+            animation-iteration-count: 3;
+            animation-timing-function: ease-in-out;
+            animation-direction: alternate; */
+
+            /* animation 단축 표현 */
+            animation: change_box3 3s 1s 3 ease-in-out alternate;
+        }
+
+        @keyframes change_box3 {
+            from {
+                background-color: beige;
+            }
+            to {
+                width: 400px;
+                background-color: orange;
+                transform: scale(1.5) rotate(15deg);
+            }
+        }
+
+    </style>
+
+    <!-- 
+
+        < 애니메이션 효과 >
+        1. transition속성을 활용한 애니메이션 효과
+        2. animation속성을 활용한 애니메이션 효과
+
+
+        < 키프레임을 활용한 애니메이션 효과 >
+        1. keyframes 속성
+        - 사용자가 원하는 지점에 다양한 효과를 지정할 수 있음. 반복여부설정도 가능
+        - 애니메이션이 바뀌는 지점에 @keyframe속성을 사용하여 정의하고 지정할수있음
+
+        2. animation 속성
+        - animation속성의 키프레임을 사용하면 사용자가 원하는 지점에 다양한 효과를
+        지정할 수 있다.
+        animation속성을 사용하여 애니메이션의 실행시간이나 반복여부를 설정함.
+        - animation-name : 애니메이션 이름 지정
+        - animation-duration : 애니메이션 지속 시간 지정
+        - animation-delay : 애니메이션 지연 시간 지정
+        - animation-timnimg-function: linear, ease, ease-in, ease-out, ease-in-out
+        - animation-iteration-count : 반복횟수를 지정, 생략ㅎ면 1번, infinite는 무한반복
+        - animation-direction: 
+        -- normal: 기본값, 애지메이션 효과가 끝나면 원래위치로 바로 돌아감.
+        -- alternate: 애니메이션 효과가 끝나면 원래위치로 되돌아가면서 애니메이션 효과를 실행
+    
+     -->
+</head>
+<body>
+    <div id="a1"></div>
+    <div id="a2"></div>
+    <div id="a3"></div>
+    
+</body>
+</html>
