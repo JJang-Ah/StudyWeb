@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 작성 방법 2</title>
+    <script>
+        //내부 자바스크립트
+
+        let text1 = "Web Programing!!";
+        let text2 = "Javascript~~~";
+        function welcome(target) {
+            document.write("Welcome to " + target);
+
+        }
+    </script>
+    
+</head>
+
+<body>
+    <h3>3. 인라인 자바스크립트 작성 방법</h3>
+    <button onclick="alert('Welcom to Javascript!!!')">자바스크립트</button>
+    <a href="javascript:alert('자바스크립트의 세상에 오신 것을 환영합니다!~')">자바스크립트</a>
+
+    <h3>4. 내부 & 인라인 자바스크립트 작성 방법</h3>
+    <button onclick="welcome(text2);">웹프로그래밍</button>
+    <button onclick="welcome(text1);">자바스크립트</button>
+</body>
+</html>

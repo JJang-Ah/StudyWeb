@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본문법</title>
+    <style>
+        /* CSS작성 */
+    </style>
+    <script>
+        // 1-2. head 영역안에 자바스크립트 작성하는 방법
+        // 전체 html 문서에 적용하고자 하는 경우
+
+        let text1 ="자바스크립트의 세상에 오신 것을 환영합니다."
+        let text2="자바스크립트 프로그래밍을 즐기도록 합시다~"
+        function Welcome(target) {
+            document.write(target);
+
+        }
+    </script>
+
+    <!-- 
+
+        < 자바 스크립트를 작성하는 방법 >
+
+        1. 내부 자바스크립트 작성 - 가장 많이 사용
+
+        2. 외부 자바스크립트 작성 - 실무적으로 많이 사용, 관리가 편리.
+
+        3. 인라인 자바스크립트 작성 - 간편하게 사용, 권장하지는 않음.
+
+
+
+
+
+     -->
+</head>
+<body>
+    <h3>1-1. 내부 자바 스크립트 작성 방법 1번</h3>
+    <script>
+        //1-1. body영역안에 자바스크립트를 작성하는 방법
+        // 상황에 따라 바로 적용결과를 확인하고 싶은 경우
+
+        
+        document.write("Welcome to Javascript!!");
+        document.write("Enjoy Javascript Programming~~");
+    </script>
+
+    <h3>1-2. 내부 자바스크립트 작성 - 2번 방법</h3>
+    <script>
+        Welcome(text1);
+        Welcome(text2);
+
+    </script>
+
+    <h3>2. 외부 자바스크립트 작성 방법</h3>
+    <script src="js/basic01.js"></script>
+    
+</body>
+</html>

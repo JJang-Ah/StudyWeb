@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        // document.write()함수와 console.log()함수의 차이점과 사용법
+        function welcom(number){
+            //1. document.write() : 태그를 반영하여 웹페이지로 출력
+
+            document.write("<h2>welcome to Javascript!!</h2>")
+            document.write("<p>자바스크립트를 시작합니다.</p>")
+            // 2. console.log() : 자바스크립트 문법, 계산 결과 확인하는 용도로 사용
+            // F12(개발자 도구)를 통해서 확인
+            
+            let sum = 20;
+            sum += number ;
+            document.write("합계 : " + sum);
+            console.log("sum = " + sum);
+        }
+    </script>
+    <!-- 
+        < 자바스크립트 출력함수 >
+        1. alert() 합수 : 함수 안에 메세지를 경고(알림)창을 통해서 출력
+        2. document.write() 함수 : 함수 안의 내용을 웹페이지로 출력, 태그를 적으면 그래도 반영함.
+        3. console.log() 함수 : 함수 안의 결과를 콘솔창으로 출력, 
+        - 자바스크립트의 문법, 계산 결과 등을 확인하는 용도로 사용.
+
+
+
+     -->
+</head>
+<body>
+
+    <h3>자바스크립트의 출력 함수</h3>
+    <ul>
+        <li>HTML 기본 문서 작성 방법</li>
+        <li>CSS 스타일 시트 작성 방법</li>
+        <li>Javascript 작성 방법</li>
+
+    </ul>
+    <br>
+    <button onclick="welcom(10);">다음</button>
+    
+</body>
+</html>
