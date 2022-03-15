@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 연습</title>
+
+    <!-- 
+
+
+     -->
+</head>
+<body>
+
+    <h3>조건문 연습 1 - if 문</h3>
+    <script>
+        // 1. if문 : 조건이 1개일 때
+        // 점수가 80점이상일 떄 "시험을 통과하였습니다." 라는 메시지를 출력되도록 하시오
+
+        //  if(조건) {
+        //     조건이 참일 떄의 실행문
+        // }
+        let score = 85;
+        if(score >= 80) {
+            console.log("시험을 통과하였습니다.")
+        }
+
+        // 2. if ~ else문 : 조건이 2개일 때
+        // 문제2) 점수가 80점이상일 때는 "합격입니다."라는 메시지를 출력하고,
+        // 80점 미만일떄에는 불합격입니다. 출력되도록 하시오
+
+        let score2 = 80;
+        if(score2 >= 80){
+            console.log("합격입니다.");
+        }else {
+            console.log("불합격입니다.");
+        }
+
+        // 3. if~ else if ~ else : 조건의 결과가 3개 일때
+        // 문제3) 점수가 90점 이상일 때는 "최우수", 80점 이상일 떄는 "우수"
+        // 80점 미만일 떄에는 "보통"
+        
+        let score3 = 85;
+        if(score3 >= 90){
+            console.log("최우수");
+        }else if(80<= score3 < 90){
+            console.log("우수");
+        }else {
+            console.log("보통");
+        }
+
+        // 문제4) 점수가 90점 이상일때는 A학점, 80점 이상일떄는 B, 70점 이상일떄는 C학점
+        // 60점 이상일떄는 D, 그 미만은 F
+
+        let score4 = 82;
+        if(score4 >= 90) {
+            console.log("A학점 입니다.");
+        }else if(score4 >= 80){
+            console.log("B학점 입니다.");
+        }else if(score4 >= 70){
+            console.log("C학점 입니다.");
+        }else if(score4 >=60){
+            console.log("D학점 입니다.");
+        }else {
+            console.log("F입니다!!");
+        }
+
+
+        function calcGrade() {
+            let name = prompt("당신의 이름을 입력하세요");
+            let kor = prompt("국어점수를 입력해주세요");
+            let eng = prompt("영어점수를 입력해주세요");
+            let mat = prompt("수학점수를 입력해주세요");
+            
+            document.write("이름 : " + name);
+            
+            document.write("<br>국어점수 : " + kor);
+            document.write("<br>영어점수 : " + eng);
+            document.write("<br>수학점수 : " + mat);
+
+            let avg = (Number(kor)+Number(eng)+Number(mat))/3;
+            // let avg = (kor + eng + mat)/3;
+            console.log(typeof avg);
+            document.write("<br>평균점수 : " + avg);
+
+
+            if(avg >= 90) {
+                document.write("<br>A학점 입니다.");
+            }else if(avg >= 80){
+                document.write("<br>B학점 입니다.");
+            }else if(avg >= 70){
+                document.write("<br>C학점 입니다.");
+            }else if(avg >=60){
+                document.write("<br>D학점 입니다.");
+            }else {
+                document.write("<br>F입니다!!");
+            }
+        }
+    </script>
+    <h3>학점 계산 문제</h3>
+    <p>점수를 입력하면 학점을 계산해 드립니다.</p>
+    <button onclick="calcGrade()">학점 계산</button>
+
+    
+</body>
+</html>

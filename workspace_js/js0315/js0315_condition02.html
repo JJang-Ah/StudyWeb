@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 연습2</title>
+
+    <!-- 
+        퀴즈 1번 )
+        입력창을 통해서 월을 입력받아서, 월에 대한 계절을 웹화면으로 출력하시오.
+        - 345 : 봄, 678: 여름, 91011 : 가을, 1212 : 겨울
+        <출력화면 설계>
+        ex) 5월은 봄입니다.
+
+
+        퀴즈 2번)
+        입력창을 통해서 정수를 입력받아서, 정수에 대한 홀수, 짝수 여부를 알림창으로
+        출력하시오.
+
+
+        퀴즈 3번)
+        입력창을 통해서 점수를 입력받아서, 3의 배수인지 또는 4의 배수인지를 알림창으로 출력하시오
+        ex) 6은 3의 배수입니다.
+        ex) 8은 4의 배수입니다.
+        ex) 12는 3의 배수이면서 4의 배수입니다.
+        ex) 11은 3의 ㅐ수도, 4의 배수도 아닙니다.
+     -->
+
+</head>
+<body>
+    <script>
+        function func1() {
+            let month = prompt("월을 입력해주세요.")
+            let wet;
+            if(month==3 || month==4 || month==5) {
+                wet = "봄";
+            }else if(month==6 || month==7 || month==8){
+                wet = "여름";
+            }else if(month==9 || month==10 || month==11) {
+                wet = "가을";
+            }else if (month==12 || month==1 || month==2) {
+                wet = "겨울";
+            }
+            // document.write(month + "월은 " + wet + "입니다.")
+
+            document.write('${month}월은 ${wet}입니다.'); //새로 나온 기술!
+            //엥 나는 왜 안되지
+        }
+        function func2() {
+            let num1 = prompt("수를 입력해 주세요", "3");
+            if(num1 % 2 == 0) {
+                alert(num1 +"은 짝수 입니다~");
+            }else{
+                alert(num1 +"은 홀수 입니다~");
+            }
+        }
+
+        function func3() {
+            let num2 = prompt("수를 입력해 주세요!!");
+            if (num2%3==0 && num2%4==0){
+                alert(num2 + "는 3의 배수이면서 4의 배수입니다.");
+            }else if(num2%3 == 0) {
+                alert(num2 + "는 3의 배수입니다.")
+            }else if (num2%4 == 0) {
+                alert(num2 + "는 4의 배수입니다.")
+            }else {
+                alert(num2 + "는 3의 배수도 4의 배수도 아닙니다.")
+            }
+        }
+    </script>
+    
+
+    <h3>퀴즈 1번</h3>
+    <p>월을 입력하여 계절을 판별하시오</p>
+    <button onclick="func1()">계절 판별</button>
+    <hr>
+    <h3>퀴즈 2번</h3>
+    <p>정수를 입력하여 홀수, 짝수 여부를 판별하시오</p>
+    <button onclick="func2()">홀수, 짝수 판별</button>
+    <hr>
+    <h3>퀴즈 3번</h3>
+    <p>정수를 입력항혀 3의배수와 4의 배수를 판별하시오.</p>
+    <button onclick="func3()">3, 4 의 배수 판별</button>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- 
+        <자동 형변환 >
+
+     -->
+</head>
+<body>
+    <h3>자동 형변환과 형변환 함수</h3>
+    <script>
+        console.log(7);
+        console.log("----------");
+        console.log(7 + null); //7 > 숫자
+        console.log("7" + null);  // 7null > 문자열
+        console.log("7" + 2); // 72 > 문자열
+        console.log(7 + "2"); //72 > 문자열
+        console.log("----------");
+        console.log(7-5);
+        console.log("7" - 2); //5 > 숫자
+        console.log(7 - "2"); // 5 > 숫자
+        console.log("7" - "2"); // 5 > 숫자
+        console.log(7 - "hello"); // NaN , Not a Number > 숫자는 아니지만 숫자 취급은 한다.
+        
+        console.log("----------");
+        console.log("7" * 2); //34 숫자, 자동형변환
+        console.log(7 + "2"); // 14 숫자, 자동형변환
+        console.log("7" * "2"); //14 > 숫자
+        console.log("seven" * 2); // NaN
+        console.log("7" / 2); //3.5
+        console.log(7 / "2"); //3.5
+        console.log("7" / "2"); // 3.5
+        console.log("seven" / 2); // NaN
+        console.log("----------");
+
+
+        console.log("--- 2. 형변환 함수 ---");
+        // 1. 불린형 변환 함수 : Boolean(), 모든 데이터를 논리형(참 또는 거짓)으로 판별하는 함수
+        // 2. 숫자형 변환 함수 : Number(): 정수, 실수 모두 숫자로 변환하는 함수
+        //  - parseInt() : 정수로만 변환, parseFloat() : 실수로만 변환
+        // 자바의 wrapper 클래스 : Integer, Double ex) Integer.parseInt(), Double.parseDouble() ...
+        // 3. 문자열 변화 함수 : 값.toString()
+        //  값.toString(), toString(값) >> 2가지 방법으로 사용
+
+        let num1 = 3.14, num2 = 20, num3 = 100, num4 = 0;
+        let str1 = "58", str2 = "3.678", str3 ="hello";
+        let b1 = true, b2 = false;
+
+        console.log(str1 + num1); // 583.14 > 문자열 연결, +는 문자열 연결이 우선
+        console.log(Number(str1) + num1); // 61.14
+        console.log(parseInt(str1) + num1); //61.14
+        console.log(str1 - num1); //54.86 > 자동형변환
+        console.log(Number(str2) + num2); // 23.678
+        console.log(parseInt(str2) + num2); //3+20 > 23
+        console.log(parseFloat(str2) + num2); //23.678
+        console.log("----------");
+        console.log(Number(str3) + num2); // NaN
+
+        console.log("----------");
+        console.log(typeof b1);
+        console.log(typeof b1.toString());
+        console.log(typeof num1);
+        console.log(typeof num1.toString());
+        let str4 = num1.toString(); //문자열 "3.14"로 저장
+        console.log(typeof str4);
+        console.log(typeof toString(num1));
+        console.log("----------");
+        console.log(typeof num1);
+        console.log(Boolean(num1)); // true, 3.14, number > boolean 타입으로 변경
+        console.log(Boolean(num4)); // false, 0, nuber > boolean
+        console.log(typeof Boolean(str3)); // true, hello, string > boolean
+        console.log("----------");
+        let str5 = ""; //빈문자열
+        console.log(typeof str5);
+        console.log(Boolean(str5)); // false, 빈문자열 , string > boolean 타입으로 변경
+        let str6;
+        console.log(typeof str6); // undefined
+        console.log(Boolean(str6)); // false, undefind
+        let str7 = null;
+        console.log(typeof str7);
+        let str8 = new Object();
+        console.log(typeof str8); // object
+        console.log(Boolean(str8)); // true, null 제외한 모든 object
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 연습3</title>
+
+    <!-- 
+
+        < 조건문 > - if문, switch ~ case문
+
+        1. if문의 활용.
+        2. switch ~ case 문
+         - 조건에는 반드시 정수, 문자열만 가능, 실수는 불가능.
+         - 기능의 제약으로 보는 것이아니라, 정수와 문자열을 사용할 때 특화되어
+         - 정수나 문자열일때는코드의 가독성이 if문보다 훨씬 좋아짐
+         - 조건문의 경우의 수가 정수로 딱 떨어질 떄에는 if문보다 switch~case문을 사용할 것을 권장
+
+
+        형식
+        switch(조건) {
+            case 값 :
+                실행문;
+                break;
+            case 값:
+                실행문;
+                break;
+
+                ...
+            
+            default:
+                실행문;
+                break;
+
+        }
+     -->
+</head>
+<body>
+    <h3>switch ~ case문 활용</h3>
+    <script>
+        let num = 2; 
+        switch(num) {
+            case 1:
+                console.log("1번");
+                break;
+            case 2:
+                console.log("2번");
+                break;
+            case 3:
+                console.log("3번");
+                break;
+            case 4:
+                console.log("4번");
+                break;
+            default:
+                console.log("다시 선택");
+                break;
+        }
+
+        
+            // 퀴즈 1
+            //월에 대한 계절을 출력하는 문제를 switch-case문으로 해결하시오.
+        function func1() {
+            let month = Number(prompt("월을 입력하시오"));
+            
+            switch(month) {
+                case 3: case 4: case 5:
+                    document.write(month+"월은 봄입니다.");
+                    break;
+                case 6: case 7: case 8:
+                    document.write(month+"월은 여름입니다.");
+                    break;
+                case 9, 10, 11:
+                    document.write(month+"월은 가을입니다.");
+                    break;
+                case 12, 1, 2:
+                    document.write(month+"월은 겨울입니다.");
+                    break;
+            }
+
+            // 퀴즈2
+            // 이름, 국어점수, 영어점수, 수학점수를 입력하여 평균과 학점을 출력하는 문제를
+            //switch~case문을 사용하여 알림창으로 출력하시오.
+            //< 출력화면 설계 >
+            // - 이름 : 육치성
+            // - 국어점수 : 98
+            // - 영어점수 : 11
+            // - 수학점수 : 23
+            // - 평균점수 : 12
+            // - 학점 : B학점
+
+            /*
+            퀴즈 3
+            - 입력창으로 월을 입력하여 월에 해당하는 탄생화를 출력하시오.
+            - < 출력화면 설계 >
+            - ex)당신이 태어난 월은 6월이고, 탄생화는 백합입니다.
+
+            퀴즈 4 - if 문
+            - 정수를 입력하여 홀수, 짝수를 출력하시오. 문자열의 활용 사용하시오.
+            type02.html 참고
+
+            퀴즈 5 - if 문
+            - 현재 시간에 맞는 문자를 출력하시오.
+            - 11시 이전이라면, 운동하시오.
+            - 15시 이전이라면, 점심을 드세요.
+            - 18시 이전이라면, 업무를 정리하고 퇴근 하세요.
+            - 23시 이전이라면, 이제 잠자리에 들 시간이에요
+            
+            const date = new Date();
+            const hour = data.getHours(); // 시스템의 시간을 획득
+
+
+
+            */
+
+
+
+
+        }
+    </script>
+
+    <h3>퀴즈 1번</h3>
+    <p>월을 입력하여 열에 해당하는 계절을 출력하시오.</p>
+    <button onclick="func1()">계절 판별</button>
+    
+
+</body>
+</html>

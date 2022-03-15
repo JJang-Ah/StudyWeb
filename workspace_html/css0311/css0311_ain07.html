@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션</title>
+
+
+    <style>
+
+        /* 1번 - transition 활용 */
+        div {
+            width: 500px;
+            height: 500px;
+            border: 1px solid gray;
+        }
+        .ani01 {
+            transition: 3s 1s ease-out;
+            background: url(images/bg2.jpg) no-repeat;
+            background-size: cover;
+            opacity: 0;
+        }
+        .ani01:hover {
+            border: 5px solid orange;
+            border-radius: 50%;
+
+            opacity: 1;
+        }
+
+
+        /* 2번 - keyframes와 animation 속성 활용 */
+        .ani02 {
+            background: url("images/bg2.jpg") no-repeat;
+            background-size: cover;
+            opacity: 0;
+        }
+        .ani02:hover {
+            animation: show_image 3s 1s ease-out;
+
+        }
+
+        @keyframes show_image {
+            from{
+            }
+            to {
+            border: 5px solid orange;
+            border-radius: 50%;
+            opacity: 1;
+
+            }
+        }
+    </style>
+    
+    <!-- /* 퀴즈4 - 
+        ani01과 ani02는 500*500 으로 설정
+    tr2에 마우스를 올렸을 때, 
+*/
+/* 
+   tr2의 배경이미지가 해바라기 이미지로 채워지고,
+   이미지가 동그랗게 변형되고,
+   테두리가 3px의 orange색상의 실선이 그려지는
+   애니메이션 효과를 3초동안 진행하고, 1초의 지연시간을 가지고
+   느리게 끝나도록
+   설정하시오.
+
+   ani01은 transition속성으로 해결하고,
+   ani02는 keyframes과 animation 속성으로 해결하시오.
+
+
+*/ -->
+</head>
+<body>
+    <!-- 1번. transition을 활용한 애니메이션 효과 -->
+    <div class="ani01">
+
+    </div>
+    <hr>
+
+    <!-- 2번. keyframes와 animation속성을 활용한 애니메이션 -->
+    <div class="ani02">
+
+    </div>
+    
+</body>
+</html>
