@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습 3</title>
+    <!-- 
+        3. for문
+        - 특징 : for문의 괄호 안에 초깃값, 조건, 증강값이 함께있어 파악하기 쉽다.
+        
+
+        - 기본 형식
+        for(초깃값; 조건; 증감값) {
+            실행문;
+        } 
+     -->
+</head>
+<body>
+
+    <h3>3. for문 연습</h3>
+    <script>
+        // 문제1) 1부터 10까지 1씩 증가하는 수를 출력하시오.
+        for(let i=1; i<=10; i++){
+            console.log(i);
+
+        }
+        // 문제2) 10부터 1까지 1씩 감소하는 수를 출력
+        for(let i2=10; i2>=1; i2--){
+            console.log(i2);
+        }
+
+        // 문제3) 1부터 10까지 2씩 증가하는 수를 출력하시오
+        for(let i3=1; i3<=10; i3+=2){
+            console.log(i3);
+
+        }
+        // 문제4) 1부터 100까지 홀수를 출력하고, 그 합과 갯수를 출력하시오.
+        let sum4=0, cnt4=0;
+        for(let i4=1; i4<=100; i4++) {
+            if(i4%2!=0){
+                console.log(i4);
+                sum4+=i4;
+                cnt4++;
+            }
+        }
+        console.log(`문제4) 합 : ${sum4}, 갯수 : ${cnt4}`);
+
+        // 문제5) 1부터 100까지 3과 4의 배수 출력 합과 갯수
+        let sum5=0, cnt5=0;
+        for(let i5=1; i5<=100; i5++) {
+            if(i5%3==0 && i5%4==0){
+                console.log(i5);
+                sum5 += i5;
+                cnt5++;
+            }
+        }
+        console.log(`문제5) 합 : ${sum5}, 갯수 : ${cnt5}`);
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 연습 3</title>
+    <!-- 
+        < 조건문 > - if문 , switch ~ case문
+
+     -->
+</head>
+<body>
+
+    <script>
+
+        function quiz01() {
+            let month = Number(prompt("월을 입력하시오"));
+            let season;
+            switch(month) {
+                case 3:
+                case 4:
+                case 5:
+                    season = "봄";
+                    break;
+                case 6:
+                case 7:
+                case 8:
+                    season = "여름";
+                    break;
+                case 9:
+                case 10:
+                case 11:
+                    season = "가을";
+                    break;
+                case 12:
+                case 1:
+                case 2:
+                    season = "겨울";
+                    break;
+                default:
+                    season = "월이 잘못 입력 되었습니다."
+                    break;
+                    
+            }
+            alert(month + "월은 " + season + "입니다.");
+
+            // grave ` > 홀따옴표가 아니다 물결에 있는거다
+            alert(`${month}월느 ${season}입니다.`);
+        }
+        //퀴즈 2번
+        function quiz02() {
+            let name = prompt("학생의 이름을 입력하시오.");
+            let kor = Number(prompt("국어 점수를 입력하세요"));
+            let eng = Number(prompt("영어 점수를 입력하세요"));
+            let mat = Number(prompt("수학 점수를 입력하세요"));
+            let avg = (kor+eng+mat)/3;
+            let grade;
+            switch(parseInt(avg/10)){
+                case 10:
+                case 9 :
+                    grade = "A학점";
+                    break;
+                case 8 :
+                    grade = "B학점";
+                    break;
+                case 7 :
+                    grade = "C학점";
+                    break;
+                case 6 :
+                    grade = "D학점";
+                    break;
+                default:
+                    grade = "F학점";
+                    break;
+            }
+            alert(`이름 : ${name} \n국어점수 : ${kor} \n수학점수 : ${mat}
+            영어점수 : ${eng} \n평균점수 : ${avg} \n학점 : ${grade}`);
+        }
+
+        //퀴즈 3번
+        function quiz03() {
+            let month = Number(prompt("월을 입력하세요"));
+            let flower;
+            switch(month) {
+                case 1:
+                    flower = "";
+                    break;
+                case 2:
+                    flower = "";
+                    break;
+                case 3:
+                    flower = "";
+                    break;
+                case 4:
+                    flower = "";
+                    break;
+                case 5:
+                    flower = "";
+                    break;
+                case 6:
+                    flower = "";
+                    break;
+                case 7:
+                    flower = "";
+                    break;
+                case 8:
+                    flower = "";
+                    break;
+                case 9:
+                    flower = "";
+                    break;
+                case 10:
+                    flower = "";
+                    break;
+                case 11:
+                    flower = "";
+                    break;
+                case 12:
+                    flower = "";
+                    break;
+            }
+        }
+
+        //퀴즈 4번
+        function quiz04() {
+            let num = prompt("점수를 입력하시오"); //문자열
+            //홀수 : 1의 자리가 1,3,5,7,9
+            //짝수 : 1의 자리가 0,2,4,6,8
+            //ex) 546 > 1의 자리가 6이므로 짝수, 37 < 1의 자리가 7이므로 홀수
+            let len = num.length;
+            let first = num[0];
+            let last = num[num.length-1];
+            alert(`문자길이: ${len}\n첫문자 : ${first}\n마지막문자 : ${last}`);
+
+            if(last == "1" || last == "3" || last == "5" || last == "7" || last == "9") {
+                alert(`${num}은 홀수입니다.`)
+            } else {
+                alert(`${num}은 짝수입니다.`)
+            }
+
+        }
+
+        //퀴즈 5번
+        function quiz05() {
+            const date = new Date();
+            const hour = date.getHours();
+            alert(`${date}와 ${hour}`)
+            let msg;
+
+            if(hour < 11) {
+                msg = "아침 운동하세요";
+            } else if (hour < 15) {
+                msg = "점심을 드세요";
+            } else if (hour < 18) {
+                msg = "업무를 정리하고, 퇴근하세요.";
+            } else if (hour < 23) {
+                msg = "이제 잠자리에 들 시간이에요";
+            }
+            alert(msg);
+        }
+
+
+
+        
+    </script>
+
+
+    <h3>퀴즈 1번</h3>
+    <p>월에 대한 계절을 출력하는 문제를 switch~case문을 사용하여 알림창으로 출력하시오.</p>
+    <button onclick="quiz01()">계절 판별</button>
+    <hr>
+    <h3>퀴즈 2번</h3>
+    <p>이름, 국어점수, 영어점수, 수학점수를 입력하여 평균과 학점을 출력하는 문제를
+        switch~case문을 사용하여 알림창으로 출력하시오.</p>
+    <button onclick="quiz02()">학점 계산</button>
+    <hr>
+    <h3>퀴즈 3번</h3>
+    <p>입력창으로 월을 입력하여 월에 해당하는 탄생화를 출력하시오. switch~case문 사용</p>
+    <button onclick="quiz03()">탄생화 판별</button>
+    <hr>
+    <h3>퀴즈 4번</h3>
+    <p>점수를 입력하여 홀수, 짝수를 출력하시오. 문자열의 특성을 사용하시오.</p>
+    <button onclick="quiz04()">홀수, 짝수 판별</button>
+    <hr>
+    <h3>퀴즈 5번</h3>
+    <p>
+        - 현재 시간에 맞는 문자를 출력하시오. <br>
+        - 11시 이전이라면, 운동하시오. <br>
+        - 15시 이전이라면, 점심을 드세요. <br>
+        - 18시 이전이라면, 업무를 정리하고 퇴근 하세요. <br>
+        - 23시 이전이라면, 이제 잠자리에 들 시간이에요<br>
+        
+        const date = new Date(); <br>
+        const hour = data.getHours(); // 시스템의 시간을 획득</p>
+    <button onclick="quiz05()">생활 알림</button>
+    
+</body>
+</html>

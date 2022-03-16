@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습 2</title>
+
+    <!-- 
+
+        2. do-while문
+        - 기본 형식
+
+        초깃값;
+        do {
+            실행문;
+            증감값;
+        } while (조건); 
+            //세미콜론 필수!!
+
+        
+     -->
+</head>
+<body>
+    <h3>2. do-while문 연습</h3>
+    <script>
+        // 문제1) 1부터 100까지 1씩 증가하는 수를 출력하시오.
+        
+        let i=1;
+        do {
+            console.log(i);
+            i++;
+        } while(i<=100);
+
+        // 문제2) 10부터 1까지 1씩 감소하는 수를 출력하시오.
+        let i2=10;
+        do {
+            console.log(i2);
+            i2--;
+        }while(i2>=1);
+
+        // 문제3) 1부터 10까지 2씩 증가하는 수를 출력
+        let i3=1;
+        do {
+            console.log(i3);
+            i3+=2;
+        } while(i3<=10);
+
+        //문제4) 1부터 100까지 홀수를 출력하고, 그 합과 갯수를 출력하시오.
+        let i4=1;
+        let sum4 =0;
+        let cnt4 = 0;
+        do {
+            if(i4%2!=0){
+                console.log(i4);
+            cnt4++;
+            sum4+=i4;
+            }
+            i4++;
+        } while(i4<=100);
+
+        console.log(`퀴즈 4) 합 : ${sum4} , 갯수 : ${cnt4}`);
+
+        //문제5) 1부터 100까지 3의 배수이면서 4의 배수인 수를 출력하고
+        // 그합과 갯수를 출력
+
+        let i5=1;
+        let sum5=0;
+        let cnt5=0;
+        do{
+            if(i5%3==0 && i5%4==0){
+                console.log(i5);
+                sum5+=i5;
+                cnt5++;
+            }
+            i5++;
+        }while(i5<=100);
+        
+        console.log(`퀴즈 5) 합 : ${sum5} , 갯수 : ${cnt5}`);
+
+
+    </script>
+    
+</body>
+</html>
