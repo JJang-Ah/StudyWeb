@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 반복문 응용 1번</title>
+
+    <style>
+        table{
+            display: inline-block;
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 10px;
+            padding: 10px;
+        }
+        tr, td {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 3px;
+        }
+        th {
+            border: 1px solid black;
+        }
+        
+    </style>
+    <!-- 
+
+        2단
+        2*1=2
+        2*2=4
+        ...
+
+     -->
+
+</head>
+<body>
+    
+    <h3>퀴즈 1번</h3>
+    <p>테이블을 사용하여, 구구단을 웹화면으로 출력하시오.</p>
+    <script>
+        for(let i=1; i<=9; i++){
+        document.write("<table>")
+                document.write(`<tr><th>${i}단!</th></tr>`)
+            for(let j=1; j<=9; j++) {
+                document.write(`<tr><td>${i}*${j}=${i*j}`);
+            }
+        document.write("</table>")
+        }
+        // // 콘솔로 확인
+        // let output = "";
+        // for(let i=1; i<=9; i++) {
+        //     for(let j=2; j<=9; j++) {
+        //         output += `${j} * ${i} = ${j*i}`;
+        //     }
+        //     output += "\n";
+        // }
+        // console.log(output);
+        
+        // 2. 웹화면을 출력
+
+        
+        document.write("<table>");
+            document.write(`<tr>`);
+            for(let i=2; i<=9; i++) {
+            document.write(`<th>${i}단</th>`);
+            }
+            document.write(`</tr>`);
+        for(let i=1; i<=9; i++) {
+            document.write("<tr>")
+            for(let j=2; j<=9; j++) {
+                document.write(`<td>${j} * ${i} = ${j*i}</td>`);
+            }
+            document.write("</tr>")
+        }
+        document.write("</table>");
+
+    </script>
+
+</body>
+</html>

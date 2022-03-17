@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- 
+
+        직각삼각형을 출력하는 문제를 2중반복문과 if문을 활용하여 출력하시오.
+        - 출력결과는 loop2d02.html과 동일
+        퀴즈1번) 좌하면이 직각인 직각삼각형을 출력
+        퀴즈2번) 좌상면이 직각인 직각삼각형을 출력
+        퀴즈3번) 우하면이 직각인 직각삼각형을 출력
+        퀴즈4번) 우상면이 직각인 직각삼각형을 출력
+
+     -->
+</head>
+<body>
+    <script>
+        //퀴즈 1번
+        function quiz01() {
+            let n = Number(prompt("점수를 입력하시오."));
+            let output = "";
+            for(let i=1; i<=n; i++){
+                for(let j=1; j<=n; j++){
+                    if(i>=j){
+                        output += "* ";
+                    }else {
+                        output += "  ";
+                    }
+
+                }
+                output += "\n";
+
+            }
+            console.log(output);
+        }
+        //퀴즈 2번
+        function quiz02() {
+            let n = Number(prompt("점수를 입력하시오."));
+            let output = "";
+            for(let i=1; i<=n; i++){
+                for(let j=1; j<=n; j++){
+                    if((n-i+1)>=j){
+                        output += "* ";
+                    }else {
+                        output += "  ";
+                    }
+
+                }
+                output += "\n";
+
+            }
+            console.log(output);
+        }
+        //퀴즈 3번
+        function quiz03() {
+            let n = Number(prompt("점수를 입력하시오."));
+            let output = "";
+            for(let i=1; i<=n; i++){
+                for(let j=1; j<=n; j++){
+                    if((n-i+1)<=j){
+                        output += "* ";
+                    }else {
+                        output += "  ";
+                    }
+
+                }
+                output += "\n";
+
+            }
+            console.log(output);
+        }
+        //퀴즈 4번
+        function quiz04() {
+            let n = Number(prompt("점수를 입력하시오."));
+            let output = "";
+            for(let i=1; i<=n; i++){
+                for(let j=1; j<=n; j++){
+                    if(i<=j){
+                        output += "* ";
+                    }else {
+                        output += "  ";
+                    }
+
+                }
+                output += "\n";
+
+            }
+            console.log(output);
+        }
+    </script>
+
+    <h3>퀴즈 1번</h3>
+    <button onclick="quiz01()">퀴즈1 출력</button>
+    <h3>퀴즈 2번</h3>
+    <button onclick="quiz02()">퀴즈2 출력</button>
+    <h3>퀴즈 3번</h3>
+    <button onclick="quiz03()">퀴즈3 출력</button>
+    <h3>퀴즈 4번</h3>
+    <button onclick="quiz04()">퀴즈4 출력</button>
+    
+</body>
+</html>

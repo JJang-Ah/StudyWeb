@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 과제 풀이</title>
+
+    <style>
+        table {
+            width: 200px;
+            border: 1px solid black;
+            border-collapse: collapse;
+
+        }
+        tr {
+            height: 40px;
+
+        }
+        td, th {
+            width: 33.33%;
+            border: 1px solid black;
+            text-align: center;
+        }
+        th {
+            background: #adb5bd;
+        }
+        td {
+            background: #e9ecef;
+        }
+    </style>
+    <!-- 
+
+        /*
+        과제1) 입력창을 통해 정수를 입력하여 1부터 입력한 정수까지의 소수를 출력하고
+            그 합과 갯수를 출력하시오
+            소수(prime number) : 1을 제외하고, 1과 자기자신으로만 나뉘어 지는 수
+
+            
+        과제2) 입력창을 통해 정수를 입력하여 1부터 입력한 정수까지의 완전수를 출력하고
+            그 합과 갯수를 출력하시오.
+            완전수(perfect number): 자신을 제외한 자신의 약수를 더해서 자신과 같아지는 수
+            ex) 6의 약수 : 1,2,3,6 > 1+2+3 == 6
+
+        과제3) 입력창을 통해 정수를 입력하여 그 약수를 출력하고, 그 합과 개수를 출력
+        ex) 10의 약수: 1,2,5,10 합: 18, 갯수:4
+
+        과제4) 입력창을 통해 구구단의 단을 입력하고, 그 결과를 웹화면에 테이블로 출력하시오
+
+        과제5) 입력창을 통해 정수를 입력하여 1부터 입력한 수까지의
+         n, n의 제곱, n의 세제곱을 웹화면에 테이블로 출력하시오
+
+
+
+
+        */
+
+     -->
+
+     
+</head>
+<body>
+
+    <script>
+        //과제 3번
+        function quiz03(){
+            let n = Number(prompt("정수를 입력하시오."));
+            let sum = 0, cnt = 0;
+            for(let i=1; i<=n; i++){
+                if(n%i == 0){
+                    console.log(i);
+                    sum+=i;
+                    cnt++;
+                }
+            }
+            console.log(`${n}의 약수 합계 : ${sum}`);
+            console.log(`${n}의 약수 갯수 : ${cnt}`);
+        }
+
+        function quiz04() {
+            let n = Number(prompt("구구단의 단을 입력하시오"))
+
+            document.write("<table>");
+
+            for(let i=1; i<=9; i++){
+                // console.log(`${n} * ${i} = ${n*i}`);
+                document.write("<tr><td>" + n + "*" + i +"=" + n*i + "</td></tr>")
+
+            }
+            document.write("<table>");
+        }
+
+    </script>
+
+
+    <h3>과제3번</h3>
+    <p>입력창을 통해 정수를 입력하여 그 약수를 출력하고, 그 합과 개수를 출력</p>
+    <button onclick="quiz03()">약수 출력</button>
+
+    <hr>
+    <h3>과제4번</h3>
+    <p>입력창을 통해 구구단의 단을 입력하고, 그 결과를 웹화면에 테이블로 출력하시오</p>
+    <button onclick="quiz04()">구구단 계산</button>
+    <script>
+        
+        let n = Number(prompt("구구단의 단을 입력하시오"))
+
+        document.write("<table>");
+        document.write(`<th>${n}단 구구단~`);
+        for(let i=1; i<=9; i++){
+            // console.log(`${n} * ${i} = ${n*i}`);
+            if(n*i < 10) {
+            document.write("<tr><td>" + n + "*" + i +"= " + n*i + "</td></tr>")
+            }else {
+            document.write("<tr><td>" + n + "*" + i +"=" + n*i + "</td></tr>")
+            }
+        }
+        document.write("<table>");
+    </script>
+
+    <hr>
+    <h3>과제 5번</h3>
+    <p>입력창을 통해 정수를 입력하여 1부터 입력한 수까지의
+        n, n의 제곱, n의 세제곱을 웹화면에 테이블로 출력하시오.
+    </p>
+    <script>
+        let num =Number(prompt("과제5번) 정수를 입력하세요"));
+
+        document.write("<table>")    
+         document.write("<tr><th>n</th><th>n의제곱</th><th>n의세제곱</th></tr>");
+        for(let i=1; i<=num; i++){
+            // console.log(`${i} | ${i*i} | ${i*i*i}`);
+            document.write(`<tr><td>${i}</td><td>${i*i}</td><td>${i*i*i}</td></tr>`);
+        }
+        document.write("</table>")
+
+    </script>
+
+    
+</body>
+</html>

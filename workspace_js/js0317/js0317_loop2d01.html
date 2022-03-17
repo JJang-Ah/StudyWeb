@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중첩 반복문 2</title>
+
+    <!-- 
+        
+
+     -->
+</head>
+<body>
+
+    <h3>2차원 반복문 연습</h3>
+    <script>
+        // 퀴즈1) 입력창으로 정수를 입력하여 정수만큼"*"를 가로, 세로로 출력하는 
+        // 정사각형을 출력하시오.
+
+        // let n = Number(prompt("퀴즈1) 정수를 입력하세요"));
+        // for(let i=1; i<=n; i++) {
+        //     for(let j=1; j<=n; j++) {
+        //         document.write(`*  `)
+        //     }
+        //     document.write("<br>")
+        // }
+
+        //퀴즈2번) 입력창으로 점수를 입력하여 점수만큼'*'를 가로, 세로로 웹화면으로 출력하시오
+        //직각 삼각형을 출력'
+
+        // let n = Number(prompt("정수를 입력해주셍쇼"));
+        // for(let i=1; i<=n; i++) {
+        //         document.write(`<p style="text-align: center;">`)
+        //     for(let j=1; j<=i; j++) {
+        //         document.write("* ")
+        //     }
+        //     document.write(`</p>`);
+        // }
+
+        //퀴즈3번) 좌상변이 직각인 삼각형
+
+        // let n = Number(prompt("정수를 입력해!"));
+        // for(let i=n;i>0;i--){
+        //     for(let j=i;j>0;j--) {
+        //         document.write(`* `);
+        //     }
+        //     document.write("<br>");
+        // }
+
+        // //퀴즈 4번) 우하변이 직각인 직각삼각형을 출력
+        // let n = Number(prompt("정수를 입력해줘여~"));
+        // let output = "";
+        // for(let i=1; i<=n; i++) {
+        //     //공백
+        //     for(let j=i; j<n; j++) {
+        //         output += "  ";
+        //     }
+        //     //별표
+        //     for(let j=1; j<=i; j++) {
+        //         output += "* ";
+        //     }
+        //     output += "\n";
+        // }
+        // console.log(output);
+
+        //퀴즈 5번) 우상변이 직각인 직각삼각형을 출력
+        let n = Number(prompt("정수를 입력해줘여~"));
+        let output = "";
+        for(let i=1; i<=n; i++) {
+            //공백
+            for(let j=1; j<i; j++) {
+                output += "  ";
+            }
+            //별표
+            for(let j=i; j<=n; j++) {
+                output += "* ";
+            }
+            output += "\n";
+        }
+        console.log(output);
+
+
+    </script>
+
+    
+</body>
+</html>
