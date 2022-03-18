@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 기본 연습 2</title>
+
+
+    <style>
+        table {
+            width: 600px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        tr {
+            height: 30px;
+            
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        th {
+            background: #adbdfa;
+
+        }
+        td {
+            background: #e9ecef;
+        }
+    </style>
+    <!-- 
+
+
+     -->
+</head>
+<body>
+    
+    <h3>반복문 기본 연습 2</h3>
+    <script>
+        // 2차원 배열을 생성하는 방법
+        //1. 1번 방법 - [] 배열 기호를 사용하는 방법
+        // 0번 행의 0번의 값: a1[0][0] = 10
+        let a1 = [
+            [10, 15, 20, 30],   //0번 행 
+            [40,50,60],         //1번 행
+            [70,75,80,64,85]    //2번 행
+
+        ];
+
+        // 2차원 배열 확인
+        console.log(a1);
+
+        // 2. 2번 방법 - Array() 생성자 함수를 사용하는 방법
+        let a2 = new Array(
+            new Array("자료구조", 75),
+            new Array("웹프로그래밍", 90),
+            new Array("알고리즘", 88),
+            new Array("웹프로젝트", 55)
+        );
+        console.log(a2);
+
+        // 2차원 배열의 활용
+        let students = [
+            ["김민성", "컴공", 99, 48],
+            ["김정아", "수학", 79, 83],
+            ["전은수", "행정", 84, 95],
+            ["이은진", "물리", 85, 92],
+            ["조우진", "건축", 97, 88]
+        ];
+
+        // 1번 출력 방법 - 기본 for문을 사용, 테이블을 사용하여 웹화면으로 출력하시오
+        document.write("<h3>2차원 배열 - 1. 기본 for문을 사용하여 출력</h3>");
+        document.write("<table>")
+        document.write("<tr><th>이름</th><th>전공</th><th>국어</th><th>수학</th></tr>");
+        for(let i=0; i<students.length; i++) {
+            document.write("<tr>")
+            for(let j=0; j<students[i].length; j++) {
+                document.write(`<td>${students[i][j]}</td>`)
+            }
+            document.write("</tr>")
+
+        }
+        document.write("</table>")
+
+        /// 2번 출력 방법 - for-in문을 사용, 테이블을 사용하여 웹화면으로 출력
+        document.write("<hr>");
+        document.write("<h3>2차원 배열 - 1. 기본 for문을 사용하여 출력</h3>");
+        document.write("<table>")
+        document.write("<tr><th>이름</th><th>전공</th><th>국어</th><th>수학</th></tr>");
+        for(let i in students) {
+            document.write("<tr>")
+            for(let j in students[i]) {
+                document.write(`<td>${students[i][j]}</td>`)
+            }
+            document.write("</tr>")
+
+        }
+        document.write("</table>")
+
+
+        // 3번 출력 방법 - for of 문을 사용, 테이블을 사용하여 웹화면으로 출력하시오
+    
+        document.write("<hr>");
+        document.write("<h3>2차원 배열 - 1. 기본 for문을 사용하여 출력</h3>");
+        document.write("<table>")
+        document.write("<tr><th>이름</th><th>전공</th><th>국어</th><th>수학</th></tr>");
+        for(let i of students) {
+            document.write("<tr>")
+            for(let j of i) {
+                document.write(`<td>${j}</td>`)
+            }
+            document.write("</tr>")
+
+        }
+        document.write("</table>")
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열의 기본 1</title>
+
+    <!-- 
+
+        < 배열 ( Array) >
+        자바의 배열 - 같은 타입의 변수의 타입
+        int[] a = new int[5];
+
+        자바 스크립트의 배열 - (여러 가지 타입의) 변수의 집합
+
+     -->
+</head>
+<body>
+    <h3>배열 기본 연습1</h3>
+    <script>
+        // 1. 자바스크립트에서 배열을 생성하는 방법
+        // 1번 방법 - [] 배열 기호를 사용하는 방법
+
+        let a1 = [];  // 빈 배열
+        let a2 = [10, 20, 30, 40, 50]; //정수값 5개를 갖는 배열
+        let a3 = ["자료구조", 84, "웹프로그래밍", 92, "알고리즘", 78]; //문자열과 정수를 모두 저장한 배열
+
+        console.log(a1);
+        console.log(typeof a1); //object
+        console.log(a2);
+        console.log(typeof a2); //object
+        console.log(a3);
+        console.log(typeof a3);
+        console.log("--------------------");
+
+        // 2번 방법 - Array() 생성자 함수를 사용하는 방법
+        let b1 = new Array(); // 빈 배열
+        let b2 = new Array(10,20,30,40,50); //정수값 5개를 갖는 배열
+        let b3 = new Array("자료구조", 84, "웹프로그래밍", 18, "알고리즘", 85);
+
+        console.log(b1);
+        console.log(typeof b1); //object
+        console.log(b2);
+        console.log(typeof b2); //object
+        console.log(b3);
+        console.log(typeof b3);
+        console.log("--------------------");
+
+        let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        let weeks = ["Sun", "Mon", "Tue", "wed", "Thu", "Fri", "Sat"];
+        let seasons = ["Spring", "Summer", "Autumn", "Winter"];
+
+        // 배열의 모든 정보 확인
+        console.log("월: " + months);
+        console.log("요일: " + weeks);
+        console.log("계절: " + seasons);
+        
+        //배열의 모든 데이터를 인덱스로 하나씩 꺼내어 확인
+        // seasons[0] ...
+        for(let i=0; i<seasons.length; i++){
+            console.log(seasons[i]);
+        }
+
+        //배열의 크기 확인
+        console.log("배열의 크기 : " + seasons.length);
+        console.log("--------------");
+
+        // 문제 ) 학생 배열을 출력하고 합계와 평균을 구하시오.
+        let scores = [88,92,76,64,58,65];
+        let sum = 0, avg;
+        for(let i=0; i<scores.length; i++) {
+            sum += scores[i];
+        }
+        avg = sum/scores.length;
+        console.log(`합계 : ${sum}\n평균: ${avg.toFixed(2)}`);
+
+        // 배열의 데이터 추가
+        scores[2] = 44;
+        console.log(scores);
+        console.log(`학생수: ${scores.length}`);
+
+        // value: 88 92 44 64 58 65 ? 결석
+        // index: 0  1  2  3  4  5  6  7
+        scores[7] = "결석"; // 5번까지 존재, 7번에는 "결석"을 넣고, 6번은 undefined
+        console.log(scores);
+        console.log(`학생수: ${scores.length}`);
+
+        // 1번 출력 방법 : 기본 for문 사용
+        for(let i=0; i<scores.length; i++) {
+            console.log(`${i} : ${scores[i]} : ${typeof scores[i]}`);
+        }
+        console.log("-----------------");
+
+        // 2번 출력 방법 : for-in문 사용
+        // 특이점
+        // for-in에서 i는 인덱스일 뿐, 값은 scores[i]로 사용해야한다.
+        // for-in문은 undefined으로 저장된 데이터는 출력하지 않는다.
+        for(let i in scores) {
+            console.log(`${i} : ${scores[i]}`); // i는 인덱스 일 뿐이다.
+
+        }
+
+
+
+
+
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 응용 과제 풀이1</title>
+
+
+    <!-- 
+        
+         과제1) 입력창을 통해서 문자열을 입력했을 떄 역순으로 출력하시오.
+         - 문자열의 특성을 사용하시오.
+         입력) hello
+         출력) elleh
+
+         과제2) 입력창을 통해서 정수를 입력했을때 역순으로 출력하시오.
+         - 숫자의 특성을 사용하시오.
+         입력) 34567
+         출력) 76543
+
+         과제3) 입력창을 통해서 영어단어를 입력했을 떄 회문인지의 여부를 출력하시오
+         회문) level, sos >> 앞뒤로 바꿔도 똑가튼 단어가 회문
+         출력) rotator는 회문입니다.
+
+         과제4) 입력창을 통해서 입력한 정수까지의(factorial)을 출력하시오.
+         입력) 5
+         출력) 5! = 1*2*3*4*5 = 120
+
+         과제5) 입력창을 통해서 입력한 정수 개수의 피보나치 수열을 출력하시오
+         피보나치 수열 - 앞의 두 수를 더해서 다음 수를 만든 수열
+         입력) 7 > 개수
+         출력) 1 1 2 3 5 8  13  >> 7개
+         
+     -->
+</head>
+<body>
+    <script>
+        //과제 1번
+        // swapping
+        // letter > 0123456 > 0과6을 교환, 1과5를 교환 ...
+        //
+        function quiz01() {
+            let n = prompt("문자열을 입력해주세요");
+            n = n.split(""); //문자열을 특정문자(구분자)로 구분하여 문자열의 배열을
+            let t = "";
+            for(let i=0; i<parseInt(n.length/2); i++) {
+                t = n[i];
+                n[i] = n[n.length-1-i];
+                n[n.length-1-i] = t;
+            }
+            console.log(`reverse 후 문자열 : ${n}`);
+        }
+
+            // let s="";
+            // for(let i=n.length-1; i>=0; i--){ //6,5,4,3,2,1,0
+            //     s += n[i];
+            // }
+            // console.log(`reverse 후 문자열 : ${s}`);
+
+            // let t = "";
+            // console.log(`reverse 전 문자열 : ${n}`);
+            
+        // }
+
+        //과제 2번
+        function quiz02() {
+            let n = Number(prompt("정수를 입력하시오. 역순으로 출력합니다."));
+            let n2 = "";
+            while(n>0) {
+                n2 += (n%10); //나머지 출력
+                n = parseInt(n/ 10);
+
+            }
+            console.log(`reverse 후 정수 : ${n2}`);
+
+        }
+
+        //과제 3번
+        function quiz03() {
+            let str = prompt("문자열을 입력해주세요 회문 판별합니다.");
+            let flag = true;
+            for(let i=0; i<str.length-1; i++) {
+                if(str[i] != str[str.length-1-i]) {
+                    flag = false;
+                    break;
+                }
+            }
+            // 조건선택 연산자 사용
+            flag ? console.log(`${str}은 회문입니다.`): consol.log(`${str}은 회문이 아닙니다.`);
+            console.log(str + "은 회문" + (flag ? "입니다." : "이 아닙니다."));
+            //if문 사용
+            // if(flag) {
+            //     console.log(`${str}은 회문입니다.`);
+            // } else {
+            //     console.log(`${str}은 회문이 아닙니다.`);
+
+            // }
+        }
+
+        //과제 4번
+        function quiz04() {
+            let n = Number(prompt("정수를 입력하시오. 팩토리얼을 구합니다."));
+            let fact = 1;
+            let str = "";
+            str += n + "!=";
+
+            for(let i=1; i<=n; i++) {
+            //     str += i + "*";
+            //     fact = fact * i;
+
+            str += (i<n ? i+"*" : i+"=");
+            fact *= i;
+            }
+            str += "="+fact;
+            console.log(`${str}`);
+        }
+
+        //과제 5번
+        function quiz05() {
+            let n = Number(prompt("피보나치 수열의 개수를 입력하시오."));
+            let n1 = 1, n2 = 1, n3;
+            
+            for(let i=1; i<=n; i++) {
+                n3 = n1 + n2;
+                n1=n2;
+                n2=n3;
+                console.log(n3);
+            }
+        }
+
+        //과제 6번
+        // 완전수 구하기
+        // 완전수 : 자신을제외한 자신의 약수를 더해서 자신과 같아지는 수
+        // ex) 6의 약수 : 1,2,3,6 > 6=1+2+3
+
+        function quiz06() {
+            let n = Number(prompt("정수를 입력하세요. 정수까지의 완전수를 출력합니다."));
+            
+            for(let i=2; i<=n; i++) {
+                let sum=0;
+                for(let j=1; j<=parseInt(i/2); j++) { //각각의 i값에 대한 완전수 판별
+                    
+                    if(i%j==0){ //약수 판별
+                        sum+=j;
+                    }
+                }
+                if(i == sum) { //자신과 약수의 합을 비교
+                        console.log(i);
+                }
+            }
+        }
+    </script>
+    
+    <h3>과제 1번</h3>
+    <p>입력창을 통해서 문자열을 입력했을때 역순으로 출력하시오. 문자열의 특성 활용</p>
+    <button onclick="quiz01()">문자열 역순 출력</button>
+    <hr>
+    <h4>과제 2번</h4>
+    <p>입력창을 통해서 문자열을 입력했을떄 역순으로 출력하시오. 숫자의 특성 활용</p>
+    <button onclick="quiz02()">점수 역순 출력</button>
+    <hr>
+    <h3>과제 3번</h3>
+    <p>입력창을 통해서 영어단어를 입력했을 때 회문(palindrome)인지의 여부를 출력하시오.</p>
+    <button onclick="quiz03()">회문 판별</button>
+    <hr>
+    <h3>과제 4번</h3>
+    <p>입력창을 통해서 입력한 정수의 팩토리얼(factorial)을 출력하시오</p>
+    <button onclick="quiz04()">팩토리얼 출력</button>
+    <hr>
+    <h3>과제 5번</h3>
+    <p>입력창을 토해서 입력한 정수 개수의 피보나치 수열을 출력하시오.</p>
+    <button onclick="quiz05()">피보나치 수열 계산</button>
+    <hr>
+    <h3>과제6번</h3>
+    <p></p>
+    <button onclick="quiz06()">완전수 구하기</button>
+</body>
+</html>
