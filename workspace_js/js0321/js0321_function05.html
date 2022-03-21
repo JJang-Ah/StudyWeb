@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 응용 3</title>
+    <style>
+        #gallery {
+            width: 600px;
+            text-align: center;
+        }
+        button {
+            width: 100px;
+            height: 40px;
+            background: navy; 
+            color: white;
+            border: none;
+            font-size: 1.1em;
+
+        }
+    </style>
+    <!-- 
+        과제1) 이미지 갤러리를 완성하시오. 
+
+        과제2) 3자리 난수를 10개를 생성하여 배열에 저장하고, 그 중에서 최솟값과 최댓값을 구하시오.
+
+        과제3) 입력한 정수까지의 n!을 구하는 함수를 만들어 사용하시오.
+            입력) 5
+            출력)
+            1! = 1
+            2! = 2
+            3! = 6
+            4! = 24
+            5! = 120
+
+        과제4) 두 개의 정수와 연산자를 입력하고, 이것을 매개변수로 사칙연산을 하는 함수를 만들어 사용하시오.
+        입력 정수1) 10
+        입력 정수2) 5
+        입력 연산자) *
+        출력) 10 * 5 = 50
+        
+
+
+     -->
+</head>
+<body>
+    <h3>함수와 배열을 활용한 이미지 갤러리 만들기</h3>
+    <div id="gallery">
+        <p><img src="images/jeju01.jpg" width="500px" id="photo"></p>
+        <p>
+            <button onclick="moveImage()">이전</button>
+            <button onclick="moveImage()">다음</button>
+        </p>
+
+    </div>
+    <script>
+        // 이미지의 배열
+        let imgs = ["Jeju01.jpg", "Jeju02.jpg", "Jeju03.jpg", "Jeju04.jpg", 
+                    "Jeju05.jpg", "Jeju06.jpg", "Jeju07.jpg", "Jeju08.jpg"];
+
+        //이전 버튼을 누르면 이전 그림으로 이동하고, 다음 버튼을 누르면 
+        // 다름 그림으로 변경되도록 하는 함수
+        function moveImage() {
+            // 이미지 변경 코드 작성
+
+
+            // 이미지를 변경하는 방법
+            // getElementById(): 태그에서 id값을 받아서 처리하는 메소드
+            // setAttribute(): 이미지의 속성을 변경하는 메소드 
+
+            let imgTag = document.getElementById("photo"); // id가 "photo"인 태그와 연결
+            imgTag.setAttribute("src", "images/" + imgs[]);
+
+
+        }
+    </script>
+    
+</body>
+</html>

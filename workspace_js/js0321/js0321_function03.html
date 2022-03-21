@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지역변수와 전역변수</title>
+    <!-- 
+        < 지역변수와 전역변수 >
+        1. 지역변수(local variable) : 함수 내부에서 선언되어 함수 내에서만 사용 가능한 변수
+        2. 전역변수(global variable) : 함수 외부에서 선언되어 어디에서나 사용가능한 변수
+
+
+     -->
+</head>
+<body>
+    <h3>함수의 활용 1 - 지역변수와 전역변수</h3>
+    <script>
+        // 함수 외부 - 전역 변수
+        let a = "globalA", b="globalB", c="globalC";
+        
+        function f1() {
+            // 함수 내부 - 지역 변수
+            let b="localB", d="localD";
+
+            console.log("---함수 내부 : 지역변수");
+            console.log(`a = ${a}`); // globalA >> 함수 내부에서 전역변수 사용 가능
+            console.log(`b = ${b}`); // localB >> 함수 내부에서는 지역변수 우선
+            console.log(`c = ${c}`); // globalC
+            console.log(`d = ${d}`); // localD
+        }
+
+        f1();
+
+        console.log("---함수 외부---");
+        console.log(`a = ${a}`); //globalA
+        console.log(`b = ${b}`); // globalB
+        console.log(`c = ${c}`); // globalC
+        // 함수 외부에서는 함수 내부에 있는 지역변수에 접근 불가함
+        console.log(`d = ${d}`); // Uncaught ReferenceError : d is not defined
+
+    </script>
+    
+</body>
+</html>

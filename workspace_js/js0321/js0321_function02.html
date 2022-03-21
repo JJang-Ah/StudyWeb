@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 생성1</title>
+    <!-- 
+        < 함수를 생성하는 기본 방법 >
+        1. function() 키워드와 함수명을 사용하여 명시적으로 정의하는 방법
+        2. Function() 생성자를 사용하여 정의하는 방법
+        3. function() 키워드를 익명으로 선언하고 변수에 대입하여 정의하는 방법
+     -->
+</head>
+<body>
+    <h3>함수의 생성 2</h3>
+    <script>
+        // 1번 방법 - function 키워드와 함수명을 사용하여 명시적으로 정의하는 방법
+        // 보편적으로 가장많이 사용되는 형태
+
+        console.log(`정적 호출 : ${triangle1(30.5, 44.5)}`);
+        function triangle1(width, height) {
+            return (width* height) / 2;
+        }
+
+        // 2번 방법 - Function 생성자를 사용하여 정의하는 방법
+        // 앞에 매개변수를 나열하고, 마지막에 리턴값을 나열하는 방법
+        //  함수 생성과 동시에 객체를 생성함으로서 시간이 많이 걸리고, 효율이 떨어지는 단점이 있음.
+        // 빈번하게 호출해서 사용하는 경우에는 효율이 많이 떨어지므로 사용하지 않을 것을 권장
+
+        // console.log(`호출2 : ${triangle2(7.7, 8.8)}`); // Uncaught ReferenceError Cannot access 'triangle2' before initialization
+        // Function() 생성자를 사용하여 정의된 함수는 선언되기 전에 사용 불가하다.
+
+        let triangle2 = Function("width", "height", "return (width*height)/2");
+
+
+        // 3번 방법 - 함수 리터럴로 정의하는 방법, 익명함수(anonymous)로 정의하여 사용하는 방법
+        // 다양한 함수의 응용으로 사용함.
+
+        // 함수 리터럴로 정의된 함수는 선언되기 전에 사용이 불가능함
+         // Uncaught ReferenceError Cannot access 'triangle2' before initialization
+        // console.log(`호출3 : ${triangle3(22.3, 33.4)}`);
+
+        let triangle3 = function(width, height) {
+            return (width*height)/2;
+        }
+        console.log(`area1 : ${triangle1(10, 20)}`);
+        console.log(`area2 : ${triangle2(30, 20)}`);
+        console.log(`area3 : ${triangle3(40, 30)}`);
+
+        // 자바스크립트에서는 함수도 데이터타입으로 인식한다!!
+        console.log(typeof(triangle1)); // function
+        console.log(typeof(triangle2)); // function
+        console.log(typeof(triangle3)); // function
+
+        triangle3 = 100;
+        console.log(triangle3); // 100
+        console.log(typeof(triangle3)); // number
+    </script>
+    
+</body>
+</html>

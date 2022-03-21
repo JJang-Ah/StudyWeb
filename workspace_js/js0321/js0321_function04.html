@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 활용 2</title>
+    <!-- 
+        < 함수의 호이스팅 >
+        hoisting: 함수 정의 이전에 함수의 사용이 가능하도록 끌어당겨 사용하는 방법
+        - 기본 함수에서는 호이스팅이 가능하지만, 익명함수(함수리터럴)에서는 사용불가함.
+        
+
+     -->
+</head>
+<body>
+    <h3>함수의 활용 2</h3>
+    <script>
+        //1. 함수의 인수에 대한 느슨한(loose) 검사
+        // 2. 함수의 호이스팅(hoisting): 함수를 사용하는 시점에는 없으나, 뒤에 정의된 함수를 끌어당겨서 사용하는 방법
+        // - 기본 함수에서는 가능, 익명함수에서는 불가함.
+
+
+        // fq 함수 호출
+        f1(10, 20, 30);
+        f1(40, 50);
+        f1(60);
+        f1();
+        f1(15, 25, 35, 45);
+
+        let a = 66, b = 77;
+        f1(a, b, c);
+
+
+
+        // f1 기본함수의 정의
+        function f1(x, y, z) {
+            console.log(`첫번째 매개변수: ${x}`);
+            console.log(`두번째 매개변수: ${y}`);
+            console.log(`세번째 매개변수: ${z}`);
+            console.log("---------------------");
+        }
+        let c = 88;
+
+
+
+        // f2 함수 호출 : 익명함수는 정의되기 전에 사용할 수 없음.
+        f2(10, 20, 30);
+
+        // f2() - 익명함수
+        let f2 = function(a, b, c) {
+            console.log(`첫번째 매개변수: ${a}`);
+            console.log(`두번째 매개변수: ${b}`);
+            console.log(`세번째 매개변수: ${c}`);
+        }
+    </script>
+    
+</body>
+</html>
