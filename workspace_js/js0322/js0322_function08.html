@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 활용 3</title>
+    <!-- 
+        1. ... : 나머지 매개변수 연산자 - 매개변수로 넘어오는 값을 배열로 취급
+        - 매개변수 자리에서 쓰일 떄
+
+        2. ... : 전개 연산자 - 함수를 호출할 때 배열을 넘기면, 값을 펼쳐서 출력
+        - 함수 호출시에 쓰일 때
+        
+     -->
+</head>
+<body>
+    <h3>나머지 매개변수 연산자</h3>
+    <script>
+        function f1(a) {
+            console.log(a);
+        }
+        f1(10);
+        f1();
+        f1(10,20);
+        console.log("--------------");
+
+        // 나머지 매개변수 연산자
+        // ...을 매개변수 자리에 쓸 때 : 나머지 매개변수 연산자
+        function f2(...a) { // 나머지 매개변수 연산자
+            console.log(a);
+        }
+        f2(10);
+        f2(10, 20);
+        f2(10, 20, 30, 40,); // 넘어오는 값들을 배열로서 출력해준다.
+
+        console.log("--------------");
+        //...을 함수 호출에서 사용했을 떄 : 전개 연산자.
+
+        function f3(...a) {
+            console.log(a);
+        }
+        let arr = [10, 20, 30, 40, 50];
+        f3(arr); // [Array(5)]
+        f3(...arr); // (5) [10, 20, 30, 40, 50]
+
+    </script>
+    
+</body>
+</html>

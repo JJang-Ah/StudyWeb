@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 응용 과제</title>
+    <script>
+        // 과제 2번
+        function quiz02() {
+          let a = new Array();
+    
+          for (let i = 0; i < 10; i++) {
+            a[i] = parseInt(Math.random() * 900) + 100; // 100 ~ 999
+          }
+          console.log("배열 확인 : " + a);
+    
+          // 최솟값, 최댓값
+          
+          let min = a[0],
+            max = a[0];
+          for (let i = 1; i < a.length; i++) {
+            if (min > a[i]) {
+              min = a[i];
+            }
+            if (max < a[i]) {
+              max = a[i];
+            }
+          }
+          console.log(`최솟값 : ${min}\n최댓값 : ${max}`);
+        }
+
+        ///과제 3번
+        function quiz03() {
+            let n = Number(prompt("정수를 입력하시오. 팩토리얼을 구합니다."));
+
+            //팩토리얼 > 함수로 변경
+            function showFact(n) {
+                for(let i=1; i<=n; i++) {
+                    let fact = 1;
+                    for(let j=1; j<=i; j++) {
+                        fact *=j;
+                    }
+                    console.log(`${i}! = ${fact}`);
+                }
+            }
+            showFact(n);
+        }
+
+        // 과제 4번
+        function quiz04() {
+            let n1 = Number(prompt("첫번째 정수를 입력하시오"));
+            let n2 = Number(prompt("두번째 정수를 입력하시오"));
+            let op = prompt("연산자를 입력하시오");
+            let result;
+
+            switch(op) {
+                case "+": result = n1 + n2; break;
+                case "-": result = n1 - n2; break;
+                case "*": result = n1 * n2; break;
+                case "/": result = n1 / n2; break;
+
+            }
+
+            console.log(`${n1} ${op} ${n2} = ${result}`);
+
+
+        }
+      </script>
+    
+</head>
+<body>
+    
+  <h3>함수의 응용</h3>
+  <h4>과제 2번</h4>
+  <p>3가지 난수를 10개 생성하여 배열에 저장하고, 그 중에서 최솟값과 최댓값을 구하는 함수를 만들어 보시오.</p>
+  <button onclick="quiz02()">최솟값, 최댓값 구하기</button>
+
+  <hr>
+  <h4>과제 3번</h4>
+  <p>과제3) 입력한 정수까지의 n!을 구하는 함수를 만들어 사용하시오.</p>
+  <button onclick="quiz03()">팩토리얼 구하기</button>
+
+  <hr>
+  <h4>과제 4번</h4>
+  <p></p>
+  <button onclick="quiz04()">연산자 함수</button>
+
+    
+</body>
+</html>
