@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date 객체 1</title>
+    <!-- 
+        < Date 객체 > : 날짜와 시간을 다루는 객체
+        1. 
+
+     -->
+</head>
+<body>
+    <h3>Date 객체 1</h3>
+    <script>
+        // 1. 날짜를 생성하는 방법 : 현재 시스템의 날짜와 시간을 획득
+        console.log("--- 1 ---");
+        let date1 = new Date();
+        console.log(date1); //Wed Mar 23 2022 15:41:14 GMT+0900 (한국 표준시)
+        console.log(date1.getFullYear() + "년"); // 2022 (연도가 찍힌다)
+        console.log(date1.getMonth()+1 +"월"); // 2 ()
+        console.log(`${date1.getDate()}일`);
+        console.log(`${date1.getHours()}시`);
+        console.log(`${date1.getMinutes()}분`);
+        console.log(`${date1.getSeconds()}초`);
+        console.log(`${date1.getMilliseconds()}밀리초`);
+        console.log(date1.getTimezoneOffset()); //-540분, 세계 협정시(그리니치)와 시차
+        console.log(date1.getDay()); // 3 >> 수요일
+
+        //일요일:0, 월요일:1 ~ 토요일:6 > 0~6을 일요일부터 토요일까지 표현
+        let date3 = new Date(2022, 2, 27);
+        console.log(date3.getDay());
+        let week = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+        console.log(`${week[date1.getDay()]}`);
+
+
+        console.log("--------------------");
+        console.log(`${date1.getTime()}`); //1648018391746, 1970년 1월 1일 0시0분0초기준으로 측정한 밀리초
+        
+
+        // 2. 날짜를 생성하는 방법: 직접 입력하여 날짜와 시간을 설정하는 방법
+        console.log("--- 2 ---");
+        let date2 = new Date(2022, 0, 19, 9, 30, 0, 0) // 년 월 일 시 분 초 밀리초를 각각 설정
+        console.log(date2);
+        console.log(date2.getTime());   
+
+        // 문제1) 첫훈련일로부터 오늘 이시간까지의 경과일, 경과시간을 구하시오
+        console.log("--------------");
+        let passedTime = (date1.getTime() - date2.getTime())/1000;
+        console.log(`경과시간: ${passedTime}초`);
+        let s1 = parseInt(passedTime%60);
+        let m1 = parseInt(passedTime/60);
+        console.log(`${m1}분 ${s1}초`);
+        let h2 = parseInt(m1/60);
+        let m2 = m1%60;
+        console.log(`${h2}시${m2}분${s1}초`);
+
+        console.log("---------------------");
+
+        console.log(date1.toLocaleString()); //2022. 3. 23. 오후 4:50:28
+        console.log(date1.toLocaleDateString()); //2022. 3. 23.
+        console.log(date1.toLocaleTimeString()); // 오후 4:50:28
+
+        console.log("------------");
+
+        // 3. 날짜를 생성하는 방법: 날짜와 시간을 직접 입력하여 설정하는 방법(setter 메소드 사용)
+        // 문제2) 2022년 2월 16일 12시 30분 0초로 설정하시오. setter메소드를 사용하시오.
+
+        let date4 = new Date();
+        date4.setFullYear(2022);
+        date4.setMonth(1);
+        date4.setHours(12);
+        date4.setMinutes(30);
+        date4.setSeconds(0);
+        console.log(date4);
+        console.log(date4.toLocaleString());
+
+        console.log("--------------------");
+        date4.setMonth(date4.getMonth() +12); //12개월 후로 설정, 2+12=14? > 월에 대한 년도를 자동으로 보정
+        console.log(date4.toLocaleString());
+        date4.setDate(date4.getDate() + 20); //
+        console.log(date4.toLocaleString());
+
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

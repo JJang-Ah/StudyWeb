@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문자열 메소드 1</title>
+    <title>String 문자열 메소드 1</title>
     <!-- 
         < 익명 함수, 화살표 함수, 콜백 함수, 콜백 함수를 활용한 함수 >
         과제1) 1~100 사이의 난수를 10개 생성하여 배열에 저장하고,
@@ -62,6 +62,7 @@
         console.log("------------------");
         // 8. slice(): 문자열에서 특정 문자열을 추출함. 추출 범위
         // 맨 끝에서부터 -1로 인덱스를 지정하여 사용 가능함.
+        console.log("--- 8 ---");
         let str3 = str.slice(11, 20);
         console.log(str3); // Javascrip
         str3 = str.slice(11, 21);
@@ -74,39 +75,42 @@
         str3 = str.slice(-14); // to Javascript?, -14번 부터 끝까지
         console.log(str3);
 
-        console.log("---------------");
 
         // 9. substr() : 문자열에서 특정 문자열을 시작 인덱스로부터 입력 개수만큼 추출함.
+        console.log("--- 9 ---");
         let str4 = str.substr(11, 4) // 11번부터 4글자
         console.log(str4);
         str4 = str.substr(11, 10); // 11번부터 10글자
         console.log(str4); // Javascript
 
-        console.log("-----------------");
         // 10. split(): 문자열을 특정 구분자(seperator)를 기준으로 분리하여 문자열의 배열을 생성
+        console.log("--- 10 ---");
         
         let animals = "lion,elephant,leopard,cheetah,hyena,zeebra,giraffe,hippo";
         let arr = animals.split(",")
         console.log(arr);
         console.log(typeof arr); //object -> 배열
 
-        console.log("--------------------");
 
         // 11. toLowerCase(): 모든 문자열을 소문자로 변경함.
+        console.log("--- 11 ---");
         let str5 = str.toLowerCase();
         console.log(str5);
 
         // 12. toUpperCase(): 모든 문자열을 대문자로 변경함.
+        console.log("--- 12 ---");
         str5 = str.toUpperCase();
         console.log(str5);
 
         // 13. concat(): 문자열을 결합(연결)함.
+        console.log("--- 13 ---");
         let a = "good", b = "luck";
         // let str6 = a.concat(b);
         let str6 = a+b;
         console.log(str6);
 
         // 14. trim(): 문자열의 앞뒤의 공백을 제거함.
+        console.log("--- 14 ---");
         let str7 = "                 Web         Programming             ";
         str7 = str7.trim();
         console.log(str7);
@@ -114,24 +118,74 @@
         // 아스키 코드 : 7비트 구성, 128문자를 표현
         // A:65, a:97
         // 15. charCodeAt(): 인덱스에 해당하는 문자의 아스키 코드값을 반환한다.
+        console.log("--- 15 ---");
         console.log(str.charCodeAt(11)); // J: 74
         console.log(str.charCodeAt(12));  // a: 97
 
         // 16. fromCharCode() : 아스키코드값에 해당하는 문자를 반환함.
-        console.log(String.fromCharCode65);
-        console.log(String.fromCharCode66);
-        console.log(String.fromCharCode97);
-        console.log(String.fromCharCode98);
-        console.log(" --------------------");
+        console.log("--- 16 ---");
+        console.log(String.fromCharCode(65));
+        console.log(String.fromCharCode(66));
+        console.log(String.fromCharCode(97));
+        console.log(String.fromCharCode(98));
         // 17. lenth: 문자열의 길이를 반환하는 변수
+        console.log("--- 17 ---");
         console.log("문자열의 길이 : " + str.length);
 
         // 18. 문자열을 태그로 변환하는 메소드
+        console.log("--- 18 ---");
         document.write("다음".anchor("next") + "<br>"); // <<a name="next">다음</a>
         document.write("naver".link("http://www.naver.com") + "<br>"); // <a href="http://www.naver.com">naver</a>
         document.write("상한가" + "10%".sub() + "<br>"); //아래첨자
         document.write("하한가" + "25%".sup() + "<br>"); // 위첨자
         
+        
+        // 19. padStart() : 문자열 앞에 지정한 문자를 지정한 길이만큼 채움
+        // padEnd() : 문자열 뒤에 지정한 문자를 지정한 길이(전체 길이)만큼 채움
+        console.log("--- 19 ---");
+        let s1 = "5";
+        console.log(s1.padStart(4, 0)); // 0005 > (전체길이, 채울문자)
+        let s2 = "79";
+        console.log(s2.padEnd(5, 0)); // 79000
+
+        // 20. startsWith(): 문자열이 특정 문자열로 시작하는지의 여부를 알려줌. (불린값)
+        // endsWith(): 문자열이 특정 문자열로 끝나는지의 여부를 알려줌. (불린값)
+        console.log("--- 20 ---");
+        let url = "http://www.naver.com";
+        if(url.startsWith("http://") || url.startsWith("https://")) {
+            console.log("올바른 웹사이트입니다.");
+        } else {
+            console.log("올바른 웹사이트가 아닙니다.");
+        }
+
+        let file = "homework01.jpg";
+        if(file.endsWith(".jpg") || file.endsWith(".pngs")) {
+            console.log("올바른 이미지 파일형식입니다.");
+        } else {
+            console.log("올바르지 않은 이미지 파일형식입니다.");
+        }
+
+        // 21. replace() 응용 - 6번 참고
+        // replace()는 처음에 찾은 문자열만 변경
+        // replace()에서 정규식을 사용하면 다양한 방식으로 문자열의 변경이 가능
+        // ex) 대소문자 구분없이 찾기, 모든 문자열을 찾기
+        console.log("--- 21 ---");
+        let s3 = "please visit Seoul and Seoul!!";
+        let s4 = s3.replace("Seoul", "Jeju"); //  두개의 Seoul중 처음 Seoul만 변경
+        console.log(s4);
+        let s5 = s3.replace(/Seoul/g, "Jeju"); // 정규식, 모든 Seoul을 Jeju로 바꿈
+        // g(global) : 모든 문자열을 찾음
+        console.log(s5);
+        // let s6 = s3.replace("SEOUl", "Jeju"); // 바뀌지않는다 > 대소문자를 엄격하게 구분
+        // let s6 = s3.replace("seoul", "Jeju"); // 바뀌지않는다 > 대소문자를 엄격하게 구분
+        let s6 = s3.replace(/seoul/i, "Jeju"); // 정규식,
+        // i(insensitive) : 대소문자구분없이 찾는다.
+        console.log(s6);
+        let s7 = s3.replace(/SEOUL/gi, "Jeju"); // 정규식, 대소문자 구분없이 모든 문자열을 찾음
+        console.log(s7);
+
+
+
 
 
         

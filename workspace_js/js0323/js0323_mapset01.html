@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map과 Set 객체</title>
+
+
+    <!-- 
+        1. Set 객체: 중복된 값을 허용하지 않음(유일한 값을 보장)
+        2. Map 객체의 특징 : 데이터는 키와 값으로 쌍으로 구성되어있다.
+        - 중복된 키를 허용하지 않음(유일한 키를 보장), 중복된 값은 가짐
+
+
+     -->
+</head>
+<body>
+
+    <h3>Set 객체</h3>
+    <script>
+        let set = new Set();
+        set.add(30);
+        set.add(10);
+        set.add(50);
+        set.add(40);
+        set.add(20);
+
+        console.log(set);
+        console.log(`set의 개수: ${set.size}`); //프로퍼터
+
+        // set 에서 특정 데이터의 존재 유무 확인
+        console.log(set.has(30)); // true
+        console.log(set.has(60)); // flase
+
+        // set에서 특정 데이터를 삭제
+        set.delete(40);
+        console.log(set);
+        set.delete(60);
+        console.log(set);
+
+        // set의 모든 데이터를 삭제
+        set.clear();
+        console.log(set);
+        console.log("---------------");
+        
+        // set = new Set(30, 10, 50, 40, 20); //error, 불가능
+        let a = [30, 10, 50, 40, 20];
+        set = new Set(a);
+        console.log(set);
+        set.add(30); // 중복값의 추가는 불가하다
+        console.log(set);
+
+        // set은 인덱스를 사용하지 않으므로 기본 for문과 for-in문은 사용불가
+        // 출력1 - for-of문 사용
+        for(let i of set) {
+            console.log(i);
+        }
+        console.log("--------------");
+
+        // 출력2 - forEach
+        // set.forEach(function(value) {
+        //     value += 5;
+        //     console.log(value);
+        // });
+
+        set.forEach((value) => (value+=5, console.log(value)));
+
+
+    </script>
+
+    <h3>Map 객체</h3>
+
+    <script>
+        // 문제) 학생명(키)에 대한 점수(값)을 Map에 저장하시오.
+        let map = new Map();
+        map.set("최여진", 95);
+        map.set("정해인", 93);
+        map.set("이혜정", 46);
+        map.set("김재희", 85);
+        map.set("이영진", 47);
+        map.set("정진희", 88);
+
+        // map의 데이터 확인
+        console.log(map);
+        console.log(`map의 크기: ${map.size}`);
+
+        // 키를 통해서 값을 획득
+        console.log(map.get("김재희")); // 85
+        console.log(map.get("송소희")); // undefined
+
+        // 키를 확인하여 존재유무 파악
+        console.log(map.has("이영진")); // true
+        console.log(map.has("송소희")); // false
+
+        // 키를 통해 데이터를 삭제
+        map.delete("정진희");
+        console.log(map);
+        map.delete("아이린");
+
+        // 중복된 키를 추가 > 중복된 키는 허용하지 않음
+        map.set("정해인", 14);
+        console.log(map);
+
+        // 중복된 값을 추가
+        map.set("송해나", 96);
+        console.log(map);
+
+        // 모든 데이터 삭제
+        map.clear();
+        console.log(map);
+
+        // 
+    </script>
+    
+</body>
+</html>

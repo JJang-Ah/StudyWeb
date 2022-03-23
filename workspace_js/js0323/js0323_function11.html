@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 활용 5</title>
+
+    <!-- 
+         < 익명 함수, 화살표 함수, 콜백 함수, 콜백 함수를 활용한 함수 >
+        과제1) 1~100 사이의 난수를 10개 생성하여 배열에 저장하고,
+            3의 배수를 구하여 그 합과 개수를 출력하시오.
+        
+        과제2) 50~100 사이의 난수(학생들의 점수)를 10개를 생성하여 배열에 저장하시오
+        - 80점이상의 테스트 합격자의 총점과 평균을 구하시오
+        - 80점 미만의 테스트 불합격자의 리스트를 출력하시오.
+        - 학생의 최고값과 최저값을 구하시오.
+        - 80점 이상의 테스트 합격자의 성적을 오름차순으로 정렬하여 출력하시오.
+        - 80점 미만의 테스트 불합격자의 배열을 내림차순으로 정렬하여 출력하시오.
+        - 60점 미만인 학생에게는 학생점수의 10%를 가산점으로 추가하여 모든 학생을 오름차순으로 정렬하여 출력하시오.
+        - 각 학생의 학점을 계산하여 출력하시오.
+     -->
+
+     <script>
+         //과제1번
+
+         let a =[];
+         for(let i=0; i<10; i++) {
+             a[i] = parseInt(Math.random() * 100 ) +1; //1~100까지의 난수 10개
+         }
+
+         let sum=0, cnt=0;
+         let a2 = a.filter((value) => value%3==0);
+        //  .forEach(function(value, index, array) {
+        //      sum += value;
+        //      cnt++;
+        //  });
+         console.log(a);
+         console.log(a2);
+        //  a2.forEach(function(value, index, array) {
+        //      sum += value;
+        //      cnt++;
+        //  });
+        a2.forEach((value, index, array) => (sum += value, cnt++));
+         console.log(`합계: ${sum}, 개수: ${cnt}`);
+         console.log("---------------------------");
+
+         // 과제 2번
+         let scores = [];
+         for(let i=0; i<10; i++) {
+             scores[i] = parseInt(Math.random() * 51) + 50;
+         }
+         console.log(`scores: ${scores}`);
+
+         // 2-1 번
+         let tot = 0, ave=0;
+        //  scores.filter((value) => value>=80)
+        //  .forEach((value, index, array) => (console.log(value), tot+=value));
+        //  console.log(`총점: ${tot}, 평균: ${tot/`);
+        let s1 = scores.filter((value) => (value >= 80));
+        s1.forEach((value, index, array) => (tot += value));
+        console.log(`80점 이상 점수: ${s1}`);
+        console.log(`총점: ${tot}`);
+        console.log(`평균: ${tot/s1.length.toFixed(2)}`);
+        console.log("--------------------------");
+
+        // 2-2번 - 80점 미만의 테스트 불합격자의 배열을 출력하시오.
+        tot = 0;
+        let s2 = scores.filter((value) => (value < 80));
+        s2.forEach((value, index, array) => (tot += value));
+        console.log(`80점미만 불합격 점수: ${s2}`);
+        console.log(`총점: ${tot}`);
+        console.log(`평균: ${tot/s2.length.toFixed(2)}`);
+        console.log("--------------------------");
+
+        // 2-3번 - 학생의 최고값과 최저값을 구하시오.
+        let max = scores[0], min = scores[0];
+        // scores.forEach(function(value, index, array) {
+        //     if(value > max) max = value;
+        //     if(value < min) min = value;
+        // });
+        scores.forEach((value, index, array) =>{
+            if(value > max) max = value;
+            if(value < min) min = value;
+
+        });
+        console.log(`최고값: ${max}, 최저값: ${min}`);
+        let s3 = scores.sort(); //오름차순
+        console.log(s3);
+        console.log(`최고값: ${s3[s3.length-1]}, 최저값: ${s3[0]}`);
+        let s4 = scores.sort((a, b) => (b-a));
+        console.log(s4);
+        console.log(`최고값: ${s4[0]}, 최저값: ${s4[s4.length-1]}`);
+        console.log("-------------------------");
+
+        //2-4번 : 80점 이상의 테스트 합격자의 성적을 오름차순으로 정렬하여 출력하시오
+        scores.filter((value) => (value >= 80)).sort((a, b) => (a-b))
+        .forEach((value, index, array) => console.log(value));
+        console.log("-------------------------");
+
+        //2-5 : 80점 미만의 테스트 불합격자의 성적을 내림차순으로 정렬하여 출력하시오.
+        scores.filter(value => value<80).sort((a,b) => b-a)
+        .forEach((value, index, array) => console.log(value));
+        console.log("-------------------------");
+
+        // 2-6 : 60점 미만인 학생에게는 학생점수의 10%를 가산점으로 추가하여 모든 학생을 오름차순으로 정렬하여 출력하시오.
+        let s6 = scores.filter(value => value <60).sort();
+        console.log(s6);
+        scores.filter(value => value <60)
+        .map((value, index, array) => value = value * 1.1)
+        .sort((a, b) => a - b)
+        .forEach((value, index, array) => console.log(value));
+
+        
+     </script>
+</head>
+<body>
+    <h3>함수의 활용 3</h3>
+
+
+    
+</body>
+</html>
