@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window 객체 1</title>
+
+    <!-- 
+        < BOM과 DOM 객체 >
+        ※ window : BOM과 DOM의 부모 객체
+        - 웹브라우저 창의 생성, 소멸, 크기 등을 제어하는 객체
+
+        1. BOM : Browser Object Model, 웹브라우저를 조작하는 여러가지 객체들
+        - ex) location, history, navigator, screen
+
+        ★★★★★★
+        2. DOM : Document Object Model, 웹페이지의 내용(html, css)을 조작하는 객체
+        - ex) document 객체
+
+
+     -->
+</head>
+<body>
+    <h2>BOM 객체 1</h2>
+    <h3>윈도우 열기 및 닫기</h3>
+    <button onclick="w1=window.open('', 'win1', 'width=300, height=200')">윈도우(win1) 열기</button>
+    <button onclick="w1.close()">윈도우(win1) 닫기</button>
+    <hr>
+    <button onclick="w2=window.open('', 'win2')">윈도우(win2) 열기</button>
+    <button onclick="w2.close()">윈도우(win2) 닫기</button>
+    <hr>
+    <button onclick="w3=window.open('http://www.daum.net', 'win3')">윈도우(win3) 열기</button>
+    <button onclick="w3.close()">윈도우(win3) 닫기</button>
+    <hr>
+    <a href="http://www.naver.com" target="win2">네이버(win2)</a>
+    <hr>
+    <button onclick="getDate()">현재 날짜와 시간 확인</button>
+    <button onclick="window.print()">인쇄하기</button>
+    <div id="date"></div>
+    <script>
+        function getDate() {
+            let date = new Date();
+            document.getElementById("date").innerHTML = date.toLocaleString();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>screen 객체</title>
+    <!-- 
+        4. screen 객체 : 현재 웹브라우저가 실행되고 있는 운영체제의 화면, 즉 모니터의
+            권한 정보를 가진 객체
+        
+
+
+     -->
+</head>
+<body>
+    
+    <h2>screen 객체</h2>
+    <h3>screen의 크기와 위치를 조절</h3>
+    <button onclick="resizeHalf()">2분의 1</button>
+    <button onclick="resizeQuarter()">4분의 1</button>
+    <script>
+        function resizeHalf() {
+            let w1 = window.open('', '', 'width=200, height=150');
+            let wid = screen.width / 2;
+            let hei = screen.height / 2;
+
+            // 브라우저창의 위치를 재설정
+            w1.moveBy(screen.width/2 - window.width/2, screen.height/2 - window.height/2);
+
+            // 브라우저창의 크기를 재설정
+            w1.resizeTo(wid, hei);
+            console.log(`모니터의 너비: ${screen.width}, 높이: ${screen.height}`);
+        }
+        function resizeQuarter() {
+            let w1 = window.open('', '', 'width=200, height=150');
+            let width = screen.width / 4;
+            let height = screen.height / 4;
+            w1.resizeTo(width, height);
+        }
+    </script>
+
+</body>
+</html>

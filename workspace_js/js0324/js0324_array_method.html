@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <h3>Array 객체 1</h3>
+    <script>
+        let a1 = ["최여진", "정해인", "이해정", "김재화", "이영진", "장진희"];
+        let a2 = ["신이영", "윤태진", "주시은", "박은영", "오정연", "최은경", "노윤주"];
+
+        // 1. concat() : 배열을 연결하는 메소드
+        console.log("--- 1 ---");
+        let s1 = a1.concat(a2);
+        console.log(s1);
+        console.log(typeof s1); // object >> array
+
+        // 2. join() : 배열의 각 요소를 특정문자(구분자, seperator)로 연결하여 문자열을 생성
+        console.log("--- 2 ---");
+        let s2 = a1.join("/");
+        console.log(s2); // 최여진/정해인/이해정/김재화/이영진/장진희
+        console.log(typeof s2); // string
+
+        // 3. slice() : 배열의 요소를 추출하여 새로운 배열을 생성하는 메소드
+        console.log("--- 3 ---");
+        let s3 = a2.slice(1, 6); // 1번부터 4번까지 추출, 끝번호는 포함하지 않음.
+        console.log(s3);
+        console.log(typeof s3);
+
+        // 4. spice() : 배열의 특정 요소를 지정한 요소로 바꾸어 기존 배열을 저장하는 메소드
+        // splice(시작 인덱스, 개수, 바꿀 내용...)
+        // 문제1) a1 배열에서 2번 인덱스부터 3개를 "이현이", "아이린", "김진경"으로 변경하시오.
+        console.log("--- 4 ---");
+        a1.splice(2, 3, "이현이", "아이린", "김진경");
+        console.log(a1);
+        console.log(typeof a1);
+        
+        // let a1 = ["최여진", "정해인", "이현이", "아이린", "김진경", "장진희"];
+        // let a2 = ["신이영", "윤태진", "주시은", "박은영", "오정연", "최은경", "노윤주"];
+        // 5. pop() : 배열에서 배열의 끝에있는 요소를 취득하여 삭제
+        // 문제2) a2 배열에서 맨 끝의 요소를 찾아서 삭제하시오.
+        console.log("--- 5 ---");
+        console.log(a2.pop());
+        console.log(a2);
+
+        // 문제3) a2배열의 모든 요소를 출력하고, 모든 요소를 삭제하시오.
+        while(a2.length!=0) {
+            console.log(a2.pop());
+        }
+        console.log(`a2 배열의 크기 : ${a2.length}`);;
+
+        // 6. push() : 지정 요소를 배열의 끝에 추가하는 메소드
+        // 문제4) a2배열에 FC아나콘다 멤버를 차례대로 추가하시오. push() 메소드를 활용하시오.
+        console.log("--- 6 ---");
+        // a2.push("신아영");
+        // a2.push("윤태진");
+        // a2.push("주시은");
+        // a2.push("박은영");
+        // a2.push("오정연");
+        // a2.push("최은경");
+        // a2.push("노윤주");
+        a2.push("신아영", "윤태진", "주시은", "박은영", "오정연", "최은경", "노윤주");
+        console.log(a2);
+
+        // let a1 = ["최여진", "정해인", "이현이", "아이린", "김진경", "장진희"];
+        // 7. shift() : 배열의 맨 앞에 있는 요소를 삭제하고 다른 요소들을 앞으로 떙긴다
+        // 문제5) a1 배열에서 맨 앞의 요소를 삭제하시오.
+        console.log("--- 7 ---");
+        a1.shift();
+        console.log(a1);
+
+        // 8. unshift() : 지정 요소를 배열의 맨 앞에 추가하는 메소드
+        console.log("--- 8 ---");
+        a1.unshift("송소희");
+        console.log(a1);
+
+        a1.unshift("채리나", "바다", "간미연");
+        console.log(a1);
+
+        // 9. reverse() : 배열의 요소의 순서를 역순으로 만드는 메소드
+        // 문제) a1배열의 순서를 역순으로 저장하여 출력하시오.
+        console.log("--- 9 ---");
+        console.log(a1);        
+        a1.reverse();
+        console.log(a1);
+
+        // 10. sort(): 배열의 요소를 오름차순으로 정렬하는 메소드
+        console.log("--- 10 ---");
+        a1.sort(); //가나다라 순으로 정렬된다.
+        console.log(a1);
+
+        a1.reverse(); //내림차순 > 오름차순으로 정렬하고 역순
+        console.log(a1);
+
+        // 11. length : 배열의 개수를 알려주는 프로퍼티
+        console.log("--- 11 ---");
+        console.log(`a1배열의 크기 : ${a1.length}`);
+
+        // 12. toString() : 배열을 문자열로 변환하는 메소드
+        console.log("--- 12 ---");
+        let s4 = a1.toString();
+        console.log(s4);
+        console.log(typeof s4); // string
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

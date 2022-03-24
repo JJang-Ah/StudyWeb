@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object 객체</title>
+    <!-- 
+        < Object 객체 >
+        - 모든 자바스크립트 객체의 부모(상위, 루트) 객체
+
+     -->
+
+</head>
+<body>
+    <h3>Object 객체 1</h3>
+    <script>
+        let person = new Object();
+
+        // 프로퍼티 추가
+        person.name = "최여진";
+        person.position = "스트라이커";
+        person.no = "10";
+        person.age = 35;
+
+        // 메소드 추가
+        // this : 메소드에서 프로퍼티에 접근할때 사용
+        person.showInfo = function() {
+            return `이름: ${this.name}, 포지션: ${this.position}, 넘버: ${this.no}, 나이: ${this.age}`;
+        };
+
+        // 객체 출력
+        console.log(person.showInfo());
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document 객체 3</title>
+
+    <style>
+        #img1 {
+            width: 70px;
+            height: 70px;
+        }
+        #txt1 {
+            background: orange;
+        }
+    </style>
+    <script>
+        function changeDom() {
+            let imgTag = document.getElementById("img1");
+            let txtTag = document.getElementById("txt1");
+
+            // 이미지의 속성 변경
+            imgTag.src = "images/html5.png";
+            imgTag.style.width = "100px";
+            imgTag.style.height = "100px";
+
+            //span 텍스트의 내용과 속성 변경
+            txtTag.innerHTML = "HTML5";
+            txtTag.style.backgroundColor = "pink";
+        }
+    </script>
+    <!-- 
+        < document 객체의 역할 >
+        1. h1~h6, p ...등과 같은 HTML 요소의 내용 참조 및 변경
+        2. img의 src 속성, a의 href 속성 등과 같은 HTML 요소의 속성값 변경
+        3. color, backgroundColor 등과 같은 HTML 요소의 css 스타일 지정
+        4. ul, ol, li 등의 항목 추가, 삭제 등과 같은 HTML 요소의 추가 및 삭제
+        5. img src 속성의 연속적인 변화 등과 같은 애니메이션 효과 구현
+        
+
+
+
+     -->
+</head>
+<body>
+    <img src="images/js.PNG" id="img1">
+    <span id="txt1">자바스크립트</span>
+    <hr>
+    <button onclick="changeDom()">문서 변경</button>
+    
+</body>
+</html>

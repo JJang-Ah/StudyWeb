@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document 객체 5</title>
+
+    <!-- 
+        퀴즈1번) 전구 점등 버튼을 클릭했을 떄 light에 전구가 켜진 이밎를 보여주고,
+        전구 소등 버튼을 클릭했을 떄 light에 전구가 꺼진 이미지를 보여주도록
+     -->
+
+     <script>
+        function lightOn() {
+           let iTag = document.getElementById("light");
+           iTag.src = "images/lighton.png";
+        }
+         function lightOff() {
+            let iTag = document.getElementById("light");
+            iTag.src = "images/lightoff.png";
+         }
+     </script>
+</head>
+<body>
+    <h2>전등의 점등/소등</h2>
+    <button onclick="lightOn()">전구 점등</button>
+    <button onclick="lightOff()">전구 소등</button>
+    <hr>
+    <img src="images/lightoff.png" id="light" width="200" height="200">
+
+    
+</body>
+</html>
