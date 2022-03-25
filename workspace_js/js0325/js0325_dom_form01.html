@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - form 태그 활용</title>
+    <style>
+        #container {
+            width: 500px;
+            margin: 20px auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        fieldset {
+            width: 100%;
+            height: 300px;
+        }
+        legend {
+            color: purple;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            text-align: center;
+        }
+        li {
+            width: 400px;
+            height: 30px;
+            padding: 10px;
+            margin-left: 0px;
+        }
+        ul label {
+            margin-right: 50px;
+        }
+        ul input {
+            margin-left: 2px;
+        }
+        #btnDiv {
+            text-align: center;
+            margin-top: 10px;
+        }
+        #btnDiv input {
+            width: 100px;
+            height: 32px;
+        }
+        input[type="button"] {
+            background: black;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            
+        }
+        input[type="reset"] {
+            background: white;
+            color: black;
+            font-weight: bold;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showResult() {
+            // 폼을 사용하는 1번 방법
+            let form = document.inputForm; // name을 받는다.
+
+            if(!form.sname.value) {
+                alert("이름을 입력해 주세요.");
+                form.sname.focus();
+                return;
+            }
+            if(form.kor.value.length == 0) {
+                alert("국어 점수를 입력하세요.");
+                form.kor.focus();
+                return;
+            }
+            if(form.eng.value.length == 0) {
+                alert("영어 점수를 입력하세요.");
+                form.eng.focus();
+                return;
+            }
+            if(form.mat.value.length == 0) {
+                alert("수학 점수를 입력하세요.");
+                form.mat.focus();
+                return;
+            }
+
+            // 2번 - 성적확인
+            // form을 다루는 2번 방법
+            // let sname = form.sname.value;
+            // let kor = parseInt(Number(form.kor.value));
+            // let eng = parseInt(Number(form.eng.value));
+            // let mat = parseInt(Number(form.mat.value));
+
+            let sname = inputForm['sname'].value;
+            let kor = parseInt(inputForm['kor'].value);
+            let eng = parseInt(inputForm['eng'].value);
+            let mat = parseInt(inputForm['mat'].value);
+
+            let sum = kor + eng + mat;
+            let avg = sum / 3;
+            let grade = "";
+
+            switch(parseInt(avg/10)) {
+                case 10: case 9:
+                    grade = "A"
+                    break;
+                case 8:
+                    grade = "B"
+                    break;
+                case 7:
+                    grade = "C"
+                    break;
+                case 6:
+                    grade = "D"
+                    break;
+                default:
+                    grade = "F"
+                    break;
+            }
+            alert(`이름: ${sname}\n국어: ${kor}\n영어: ${eng}\n수학: ${mat}\n총점: ${sum}\n평균: ${avg}\n학점: ${grade}`)
+
+        }
+
+    </script>
+    <!-- 
+        문제1) 이름, 국어, 영어, 수학 점수에 대해서 유효성 검사(빠진 내용이 없는지)를 하시오.
+        문제2) 성적확인 버튼을 눌렀을 떄, 학생의 정보와, 총점, 평균, 학점을
+            계산하여 알림창으로 출력하시오.
+        
+        ★★★★★★★★
+            < form 태그(객체)를 다루는 2가지 방법 >
+            1. document.폼네임
+            2. 폼이름['입력상자네임'].value
+
+            < document의 하위객체들과 메서드 >
+            1. documentElement: html의 요소객체
+            2. head: head 요소객체
+            3. title: title 요소객체 >> document.title
+            4. body: body 요소객체 >> document.body
+            5. 특정태그는 document에서 배열 객체로 취급: links[], scripts[], anchors[], forms[], images[]
+                - forms[]를 가장 많이 활용
+            6. getElementById(): 요소객체를 반환하는 메소드다
+            
+     -->
+</head>
+<body>
+    <div id="container">
+        <h2>이젠 대학교 성적 확인</h2>
+        <form action="" method="" name="inputForm">
+            <fieldset>
+                <legend>1학기 성적 확인</legend>
+                <ul>
+                    <li>
+                        <label for="sname">이름</label>
+                        <input type="text" name="sname" id="sname">
+                    </li>
+                    <li>
+                        <label for="kor">국어</label>
+                        <input type="text" name="kor" id="kor">
+                    </li>
+                    <li>
+                        <label for="eng">영어</label>
+                        <input type="text" name="eng" id="eng">
+                    </li>
+                    <li>
+                        <label for="mat">수학</label>
+                        <input type="text" name="mat" id="mat">
+                    </li>
+                </ul>
+                <hr>
+                <div id="btnDiv">
+                    <input type="button" value="성적 확인" onclick="showResult()">&ensp;&ensp;
+                    <input type="reset" value="입학 취소">
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    
+</body>
+</html>

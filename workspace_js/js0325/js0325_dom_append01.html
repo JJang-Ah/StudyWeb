@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 요소의 추가</title>
+    <style>
+
+    </style>
+
+    <script>
+        function insertCountry() {
+            let tag1 = document.getElementById("n1");
+            let tag2 = document.getElementById("n2");
+            
+            // 유효성 검사 (입력값의 누락에 대한)
+            if(!tag1.value) {
+                alert("여행하고 싶은 나라를 입력하시오");
+                tag1.focus();
+                return;
+            }
+            let newTag = document.createElement("li"); // li태그생성
+            let newTxt = document.createTextNode(tag1.value); // 입력상자값을 저장
+            newTag.appendChild(newTxt) // li태그와 입력값을 결합
+            tag2.appendChild(newTag); // ul태그의 자식인 li태그를 결합
+
+            // 입력 후 처리 - 입력값의 제거, 포커스 삽입
+            tag1.value = "";
+            tag1.focus();
+        }
+    </script>
+
+    <!-- 
+
+     -->
+</head>
+
+<body>
+    <div id="container">
+        <h2>DOM - 요소의 추가</h2>
+        <h3>이젠과 함께 세계를 느껴보세요. - 이젠 여행사 -</h3>
+        <div>
+            여행하고 싶은 나라: <input type="text" id="n1">
+            <button onclick="insertCountry()">추가</button>
+            <ul id="n2"></ul>
+        </div>
+
+    </div>
+    
+</body>
+</html>

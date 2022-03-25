@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document 객체 8</title>
+    <style>
+        #answer {
+            /* display: none; */
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        function showAnswer() {
+            let pTag = document.getElementById("answer");
+           let check = confirm("정답을 확인 하시겠습니까?");
+           if(check) {
+            //    pTag.style.display = "block";
+                pTag.style.visibility = "visible";
+           } else {
+            //    pTag.style.display = "none";
+            
+                pTag.style.visibility = "hidden";
+           }
+
+        }
+    </script>
+    <!-- 
+        문제1) 정답 버튼을 눌렀을 떄 확인창을 통해서 예를 하면 answer에 정답을 보이도록 하고,
+        아니오를 선택하며, 정답을보이지 않도록 적용하시오
+     -->
+</head>
+<body>
+    <h2>document 객체 8</h2>
+    <p>[문제1] 동적 웹페이즈를 작성할 때 사용하는 프로그래밍 언어를 쓰시오.</p>
+    <button onclick="showAnswer()">정답</button>
+    <hr>
+    <p id="answer">자바스크립트</p>
+
+    
+</body>
+</html>

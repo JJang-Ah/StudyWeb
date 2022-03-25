@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 요소의 추가</title>
+    <style>
+
+    </style>
+    <script>
+        function insertMusic1() {
+            let box1 = document.getElementById("box1");
+            let img = document.createElement("img");
+            img.setAttribute("src", "images/m1.png");
+            // img.src = "images/m1.png";
+            box1.append(img);
+        }
+
+        function insertMusic2() {
+            let box1 = document.getElementById("box1");
+            let img = document.createElement("img");
+            img.src = "images/m2.png";
+            box1.append(img);
+
+        }
+
+    </script>
+    <!-- 
+
+        문제1) 음표1 버튼을 눌렀을 때 box1영역에 "m1.png"를 추가하고
+        음표2 버튼을 눌렀을 때 box1영역에 "m2.png"를 추가하시오.
+
+
+        setAttribute(): 속성을 연속해서 적용하지 못함.
+        
+
+
+     -->
+</head>
+<body>
+    <div id="container">
+
+        <h2>DOM - 요소의 추가</h2>
+        <h3>세상의 모든 음악</h3>
+        <p>버튼을 클릭하면 음표가 추가됩니다.</p>
+        <button onclick="insertMusic1()">음표1</button>
+        <button onclick="insertMusic2()">음표2</button>
+        <hr>
+        <div id="box1"></div>
+        <hr>
+        <p>즐겁게 공부합시다!</p>
+
+
+        
+    </div>
+    
+</body>
+</html>

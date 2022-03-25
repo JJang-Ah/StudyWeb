@@ -24,12 +24,14 @@
             let w1 = window.open('', '', 'width=200, height=150');
             let wid = screen.width / 2;
             let hei = screen.height / 2;
-
-            // 브라우저창의 위치를 재설정
-            w1.moveBy(screen.width/2 - window.width/2, screen.height/2 - window.height/2);
-
+            
             // 브라우저창의 크기를 재설정
             w1.resizeTo(wid, hei);
+
+            // 브라우저창의 위치를 재설정
+            w1.moveBy(screen.width/2 - w1.outerWidth/2, screen.height/2 - w1.outerHeight/2);
+            console.log(`윈도우창의 너비: ${w1.outerWidth}, 높이: ${w1.outerHeight}`);
+
             console.log(`모니터의 너비: ${screen.width}, 높이: ${screen.height}`);
         }
         function resizeQuarter() {

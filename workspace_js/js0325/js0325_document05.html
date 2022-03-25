@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document 객체 5</title>
+
+    <style>
+       #swich {
+          background: yellow;
+       }
+    </style>
+
+    <!-- 
+        퀴즈1번) 전구 점등 버튼을 클릭했을 떄 light에 전구가 켜진 이밎를 보여주고,
+        전구 소등 버튼을 클릭했을 떄 light에 전구가 꺼진 이미지를 보여주도록
+     -->
+
+     <script>
+        // 1번 방법 - 버튼 2개, 함수 2개
+        // 점등
+        function lightOn() {
+           let iTag = document.getElementById("light");
+           iTag.src = "images/lighton.png";
+        }
+        // 소등
+         function lightOff() {
+            let iTag = document.getElementById("light");
+            iTag.src = "images/lightoff.png";
+         }
+
+         // 2번 방법 - 버튼 2개, 함수 1개
+         function changeLight(x) {
+            let iTag = document.getElementById("light");
+            if(x==0) {
+               iTag.src = "images/lightoff.png";
+            }
+            if(x == 1) {
+               iTag.src = "images/lighton.png";
+            }
+         }
+
+         // 3번 방법 - 버튼1개 함수1개
+         function turnLight() {
+            let iTag = document.getElementById("light");
+            let sTag = document.getElementById("swich");
+            if(sTag.innerHTML == "점등") {
+               sTag.innerHTML = "소등";
+               iTag.src = "images/lighton.png";
+               sTag.style.backgroundColor = "pink"
+            } 
+            else if(sTag.innerHTML == "소등") {
+               sTag.innerHTML = "점등";
+               iTag.src = "images/lightoff.png";
+               sTag.style.backgroundColor = "yellow"
+            }
+         }
+
+     </script>
+</head>
+<body>
+    <h2>전등의 점등/소등</h2>
+    <img src="images/lightoff.png" id="light" width="200" height="200">
+    <hr>
+    <button onclick="lightOn()">전구 점등1</button>
+    <button onclick="lightOff()">전구 소등1</button>
+    <hr>
+    <button onclick="changeLight(1)">전구 점등2</button>
+    <button onclick="changeLight(0)">전구 소등2</button>
+    <hr>
+    <button onclick="turnLight()" id="swich">점등</button>
+    
+    
+</body>
+</html>

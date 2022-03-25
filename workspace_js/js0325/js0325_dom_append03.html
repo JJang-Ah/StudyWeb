@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 요소의 추가</title>
+    <style>
+        .title {
+            color: navy;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <script>
+
+        function insertTrip(x) {
+            let trip = document.getElementById("trip1");
+            let box1 = document.getElementById("box1");
+            let box2 = document.getElementById("box2");
+
+            let newTag = document.createElement("div");
+            let newTxt = document.createTextNode(trip.value);
+            newTag.appendChild(newTxt);
+
+
+            
+            if(x) { // x=1, 국내 여행지
+                // 부모.insertBefore(새태그, 자식) - 부모의 자식 앞에 새태그를 추가
+                box1.insertBefore(newTag, box2); // box2전에 newTag를 넣는다.
+                trip.value = "";
+                trip.focus();
+            }else { // x=0, 해외 여행지
+                box1.appendChild(newTag);
+            }
+            trip.value = "";
+            trip.focus();
+        }
+    </script>
+
+    <!-- 
+        문제1) 입력상자에 국내 여행지를 입력하면 "1. 국내 여행지" 아래로 추가되고,
+        해외 여행지 버튼을 누르면 "2. 해외 여행지" 아래로 추가되도록 하시오.
+
+
+     -->
+</head>
+<body>
+    <div id="container">
+        <h2>DOM - 요소의 추가</h2>
+        <h3>이젠과 함께 세계를 느껴보세요. - 이젠 여행사 -</h3>
+        <div>
+            추천 여행지: <input type="text" id="trip1">
+            <button onclick="insertTrip(1)">1. 국내 여행지</button>
+            <button onclick="insertTrip(0)">2. 해외 여행지</button>
+        </div>
+        <hr>
+        <div id="box1">
+            <div class="title">1. 국내 여행지</div>
+            <div></div>
+            <div></div>
+            <div class="title" id="box2">2. 해외 여행지</div>
+        </div>
+
+        <div>
+            <div>1. 국내 여행지</div>
+        </div>
+        <div>
+            <div>2. 해외 여행지</div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
