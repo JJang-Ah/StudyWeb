@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - form 객체 연습 2</title>
+    <style>
+
+    </style>
+
+    <script>
+        function computeScore() {
+            // 1번 방법 - forms[] 배열 활용
+            // let dept = document.forms[0].dept.value;
+            // let sname = document.forms[0].sname.value;   
+
+
+            // 2번 방법 - form의 name활용
+            // let dept = document.s_Info.dept.value;
+            // let sname = document.s_Info.sname.value;
+
+            // 3번 방법 - form의 이름을 배열로 입력창의 이름을 문자열 인덱스로 활용
+            let dept = document.s_Info['dept'].value;
+            let sname = document.s_Info['sname'].value;
+
+            //문제가 여러 문제일 떄 배열을 활용
+            let answer = [4,2];
+            let test = [];
+            
+            // 1번 방법
+            // test[0] = document.forms[1].q1.value;
+            // test[1] = document.forms[2].q2.value;
+
+            // 2번 방법
+            // test[0] = document.quiz01.q1.value;
+            // test[1] = document.quiz02.q2.value;
+
+            // 3번 방법
+            test[0] = document.quiz01['q1'].value;
+            test[1] = document.quiz02['q2'].value;
+
+            // 1문제 당 10 점
+            let sum = 0;
+            for(let i=0; i<answer.length; i++) {
+                if(test[i] == answer[i]) sum += 10;
+            }
+
+            let result = document.querySelector("#result");
+            result.innerHTML = `전공: ${dept}<br>이름: ${sname}<br>점수: ${sum}점 입니다~`;
+        }
+
+    </script>
+
+    <!-- 
+
+     -->
+
+</head>
+<body>
+    <h2>DOM - form 객체 연습 2</h2>
+    <h3>이젠대학교 1학년 교양 테스트</h3>
+    <form name="s_Info">
+        <!--  forms[0]  -->
+        학과: <input type="text" name="dept">
+        이름: <input type="text" name="sname">
+        
+    </form>
+    <hr>
+    <form name="quiz01">
+        <!-- forms[1] -->
+        문제1) HTML 프로그래밍에서 다루는 언어가 아닌 것은? <br>
+        <input type="radio" name="q1" value="1">HTML<br>
+        <input type="radio" name="q1" value="2">CSS3<br>
+        <input type="radio" name="q1" value="3">Javascript<br>
+        <input type="radio" name="q1" value="4">Oracle<br>
+    </form>
+    <hr>
+    <form name="quiz02">
+        <!-- forms[2] -->
+        문제2) 다음 중 웹브라우저가 아닌 것은? <br>
+        <input type="radio" name="q2" value="1">오페라<br>
+        <input type="radio" name="q2" value="2">드림위버<br>
+        <input type="radio" name="q2" value="3">사파리<br>
+        <input type="radio" name="q2" value="4">파이어폭스<br>
+    </form>
+    <hr>
+    <button onclick="computeScore()">시험 결과</button>
+    <div id="result"></div>
+
+    
+</body>
+</html>

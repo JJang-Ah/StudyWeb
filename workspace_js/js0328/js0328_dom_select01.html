@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 콤보박스 (select) 1</title>
+    <style>
+
+    </style>
+    <script>
+
+        function inputData() {
+            // 전공 선택 - 단일 선택
+            let dept = document.querySelector("#dept");
+            let output1 = dept.options[dept.selectedIndex].value; // 1번 방법
+
+            // 2번 방법
+            // for(let i=0; i<dept.length; i++) {
+            //     if(dept[i].selected) {
+            //         ouput1 = dept[i].value;
+            //         break;
+            //     }
+            // }
+
+            
+            console.log(`과목: ${output1}`);
+
+
+            // 과목 선택 - 다중 선택 (복수 선택)
+            let subjects = document.querySelector("#subjects");
+            console.log(`${typeof(dept)} : ${dept}`);
+            let output2 = "";
+            for(let i=0; i<subjects.length; i++) {
+                if(subjects[i].selected) {
+                    output2 += subjects[i].value + " ";
+                }
+            }
+            let result = document.querySelector("#result");
+            result.innerHTML= `전공: ${output1}<br>과목: ${output2}`;
+        }
+    </script>
+    <!-- 
+
+
+     -->
+</head>
+<body>
+    <h2>DOM - 콤보박스 (select) 1</h2>
+    <h3>학생의 전공을 선택하시오. (단일선택)</h3>
+    <select id="dept">
+        <option value="컴퓨터공학" selected>컴퓨터공학</option>
+        <option value="전자공학">전자공학</option>
+        <option value="기계공학">기계공학</option>
+        <option value="건축공학">건축공학</option>
+        <option value="화학공학">화학공학</option>
+        <option value="신소재공학">신소재공학</option>
+    </select>
+    <br>
+    <h3>학생이 가장 좋아하는 교양과목을 선택하시오. (다중선택</h3>
+    <select id="subjects" multiple>
+        <option value="영어회화">영어회화</option>
+        <option value="시와문학">시와문학</option>
+        <option value="법과윤리">법과윤리</option>
+        <option value="프로그래밍">프로그래밍</option>
+        <option value="세계역사">세계역사</option>
+        <option value="심리학">심리학</option>
+    </select>
+    <hr>
+    <button onclick="inputData()">결과 제출</button>
+    <div id="result"></div>
+
+</body>
+</html>

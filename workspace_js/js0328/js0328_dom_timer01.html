@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 타이머 메소드</title>
+    <style>
+        #clock {
+            width: 400px;
+            height: 150px;
+            border-radius: 20px;
+            background: skyblue;
+            text-align: center;
+            line-height: 130px;
+            font-size: 3em;
+
+
+            
+        }
+
+    </style>
+
+    <script>
+
+        let interval = 500; // 0.5초 = 500ms
+        function changeTime() {
+            let clock = document.getElementById("clock");
+            let date = new Date();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+
+            // am, pm 구분
+            let txt = "";
+            if(hour<12) {
+                txt += "AM";
+            } else {
+                txt += "PM";
+            }
+
+            if(hour < 10) {
+                hour = "0" + hour;
+            }
+            if(minute < 10) {
+                minute = "0" + minute;
+            }
+            if(second < 10) {
+                second = "0" + second;
+            }
+            txt += ` ${hour} : ${minute} : ${second}`;
+            clock.innerHTML = txt;
+        }
+
+        setInterval(changeTime, 500);
+    </script>
+
+    <!-- 
+        setInterval(이벤트핸들러함수, 시간(초)): 정해진 시간마다 자동으로 이벤트핸들러함수를 호출하는 함수
+
+
+     -->
+</head>
+<body>
+    <h2>DOM - 타이머 메소드</h2>
+    <h3>디지털 시계</h3>
+    <h1 id="clock"></h1>
+
+    
+</body>
+</html>

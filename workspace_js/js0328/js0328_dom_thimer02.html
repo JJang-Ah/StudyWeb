@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 타이머 함수</title>
+    <style>
+        #no {
+            color: red;
+            font-weight: bold;
+        }
+        #pro {
+            width: 500px;
+            height: 30px;
+            background: darkgray;
+            position: relative;
+        }
+        #bar {
+            width: 0px;
+            height: 30px;
+            background: red;
+            position: absolute;
+        }
+
+
+    </style>
+
+    <script>
+        function startProgress() {
+            let no = document.getElementById("no");
+            let bar = document.getElementById("bar");
+
+            let width = 0;
+            let id = setInterval(function() {
+                width += 5; // 500px의 5px, 1%씩 증가
+                bar.style.width = width + "%";
+                no.innerHTML = width + "%";
+
+                if(width >= 100) clearInterval(id); // 인터벌 중지
+            }, 500);
+
+        }
+
+    </script>
+
+    <!-- 
+        setInterval(이벤트핸들러함수, 시간(초)): 시감나다 이벤트핸들러함수를 호출하는 메소드
+        clearInterval(setInterval함수명): 지정한 setInterval메소드를 중지하는 메소드
+        
+     -->
+</head>
+<body>
+    <h2>DOM - 타이머 메소드</h2>
+    <h3>진행 상태 표시 (progress bar 구현)</h3>
+    진행 상태 : <span id="no">0%</span><hr>
+    <div id="pro">
+        <div id="bar"></div>
+    </div>
+    <hr>
+    <button onclick="startProgress()">진행</button>
+    
+</body>
+</html>

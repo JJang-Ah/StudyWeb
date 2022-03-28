@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 모델</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            background: lightgray;
+        }
+    </style>
+    <script>
+
+        // 3-1번 - 표준 이벤트 모델
+        // 최근에는 고전 이벤트 모델보다 표준 이벤트 모델을 사용하기를 권장
+
+        window.onload = function() {
+            let btnStd = document.getElementById("btnStd");
+            btnStd.addEventListener("click", function() {
+                let box = document.getElementById("box");
+                box.style.backgroundColor = "yellow";
+                box.style.borderRadius = "50%";
+                box.style.border = "3px solid orange";
+            })
+
+        // 3-2번 - 표준 이벤트 모델 - 선언함수
+        // btnStd.addEventListener("click", changeBox);
+
+
+        // 2-1번
+            let btnOld = document.getElementById("btnOld");
+            btnOld.onclick = function() {
+                let box = document.getElementById("box");
+                box.style.backgroundColor = "skyblue";
+                box.style.borderRadius = "50%";
+                box.style.border = "3px solid blue";
+            }
+
+        }
+
+        // 2-1번 - 고전 이벤트 모델 - 익명함수
+        // window.onload = function() { //윈도우를 불렀을때 익명함수를 실행한다.  
+        // }
+
+        // > 최근에는 고전 이벤트 모델보다 표준 이벤트 모델 사용을 권장
+        // 2-2번 - 고전 이벤트 모델 - 선언함수
+        // window.onload = function() {
+        //     let btnOld = document.getElementById("btnOld");
+        //     let box = document.getElementById("box");
+        //     btnOld.onclick = changeBox;
+        // }
+
+        // 1번 - 인라인 이벤트 모델 - 지양하는 방법
+        function changeBox() {
+            let box = document.getElementById("box");
+            box.style.backgroundColor = "orange";
+            box.style.borderRadius = "50%";
+            box.style.border = "3px solid red";
+        }
+    </script>
+
+    <!-- 
+        1. 이벤트(event) - 웹브라우저에서 일어나는 여러가지 동작
+        2. 이벤트 핸들러(handler), 이벤트 리스너(Listener) - ㅇ벤트를 실행하는 함수
+        3. 이벤트 등록 - 이벤트와 이벤트 리스터를 연결하는 작업
+        
+     -->
+
+</head>
+<body>
+    <h2>이벤트 모델</h2>
+    <h3>이벤트를 처리하는 3가지 방법</h3>
+    <div id="box"></div>
+    <hr>
+    <br> 1번: 인라인 이벤트 모델 <button onclick="changeBox()">인라인 모델</button>
+    <br> 2번: 고전 이벤트 모델 <button id="btnOld">고전 이벤트 모델</button>
+    <br> 3번: 표준 이벤트 모델 <button id="btnStd">표준 이벤트 모델</button>
+   
+    
+</body>
+</html>

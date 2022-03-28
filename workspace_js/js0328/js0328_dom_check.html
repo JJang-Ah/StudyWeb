@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - 체크박스와 라디오버튼 1</title>
+    <style>
+
+    </style>
+    <script>
+
+        function inputData() {
+            // 라디오 버튼일 때
+            // let year = document.getElementsByName("year");
+            let year = document.searchForm.year.value;
+
+            // console.log(`라디오 : ${typeof year} : ${year}`);
+            // console.log(`라디오버튼 선택 개수: ${year.length}`);
+            
+            let txt = "";
+            for(let i=0; i<year.length; i++) {
+                if(year[i].checked) {
+                    txt = year[i].value;
+                    break;
+                }
+            }
+
+            // 체크박스일 때
+            let subject = document.getElementsByName("subject");
+            // form활용하는 3가지 방법
+            // let subject = document.searchForm.subject;
+            // let subject = document.forms[0].subject;
+            // let subject = document.searchForm['subject'];
+            // console.log(`체크박스 : ${typeof subject} : ${subject}`);
+            // console.log(`체크박스버튼 선택 개수: ${subject.length}`);
+            let txt2 = "";
+            // 1번 - 기본 for문
+            // for(let i=0; i<subject.length; i++) {
+            //     if(subject[i].checked) {
+            //         txt2 = txt2 + subject[i].value + " ";
+            //     }
+            // }
+            
+            // 2번 - for-in문
+            // for(let i in subject) {
+            //     if(subject[i].checked) {
+            //         txt2 += subject[i].value + " " ;
+            //     }
+            // }
+
+            // 3번 - for-of문
+            // for(let i of subject) {
+            //     if(i.checked) {
+            //         txt2+= i.value + " ";
+            //     }
+            // }
+
+            // 4-1번 - forEach()
+            // subject.forEach(function(v, i) {
+            //     if(v.checked) txt2 += v.value + " ";
+            // });
+
+            // 4-2번 - forEach()
+            subject.forEach((v, i) => {if(v.checked) txt2 += v.value + " "});
+
+
+            let result = document.querySelector("#result");
+            result.innerHTML = `학년: ${txt}학년<br>희망 과목: ${txt2}`;
+
+        }
+    </script>
+
+    <!-- 
+        라디오버튼과 체크박스의 입력에서 선택된 것은 checked 속성이 true인 것이고,
+        선택되지 않은 것은 checked 속성이 false인 것임.
+
+     -->
+</head>
+<body>
+    <h2>DOM - 체크박스와 라디오버튼 1</h2>
+    <h3>이젠대학교 1학기 설문조사</h3>
+    <form name="searchForm">
+        <fieldset>
+            <h3>Q1. 학생의 학년을 선택하시오.</h3>
+            <input type="radio" name="year" value="1">1학년&emsp;
+            <input type="radio" name="year" value="2">2학년&emsp;
+            <input type="radio" name="year" value="3">3학년&emsp;
+            <input type="radio" name="year" value="4">4학년&emsp;
+        </fieldset>
+
+        <fieldset>
+            <h3>Q2. 학생이 배우고싶은 과목을 선택하시오. (다중 선택)</h3>
+            <input type="checkbox" name="subject" value="자료구조">자료구조&emsp;
+            <input type="checkbox" name="subject" value="데이터베이스">데이터페이스&emsp;
+            <input type="checkbox" name="subject" value="운영체제">운영체제&emsp;
+            <input type="checkbox" name="subject" value="네트워크">네트워크&emsp;
+            <input type="checkbox" name="subject" value="인공지능">인공지능&emsp;
+        </fieldset>
+    </form>
+        <button onclick="inputData()">입력 완료</button>
+        <hr>
+        <div id="result"></div>
+    
+</body>
+</html>
