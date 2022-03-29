@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 이벤트 - focus와 blur</title>
+    <!-- 
+
+        1. 입력상자의 포커스 이벤트와 블러 이벤트
+        - focus 이벤트: 커서를 획득했을 때 발생하는 이벤트
+        - blur 이벤트 : 커서를 제거했을 떄 발생하는 이벤트
+
+    -->
+
+
+
+    <script>
+        window.onload = () => {
+            // 문제) 영문명 입력 상자에 커서를 넣으면 beige 색상으로 변하고,
+            // 커서를 옮겼을 떄, lightgray 색상으로 바뀌고, 영문명은 대문자로 바뀌시오
+            let name = document.querySelector("#name");
+            name.addEventListener("focus", () => {
+                name.style.backgroundColor = "beige";
+            })
+
+            name.addEventListener("blur", () => {
+                name.style.backgroundColor = "lightgray";
+                name.value = name.value.toUpperCase();
+            })
+        }
+    </script>
+
+</head>
+<body>
+    <h3>회원 정보 입력</h3>
+    이름입력 : <input type="text" id="name"><br>
+    전화번호 : <input type="text" id="tel">
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 이벤트 - change</title>
+    <!-- 
+
+     -->
+     <script>
+         window.onload = () => {
+             let year = document.getElementById("year");
+             year.addEventListener("change", () => {
+                let txt1 = document.getElementById("txt1");
+                txt1.textContent = year.value + "선택하였습니다."
+             });
+         }
+         //
+         let sum = 0;
+         function addGrade(s) {
+            if(s.checked) { //선택: 수강학점에 더함
+                sum += parseInt(s.value);
+            } else {        // 해제 : 수강학점에서 뺌
+                sum -= parseInt(s.value);
+            }
+            document.getElementById("tot").value = sum;
+
+         }
+     </script>
+
+</head>
+<body>
+    <div>
+        <h3>Q1. 학생의 학년을 선택하시오.</h3>
+        <select id="year">
+            <option value="1학년">1학년</option>
+            <option value="2학년">2학년</option>
+            <option value="3학년">3학년</option>
+            <option value="4학년">4학년</option>
+        </select>
+        <p id="txt1"></p>
+        <hr>
+        <h3>Q2. 수강신청 과목을 모두 선택하시오.</h3>
+        <input type="checkbox" name="subject" value="2" onchange="addGrade(this)"> 교양컴퓨터(2학점)
+        <input type="checkbox" name="subject" value="4" onchange="addGrade(this)"> 자료구조(4학점)
+        <input type="checkbox" name="subject" value="3" onchange="addGrade(this)"> 데이터베이스(3학점)
+        <input type="checkbox" name="subject" value="4" onchange="addGrade(this)"> 알고리즘(4학점)
+        <input type="checkbox" name="subject" value="3" onchange="addGrade(this)"> 네트워크(3학점)
+        <br>
+        총 수강신청 학점: <input type="text" id="tot">
+    </div>
+    
+</body>
+</html>

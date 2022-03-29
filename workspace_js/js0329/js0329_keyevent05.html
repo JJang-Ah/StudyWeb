@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키 이벤트 5번</title>
+
+    <!-- 
+
+        1. 이메일에 대한 유효성 검사
+        - @가 있는지를 판단한 다음에 .이 오는지를 검사함.
+
+
+     -->
+
+     <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let email = document.querySelector("#email");
+            let message = document.querySelector("#message");
+
+            // 이베일 형식의 여부를 판별하는 함수
+            let isEmail = (value) => {
+                return(value.indexOf("@")>1) && (value.split('@')[1].indexOf('.')>1);
+            }
+
+            email.addEventListener("keyup", () => {
+                let value = event.currentTarget.value; // 계쏙 값을 받는다.
+                
+                if(isEmail(value)) { // 이메일 형식
+                    message.style.color = "green";
+                    message.innerHTML = `이메일 형식입니다. : ${value}`;
+                } else { // 이메일 형식이 아닐 때
+                    message.style.color = "red";
+                    message.innerHTML = `이메일 형식이 아닙니다. : ${value}`;
+
+                }
+            })
+        })
+     </script>
+
+</head>
+<body>
+    <h1>키 이벤트 5번</h1>
+    <h3>이메일 형식의 유효성 검사하기</h3>
+    이메일 입력: <input type="text" name="" id="email"> <br>
+    <p id="message"></p>
+    
+</body>
+</html>

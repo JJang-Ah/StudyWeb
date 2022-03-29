@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 이벤트 4 - load</title>
+    <!-- 
+
+     -->
+     <script>
+         window.onload = () => {
+             //현재 창을 실행하면 바로 알림창을 띄우도록 하는 load 이벤트
+            
+
+
+            let img1 = document.querySelector("#img1");
+            let img2 = document.querySelector("#img2");
+            let txt = document.querySelector("#txt");
+
+            // 이미지 이벤트 발생시에 문제점 - 이미지의 크기: 0 * 0
+            // - 이미지를 변경한 직후에는 곧바로 이미지의 크기를 인식하지 못하는 문제점이 발생
+            // >> 해결책: load 이벤트 사용
+
+            // img1.addEventListener("click", () => {
+            //     img2.src = "images/image2.jpg";
+            //     txt.innerHTML = `이미지의크기: ${img2.width} * ${img2.height}`;
+            // })
+
+            // load 이벤트 사용 - img2의 이미지의 크기를 파악할 때
+            img1.addEventListener("click", () => {
+                img2.src = "images/image1.jpg";
+                img2.addEventListener("load", () => {
+                    txt.innerHTML = `이미지의크기: ${img2.width} * ${img2.height}`;
+                })
+            })
+             
+         }
+
+
+         function showMessage() {
+             alert("다양한 일몰 사진을 감상하삼여");
+         }
+     </script>
+</head>
+<body onload="showMessage()">
+    <h2>다양한 이벤트 4 - load</h2>
+    <h3>미국 키웹스트에서 일몰 점프</h3>
+    <img src="images/image1.JPG" width="200" id="img1">
+    <hr>
+    <p id="txt"></p>
+    <img src="" id="img2">
+    
+</body>
+</html>

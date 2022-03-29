@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 이벤트 - input </title>
+    
+    <!-- 
+        문제1) 이름, 전공, 국어, 영어, 수학 점수를 입력하여
+        총점, 평균, 학점을 출력하시오.
+        - 출력형식
+        이름: ---
+        전공: -----
+        국어점수: 
+        영어점수: 
+        수학점수: 
+        총점: 
+        평균: 
+        학점: 
+
+
+     -->
+
+     <script>
+         // 인라인 모델
+         function computeScore() {
+            // 1번
+            // let form = document.scoreForm;
+            // let sname = form.sname.value;
+            // let dept = form.dept.value;
+            // let kor = form.kor.value;
+            // let eng = form.eng.value;
+            // let mat = form.mat.value;
+
+            // 2번
+            // let form = document.forms[0];
+            // let sname = document.forms[0].sname.value;
+            // let dept = form.dept.value;
+            // let kor = form.kor.value;
+            // let eng = form.eng.value;
+            // let mat = form.mat.value;
+
+            // v폼이름 배열의 문자열인덱스로 입력상장지름을 사용
+            let sname = document.scoreForm['sname'].value;
+            let dept = document.scoreForm['dept'].value;
+            let kor = document.scoreForm['kor'].value;
+            let eng = document.scoreForm['eng'].value;
+            let mat = document.scoreForm['mat'].value;
+
+            let sum = Number(kor) + Number(eng) + Number(mat);
+            let ave = sum/3;
+            let grade = "";
+            switch(parseInt(ave/10)) {
+                case 10: case 9: grade="A"; break;
+                case 8: grade="B"; break;
+                case 7: grade="C"; break;
+                case 6: grade="D"; break;
+                default: grade="F"; break;
+            }
+            
+            let result = document.getElementById("result");
+            let txt = `이름: ${sname}<br>전공: ${dept}<br>국어점수: ${kor}<br>영어점수: ${eng}<br>수학점수: ${mat}`;
+            txt += `총점: ${sum}<br>평균: ${ave.toFixed(2)}<br>학점: ${grade}`;
+            result.innerHTML = txt;
+
+
+         }
+
+         //고전 이벤트 모델
+        //  window.onload = function() {}
+        //  window.onload = () => {}
+
+        // 표준 이벤트 모델
+        // document.addEventListener("", function() {})
+        // document.addEventListener("", () => {})
+        // DOMContentLoaded
+        document.addEventListener("DOMContentLoaded", () => {
+            let btnInput = document.getElementById("btnInput");
+            btnInput.addEventListener("click", computeScore);
+        });
+
+
+     </script>
+     
+</head>
+<body>
+
+    
+    <h2>DOM - 입력 상자 1</h2>
+    <h3>이젠대학교 성적 확인</h3>
+    <form name="scoreForm">
+        이름: <input type="text" name="sname" id=""><br>
+        전공: <input type="text" name="dept" id=""><br>
+        국어점수: <input type="text" name="kor" id=""><br>
+        영어점수: <input type="text" name="eng" id=""><br>
+        수학점수: <input type="text" name="mat" id=""><br>
+        
+        <!-- <input type="button" onclick="computeScore()" value="처리 결과"> 인라인 이벤트-->
+        <input type="button" value="처리 결과" id="btnInput"> <!-- 표준 이벤트 -->
+    </form>
+    <div id="result"></div>
+
+
+    
+</body>
+</html>

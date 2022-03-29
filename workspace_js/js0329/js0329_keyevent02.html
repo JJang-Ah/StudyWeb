@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키 이벤트 2번</title>
+    <!-- 
+        event.code: 입력한 키이름 ex) NUmpad1, shiftLeft ...
+        event.keyCode: 입력한 키의 번호 ex) 방향키 왼쪽,위쪽,오른쪽,아래쪽 화살표 : 37, 38, 39, 40
+        event.ctrlKey: ctrl 키가 눌러졌는지의 여부, true, false
+
+        
+
+     -->
+
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+             let txt = document.querySelector("#txt");
+
+             let print = (event) => {
+                let output = "";
+                output += `ctrl: ${event.ctrlKey}<br>`;
+                output += `shift: ${event.shiftKey}<br>`;
+                output += `alt: ${event.altKey}<br>`;
+                output += `code: ${typeof(event.code) != "undefined" ? event.keyCode: event.keyCode}<br>`;
+                txt.innerHTML = output;
+             }
+
+             document.addEventListener("keydown", print);
+             document.addEventListener("keyup", print);
+         })
+
+     </script>
+
+</head>
+<body>
+    <h1>키 이벤트와 키 이벤트 속성</h1>
+    <h3>키보드에서 어떤 키를 눌렀는지 파악</h3>
+    <div id="txt"></div>
+
+    
+</body>
+</html>

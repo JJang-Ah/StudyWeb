@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 이벤트 2 - contextmenu</title>
+    <!-- 
+
+     -->
+     <script>
+
+        function f1(e) {
+            e.preventDefault();
+        }
+     </script>
+</head>
+<body>
+    <h2>다양한 이벤트 2</h2>
+    <h3>컨텍스트 메뉴 이벤트</h3>
+    <img src="images/image1.JPG" width="300" oncontextmenu="return false">
+    <hr>
+    <img src="images/image1.JPG" width="300" oncontextmenu="f1(event)">
+
+    
+</body>
+</html>

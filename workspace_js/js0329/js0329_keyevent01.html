@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키 이벤트 1</title>
+    <!-- 
+        2. 키보드 관련 이벤트
+        - keypress, keydown, keyup: 키눌렀을 때, 키 입력할 떄, 키를 뗏을 떄
+
+     -->
+
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+             let no = document.querySelector("#no");
+             let ta = document.querySelector("#ta");
+
+             ta.addEventListener("keyup", () => {
+                 let cnt = ta.value.length;
+                 no.textContent = `입력한 글자수: ${cnt} `;
+             })
+         })
+     </script>
+</head>
+<body>
+    <h1>키보드 이벤트 - keyup</h1>
+    <h3>입력상자에 입력한 글자수 세기</h3>
+    <p id="no"></p>
+    <textarea name="" id="ta" cols="30" rows="10"></textarea>
+    
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- 
+        1. 디폴트 이벤트(defalut event) - 태그가 기본적으로 가지고 있는 이벤트
+        ex) a 태그 - 기본적으로 페이지를 이동하는 이벤트를 내장하고 있음
+        input의 submit, reset - 전송, 리셋의 기능을 하는 이벤트를 내장하고 있음
+
+        2. 디폴트 이벤트 처리
+        - 태그가 기본적으로 가지고 있는 이벤트로 인해서 사용자가 정의한 내용을 제대로
+        실현하시 못하는 문제가 발현됨. >> 이를 해결하는 방법이 필요
+
+     -->
+
+     <script>
+         function f1(e) {
+            e.preventDefault(); // 디폴트 이벤트를 중지시키는 메소드
+         }
+         function f2(e) {
+            let result = confirm("네이버 페이지로 이동하겠습니까?");
+            if(!result) {
+                e.preventDefault();
+            }
+         }
+
+         window.onload = function() {
+             //고전 이벤트
+             document.getElementById("a4").onclick = f1;
+
+             //표준 이벤트
+             document.getElementById("a5").addEventListener("click", f1);
+
+             // 표준 이벤트 응용 - 이동 여부를 확인
+             document.getElementById("a6").addEventListener("click", f2);
+
+
+         }
+     </script>
+</head>
+<body>
+    <h2>디폴트 이벤트</h2>
+    <a href="http://www.naver.com">하이퍼링크 1</a><br><br>
+    <a href="http://www.naver.com" onclick="return false">하이퍼링크 2</a><br><br>
+    <!--  인라인1 : 디폴트 이벤트 중지  -->
+    <a href="http://www.naver.com" onclick="f1(event)">하이퍼링크 3</a><br><br>
+    <!-- 인라인2 : 디폴트 이벤트 중지 -->
+    <a href="http://www.naver.com" id="a4">하이퍼링크 4</a><br><br>
+    <!-- 고전: 디폴트 이벤트 중지 -->
+    <a href="http://www.naver.com" id="a5">하이퍼링크 5</a><br><br>
+    <!-- 표준: 디폴트 이벤트 중지 -->
+    <a href="http://www.naver.com" id="a6">하이퍼링크 6</a><br><br>
+    
+    
+</body>
+</html>

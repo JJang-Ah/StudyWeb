@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키 이벤트 3번</title>
+    <!-- 
+
+
+     -->
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+            let turtle = document.querySelector("#turtle");
+            turtle.style.position = "absolute";
+
+
+            //거북이의 이동
+            let [x, y] = [100, 0]; // x=0, y=0
+            let d = 20;
+            let move = () => {
+                turtle.style.left = `${x*d}px`;
+                turtle.style.top = `${y*d}px`;
+            }
+            move();
+
+            // 키 이벤트 발생 - 방향키를 눌렀을 떄 x,y값을 변경하여 거리
+            let [left, up, right, down] = [37, 38, 39, 40];
+            document.body.addEventListener("keydown", (event) => {
+                switch(event.keyCode) {
+                    case left:
+                        --x;
+                        break;
+                    case up:
+                        --y;
+                        break;
+                    case right:
+                        ++x;
+                        break;
+                    case down:
+                        ++y;
+                        break;
+                }
+                move();
+            })
+         })
+     </script>
+
+
+</head>
+<body>
+    <h1>키 이벤트와 키 코드</h1>
+    <h3>키보드의 방향키를 이동하여 거북이를 이동하기</h3>
+    <img src="images/turtle.png" width="100" id="turtle">
+    
+</body>
+</html>
