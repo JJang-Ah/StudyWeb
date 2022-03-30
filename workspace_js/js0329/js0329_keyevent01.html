@@ -15,7 +15,7 @@
          document.addEventListener("DOMContentLoaded", () => {
              let no = document.querySelector("#no");
              let ta = document.querySelector("#ta");
-
+            ta.focus();
              ta.addEventListener("keyup", () => {
                  let cnt = ta.value.length;
                  no.textContent = `입력한 글자수: ${cnt} `;

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 종합 응용 문제</title>
+    <!-- 
+        이전에 학습한 여행리스트 추가 >> 조금 응용한 문제
+        dom tree, event 
+
+        추가 목록 형태 : <div>체크박스 - 내용 - 버튼 (지우기) </div>
+            <div> <input type="checkbox"><span>내용</span> <button>완료</button></div>
+
+     -->
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+             let txtInput = document.querySelector("#txtInput");
+             let btnInput = document.querySelector("#btnInput");
+             let items = document.querySelector("#items");
+
+             // 내용 추가 함수 
+             let addContent = () => {
+                // 입력 유효성 검사 - 내용이 없을 떄
+                if(!txtInput.value) {
+                    alert("오늘 할 일을 입력해 주세요");
+                    txtInput.focus();
+                    return;
+                }
+
+                // 1. 추가할 태그 생성
+                let divTag = document.createElement("div");
+                let inputTag = document.createElement("input");
+                let spanTag = document.createElement("span");
+                let btnTag = document.createElement("button");
+
+                // 2. 태그에 속성 추가
+                inputTag.type = "checkbox";
+                spanTag.innerText = txtInput.value;
+                btnTag.innerText = "삭제";
+
+                // 3. 태그 연결 - div의 자식으로 input, span, button을 연결
+                // items의 자식으로 div를 연결
+                divTag.appendChild(inputTag);
+                divTag.appendChild(spanTag);
+                divTag.appendChild(btnTag);
+                items.appendChild(divTag);
+
+                // 4. 내용 추가 후 입력상자 비우기
+                txtInput.value = "";
+                txtInput.focus();
+
+                // checkbox 이벤트 - 체크되었는지의 여부 (true of false)
+                inputTag.addEventListener("change", (event) => {
+                    if(event.currentTarget.checked) {
+                        spanTag.style.textDecoration = "line-Through red";
+                        // spanTag.style.border = "1px solid red";
+                    } else {
+                        spanTag.style.textDecoration = "none";
+                    }
+                })
+
+                // 삭제 버튼 이벤트 - 삭제 버튼을 클릭하면, 그 내용 삭제하기
+                btnTag.addEventListener("click", (event) => {
+
+                })
+
+                // 완료 버튼 이벤트
+                btnTag.addEventListener("click", (event) => {
+                    // items.removeChild(divTag);
+                    divTag.remove();
+                })
+             }
+
+             // 추가 버튼의 클릭 이벤트 >> 내용을 입력한 후에 버튼을 눌렀을 떄 발생하는 이벤트
+             btnInput.addEventListener("click", (event) => {
+                addContent();
+             })
+
+
+             // 입력 상자의 키 이벤트 >> 내용을 입력후에 enter 키를 눌렀을 떄 발생하는 이벤트
+             txtInput.addEventListener("keyup", (event) => {
+                if(event.keyCode == 13) { //13 >> enter key
+                    addContent();
+                }
+             })
+         })
+     </script>
+</head>
+<body>
+    <h1>이벤트 종합 응용 문제</h1>
+    <h3>오늘 할 일을 입력하시오. (dom tree와 event를 활용한 문제)</h3>
+    <input type="text" id="txtInput"> <button id="btnInput">추가</button>
+    <hr>
+    <div id="items"></div>
+
+
+    
+</body>
+</html>

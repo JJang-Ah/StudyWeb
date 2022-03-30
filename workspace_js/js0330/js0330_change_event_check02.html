@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change 이벤트 5번 - checkbox</title>
+    <!-- 
+        체크박스를 체크하면 타이머가 활성화되고, 해제하면 비활성화(멈춤)
+
+     -->
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+             let t1 = document.querySelector("[name=t1]");
+             let t2 = document.querySelector("#t2");
+             let cnt = 0, timer = 0;
+
+             // 체크박스 - change 이벤트 사용
+             t1. addEventListener("change", (event) => {
+                 if (event.currentTarget.checked) { // 체크 했을 떄
+                    timer = setInterval(() => {
+                        t2.textContent = `${++cnt}초`;
+                    }, 1000)
+                 } else {
+                    clearInterval(timer);
+                 }
+             })
+         })
+     </script>
+
+</head>
+<body>
+    <h1>change 이벤트 5번 - checkbox</h1>
+    <h3>타이머 함수를 사용하여 시간 측정</h3>
+    <label><input type="checkbox" name="t1">타이머 활성화</label> <br>
+    <h2 id="t2"></h2>
+
+    
+</body>
+</html>

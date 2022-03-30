@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change 이벤트 4번 - checkobx</title>
+    <!-- 
+
+
+     -->
+     <script>
+
+         document.addEventListener("DOMContentLoaded", () => {
+            //  let ck = document.querySelector("[name=ck]"); // 배열 중에서 1개의 값
+            let ck = document.getElementsByName("ck")[0]; // 배열
+
+
+            //  console.log(`ck: ${ck}`);
+            let flag = false;
+
+             // checkbox  - change 이벤트
+            ck.addEventListener("change", (event) => {
+                flag = event.currentTarget.ckecked;
+                console.log(`flag = ${flag}`);
+            })
+
+            let link = document.querySelector("#link");
+             // a 태그 - click 이벤트 
+            link.addEventListener("click", (event) => {
+                if(!flag) { // 체크하지 않았을 떄 > 링크로 이동 중지
+                    event.preventDefault 
+                }
+            })
+
+         })
+
+     </script>
+
+</head>
+<body>
+    <h1>change 이벤트 4번 - check</h1>
+    <h3>체크를 했을때 링크를 활성화하기</h3>
+    <label><input type="checkbox" name="ck">링크 활성화</label> <a href="http://www.naver.com" id="link">네이버</a>
+    
+</body>
+</html>

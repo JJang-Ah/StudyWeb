@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change 이벤트 1번 (select)</title>
+    <!-- 
+
+
+    -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let food = document.querySelector("#food");
+            let memo = document.querySelector("#memo");
+
+            food.addEventListener("change", (event) => {   
+                // 1번 - 단일 선택일 때
+
+                // let options = event.currentTarget.options; // 선택한 옵션의 배열
+                // let index = event.currentTarget.options.selectedIndex; // 선택한 옵션의 인덱스
+                // memo.innerHTML = `${options[index].value} 메뉴를 선택하였습니다.`;
+
+                // 2번 - 다중 선택일 떄
+                let options = event.currentTarget.options;
+                let foodList = [];
+                for(let i of options) {
+                    if(i.selected) {
+                        foodList.push(i.value);
+                        console.log(i.value);
+                    }
+                }
+                memo.innerHTML = `${foodList} 메뉴를 선택하였습니다.`;
+
+            })
+        })
+
+    </script>
+
+
+</head>
+<body>
+    
+    <h1>change 이벤트 2번</h1>
+    <h3>좋아하는 음식을 선택하시오. (select 태그)</h3>
+
+    <select id="food" multiple>
+        <option>떡볶이</option> 
+        <!-- value값을 명시하지않으면 옵션안의 텍스트값이 value값이 된다. -->
+        <option>김밥</option>
+        <option>라면</option>
+        <option>오뎅</option>
+        <option>튀김</option>
+        <option>우동</option>
+    </select>
+    <br>
+    <div id="memo"></div>
+</body>
+</html>

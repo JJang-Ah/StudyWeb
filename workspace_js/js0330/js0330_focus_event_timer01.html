@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 응용 문제 - 글자수 파악</title>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let count = document.querySelector("#count");
+            let memo = document.querySelector("#memo");
+
+            //textarea에 포커스를 획득했을 떄
+            memo.addEventListener("focus", (event) => {
+                timer = setInterval(() => {
+                    count.innerText = "글자수 : " + memo.value.length;
+                }, 100)
+            })
+
+            // textarea가 포커스를 잃었을 때 >> setInterval() 함수의 동작을 멈춘다
+            memo.addEventListener("blur", (event) => {
+                clearInterval(timer);
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1>이벤트 응용 문제 - 글자수 파악</h1>
+    <h3>입력한 글자수를 파악합니다.</h3>
+    <hr>
+
+    <textarea id="memo" cols="30" rows="10"></textarea>
+    <h3 id="count"></h3>
+</body>
+</html>

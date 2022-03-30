@@ -20,7 +20,11 @@
             let email = document.querySelector("#email");
             let message = document.querySelector("#message");
 
-            // 이베일 형식의 여부를 판별하는 함수
+            // 이메일의 유효성 검사 - 이베일 형식의 여부를 판별하는 함수
+            // 1. @를 포함하고 있는지의 여부 >> 아이디가 3글자 이상인지를 판별
+            // 2. '@'문자 다음에 '.'을 포함하고 있는 여부 >> 회사이름도 3글자 이상인지를 판별
+            
+
             let isEmail = (value) => {
                 return(value.indexOf("@")>1) && (value.split('@')[1].indexOf('.')>1);
             }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change 이벤트 2번 (select)</title>
+
+
+    <!-- 
+
+     -->
+     <style>
+         #tUnit {
+             background-color: lightgray;
+         }
+     </style>
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+            let meter = document.querySelector("#meter");
+            let tUnit = document.querySelector("#tUnit");
+            let sUnit = document.querySelector("#sUnit");
+            let [mValue, sValue] = [0, 0]; // mValue: 미터값, sValue: 단위값
+
+
+            // 단위 계산 함수
+            let calc = () => {
+                tUnit.value = (mValue * sValue).toFixed(4);
+                console.log(`mValue = ${mValue}`);
+                console.log(`sValue = ${sValue}`);
+            }
+
+            // keyup 이벤트 - 미터를 입력할 때 발생
+            meter.addEventListener("keyup", (event) => {
+                sValue = sUnit.options[sUnit.selectedIndex].value;
+                mValue = Number(event.currentTarget.value);
+                // 문자를 입력했을 떄의 유효성 검사
+                if(isNaN(mValue)) {
+                    memo.style.color = "red";
+                    memo.textContent = "숫자를 ㄹ입력하세요";
+                    return;
+                } else {
+                    memo.textContent = "";
+                }
+                calc();
+            })
+
+            // change 이벤트 - select에서 옵션을 선택할 떄 발생, 단일 선택
+            sUnit.addEventListener("change", (event) => {
+                let options = event.currentTarget.options; // 옵션의 배열
+                let index = event.currentTarget.options.selectedIndex; // 옵션에서 선택한 인덱스
+                sValue = options[index].value; // 선택한 옵션의 값
+                calc();
+            })
+
+         })
+     </script>
+
+</head>
+<body>
+    <h1>change 이벤트 2번</h1>
+    <h3>단위 변환 (인치를 여러가지 단위로 변환하시오.)</h3>
+    <p>meter를 입력하면, mile, feet, yard로 변경합니다.</p>
+    미터 입력: <input type="text" id="meter"> m > <input type="text" name="" id="tUnit" readonly>
+    <select id="sUnit">
+        <option value="0.000621371">mile</option>
+        <option value="3.28084">feet</option>
+        <option value="1.09361">yard</option>
+    </select>
+    <br>
+    <p id="memo"></p>
+    
+</body>
+</html>

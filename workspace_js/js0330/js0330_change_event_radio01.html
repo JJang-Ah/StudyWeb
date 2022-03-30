@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change 이벤트 3 (radio)</title>
+    <!-- 
+
+     -->
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+             let pets = document.querySelectorAll("[name=pets]");
+             let memo = document.querySelector("#memo");
+
+            //  let pets = document.getElementsByName("pets");
+            //  let memo = document.getElementById("memo");
+            console.log(`pets: ${pets}`);
+            
+            // 1번 방법
+            // for(let p of pets) {
+            //     p.addEventListener("change", (event) => {
+            //         if(event.currentTarget.checked) {
+            //             memo.textContent = "당신이 좋아하는 애완동물은 " 
+            //             + event.currentTarget.value + "입니다~";
+            //         }
+            //     })
+            // }
+
+            // 2번 방법
+            pets.forEach(value => {
+                value.addEventListener("change", (event) => {
+                    if(event.currentTarget.checked) {
+                        memo.textContent = "당신이 좋아하는 애완동물은 " 
+                        + event.currentTarget.value + "입니다~";
+                    }
+                })
+            })
+         })
+     </script>
+</head>
+<body>
+    
+    <h1>change 이벤트 3번 (radio)</h1>
+    <h3>다음 중 좋아하는 애완동물을 선택하시오. (라디오 - 단일선택)</h3>
+    <label><input type="radio" name="pets" value="강아지">강아지</label>
+    <label><input type="radio" name="pets" value="고양이">고양이</label>
+    <label><input type="radio" name="pets" value="햄스터">햄스터</label>
+    <label><input type="radio" name="pets" value="거북이">거북이</label>
+    <label><input type="radio" name="pets" value="기타">기타</label>
+    <hr>
+    <p id="memo"></p>
+
+</body>
+</html>
