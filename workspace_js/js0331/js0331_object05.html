@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 기본 5 - 인스턴스 객체</title>
+    <!-- 
+        객체 생성자 함수를 사용하여 Student 객체를 생성하여 사용하시오.
+        - 프로퍼티: name, kor, eng, mat
+        - 메소드: 총점계산, 평균계싼, 학점계산, 학생정보출력
+
+        - 학생 5명의 인스턴스 배열을 생성하여 그 정보를 출력하시오.
+        - 학생 정보는 슬기로운 의사생활의 주인공을 기본으로 하여 적절하게 대입시켜보세요.
+
+     -->
+    <script>
+
+        //객체 생성
+        // function Student(name, kor, eng, mat) {
+        //     // property
+        //     this.name = name;
+        //     this.kor = kor;
+        //     this.eng = eng; 
+        //     this.mat = mat;
+
+        //     // method
+        //     // 총점
+        //     this.getSum = function() {
+        //         return Number(this.kor) + Number(this.eng) + Number(this.mat);
+        //     }
+
+        //     // 평균
+        //     this.getAvg = function() {
+        //         return (this.getSum()/3).toFixed(1);
+        //     }
+
+        //     // 학점
+        //     this.getGrade = function() {
+        //         let grade = "";
+        //         switch(parseInt(this.getAvg()/10)) {
+        //             case 10: case 9:
+        //                 grade = "A";
+        //                 break;
+        //             case 8:
+        //                 grade = "B";
+        //                 break;
+        //             case 7:
+        //                 grade = "C";
+        //                 break;
+        //             case 6:
+        //                 grade = "D";
+        //                 break;
+        //             default:
+        //                 grade = "F";
+        //                 break;
+        //         }
+        //         return grade;
+        //     }
+
+        //     // 정보출력
+        //     this.showInfo = function() {
+        //         return `이름: ${this.name}, 국어: ${this.kor}, 영어: ${this.eng}, 수학: ${this.mat}
+        //          총점: ${this.getSum()}, 평균: ${this.getAvg()}, 학점: ${this.getGrade()}`;
+        //     }
+
+        // }
+        //객체 생성
+        function Student(name, kor, eng, mat) {
+            // property
+            this.name = name;
+            this.kor = kor;
+            this.eng = eng; 
+            this.mat = mat;
+        }
+            // method
+            // 총점
+            Student.prototype.getSum = function() {
+                return Number(this.kor) + Number(this.eng) + Number(this.mat);
+            }
+
+            // 평균
+            Student.prototype.getAvg = function() {
+                return (this.getSum()/3).toFixed(1);
+            }
+
+            // 학점
+            Student.prototype.getGrade = function() {
+                let grade = "";
+                switch(parseInt(this.getAvg()/10)) {
+                    case 10: case 9:
+                        grade = "A";
+                        break;
+                    case 8:
+                        grade = "B";
+                        break;
+                    case 7:
+                        grade = "C";
+                        break;
+                    case 6:
+                        grade = "D";
+                        break;
+                    default:
+                        grade = "F";
+                        break;
+                }
+                return grade;
+            }
+
+            // 정보출력
+            Student.prototype.showInfo = function() {
+                return `이름: ${this.name}, 국어: ${this.kor}, 영어: ${this.eng}, 수학: ${this.mat}
+                 총점: ${this.getSum()}, 평균: ${this.getAvg()}, 학점: ${this.getGrade()}`;
+            }
+
+        
+
+        // 5명의 인스턴스 배열
+        let students = [
+            new Student("이익준", 98, 07, 96),
+            new Student("김준완", 99, 93, 82),
+            new Student("채송화", 87, 82, 80),
+            new Student("안정원", 80, 74, 92),
+            new Student("양석형", 69, 99, 86),
+        ];
+
+        // for-of문
+        for(let s of students) {
+            console.log(s);
+            console.log(s.showInfo());
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

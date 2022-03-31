@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 기본 1</title>
+    <!-- 
+        1. 객체(object) - 자바스크립트에서 하나로 처리되는 모든 개념과 실체
+        2. 객체의 구성 요소 - 속성(property), 행위(method)로 구성
+        3. 객체의 종류
+        (1) 싱글톤(singleton) 객체
+        - 하나의 객체를 속성명:값의 형태로 표현되는 여러개의 값을 중괄호 묶어서 표현
+        - 특별하게 메소드가 필요없는 간단한 객체를 만들 떄 사용
+        - 일회용으로 사용
+        - Object() 객체 생성자 함수를 통해서 빈 객체를 생성하고, 속성과 값을 나중에 대입
+
+        (2) 인스턴스 객체
+        - 객체 생성자 함수를 통해서 객체를 생성하는 방법
+
+        4. 객체를 생성할 때 주의해야 할 사항
+        - 객체의 메소드에서 프로퍼티에 접근할 떄는 반드시 this를 붙여서 사용
+
+        - 객체안에서 화살표 함수의 this는 자신의 객체가 아니라, window객체를 가르킴
+
+
+     -->
+     <script>
+
+        // 1. 학생 정보를 담는 객체 생성 - 싱글톤 객체
+
+        // 1-1 싱글톤 객체
+        // 1번 방법 - 싱글톤 객체
+        let student = {
+            // property
+            name:"이현이",
+            major: "국어국문학과",
+            age: 38,
+
+            //method
+            showInfo: function() {
+                console.log(`이름: ${this.name}\n전공: ${this.major}\n나이: ${this.age}`);
+            },
+            // showInfo: () => { // 화살표 함수 사용 불가 >> window를 가르킴
+            //     console.log(`이름: ${name}\n전공: ${major}\n나이: ${age}`);
+            // }
+
+        }
+        console.log(`이름: ${student.name}`);
+        console.log(`전공: ${student.major}`);
+        console.log(`나이: ${student.age}`);
+        console.log(`--------------`);
+
+        student.showInfo();
+        console.log("-----------------");
+
+        // 2번 방법 - 싱글톤 객체
+        let student2 = new Object();
+        student2.name = "아이린";
+        student2.major = "모델학과";
+        student2.age = 33;
+        student2.showInfo = function() {
+            console.log(`이름: ${this.name}\n전공: ${this.major}\n나이: ${this.age}`);
+        };
+        console.log(`이름: ${student2.name}`);
+        console.log(`전공: ${student2.major}`);
+        console.log(`나이: ${student2.age}`);
+        console.log("-------------------------");
+        student2.showInfo();
+     </script>
+</head>
+
+<body>
+    <h1>클래스 기본 1</h1>
+
+
+
+    
+</body>
+</html>

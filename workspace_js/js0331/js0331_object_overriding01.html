@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 기본 5 - 오버라이딩</title>
+
+    <!-- 
+        오버라이딩(Overriding) - 부모 클래스의 메소드를 자식 클래스에서 재정의 하는것
+
+
+        과제1) 학생의 객체를 두가지 방법으로 작성하시오.
+        (객체 생성자 합수, 클래스 - private, getter/setter)
+
+        - js0331_object05.html파일 활용
+
+        입력화면 구성
+        form - 이름, 국어점수, 영어점수, 수학점수, 입력완료 버튼
+
+        입력완료 버튼을 눌렀을 때, 입력화면 아래쪽에 결과를 테이블 형태로 추가하시오
+        
+     -->
+
+    <script>
+
+
+        class Parent {
+            print() {
+                this.a();
+                this.b();
+                this.c();
+            }
+
+            a() { console.log("부모 a() 메소드");}
+            b() { console.log("부모 b() 메소드");}
+            c() { console.log("부모 c() 메소드");}
+            
+        }
+
+        class Child extends Parent {
+            // 오버라이딩(Overriding)
+            a() {
+                super.a();
+                console.log("자식 a() 메소드");
+            }
+            b() { console.log("자식 b() 메소드");}
+            c() { console.log("자식 c() 메소드");}
+        }
+
+        new Parent().print();
+        console.log("----------");
+        new Child().print();
+    </script>
+
+</head>
+<body>
+    <h1>클래스 기본 5 - 오버라이딩</h1>
+
+    
+</body>
+</html>

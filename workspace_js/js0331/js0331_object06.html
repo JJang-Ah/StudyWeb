@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 기본 6 - 프로토타입(prototype, 원형)</title>
+    <!-- 
+        < 객체를 생성할 떄 주의할 점 >
+        - 객체 생성자 함수 안에 메소드를 넣어서 생성하게 되면,
+        객체를 생성할 떄마다 메모리에 메소드의 공간도 만들어져서 메모리가 낭비되는 현상
+
+        -> 해결책: 객체 생성자 함수의 메소드를 프로토타입으로 생성함.
+        - 메소드 하나만 생성되어 모든 객체에서 공유함.
+        - 따라서, 메모리의 낭비를 막을 수 있음
+
+     -->
+     <script>
+
+
+         // 1번 - 객체 생성자 함수 사용, 메소드를 객체 생성자 함수 안에서 생성
+        //  function Doctor(name, major, age) {
+        //     // 프로퍼티
+        //     this.name = name;
+        //     this.major = major;
+        //     this.age = age;
+        //     // 메소드
+        //     this.showInfo = function() {
+                // console.log(`이름: ${this.name}, 전공: ${this.major}, 나이: ${this.age}`);
+        //     }
+        // } 
+        
+        // 2번 - 객체 생성자 함수 사용, 메소드를 프로토타입으로 생성
+         function Doctor(name, major, age) {
+            // 프로퍼티
+            this.name = name;
+            this.major = major;
+            this.age = age;
+        }
+        // 메소드의 프로토타입
+        Doctor.prototype.showInfo = function() {
+            console.log(`이름: ${this.name}, 전공: ${this.major}, 나이: ${this.age}`);
+        }
+
+        
+        let d1 = new Doctor("strange", "heart", 44);
+        let d2 = new Doctor("이익준", "간담췌외과", 42);
+        let d3 = new Doctor("김준환", "흉부외과", 41);
+        let d4 = new Doctor("채송화", "신경외과", 39);
+        let d5 = new Doctor("안정원", "소아외과", 38);
+
+        let doctors = [d1,d2,d3,d4,d5];
+
+        // for-of 문
+        for(let s of doctors) {
+            console.log(s);
+        }
+     </script>
+
+</head>
+<body>
+    
+</body>
+</html>

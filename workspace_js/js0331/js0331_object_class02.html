@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 기본 3 - 접근 제한</title>
+    <!-- 
+
+
+     -->
+
+    <script>
+
+        class Square {
+            #length; // private property
+
+            constructor(length) {
+                this.#length = length;
+            }
+
+            getPerimeter() {
+                return this.#length*4;
+            }
+            getArea() {
+                return this.#length*this.#length;
+            }
+
+            // private로 선언된 프로퍼티에 접근하기 위한 setter/getter 메소드 선언
+            // getter method
+            get length() {
+                return this.#length;
+            }
+
+            // setter method
+            set length(length) {
+                this.#length = length;
+            }
+
+        }
+
+        let s1 = new Square(10);
+        console.log(`정사각형 둘레: ${s1.getPerimeter()}, 정사각형 면적: ${s1.getArea()}`);
+
+        // let s2 = new Square(-10); // 예외처리
+        let s2 = new Square(20);
+        // s2.length = -15 // 예외처리로 막을 수 없다.
+        // s2.#length = -15; 
+        //Private field '#length' must be declared in an enclosing class
+
+        console.log(`정사각형 둘레: ${s2.getPerimeter()}, 정사각형 면적: ${s2.getArea()}`);
+        console.log("------------");
+        s2.length = 30;
+        console.log(`정사각형 길이: ${s2.length}`);
+        console.log(`정사각형 둘레: ${s2.getPerimeter()}, 정사각형 면적: ${s2.getArea()}`);
+
+
+    </script>
+
+</head>
+<body>
+
+    
+</body>
+</html>

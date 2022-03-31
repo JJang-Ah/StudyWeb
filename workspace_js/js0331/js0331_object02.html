@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 기본 2</title>
+    <!-- 
+
+     -->
+
+     <script>
+         //객체를 생성할 떄 반드시 익명함수를 사용하는 이유 (화살표 함수 사용 불가)
+         // 객체안에서 화살표 함수의 this는 자신의 객체가 아니라, window객체를 가르킴
+         let test = {
+             // method - 익명 함수
+             a: function() {
+                 console.log(`익명함수    a: ${this}`);
+             },
+             // method - 화살표 함수
+             b: () => {
+                 console.log(`화살표함수  b: ${this}`);
+                 
+             }
+         }
+
+         test.a(); // 익명함수    a: [object Object]
+         console.log("___________-"); // 화살표함수  b: [object Window]
+         test.b(); 
+     </script>
+
+</head>
+<body>
+    
+</body>
+</html>

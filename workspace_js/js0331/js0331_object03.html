@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 기본 3</title>
+    <!-- 
+        JSON 표기법, Javascript Object Notation, 
+        - 자바스크립트의 객체 표기법
+        - 프로퍼티와 값을 프로퍼티: 값의 형식으로 표현하여 데이터를 전달하는 방법
+
+        JSON.stringify(): 객체의 프로퍼티를 JSON 표기법의 형태로 출력하는 메소드
+        - stringify(객체, 출력하고자하는 프로퍼티명, 들여쓰기의 칸수)
+
+        JSON.parse(): stringify()를 통해서 문자열 형태로 된 값을 다시 객체 형태로 전개
+
+     -->
+     <script>
+         // 퀴즈1 ) 골때리는 그녀들의 구척장신, 액셔니스타를 싱글톤 객체의 2가지
+         // 방법으로 생성하여 사용하시오.
+
+         // 객체명: player1(구척장신), player2(액셔니스타)
+         // 프로퍼티 : no, name, position, job
+
+         let player1 = {
+             name: "이현이",
+             no: 19,
+             position: "윙백",
+             job: "모델",
+             printInfo: function() {
+                console.log(`이름: ${this.name}\n번호: ${this.no}\n포지션: ${this.position}\n직업: ${this.job}`);
+             }
+
+         }
+
+        
+        // let player1 = {};
+        //      player1.name= "이현이";
+        //      player1.no= "19";
+        //      player1.position= "윙백";
+        //      player1.job= "모델";
+        //      player1.printInfo= function() {
+        //         console.log(`이름: ${this.name}\n번호: ${this.no}\n포지션: ${this.position}\n직업: ${this.job}`);
+        //      }
+
+         
+         let player2 = new Object();
+         player2.name = "최여진";
+         player2.no = 20;
+         player2.position = "스트라이커";
+         player2.job = "배우";
+         player2.printInfo = function() {
+            console.log(`이름: ${this.name}\n번호: ${this.no}\n포지션: ${this.position}\n직업: ${this.job}`);
+         }
+
+         player1.printInfo();
+         player2.printInfo();
+         console.log("---------------");
+         console.log(JSON.stringify(player1, ['name', 'job'], 3)); // 제이슨 표기법 출력방법
+         // player1객체의 name, job 프로퍼티만 3칸씩 들여쓰기해서 출력
+
+         console.log(JSON.stringify(player1, null, 2));
+         // player1객체의 모든 프로퍼티를 2칸씩 들여쓰기해서 출력
+
+         console.log("---------------");
+         let json = JSON.stringify(player1);
+         console.log(typeof json);
+         console.log(json);
+         console.log(JSON.parse(json));
+         console.log(player1);
+         console.log("--------------------");
+
+         // 객체에서 프로퍼티를 삭제
+         delete player2.job;
+         console.log(player2);
+         delete player2.printInfo;
+         console.log(player2);
+
+
+
+     </script>
+</head>
+<body>
+
+    
+</body>
+</html>

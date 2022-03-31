@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 기본 4 - static</title>
+    <!-- 
+
+        static을 붙인 프로퍼티, 메소드 - 정적 프로퍼티, 정적 메소드
+        - 해당 클래스 1개만 만들어져서 모든 클래스에서 공유
+        - 접근하는 방법: 클래스명.프로퍼티명, 클래스명.메소드명
+        
+     -->
+     <script>
+
+         class Square {
+            #length; // private property
+            
+            // 인스턴스의 개수 파악
+            static #count = 0;
+
+            
+
+            constructor(length) {
+                if(length <= 0) {
+                    throw "길이는 0보다 커야합니다.";
+                }
+                this.#length = length;
+                ++Square.#count;
+            }
+
+
+            // static getter method
+            static get count() {
+                return Square.#count;
+            }
+
+            // private로 선언된 프로퍼티에 접근하기 위한 setter/getter 메소드 선언
+            // getter method
+            get length() {
+                return this.#length;
+            }
+
+            // setter method
+            set length(length) {
+                this.#length = length;
+            }
+
+            get perimeter() {
+                return this.#length*4;
+            }
+
+            get area() {
+                return this.#length * this.#length;
+            }
+        }
+
+        console.log(`인스턴스 개수: ${Square.count}`);
+        let s1 = new Square(10);
+        let s2 = new Square(20);
+        let s3 = new Square(30);
+        console.log(`인스턴스 개수: ${Square.count}`);
+
+     </script>
+
+</head>
+<body>
+    
+    
+</body>
+</html>
