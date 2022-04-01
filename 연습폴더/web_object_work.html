@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        
+
+        과제1) 학생의 객체를 두가지 방법으로 작성하시오.
+        (객체 생성자 합수, 클래스 - private, getter/setter)
+
+        - js0331_object05.html파일 활용
+
+        입력화면 구성
+        form - 이름, 국어점수, 영어점수, 수학점수, 입력완료 버튼
+
+        입력완료 버튼을 눌렀을 때, 입력화면 아래쪽에 결과를 테이블 형태로 추가하시오
+     -->
+     <style>
+        #main {
+            margin: 20px auto;
+            width: 600px;    
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+        }
+
+
+        
+        #resultTable {
+            width: 600px;
+            text-align: center;
+        }
+        tr, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+     </style>
+     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            class Student {
+                constructor(name, kor, eng, mat) {
+                    this.name = name;
+                    this.kor = kor;
+                    this.eng = eng;
+                    this.mat = mat;
+                }
+                getSum() {
+                    return Number(this.kor) + Number(this.eng) + Number(this.mat);
+                }
+                getAvg() {
+                    return (this.getSum()/3).toFixed(1);
+                }
+                getGrade() {
+                let grade = "";
+                    switch(parseInt(this.getAvg()/10)) {
+                        case 10: case 9:
+                            grade = "A";
+                            break;
+                        case 8:
+                            grade = "B";
+                            break;
+                        case 7:
+                            grade = "C";
+                            break;
+                        case 6:
+                            grade = "D";
+                            break;
+                        default:
+                            grade = "F";
+                            break;
+                    }
+                    return grade;
+                }
+            }
+
+            let btnSubmit = document.querySelector("#btnSubmit");
+            let ss = [];
+            btnSubmit.addEventListener("click", submit);
+
+            
+            function submit() {
+                let sname = document.querySelector("#sname");
+                let kor = document.querySelector("#kor").value;
+                let eng = document.querySelector("#eng").value;
+                let mat = document.querySelector("#mat").value;
+                let s = new Student(sname.value, kor, eng, mat);
+                ss.push(s);
+                getTable();
+                sname.focus();
+            }
+
+            function removeRow(n) {
+                ss.splice(n, 1);
+                getTable();
+            }
+
+            function getTable() {
+                resultTable.innerHTML = `<tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>학점</th>`;
+                for(let i=0; i<ss.length; i++) {
+                    resultTable.innerHTML += `<td>${ss[i].name}</td><td>${ss[i].kor}</td>
+                    <td>${ss[i].eng}</td><td>${ss[i].mat}</td><td>${ss[i].getSum()}</td><td>${ss[i].getAvg()}</td>
+                    <td>${ss[i].getGrade()}</td><td><button onclick="removeRow(${i});">삭제</button>`;
+                }
+                resultTable.innerHTML += `</tr>`;
+                
+            }
+        })
+
+     </script>
+</head>
+<body>
+    <div id="main">
+        <h1>과제 1 </h1>
+        <form>
+            <fieldset>
+                <legend>학생 정보</legend>
+                <ul>
+                    <li><label>성 명: <input type="text" name="sname" id="sname"></label></li>
+                    <li><label>국어점수: <input type="text" name="kor" id="kor"></label></li>
+                    <li><label>영어점수: <input type="text" name="eng" id="eng"></label></li>
+                    <li><label>수학점수: <input type="text" name="mat" id="mat"></label></li>
+                </ul>
+                <input type="button" id="btnSubmit" value="제출">
+                <button type="reset">취소</button>
+            </fieldset>
+        </form>
+        <hr>
+        <div id="result">
+            <table id="resultTable">
+                
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

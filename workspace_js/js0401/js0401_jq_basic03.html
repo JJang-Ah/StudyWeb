@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기본 3</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        #container { width: 500px; margin: 0 auto;}
+    </style>
+    
+    <script>
+        // 1번 - 자바스크립트로 작성
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     let light = document.querySelector("#light");
+        //     let btnLight = document.querySelector("#btnLight");
+        //     btnLight.addEventListener("click", () => {
+        //         if(btnLight.innerHTML == "점등") {
+        //             light.src = "images/lighton.png";
+        //             btnLight.innerHTML = "소등";
+        //         } else {
+        //             light.src = "images/lightoff.png";
+        //             btnLight.innerHTML = "점등";
+        //         }
+        //     })
+        // })
+
+        // 2번 - 제이쿼리로 작성, click(), text(), attr() 함수를 사용
+        $(document).ready(() => {
+            $("#btnLight").click(() => {
+                if($("#btnLight").text() == "점등") {
+                    $("#light").attr("src", "images/lighton.png");
+                    $("#btnLight").text("소등")
+                    .css("backgroundColor", "pink");
+                    
+                } else {
+                    $("#light").attr("src", "images/lightoff.png");
+                    $("#btnLight").text("점등")
+                    .css("backgroundColor", "orange");
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h3>전구의 점등 및 소등</h3>
+        <img src="images/lightoff.png" width="200" id="light"><br>
+        <button id="btnLight">점등</button>
+
+    </div>
+    
+</body>
+</html>

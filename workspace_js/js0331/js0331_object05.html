@@ -73,45 +73,45 @@
             this.eng = eng; 
             this.mat = mat;
         }
-            // method
-            // 총점
-            Student.prototype.getSum = function() {
-                return Number(this.kor) + Number(this.eng) + Number(this.mat);
-            }
+        // method
+        // 총점
+        Student.prototype.getSum = function() {
+            return Number(this.kor) + Number(this.eng) + Number(this.mat);
+        }
 
-            // 평균
-            Student.prototype.getAvg = function() {
-                return (this.getSum()/3).toFixed(1);
-            }
+        // 평균
+        Student.prototype.getAvg = function() {
+            return (this.getSum()/3).toFixed(1);
+        }
 
-            // 학점
-            Student.prototype.getGrade = function() {
-                let grade = "";
-                switch(parseInt(this.getAvg()/10)) {
-                    case 10: case 9:
-                        grade = "A";
-                        break;
-                    case 8:
-                        grade = "B";
-                        break;
-                    case 7:
-                        grade = "C";
-                        break;
-                    case 6:
-                        grade = "D";
-                        break;
-                    default:
-                        grade = "F";
-                        break;
-                }
-                return grade;
+        // 학점
+        Student.prototype.getGrade = function() {
+            let grade = "";
+            switch(parseInt(this.getAvg()/10)) {
+                case 10: case 9:
+                    grade = "A";
+                    break;
+                case 8:
+                    grade = "B";
+                    break;
+                case 7:
+                    grade = "C";
+                    break;
+                case 6:
+                    grade = "D";
+                    break;
+                default:
+                    grade = "F";
+                    break;
             }
+            return grade;
+        }
 
-            // 정보출력
-            Student.prototype.showInfo = function() {
-                return `이름: ${this.name}, 국어: ${this.kor}, 영어: ${this.eng}, 수학: ${this.mat}
-                 총점: ${this.getSum()}, 평균: ${this.getAvg()}, 학점: ${this.getGrade()}`;
-            }
+        // 정보출력
+        Student.prototype.showInfo = function() {
+            return `이름: ${this.name}, 국어: ${this.kor}, 영어: ${this.eng}, 수학: ${this.mat}
+                총점: ${this.getSum()}, 평균: ${this.getAvg()}, 학점: ${this.getGrade()}`;
+        }
 
         
 

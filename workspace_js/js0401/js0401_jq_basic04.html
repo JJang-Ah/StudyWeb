@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기본 4</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        #container { width: 500px; margin: 0 auto;}
+        p { background: gray; width: 150px; height: 30px; margin: 10px; padding: 10px;}
+        .current { background-color: yellow;}
+    </style>
+    <script>
+        // 1. 클래스의 추가/삭제
+        // - addClass(): 클래스를 추가하는 함수
+        // - removeClass(): 클래스를 삭제하는 함수
+
+        $(function() {
+            // 이벤트를 추가하는 방법
+            // 1번 방법 - 이벤트 함수를 사용하는 방법
+            // $("p").mouseenter(function() {
+            //     $(this).addClass("current");
+            // })
+            // $("p").mouseout(function() {
+            //     $(this).removeClass("current");
+            // })
+            // 1-2번 함수 체이닝
+            // $("p").mouseenter(function() {
+            //     $(this).addClass("current");
+            // })
+            // .mouseout(function() {
+            //     $(this).removeClass("current");
+            // })
+
+
+            // 2번 방법 - on() 함수를 사용
+            // $("p").on("mouseenter", function() {
+            //     $(this).addClass("current");
+            // })
+            // $("p").on("mouseout", function() {
+            //     $(this).removeClass("current");
+            // })
+
+            // 2-2번 방법 - JSON 방법을 사용
+            $("p").on({
+                "mouseenter": function() {
+                    $(this).addClass("current");
+                },
+                "mouseout": function() {
+                    $(this).removeClass("current");
+                }
+            });
+
+
+        })
+
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>jQuery의 mouse이벤트</h2>
+        <h3>jQuery Programming</h3>
+        <p id="p1">HTML5</p>
+        <p id="p2">CSS3</p>
+        <p id="p3">Javascript</p>
+        <p id="p4">jQuery</p>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- 
+
+        
+        과제1) 학생의 객체를 두가지 방법으로 작성하시오.
+        (객체 생성자 합수, 클래스 - private, getter/setter)
+
+        - js0331_object05.html파일 활용
+
+        입력화면 구성
+        form - 이름, 국어점수, 영어점수, 수학점수, 입력완료 버튼
+
+        입력완료 버튼을 눌렀을 때, 입력화면 아래쪽에 결과를 테이블 형태로 추가하시오
+
+     -->
+    <style>
+        #container {
+            width: 600px;
+            margin: 20px auto;
+        }
+        #inputBox {
+            width: 100%;
+            padding: 10px;
+            height: 500px;
+            border: 1px solid black;
+        }
+        #inputBox h2 {
+            text-align: center;
+        }
+        #inputBox ul {
+            list-style: none;
+            margin-top: 50px;
+            margin-left: 40px;
+        }
+        #inputBox li {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+
+        }
+        #inputBox label {
+            display: inline-block;
+            width: 100px;
+        }
+        #inputBox #btns {
+            margin-top: 50px;
+            text-align: center;
+        }
+        #inputBox input[type="button"], #inputBox input[type="reset"] {
+            width: 120px;
+            height: 32px;
+            font-weight: bold;
+            border: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+        #inputBox input[type="button"]:hover, #inputBox input[type="reset"]:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+        }
+        /* 입력 결과 테이블 */
+        #tblBox {
+            margin-top: 20px;
+
+        }
+        #tblBox h3 {
+            text-align: center;
+        }
+        #tblBox table {
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #tblBox tr {
+            height: 30px;
+        }
+        #tblBox th, #tblBox td {
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {        
+            // 1번 방법
+            // function Student(name, kor, eng, mat) {
+            //     // property
+            //     this.name = name;
+            //     this.kor = kor;
+            //     this.eng = eng; 
+            //     this.mat = mat;
+            // }
+            // // method
+            // // 총점
+            // Student.prototype.getSum = function() {
+            //     return Number(this.kor) + Number(this.eng) + Number(this.mat);
+            // }
+
+            // // 평균
+            // Student.prototype.getAvg = function() {
+            //     return this.getSum()/3;
+            // }
+
+            // // 학점
+            // Student.prototype.getGrade = function() {
+            //     let grade = "";
+            //     switch(parseInt(this.getAvg()/10)) {
+            //         case 10: case 9:
+            //             grade = "A";
+            //             break;
+            //         case 8:
+            //             grade = "B";
+            //             break;
+            //         case 7:
+            //             grade = "C";
+            //             break;
+            //         case 6:
+            //             grade = "D";
+            //             break;
+            //         default:
+            //             grade = "F";
+            //             break;
+            //     }
+            //     return grade;
+            // }
+
+            // // 정보출력
+            // Student.prototype.showInfo = function() {
+            //     return `이름: ${this.name}, 국어: ${this.kor}, 영어: ${this.eng}, 수학: ${this.mat}
+            //         총점: ${this.getSum()}, 평균: ${this.getAvg()}, 학점: ${this.getGrade()}`;
+            // }
+
+            // 2번 방법
+            class Student {
+                #name;
+                #kor;
+                #eng;
+                #mat;
+
+                constructor(name, kor, eng, mat) {
+                    this.#name = name;
+                    this.#kor = kor;
+                    this.#eng = eng;
+                    this.#mat = mat;
+                }
+
+                get name() {
+                    return this.#name;
+                }
+                get kor() {
+                    return this.#kor;
+                }
+                get eng() {
+                    return this.#eng;
+                }
+                get mat() {
+                    return this.#mat;
+                }
+                get sum() { 
+                    return (this.#kor + this.#eng + this.#mat);
+                }
+                get avg() {
+                    return (this.sum/3);
+                }
+                get grade() {
+                    let grade = "";
+                    switch(parseInt(this.avg/10)) {
+                        case 10: case 9:
+                            grade = "A";
+                            break;
+                        case 8:
+                            grade = "B";
+                            break;
+                        case 7:
+                            grade = "C";
+                            break;
+                        case 6:
+                            grade = "D";
+                            break;
+                        default:
+                            grade = "F";
+                            break;
+                    }
+                    return grade;
+                }
+            }
+            let list = []; // 객체를 저장할 배열
+
+            let form = document.inputForm;
+            let btnInput = document.querySelector("#btnInput");
+            let tblInput = document.querySelector("#tblInput");
+
+            form.name.focus();
+            form.name.addEventListener("keyup", (event) => {
+                if(form.name.value) {
+                    alert("이름을 입력해!");
+                    form.name.focus();
+                    return;
+                }
+            })
+            form.kor.addEventListener("keyup", (event) => {
+                if(!form.kor.value) {
+                    alert("국어점수를 입력해!");
+                    form.kor.focus();
+                    return;
+                }
+                let kor = form.kor.value;
+                if(isNaN(Number(kor))) {
+                    alert("숫자를 입력해!");
+                    form.kor.value = "";
+                    form.kor.focus();
+                    return;
+                }
+                if(Number(kor) < 0 || Number(kor) > 100) {
+                    alert("0에서 100사이의 점수를 입력하시오!");
+                    form.kor.value = "";
+                    form.kor.focus();
+                    return;
+                }
+            })
+
+            // 버튼 클릭 이벤트
+            btnInput.addEventListener("click", () => {
+                // 유효성 검사
+                if(!form.name.value) {
+                    alert("이름을 입력하시오!");
+                    form.name.focus();
+                    return;
+                }
+                if(!form.kor.value) {
+                    alert("국어점수를 입력하시오!");
+                    form.kor.focus();
+                    return;
+                }
+                if(!form.eng.value) {
+                    alert("영어점수를 입력하시오!");
+                    form.eng.focus();
+                    return;
+                }
+                if(!form.mat.value) {
+                    alert("수학점수를 입력하시오!");
+                    form.name.focus();
+                    return;
+                }
+                
+                // 입력상자 값을 저장
+                let name = form.name.value;
+                let kor = Number(form.kor.value);
+                let eng = Number(form.eng.value);
+                let mat = Number(form.mat.value);
+                
+                // 객체 생성
+                let st = new Student(name, kor, eng, mat);
+                // 객체를 배열에 저장
+                list.push(st);
+                // 객체를 배열ㅇ ㅔ저장한 후 입력상자 비우기, 이름에 포커싱
+                form.name.value = "";
+                form.kor.value = "";
+                form.eng.value = "";
+                form.mat.value = "";
+                form.name.focus();
+
+                console.log(list);
+
+                // 결과 테이블 객체의 배열 내용을 추가
+                // 입력내용과 메소드 호출 결과를 td를 포함한 문자열 tdTag 생성
+                // 1번방법
+                // let tdTag = `<td>${st.name}</td><td>${st.kor}</td><td>${st.eng}</td><td>${st.mat}</td>`;
+                // tdTag += `<td>${st.getSum()}</td><td>${st.getAvg().toFixed(2)}</td><td>${st.getGrade()}</td>`;
+
+                // 2번 방법
+                let tdTag = `<td>${st.name}</td><td>${st.kor}</td><td>${st.eng}</td><td>${st.mat}</td>`;
+                tdTag += `<td>${st.sum}</td><td>${st.avg.toFixed(2)}</td><td>${st.grade}</td>`;
+
+                // tr을 생성, tr에 tdTag를 부착
+                let trTag = document.createElement("tr");
+                trTag.innerHTML = tdTag;
+
+                // table에 tr을 자식으로 추가
+                tblInput.appendChild(trTag);
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="inputBox">
+            <form name="inputForm">
+                <h2>이젠 대학교 성적입력</h2>
+                <ul>
+                    <li><label>이름</label><input type="text" name="name"></li>
+                    <li><label>국어점수</label><input type="text" name="kor"></li>
+                    <li><label>영어점수</label><input type="text" name="eng"></li>
+                    <li><label>수학점수</label><input type="text" name="mat"></li>
+                </ul>
+                <div id="btns">
+                    <input type="button" value="입력완료" id="btnInput"> &ensp;
+                    <input type="reset" value="삭제">
+                </div>
+            </form>
+        </div>
+
+        <div id="tblBox">
+            <h3>성적 결과</h3>
+            <table id="tblInput">
+                <tr>
+                    <th>학생명</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                    <th>총점</th>
+                    <th>평균</th>
+                    <th>학점</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>
