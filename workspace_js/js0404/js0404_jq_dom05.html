@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM 5</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        #p6 { display: none;}
+
+    </style>
+    <script>
+        /*
+        (7) is()함수: 선택한 요소의 상태가 지정한 속성과 일치할 때 true를 반환하는 함수
+        - is()함수 안에서 사용할 수 있는 속성: visible, checked, selected, animated
+        
+
+        */
+       $(document).ready(function() {
+           // 숨겨진 fc 탑걸의 멤버를 찾으시오.
+           console.log($("#fc1 p").eq(4).is(":visible")); // 4번 문별, true
+           console.log($("#fc1 p").eq(6).is(":visible")); // 6번 김보경, true
+           console.log($("#fc1 p").eq(5).is(":visible")); // 5번 유빈, false
+
+           $("#fc1 p").each(function(i, e) {
+               let hiddenMember = $("#fc1 p").eq(i).is(":visible");
+               if(!hiddenMember) {
+                   console.log(`fc 탑걸의 숨겨진 멤버는 ${e.innerHTML}입니다.`);
+               }
+           })
+
+           console.log("---------------");
+
+           // 문제2) 체크한 fc 원더우먼의 멤버를 출력하시오.
+           console.log("FC 원더우먼 멤버");
+           $("#fc2 input").each(function(i, e) {
+               if($("#fc2 #wonder").eq(i).is(":checked")) {
+                   console.log(e.value);
+
+               }
+           })
+       })
+
+    </script>
+</head>
+<body>
+    <h1>jQuery DOM 5</h1>
+    <div id="fc1">
+        <h3>FC 탑걸</h3>
+        <p>채리나</p>
+        <p>바다</p>
+        <p>간미연</p>
+        <p>아유미</p>
+        <p>문별</p>
+        <p id="p6">유빈</p>
+        <p>김보경</p>
+    </div>
+    <div id="fc2">
+        <h3>Fc 원더우먼</h3>
+        <input type="checkbox" id="wonder" value="송소희" checked>송소희&ensp;
+        <input type="checkbox" id="wonder" value="황소은">황소은&ensp;
+        <input type="checkbox" id="wonder" value="치타" checked>치타&ensp;
+        <input type="checkbox" id="wonder" value="박슬기">박슬기&ensp;
+        <input type="checkbox" id="wonder" value="김희정" checked>김희정&ensp;
+        <input type="checkbox" id="wonder" value="요니">요니&ensp;
+        <input type="checkbox" id="wonder" value="주명">주명&ensp;
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery  DOM 4</title>
+
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+        /*
+        */
+
+
+        $(document).ready(function() {
+            // $("#inner1 p:contain(내용1)").css("background", "yellow");
+            // // $("#inner1 p:has(b)").css("color", "red");
+            // $("#inner1 p").has("b").css("color", "red") // #inner p 중에서 b태그를 포함하는 요소 선택
+            $("#inner2").contents().css("border", "2px dotted blue");
+
+            $("#inner1 p:first").css("background", "orange");
+            $("#inner1 p:not(:first)").css("background", "green");
+
+            $("#inner2").find(".p3").css("background", "aqua"); // #inner2의 하위요소 중에서 .p3인 요소를 선택
+            $("#inner2 p").filter(".p4").css("background", "yellow"); // #inner2 안의 p중에서 .p4인 요소를 선택
+            
+
+
+        })
+        
+    </script>
+
+</head>
+<body>
+    <h1>jQuery DOM 4</h1>
+    <div id="outer">
+        <div id="inner1">
+            <h2>제목1</h2>
+            <p><span>내용1</span></p>
+            <p><span>내용2</span></p>
+            <p><b>내용3</b></p>
+            <p><span>내용4</span></p>
+            
+        </div>
+        <div id="inner2">
+            <p class="p1">내용5</p>
+            <p class="p2">내용6</p>
+            <p class="p3">내용7</p>
+            <p class="p4">내용8</p>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>

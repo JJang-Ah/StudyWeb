@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기본 7</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <!--  
+
+    -->
+    <style>
+        #box { background: lightgray; width: 200px; height: 50px;}
+
+    </style>
+    <script>
+
+        $(document).ready(function() {
+            // 메소드 체이닝
+            // $("#box").css("width", "400px")
+            // .css("height", "100px").css("background", "orange")
+            // .css("color", "white").css("textAlign", "center")
+            // .css("lineHeight", "50px");
+
+            // 2. JSON 기법
+            $("#box").css({
+                "width": "400px",
+                "height": "160px",
+                "background": "orange",
+                "color": "white",
+                "textAlign": "center",
+                "lineHeight": "50px",
+
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <h2>jQuery 기본 7</h2>
+    <div id="box">
+        jQuery 공부 중...
+    </div>
+    
+</body>
+</html>

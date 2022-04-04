@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 응용 문제</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+
+        // 문제1) 입력상자에 관광지를 입력하고, 버튼을 클릭하면 ul안에 li로 추가되도록
+        // 추가시에 글자색을 blue로 설정
+
+        $(document).ready(function() {
+            $("#btnInput").click(function() {
+                $("#trip").append(`<li>` + $("#txt").val() + `</li>`)
+                .css("color", "blue");
+                $("#txt").val("").focus();
+            })
+            $("#txt").keyup(function() {
+                if(event.keyCode == 13) {
+                $("#trip").append(`<li>` + $("#txt").val() + `</li>`)
+                .css("color", "blue");
+                $("#txt").val("").focus();
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <h3>여행하고 싶은 관광지를 입력하고 버튼을 클릭하시오.</h3>
+    여행하고 싶은 관광지: <input type="text" name="" id="txt"> &ensp;
+    <button id="btnInput">추가</button>
+    <hr>
+    <div>
+        <ul id="trip">
+
+        </ul>
+
+    </div>
+
+    
+</body>
+</html>

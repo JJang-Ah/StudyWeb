@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQyery 기본 5</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <!-- 
+        2. 속성을 추가 또는 삭제하는 함수
+        - attr() : 속성을 추가하는 함수
+        - 
+     -->
+    <script>
+        $(document).ready(function() {
+        // 1. 이벤트 함수 - 메소드 체이닝
+        //     $("#img1").mouseenter(function() {
+        //         $("#img1").attr("src", "images/w3.png");
+        //     }).mouseout(function() {
+        //         $("#img1").attr("src", "images/icon1.png");
+        //     })
+
+        // 2-1. on() - 메소드 체이닝
+            // $("#img1").on("mouseenter", function() {
+            //     $("#img1").attr("src", "images/w3.png");
+            // }).on("mouseout", function() {
+            //     $("#img1").attr("src", "images/icon1.png");
+            // })
+
+        // 2-2. on() 함수 - JSON 기법 사용
+        $("#img1").on({
+            "mouseenter": function() {
+                $("#img1").attr("src", "images/w3.png");
+            },
+            "mouseout": function() {
+                $("#img1").attr("src", "images/icon1.png");
+            }
+        })
+
+        // 3. 
+        // $("#img1").on({
+        //     "mouseenter": function() {
+        //         $("#img1").attr("src", "images/w3.png");
+        //     },
+        //     "mouseout": function() {
+        //         $("#img1").removeAttr("src");
+        //     }
+        })
+    </script>
+</head>
+<body>
+    <h2>jQuery 기본 5</h2>
+    <img src="images/icon1.png" width="100" id="img1">
+    <hr>
+    
+</body>
+</html>

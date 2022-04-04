@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM 2</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        div { margin-left: 200px;}
+    </style>
+    <script>
+        /*
+
+        5. DOM 트리를 활용하는 함수
+        (3) 선택자의 다음 형제노드, 다음 형제노드 모두를 선택하는 함수
+        - next(): 선택자의 다음 형제노드를 선택
+        - nextAll(): 선택자의 다음 형제노드 모두를 선택
+        - prev(): 선택자의 이전 형제노드를 선택
+        - prevAll(): 선택자의 이전 형제노들 모두를 선택
+
+        (4) 선택자의 이전 부모노드, 다음 자식노드를 선택하는 함수
+        - parent(): 
+
+        */
+       $(document).ready(function() {
+        //    $("#p2").css("background", "yellow"); // #p2
+        //    $("#p2").next().css("background", "yellow"); // #p2의 다음 형제노드
+        //    $("#p2").next().next().css("background", "yellow"); // #p2 다음다음 형제노드
+            // $("#p2").nextAll().css("background", "skyblue");
+           
+        //    $("#p5").css("background", "red");
+            // $("#p5").prev().css("background", "red"); // p5의 이전 형제 노드
+            // $("#p5").prevAll().css("background", "red") // p5의 이전 형제노드 모두를 선택
+
+            // 3. 부모 노드
+            // $("#b3").parent().css("border", "3px dotted red"); // b3 바로위의 부모
+            // $("#b3").parent().parent().css("border", "3px dotted red"); // b3의 위의 위의 부모
+
+            // 4. 자식 노드
+            // $("#b1").css("border", "3px dashed purple");
+            // $("#b1").children().css("border", "3px dashed purple");
+            // $("#b1").children().children().css("border", "3px dashed purple");
+            // $("#b1").children("#b2").css("border", "3px dashed purple"); // b1의 자식들 중에서 b2를 선택
+
+            // 5. #b3의 가장 가까운 상위노드인 div를 선택
+            $("#b3").closest("div").css("border", "3px dotted green");
+
+            // 6. 범위를 제한하여 현제노드를 선택
+            // .content3의 이전 .title의 다음 노드를 선택
+            $(".content3").prevUntil(".title").css("background", "pink"); 
+            $(".content3").nextUntil(".content6").css("background", "orange");
+            
+       })
+    </script>
+
+</head>
+<body>
+    <h2>jQuery DOM 3</h2>
+    <div>
+        <p id="p1">HTML5</p>
+        <p id="p2">CSS5</p>
+        <p id="p3">Javascript</p>
+        <p id="p4">jQuery</p>
+        <p id="p5">Oracle</p>
+        <p id="p6">JSP</p>
+
+    </div>
+    <hr>
+    <div id="b1">
+        <h1>제목1</h1>
+        <p>내용1</p>
+        <div id="b2">
+            <h2>제목2</h2>
+            <p>내용2</p>
+            <div id="b3">
+                <h2>제목3</h2>
+                <p>내용3</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h1 class="title">제목2</h1>
+    <p class="content1">본문1</p>
+    <p class="content2">본문2</p>
+    <p class="content3">본문3</p>
+    <p class="content4">본문4</p>
+    <p class="content5">본문5</p>
+    <p class="content6">본문6</p>
+    
+</body>
+</html>

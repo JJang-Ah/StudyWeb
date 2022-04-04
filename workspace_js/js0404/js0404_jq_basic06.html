@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기본 6</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        div { margin: 10px;}
+    </style>
+    <script>
+
+        $(document).ready(function() {
+            $("#btn1").click(function() {
+                $("#txt1").val("안녕하세요"); // value값을 넣어준다.
+            })
+            $("#btn2").click(function() {
+                $("#txt2").html("<h3>제이쿼리 열공중...</h3>");
+            })
+            $("#btn3").click(function() {
+                $("#txt3").text("<h3>h3태그를 인식할까?</h3>");
+            })
+        })
+    </script>
+    <!-- 
+        3. 요소의 내용을 축 또는 반환하는 함수
+        - html(): 태그를 인식하여 추가하는 함수
+        - text(): 태그를 인식하지 않고 텍스트로만 추가하는 함수
+        - val(): 입력상자의 값으로 추가하는 함수
+        
+     -->
+</head>
+<body>
+    <h2>jQuery 함수</h2>
+    <div>
+        <button id="btn1">추가1</button>&ensp;<input type="text" id="txt1">
+    </div>
+    <div>
+        <button id="btn2">추가2</button>&ensp;<span id="txt2"></span>
+    </div>
+    <div>
+        <button id="btn3">추가3</button>&ensp;<span id="txt3"></span>
+    </div>
+    
+</body>
+</html>

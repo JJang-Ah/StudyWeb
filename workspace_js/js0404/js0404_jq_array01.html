@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+        /*
+
+        */
+
+        $(document).ready(function() {
+            let student = ["이익준", "김준완", "채송화", "안정원", "양석형"];
+
+            // 배열의 순회
+            $(student).each(function(i,e) {
+                console.log(`${i} : ${e}`); // index(인덱스) : element(값)
+            })
+            console.log("-------------");
+            // 태그의 순회
+            $("#menu1 li").each(function(i,e) {
+                console.log(`${i} : ${e.innerHTML}`);
+            })
+            console.log("-------------");
+
+            // 태그의 순회
+            $("#menu1 li").each(function(i, e) {
+                console.log(i + " : " + $(this).text()); //인덱스 : 값
+            })
+            console.log("----------------");
+
+            let a1 = ["서울", "부산", "대구", "대전", "광주", "인천"];
+            let a2 = ["전주", "청주", "진주", "안동", "통영", "울산"];
+
+            console.log($.inArray("대전", a1)); // 3 >> 3번 인덱스
+            console.log($.inArray("안동", a1)); // -1 >> 찾지 못함
+            console.log($.isArray(a1)); // true
+            console.log($.isArray(a2)); // false
+            $.merge(a2, a1); // a2에 a1을 병합한다
+            console.log(`a1: ${a1}`);
+            console.log(`a2: ${a2}`);
+
+            console.log(`list3의 인덱스: +`+ $("li").index($("#list3"))); // 6 >> li중에서 6번 인덱스
+
+
+        })
+    </script>
+
+</head>
+<body>
+    <h2>jQuery - 배열 활용 1</h2>
+    
+    <h1>DOM 탐색 선택자</h1>
+    <ul id="menu1">
+        <li>내용1-1</li>
+        <li>내용2-1</li>
+        <li>내용3-1</li>
+        <li>내용4-1</li>
+    </ul>
+    <hr>
+    <ul id="menu2">
+        <li>내용1-2</li>
+        <li>내용2-2</li>
+        <li id="list3">내용3-2</li>
+        <li>내용4-2</li>
+    </ul>
+    
+</body>
+</html>

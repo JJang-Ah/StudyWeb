@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기본 8</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        #box { border: 3px dotted red}
+    </style>
+    <script>
+        /*
+        5. DOM 트리를 활용하는 함수
+        (1) 형제노드를 추가하는 함수
+        - (추가요소).insertBefore(기존요소): 추가요소를 기존요소의 이전 형제노들 추가
+        - (추가요소).insertAfter(기존요소): 추가요소를 기존요소의 직후 형제노드로 추가
+
+        - (기존요소).befor(추가요소): 기존요소의 직전 형제노드로 추가요소를 추가
+        - (기존요소).after(추가요소): 기존요소의 직후 형제노드로 추가요소를 추가
+
+        (2) 자식노드로 추가하는 함수
+        - (추가요소).prependTo(기존요소): 추가요소를 기존요소의 처음 자식노드로 추가
+        - (추가요소).appendTo(기존요소): 추가요소를 기존요소의 마지막 자식노드로 추가
+       
+        - (기존요소).prepend(추가요소): 기존요소의 첫번째 자식 노드로 추가요소를 추가 
+        - (기존요소).append(추가요소): 기존요소의 마지막 자식 노드로 추가요소를 추가
+         
+
+        */
+       $(document).ready(function() {
+           // jQuery로 태그 생성
+           let newTag = $("<img>").attr("src", "images/icon1.png")
+           .css("width", "80");
+
+           // box를 기준으로 newTag 추가
+           $("#btn1").click(function() {
+               $(newTag).insertBefore($("#box"));
+           })
+           $("#btn2").click(function() {
+               $(newTag).insertAfter($("#box"));
+           })
+           $("#btn3").click(function() {
+               $("#box").before(newTag);
+           })
+           $("#btn4").click(function() {
+               $("#box").after(newTag);
+           })
+           $("#btn5").click(function() {
+               $(newTag).prependTo("#box");
+           })
+           $("#btn6").click(function() {
+               $(newTag).appendTo("#box");
+           })
+
+
+       })
+    </script>
+</head>
+<body>
+    <h2>jQuery 기본 8</h2>
+    <h3>아이콘 이미지의 추가</h3>
+    <hr>
+    <div id="box">
+        <img src="images//wb1.PNG" width="60px">
+        <img src="images//wb2.PNG" width="60px">
+        <img src="images//wb3.PNG" width="60px">
+        <img src="images//wb4.PNG" width="60px">
+        <img src="images//wb5.PNG" width="60px">
+        <img src="images//wb6.PNG" width="60px">
+    </div>
+    <hr>
+    <button id="btn1">버튼1</button>
+    <br>
+    <button id="btn2">버튼2</button>
+    <br>
+    <button id="btn3">버튼3</button>
+    <br>
+    <button id="btn4">버튼4</button>
+    <br>
+    <button id="btn5">버튼5</button>
+    <br>
+    <button id="btn6">버튼6</button>
+    
+</body>
+</html>
