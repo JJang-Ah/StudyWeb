@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 응용 문제 2</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+        /*
+        romove() : 선택자를 삭제하는 함수
+        clone() : 선택자를 복사하는 함수
+
+        < jQuery의 선택자 사용 정리 >
+        - $("p") -> js에서는 document.querySelectorAll("p"), document.getElementTagName("p")
+        - $("#txt") -> js에서는 document.querySelector("#txt"), document.getElementById("txt")
+        - $(".txt") -> js에서는 document.querySelectorAll(".txt"), 
+        - $("<p>") : p태그를 생성, ex) document.createElement("p")
+
+        < jQuery 속성을 조작 함수 >
+        1. html(): 태그를 인식한 값의 리턴과 설정, ex) js에서 innerHTML
+        - $("요소").html() : 요소의 태그를 포함한 내용을 불러올 떄
+        - $("요소").html("내용"): 요소의 내용을 태그를 포함하여 설정할 떄
+        2. text(): 태그를 인식하지 않는 값의 리턴과 설정, ex) js에서 innerText
+        - $("요소").text() : 요소의 내용을 불러올 떄
+        - $("요소").text("내용"): 요소의 내용을 태그를 인식하지않고 설정할 떄
+
+        3. val(): 입력상자(input 태그)의 값의 리턴과 설정, ex) js에서 value
+        - $("요소").val(): 입력상자의 내용을 불러올 떄
+        - $("dyth").val("내용"): 입력상자 값을 설정할 때
+
+        4. attr(): 요소의 속성을 리턴과 설정, ex) setAttribute(), getAttribute(), 프로퍼티로 바로 설정
+        - $("요소").attr() : 요소의 속성을 불러올 떄
+        - $("요소").attr("속성명", "값"): 요소의 속성에 대한 값을 설정 할 때
+
+        4-2. removeAttr(): 요소의 속성을 삭제
+        - $("요소").removeAttr("속성명"): 요소의 속성을 삭제할 떄
+
+        5. css(): 요소의 스타일 속성의 리턴과 설정, ex) js에서 프로퍼티로 사용
+        - $("요소").css("속성명"): 요소의 스타일 속성의 값을 불러올 떄
+        - $("요소").css("속성명", "값"): 요소의 스타일 속성에 대한 값을 설정할 떄
+
+        6. addClass(), removeClass(), toggleClass(), hashClass(): class의 추가, 삭제, 토글, 존재여부
+        - $("요소").addClass("클래스명"): 요소에 클래스를 추가할 떄
+        - $("요소").removeClass("클래스명"): 요소에서 클래스를 삭제할 떄
+        - $("요소").toggleClass("클래스명"): 요소에 클래스가 없으면 클래스를 추가하고, 있으면 제거
+        - $("요소").hasClass("클래스명"): 요소에 클래스가 있는지의 여부를 판단, true 또는 false
+
+
+
+
+        */
+       $(document).ready(function() {
+           // 삭제 버튼 클릭할 떄 #p1 삭제
+           $("#btnDelete").click(function() {
+               $("#p2").remove();
+           })
+
+           // 추가 버튼을 클릭할 떄 p태그 생성
+           // 내용은 oracle로 입력한 후
+           //  #p4다음으로 추가
+           $("#btnInsert").click(function() {
+               $("#p4").after($("<p>").text("oracle"));
+           })
+           
+           // 복사 버튼을 클릭할 떄 #p3 복사하여 #p1의 직전 형제요소를 추가
+           $("#btnCopy").click(function() {
+               $("#p3").clone().insertBefore($("#p1"));
+           })
+
+       })
+
+    </script>
+</head>
+<body>
+    <h3>jQuery Programming!</h3>
+    <p id="p1">HTML5</p>
+    <p id="p2">CSS3</p>
+    <p id="p3">Javascript</p>
+    <p id="p4">jQuery</p>
+    <hr>
+    <button id="btnDelete">삭제</button>
+    <button id="btnInsert">추가</button>
+    <button id="btnCopy">복사</button>
+
+
+
+    
+</body>
+</html>

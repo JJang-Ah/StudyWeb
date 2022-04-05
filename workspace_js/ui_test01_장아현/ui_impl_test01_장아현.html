@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 구현 테스트 1번(장아현)</title>
+    <style>
+        #light { width: 300px; margin: 20px auto;}
+    </style>
+    <script>
+        function turnLight() {
+            let light = document.querySelector("#light");
+            let btn = document.querySelector("#btn");
+            if(btn.innerHTML == "On") {
+                light.src = "images/lighton.png";
+                btn.innerHTML = "Off"
+            } else {
+                light.src = "images/lightoff.png";
+                btn.innerHTML = "On"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>전구 스위치 On/Off</h2>
+        <img src="images/lightoff.png" id="light">
+        <button id="btn" onclick="turnLight()">On</button>
+    </div>
+</body>
+</html>

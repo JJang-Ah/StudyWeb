@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Test 3</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+        /*
+         문제1) 회전 버튼을 클릭할 떄마다 맨 앞의 이미지를 맨뒤로 이동시키도록
+        */
+
+        // 1번방법
+        $(document).ready(function() {
+            $("#btnRotate").click(function() {
+                $("#box img:first").insertAfter("#box img:last");
+            })
+        }) 
+
+        // 2번 - javascript
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     let btnRotate = document.querySelector("#btnRotate");
+        //     let box = document.querySelector("#box");
+        //     btnRotate.addEventListener("click", function() {
+        //         let imgs = document.querySelectorAll("img");
+        //         box.appendChild(img[0]);
+        //     })
+        // })
+    </script>
+    
+</head>
+<body>
+    <h3>김연아 선수의 회전 연속 동작</h3>
+    <div id="box">
+        <img src="images/f1.png" height="100px">
+        <img src="images/f2.png" height="100px">
+        <img src="images/f3.png" height="100px">
+        <img src="images/f4.png" height="100px">
+        <img src="images/f5.png" height="100px">
+        <img src="images/f6.png" height="100px">
+        <img src="images/f7.png" height="100px">
+    </div>
+    <hr>
+    <button id="btnRotate">회전</button>
+    
+</body>
+</html>

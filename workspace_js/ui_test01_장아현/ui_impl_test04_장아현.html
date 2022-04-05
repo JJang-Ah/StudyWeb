@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 구현 테스트 4번(장아현)</title>
+    <style>
+        #container { width: 600px; margin: 20px auto;}
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let car = document.querySelector("#car");
+            let imgCar = document.querySelector("#imgCar");
+
+            car.addEventListener("change", function() {
+                switch(car.value) {
+                    case "1":
+                        imgCar.src = "images/car1.png";
+                        break;
+                    case "2":
+                        imgCar.src = "images/car2.png";
+                        break;
+                    case "3":
+                        imgCar.src = "images/car3.png";
+                        break;
+                    case "4":
+                        imgCar.src = "images/car4.png";
+                        break;
+                    case "5":
+                        imgCar.src = "images/car5.png";
+                        break;
+                    case "6":
+                        imgCar.src = "images/car6.png";
+                        break;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>코리아 모터스</h2>
+        <select name="car" id="car">
+            <option value="1" id="car1">2021 그랜저 하이브리드</option>
+            <option value="2" id="car2">2021 제네시스 GV80</option>
+            <option value="3" id="car3">2021 펠리세이드</option>
+            <option value="4" id="car4">2021 소나타 하이브리드</option>
+            <option value="5" id="car5">2021 QM6</option>
+            <option value="6" id="car6">2021 K7</option>
+        </select>
+        <br>
+        <div id="result">
+            <img src="" id="imgCar">
+        </div>
+    </div>
+    
+</body>
+</html>

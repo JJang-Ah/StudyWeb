@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 애니메이션 함수 3</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+
+        $(document).ready(function() {
+            $("#box1").css({
+                "position": "absolute", "width": "100px",
+                "height": "100px",
+                "background": "red",
+                "border": "1px solid black",
+                "borderRadius": "50%"
+            })
+            $("#btnMove").click(function() {
+                $("#box1").animate({
+                    "left": "500px",
+                    "width": "200px",
+                    "height": "200px",
+                    "opacity": "0.5"
+                }, 3000).animate({
+                    "bottom": "400px"
+                }, 3000)
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <h2>jQuery 애니메이션 함수 3</h2>
+    <!-- <div id="box1"></div> -->
+    <hr><br><br>
+    <button id="btnMove">이동</button>
+    <br><br><br>
+    <div id="box1"></div>
+    
+</body>
+</html>

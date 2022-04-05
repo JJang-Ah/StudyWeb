@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 애니메이션 함수 2</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+
+    </style>
+    <script>
+        /*
+
+        */
+
+        $(document).ready(function() {
+            $("#btnAni").click(function() {
+                // $("#img1").hide(3000).show(3000);
+                // $("#img1").fadeOut(3000).fadeIn(3000);
+                $("#img1").slideUp(3000).slideDown(3000);
+
+
+            })
+        })
+
+
+    </script>
+
+
+</head>
+<body>
+    <h2>jQuery 애니메이션 함수 2</h2>
+    <button id="btnAni">애니메이션 효과 적용</button>
+    <hr>
+    <img src="images/image1.JPG" width="600" id="img1">
+    
+</body>
+</html>

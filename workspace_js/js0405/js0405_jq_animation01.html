@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Animation 함수 사용</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <style>
+        #b1 { background-color: red;}
+        #b2 { background-color: green;}
+        #b3 { background-color: blue;}
+        
+    </style>
+    <script>
+        /*
+
+        < jQuery의 애니메이션 함수 >
+        1. 나타나기, 사라지기
+        - show(): 초를 지정하지 않으면 그냥 나타나기, 시간을 slow, normal, fast로 설정, 직접 시간을 밀리초로 지정할 수 있음
+        - hide(): 초를 지정하지 않으면 그냥 사라지기, 시간을 slow, normal, fast로 설정 , 밀리초로 지정가능
+        - toggle(): show와 hide를 번갈아 가면서 실행
+
+        2. fadeIn, fadeOut, fadeToggle
+        - fadeIn(): 서서히 나타나기
+        - fadeOut(): 서서히 사라지기
+        - fadeToggle(): fadeIn과 fadeOut을 번갈아 가면서 실행하기
+
+        3. 슬라이드업, 슬라이드다운, 토글
+        - slideUp(): 위로 슬라이딩하면서 사라지기
+        - slideDown(): 아래로 슬라이딩하면서 나타나기
+        - slideToggle(): slideUp과 slideDown을 번갈아 가면서 실해하기
+        
+
+        -> 익명함수를 사용하여 추가기능을 부여할 수 있음.
+
+
+        */
+       $(document).ready(function() {
+           $("#btnHide").click(function() {
+            //    $("#box").hide();
+            //    $("#box").hide("slow"); //키워드로 시간 설정: slow, normal, fast
+            //    $("#box").hide(5000); // 5000 milli second = 5초
+
+               $("#box").hide("slow", function() { // 다 사라지고 alert 출력
+                // 익명함수를 사용하여 추가기능을 부여함
+                   alert("내용이 천천히 사라집니다.");
+               });
+           })
+           $("#btnShow").click(function() {
+            //    $("#box").show();
+            //    $("#box").show("slow");
+            //    $("#box").show(5000);
+
+                $("#box").show("slow", function() {
+                    alert("내용이 천천히 나타납니다.");
+                })
+           })
+           $("#btnToggle").click(function() {
+            //    $("#box").toggle();
+            //    $("#box").toggle("slow");
+               $("#box").toggle(5000);
+           })
+
+           // 2. fadeIn / fadeOut / toggle
+           $(".divBox").css({
+               "display": "inline-block",
+               "width": "100px",
+               "height": "100px",
+               "border": "1px solid black",
+               "color": "white",
+               "textAlign": "center",
+               "lineHeight": "100px"
+           })
+
+           $("#btnFadeIn").click(function() {
+               $("#b1").fadeIn();
+               $("#b2").fadeIn("slow");
+               $("#b3").fadeIn(5000);
+           })
+           $("#btnFadeOut").click(function() {
+               $("#b1").fadeOut();
+               $("#b2").fadeOut("slow");
+               $("#b3").fadeOut(5000);
+           })
+           $("#btnFadeInOut").click(function() {
+                $("#b1").fadeToggle();
+                $("#b2").fadeToggle("slow");
+                $("#b3").fadeToggle(5000);
+               
+           })
+
+           // 3. slideUp / slideDown / slideToggle
+           // css 설정
+           $("#panel").css({
+               "display": "none",
+               "padding": "5px",
+               "border": "2px dotted red",
+               "backgroundColor": "yellow"
+           })
+
+           $("#slideUp").click(function() {
+               $("#panel").slideUp("slow");
+           })
+           $("#slideDown").click(function() {
+               $("#panel").slideDown("slow");
+           })
+           $("#slideUpDown").click(function() {
+               $("#panel").slideToggle("slow");
+           })
+       })
+
+
+    </script>
+
+</head>
+<body>
+    <h2>jQuery Animation 함수</h2>
+    <button id="btnHide">hide</button>
+    <button id="btnShow">show</button>
+    <button id="btnToggle">toggle(hide/show)</button>
+    <hr>
+
+    <div id="box">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus nemo reprehenderit, perferendis explicabo est commodi aperiam. Nesciunt dicta illum explicabo blanditiis dolore ut temporibus adipisci sunt iste, inventore hic voluptatum.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe hic, velit totam voluptas quas corrupti neque sed suscipit laborum doloremque, molestiae esse quidem, quis unde? Laudantium aliquid eligendi aut deserunt!
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem voluptatum obcaecati quaerat velit ea odio debitis facilis voluptatibus molestias facere nesciunt autem vel, asperiores, officiis temporibus dolores, maiores hic quidem.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit exercitationem corrupti fugiat veritatis, dolorem repellat modi esse delectus odit totam! Voluptas cum veritatis sapiente autem quaerat amet earum provident quidem.
+    </div>
+    <hr>
+    <button id="btnFadeIn">fadeIn</button>
+    <button id="btnFadeOut">fadeOut</button>
+    <button id="btnFadeInOut">toggle(fadeIn/fadeOut)</button>
+    <div>
+        <div class="divBox" id="b1">박스1</div>
+        <div class="divBox" id="b2">박스2</div>
+        <div class="divBox" id="b3">박스3</div>
+
+    </div>
+    <hr>
+    <button id="slideUp">slideUp</button>
+    <button id="slideDown">slideDown</button>
+    <button id="slideUpDown">slideToggle</button>
+    <br><br>
+    <div id="panel">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat repellat asperiores aliquid ratione itaque reiciendis assumenda ipsa consectetur molestiae magni. Ipsa sequi deserunt sunt nulla nesciunt quae ex illo voluptates!
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, voluptas omnis! Sequi quasi ab vitae odit soluta sint quaerat laudantium aspernatur, molestiae cumque velit pariatur unde, voluptatem earum in impedit?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi aspernatur explicabo delectus inventore ad est. Voluptatem eius quidem illo soluta corrupti itaque libero accusantium modi, consectetur suscipit minima aspernatur. Amet!
+    </div>
+</body>
+</html>

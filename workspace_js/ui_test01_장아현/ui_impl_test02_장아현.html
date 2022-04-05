@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 구현 테스트 2번(장아현)</title>
+    <style>
+
+    </style>
+    <script>
+        function addIp() {
+            let Ip = document.getElementById("Ip");
+            let result = document.querySelector("#result");
+            result.innerHTML += Ip.value + `<br>`;
+        }
+
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1><img src="images/w3.PNG" width="150px">Web Programming!</h1>
+        <hr>
+        <input type="text" id="Ip">
+        <button id="btnAdd" onclick="addIp()">교과내용 추가</button>
+        <br>
+        <div id="result"></div>
+    </div>
+</body>
+</html>

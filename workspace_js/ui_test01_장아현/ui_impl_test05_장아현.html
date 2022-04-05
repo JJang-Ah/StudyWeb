@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 구현 테스트 5번(장아현)</title>
+    <style>
+        #container { 
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+        label { 
+            display: inline-block; 
+            width: 100px;
+            margin: 10px;
+        }
+        #result { width: 500px;}
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let submit = document.querySelector("#submit");
+            let ss = [];
+            submit.addEventListener("click", function() {
+                let sname = document.querySelector("#sname");
+                let kor = document.querySelector("#kor");
+                let eng = document.querySelector("#eng");
+                let mat = document.querySelector("#mat");
+                let student = [];
+                student[0] = sname.value;
+                student[1] = kor.value;
+                student[2] = eng.value;
+                student[3] = mat.value;
+                student[4] = Number(kor.value)+Number(eng.value)+Number(mat.value);
+                student[5] = (student[4]/3).toFixed(2);
+                switch(parseInt(student[5]/10)) {
+                    case 10: case 9:
+                        student[6] = "A";
+                        break;
+                    case 8:
+                        student[6] = "B";
+                        break;
+                    case 7:
+                        student[6] = "C";
+                        break;
+                    case 6:
+                        student[6] = "D";
+                        break;
+                    default:
+                        student[6] = "F";
+                        break;
+                }
+                ss.push(student);
+            });
+            let getScore = document.querySelector("#getScore");
+            let result = document.querySelector("#result")
+            getScore.addEventListener("click", function() {
+                result.innerHTML = `<tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>학점</th></tr>`;
+                for(let i of ss) {
+                    result.innerHTML += `<tr>`; 
+                    for(let j in i) {
+                        result.innerHTML += `<td>${i[j]}</td>`;
+                    }
+                    result.innerHTML += `</tr>`;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <fieldset>
+            <h2>이젠대학교 성적 입력</h2>
+            <label for="sname">이름</label> <input type="text" id="sname"><br>
+            <label for="kor">국어점수</label> <input type="text" id="kor"><br>
+            <label for="eng">영어점수</label> <input type="text" id="eng"><br>
+            <label for="mat">수학점수</label> <input type="text" id="mat"><br>
+            <br>
+            <input type="button" id="submit" value="입력완료">
+            &ensp;&ensp;
+            <input type="reset" value="삭제">
+        </fieldset>
+        <br>
+        <button id="getScore">성적확인</button>
+        <br>
+        <div id="">
+            <table id="result">
+            </table>
+        </div>
+    </div>
+</body>
+</html>
