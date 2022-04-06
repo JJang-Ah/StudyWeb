@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 라이브러리</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <script>
+        // 슬라이더(slider), 카로섹(carosel)
+        $(document).ready(function(){
+          $('.slider').bxSlider({
+                mode: "horizontal", // 기본값: hoizontal(가로), vertical(세로)
+                controls: true, // 기본값: true, 이전/다음 컨트롤 버튼 유무
+                autoControls: true, // 기본값:false, 재생/정지 컨트롤 버튼 유무
+                stopAutoOnclick: true, // 기본값:false, 불릿을 누르고나면 슬라이드 정지
+                pager: true, // 기본값: true, 하단의 불릿 유무
+                auto: true, // 기본값: false, 자동 슬라이드 전환
+                speed: 1000, // 화면 전환 속도
+                pause: 2000,  // 화면전환 시간 + 전환 지연시간 > 1초+1초 = 2초
+                autoHover: true, // 기본값: false, 마우스 위에 올렸을때 슬라이드 정지
+                infiniteLoop: true, // 기본값: true, 슬라이드의 무한루프 여부
+                // 중요한 속성
+                slideWidth: 350, // 이미지의 너비
+                slideHeight: 500, // 이미지의 높이
+                maxSlides: 4, // 이미지의 최대 노출 개수
+                minSlides: 2, // 이미지의 최소 노출 개수
+                moveSides: 3, // 슬라이드 이동 분할 개수
+                slideMargin: 20, // 슬라이드 마진
+          });
+        });
+      </script>
+
+    <style>
+        
+    </style>
+    <script>
+        /*
+        bxSlider
+        */
+
+    </script>
+</head>
+<body>
+    <h2>jQuery 라이브러리 1</h2>
+    <div class="slider">
+        <!-- <div><h2>HTML5</h2></div>
+        <div><h2>CSS3</h2></div>
+        <div><h2>Javascript</h2></div>
+        <div><h2>jQuery</h2></div>
+        <div><h2>Oracle</h2></div> -->
+        <div><img src="images/img01.png"></div>
+        <div><img src="images/img02.png"></div>
+        <div><img src="images/img03.png"></div>
+        <div><img src="images/img04.png"></div>
+        <div><img src="images/img05.png"></div>
+        <div><img src="images/img06.png"></div>
+        <div><img src="images/img07.png"></div>
+        <div><img src="images/img08.png"></div>
+        <div><img src="images/img09.png"></div>
+        <div><img src="images/img10.png"></div>
+    </div>
+    
+</body>
+</html>

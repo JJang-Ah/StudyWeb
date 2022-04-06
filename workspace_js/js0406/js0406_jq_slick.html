@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery 라이브러리 - slick slider</title>
+    <script src="../../jquery-3.6.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../slick-1.8.1/slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="../../slick-1.8.1/slick-1.8.1/slick/slick-theme.css"/>
+
+    <style>
+        .imgs { width: 800px; height: 300px; border: 1px solid gray;}
+        img { width: 175px; height: 250px;}
+    </style>
+    <script>
+
+    </script>
+
+</head>
+<body>
+    <h2>jQuery 라이브러리 - slick slide</h2>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="../../slick-1.8.1/slick-1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".imgs").slick({
+                dots: true, // 기본값: false, 불릿의 유무
+                prevArrow: "<button class= 'silde-arrow prev-arrow'>이전</button>", // 커스트마이징 버튼
+                nextArrow: "<button class= 'silde-arrow next-arrow'>다음</button>", // 커스터마이징 버튼
+                arrows: true,
+                autoplay: true, // 기본값: false, 자동 슬라이드 유무
+                centerMode: true, // 기본값: false, 이미지를 가운데로 정렬하여 노출
+                autoplaySpeed: 2000, // 자동전환 시간
+                speed: 1000,
+                slidesToShow: 3, // 이미지의 노출 개수
+                slidesToScroll: 2, // 이미지의 이동 개수
+                infinite: true, // 기본값: true, 무한반복
+                pauseOnHover: true, //기본값:false, 마우스를 올렸을 떄 슬라이드 멈춤
+                // vertical: true, // 기본값: false(가로), true(세로) 방향 슬라이드
+                // fade: true, // 페이드 아웃효과, 1장만 나타나고적용
+                // draggable: true, // 기본값: true, 이미지를 드래그하여 이동
+
+            });
+        });
+    </script>
+    <div class="imgs">
+        <div><img src="images/img01.png"></div>
+        <div><img src="images/img02.png"></div>
+        <div><img src="images/img03.png"></div>
+        <div><img src="images/img04.png"></div>
+        <div><img src="images/img05.png"></div>
+        <div><img src="images/img06.png"></div>
+        <div><img src="images/img07.png"></div>
+        <div><img src="images/img08.png"></div>
+        <div><img src="images/img09.png"></div>
+        <div><img src="images/img10.png"></div>
+    </div>
+</body>
+</html>
