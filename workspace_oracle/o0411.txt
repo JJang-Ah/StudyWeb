@@ -242,6 +242,13 @@ where eno = 7788
 < 4월 11일 과제 >
 과제1) 업무별 최저연봉을 출력하되, 관리자를 알수 없는 사원과 최저연봉이 2000미만인 그룹은 제외하고
 최저 연봉에 대한 내림차순으로 출력하시오.
+select job 업무, min(salary) 최저연봉
+from employee
+where manager is not null
+group by job
+having not min(salary) < 2000
+order by min(salary) desc
+
 
 과제2) 각부서에 대해 부서번호, 사원수, 평균연봉을 출력하시오.
 평균연봉은 소수점 둘째자리에서 반올림하고, 부서별로 오름차순으로 출력하시오.

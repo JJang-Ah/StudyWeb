@@ -1,0 +1,5 @@
+
+oracle sql developer
+
+관리자 계정 - system 
+사용자 계정 - ezen01, hr
