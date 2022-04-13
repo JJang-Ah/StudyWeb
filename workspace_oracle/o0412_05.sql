@@ -161,9 +161,17 @@ and salary < any (select salary from employee where job = 'SALESMAN');
 과제7) 'BLAKE'와 동인한 부서에서 근무하는 사원의 사원명과 입사일, 부서번호를 출력
 
 과제8) 급여가 평균급여보다 많은 사원의 사번, 사원명, 급여를 출력
-
-
 */
+
+-- 6번
+select eno, ename, job, salary
+from employee
+where salary > (select salary from employee where eno = '7499');
+
+-- 8번
+select eno, ename, salary
+from employee
+where salary > (select avg(salary) from employee);
 
 
 
