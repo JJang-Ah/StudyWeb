@@ -437,10 +437,50 @@ select * from user_constraints where table_name = 'DEPT02';
 alter table dept02 drop primary key cascade;
 
 
+--------------------
 
+select * from user_constraints where table_name in ('EMP02', 'DEPT02');
+select * from user_constraints where table_name in ('EMP01', 'DEPT01');
+-- 4. 제약조건의 활성화/ 비활성화(enable, desable)
+-- emp02 테이블의 eno 컬럼의 Primary key 제약조건을 비활성화(disable)
+alter table emp02 disable constraint emp02_eno_pk;
+select * from user_constraints where table_name = 'EMP02';
 
+select * from emp02;
+desc emp02;
 
--- dept02 테이블의 pk를 제거
+-- eno 컬럼의 PK 제약조건 비활성화 한후 eno 컬럼에 이미 존재하는 데이터 삽입 확인
+insert into emp02(eno) values(9000);
+select * from emp02;
+commit;
+
+-- 4-2. emp02 테이블의 eno 컬럼을 disable(비활성화)에서 enable(활성화)로 변경
+alter table emp02 enable constraint emp02_eno_pk;
+--> 에러: PK 제약조건을 활성화하려면, 중복값과 null값을 제거하고 해야함.
+/*
+오류 보고 -
+ORA-02437: cannot validate (EZEN01.EMP02_ENO_PK) - primary key violated
+02437. 00000 -  "cannot validate (%s.%s) - primary key violated"
+*Cause:    attempted to validate a primary key with duplicate values or null
+           values.
+*Action:   remove the duplicates and null values before enabling a primary
+           key.
+*/
+
+-- 중복값과 null값을 제거
+delete from emp02 where eno = 9000 and ename is null;
+delete from emp02 where eno is null;
+select * from emp02;
+
+-- 중복값과 null값을 제거
+alter table emp02 enable constraint emp02_eno_pk;
+select table_name, constraint_name, constraint_type, status 
+from user_constraints where table_name = 'EMP02';
+
+-- 중복값을 삽입 -> pk 제약조건을 활성화 하였으므로 불가능
+insert into emp02(eno) values (9000);
+
+insert into emp02(eno) values (null);
 
 
 
