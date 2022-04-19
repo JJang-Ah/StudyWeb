@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면설계 문제1번 (장아현)</title>
+    <style>
+        * {
+            font-family: 굴림;
+        }
+        body {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        header img {
+            width: 1000px;
+            height: 200px;
+        }
+        nav {
+            width: 100%;
+            height: 50px;
+            background-color: firebrick;
+            margin-top: -20px;
+        }
+        nav ul {
+            list-style: none;
+        }
+        nav ul li {
+            display: inline-block;
+            text-align: center;
+            padding: 5px 10px;
+            margin: 5px 10px
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+        nav ul li:hover a {
+            color: red;
+            background-color: white;
+        }
+        section {
+            width: 100%;
+            height: auto;
+            margin: 15px;
+        }
+        #shop {
+            display: inline-block;
+            width: 40%;
+            float: left;
+        }
+        #intro {
+            display: inline-block;
+            width: 50%;
+            margin-top: 20px;
+            margin-left: 10px;
+            padding: 10px;
+        }
+        #intro h2 {
+            color: purple;
+        }
+        #intro p {
+            color: tomato;
+            font-weight: bold;
+        }
+        #art2 {
+            clear: both;
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+        #customer {
+            width: 25%;
+            float: left;
+        }
+        #customer h3 {
+            background-color: pink;
+            color: white;
+            padding: 10px;
+        }
+        .sub {
+            display: inline-block;
+            margin: 10px;
+            width: 15%;
+            height: 200px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+        #choice1 {
+            background: url("images/flower01.PNG") no-repeat;
+            background-size: contain;
+        }
+        #choice2 {
+            background: url("images/flower02.PNG") no-repeat;
+            background-size: contain;
+        }
+        #choice3 {
+            background: url("images/flower03.PNG") no-repeat;
+            background-size: contain;
+        }
+        #choice4 {
+            background: url("images/flower04.PNG") no-repeat;
+            background-size: contain;
+        }
+        #context_text {
+            margin-top: 120px;
+            text-align: right;
+            background-color: rgba(255, 255, 255, 0.5);
+        
+        }
+        #context_text h3 {
+            opacity: 1;
+            color: purple;
+        }
+        #context_text h4 {
+            color: blue;
+        }
+        footer {
+            padding: 20px;
+        }
+        footer p {
+            display: inline-block;
+        }
+        footer p:nth-of-type(2) {
+            float: right;
+        } 
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <img src="images/title.png">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#">꽃다발</a></li>
+                <li><a href="#">꽃바구니</a></li>
+                <li><a href="#">웨딩부케</a></li>
+                <li><a href="#">화분</a></li>
+            </ul>
+        </nav>
+        <section>
+            <img src="images/flower-shop.png" id="shop">
+            <article id="intro">
+                <h2>향기나는 꽃집입니다.</h2>
+                <p>
+                    향기나는 꽃집은 식물과 함께하는 건강한 삶, 꽃으로 전하는 사랑이야기, 
+                    그리고 꽃으로 힐링하는 치유의 삶의 메신저가 되겠습니다.
+                </p>
+            </article>
+
+            <article id="art2">
+                <div id="customer">
+                    <h3>고객 상담 안내</h3>
+                    <ul id="contact">
+                        <li><strong>전화</strong> 031-858-5277</li>
+                        <li><strong>팩스</strong> 031-858-5270</li>
+                        <li><strong>운영시간</strong> 오전9~오후6시 점심:12-1시</li>
+                    </ul>
+                </div>
+                <div id="choice1" class="sub"><div id="context_text"><h3>꽃다발</h3><h4>축하의 인사</h4></div></div>
+                <div id="choice2" class="sub"><div id="context_text"><h3>꽃바구니</h3><h4>감사한 마음</h4></div></div>
+                <div id="choice3" class="sub"><div id="context_text"><h3>웨딩부케</h3><h4>사랑의 언약</h4></div></div>
+                <div id="choice4" class="sub"><div id="context_text"><h3>꽃리스</h3><h4>영원한 약속</h4></div></div>
+            </article>
+        </section>
+        <footer>
+            <p>홈 회사소개 이용약관 개인정보취급방침</p>
+            <p> Copyright 이젠아카데미</p>
+        </footer>
+    </div>
+</body>
+</html>
