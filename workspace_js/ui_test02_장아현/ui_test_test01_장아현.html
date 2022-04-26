@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ui_test_test01_장아현</title>
+    <style>
+        .container { width: 500px; margin: 30px auto; padding: 30px; border: 1px solid black;}
+        h2 { text-align: center;}
+        fieldset { margin: 20px;}
+        #f1 label { display: inline-block; width: 80px; margin-left: 80px; margin-right: 20px; color: green;}
+        #f1 #name { width: 120px;}
+        #f1 #dep { width: 150px;}
+        #btns { text-align: center;}
+        #btns input { margin-top: 20px; width: 80px; height: 30px; background-color: black; color: white;}
+        
+    </style>
+
+    <script>
+
+        function inputComplete() {
+
+            let name = document.getElementById("name");
+            let dep = document.getElementById("dep");
+            let sub = document.querySelector('input[name="subs"]:checked');
+            let topic = document.getElementsByName("topic");
+
+
+            if (!name.value) {
+                alert("이름을 입력하세요.");
+                name.focus();
+                return;
+            }
+            if(dep.value=="cho") {
+                alert("학과를 선택하세요.");
+                name.focus();
+                return;
+            }
+            if(!sub) {
+                alert("신청 과목을 선택하세요");
+                return;
+            }
+
+            let topics = "";
+            for(let i=0; i<topic.length; i++) {
+                if(topic[i].checked) {
+                    topics += topic[i].value + " ";
+                }
+            }
+            
+            
+            alert(`이름: ${name.value} \n학과: ${dep.value} \n신청 과목: ${sub.value}  \n메일링: ${topics}`);
+
+        }
+
+
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <form name="inputForm">
+            <h2>수강신청</h2>
+            <fieldset id="f1">
+                <legend>신청인</legend>
+                <label for="name">이름</label><input type="text" name="name" id="name"> <br>
+                <label for="dep">학과</label>
+                <select name="dep" id="dep">
+                    <option value="cho">___학과선택___</option>
+                    <option value="컴퓨터공학과">컴퓨터공학과</option>
+                    <option value="전자공학과">전자공학과</option>
+                    <option value="기계공학과">기계공학과</option>
+                    <option value="건축공학과">건축공학과</option>
+                    <option value="화학공학과">화학공학과</option>
+                    <option value="산업공학과">산업공학과</option>
+                </select>
+            </fieldset>
+
+            <fieldset id="f2">
+                <legend>신청 과목</legend>
+                이 달에 신청할 과목을 선택하세요. <br>
+                <label><input type="radio" name="subs" id="sub1" value="영어 회화">영어 회화</label>
+                <label><input type="radio" name="subs" id="sub2" value="영어 문법">영어 문법</label>
+                <label><input type="radio" name="subs" id="sub3" value="영어 작문">영어 작문</label>
+            </fieldset>
+
+            <fieldset id="f3">
+                <legend>메일링</legend>
+                메일로 받고 싶은 뉴스 주제를 선택해 주세요. <br>
+                <label><input type="checkbox" name="topic" value="해외뉴스">해외뉴스</label>
+                <label><input type="checkbox" name="topic" value="5분회화">5분회화</label>
+                <label><input type="checkbox" name="topic" value="모닝팝스">모닝팝스</label>
+            </fieldset>
+            <div id="btns">
+                <input type="button" type="reset" value="취소"> &ensp;
+                <input type="button" onclick="inputComplete()" value="확인">
+            </div>
+
+        </form>
+
+
+    </div>
+</body>
+</html>

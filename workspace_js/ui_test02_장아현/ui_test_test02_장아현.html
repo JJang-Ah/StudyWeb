@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ui_test_test02_장아현</title>
+    <script src="../../jquery-3.6.0.js"></script>
+
+    <style>
+        #container { width: 600px; margin: 50px auto; padding: 20px; border: 1px solid black;}
+        h2 { text-align: center;}
+        ul { list-style: none;}
+        label {display: inline-block; width: 120px; margin-right: 30px;  margin-left: 80px;}
+
+        #btns { text-align: center;}
+        #btn1, #btn2 { width: 180px; height: 50px; margin: 10px; background-color: whitesmoke; border: 1px solid gray;}
+        #btn1:hover, #btn2:hover {background-color: black; color: white;}
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let id = document.getElementById("id");
+            let idM = document.getElementById("idM");
+            let pwd = document.getElementById("pwd");
+            let pwdM = document.getElementById("pwdM");
+            let pwd2 = document.getElementById("pwd2");
+            let email = document.getElementById("email");
+            let btn1 = document.getElementById("btn1");
+            
+            id.focus();
+
+            id.addEventListener("keyup", () => {
+                if(id.value.length<4 || id.value.length>16) {
+                    idM.innerHTML = "아이디는 4~15자리의 영문과 숫자를 사용해 주세요.";
+                    id.focus();
+                    return;
+                } else {
+                    idM.innerHTML = "";
+                } 
+            })
+
+            pwd.addEventListener("keyup", () => {
+                if(pwd.value.length<8) {
+                    pwdM.innerHTML = "비밀번호는 8자리 이상이어야 합니다.";
+                    pwd.focus();
+                    return;
+                }else {
+                    pwdM.innerHTML = "";
+                }  
+            })
+
+            pwd2.addEventListener("blur", () => {
+                
+                if(pwd.value != pwd2.value) {
+                    pwd2M.innerHTML = "암호가 다릅니다. 다시 입력하세요.";
+                    pwd2.value = "";
+                    pwd2.focus();
+                    return;
+                }else {
+                    pwd2M.innerHTML = "";
+                }
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <form action="register.jsp" > 
+            <h2>회원가입</h2>
+            <ul>
+                <li>
+                    <label for="id">아이디</label><input type="text" name="id" id="id"> <p id="idM"></p>
+                </li>
+                <li>
+                    <label for="pwd">비밀번호</label><input type="text" name="pwd" id="pwd"> <p id="pwdM"></p>
+                </li>
+                <li>
+                    <label for="pwd2">비밀번호 확인</label><input type="text" name="pwd2" id="pwd2"> <p id="pwd2M"></p>
+                </li>
+                <li>
+                    <label for="email">이메일</label><input type="text" name="email" id="email">
+                </li>
+                <br>
+                <li>
+                    <label for="">메일링 수신</label>
+                    <input type="radio" value="1">예
+                    <input type="radio" value="0">아니오
+                </li>
+            </ul>
+            <div id="btns">
+                <button type="submit" id="btn1">가입하기</button>
+                <button type="reset" id="btn2">취소</button>
+            </div>
+        </form>
+
+    </div>
+    
+</body>
+</html>
