@@ -18,6 +18,7 @@
 </style>
 <body>
 	<table>
+
 		<tr class="tr_top"><td><jsp:include page="top.jsp"/></td></tr>
 		<tr class="tr_item"><td><jsp:include page="item.jsp"/></td></tr>
 		<tr class="tr_bottom"><td><jsp:include page="bottom.jsp"/></td></tr>
