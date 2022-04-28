@@ -127,6 +127,7 @@ insert into member values('aaa1111', '1234', '이현이', 35, now());
 insert into member values('bbb2222', '1234', '송혜나', 34, now());
 insert into member values('ccc3333', '1234', '아이린', 33, now());
 
+select * from member;
 
 
 
