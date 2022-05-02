@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login form</title>
+<title>로그인 폼</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Paytone+One&display=swap');
@@ -18,7 +18,7 @@ a { text-decoration: none; color: black;}
 .f_input { text-align: center; border: 1px solid #ccc; padding: 10px;}
 .f_input .c_id, .f_input .c_pwd { height: 45px; margin-top: 20px; padding-left: 5px;}
 .f_input .f_chk { text-align: left; margin-top: 10px; font-size: 0.9em; color: gray;}
-.f_input #btn_submit { width: 425px; height: 47px; margin-top: 25px; background: black; color: white;
+.f_input #btn_Login { width: 425px; height: 47px; margin-top: 25px; background: black; color: white;
  font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; margin-bottom: 10px;}
  
  /* 하단 - 비밀번호 찾기, 아이디 찾기, 회원가입 */
@@ -30,7 +30,25 @@ a { text-decoration: none; color: black;}
 </style>
 
 <script>
+	document.addEventListener("DOMContentLoaded", function() {
+		let form = document.loginForm;
+		let btn_Login = document.getElementById("btn_Login");
+		btn_Login.addEventListener("click", function() {
+			if(!form.id.value) {
+				alert('아이디를 입력하시오.!');
+				form.id.focus();
+				return;
+			}
+			
+			if(!form.pwd.value) {
+				alert('비밀번호를 입력하시오.!');
+				form.pwd.focus();
+				return;
+			}
+			form.submit();
 
+		})	
+	})
 </script>
 </head>
 <body>
@@ -39,7 +57,7 @@ a { text-decoration: none; color: black;}
 	<div class="m_title"><a href="#">EZEN MALL</a></div>
 	<div class="s_title">LOGIN</div>
 	
-	<form action="memberLoginPro.jsp" method="post">
+	<form action="memberLoginPro.jsp" method="post" name="loginForm">
 		<div class="f_input">
 			<div class="f_id"><input type="text" id="id" name="id" class="c_id" placeholder="아이디" size="55"></div>
 			<div class="f_pwd"><input type="password" id="pwd" name="pwd" class="c_pwd" placeholder="비밀번호" size="55"></div>
@@ -47,7 +65,7 @@ a { text-decoration: none; color: black;}
 				<input type="checkbox" id="chk" class="c_chk" size="55">&nbsp;
 				<label for="chk">로그인 상태 유지</label>
 			</div>
-			<div class="f_submit"><input type="submit" value="로그인" id="btn_submit"></div>
+			<div class="f_submit"><input type="button" value="로그인" id="btn_Login"></div>
 		</div>
 		<div class="f_a">
 			<a href="#">비밀번호 찾기</a>&emsp;|&emsp;

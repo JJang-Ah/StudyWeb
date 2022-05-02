@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 폼</title>
+<title>회원정보수정폼</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Paytone+One&display=swap');
 #container { width: 500px; margin: 0 auto;}
@@ -20,8 +21,6 @@ th, td { border: 1px solid black; padding-left: 10px;}
 th { background: #ced4da;}
 .addr_row {height: 100px;}
 .addr_row input { margin: 2px 0;}
-#btn_chk_id { width: 100px; height: 28px; border: none; background: #1e94be;
- color: white; font-size: 12px; cursor: pointer; border-radius: 3px; margin-left: 10px;}
 #btn_address { width: 100px; height: 28px; border: none; background: #76af7b;
  color: white; font-size: 12px; cursor: pointer; border-radius: 3px;}
 span { font-size: 0.8em;}
@@ -37,10 +36,9 @@ span { font-size: 0.8em;}
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 
 <script>
-	let isChk = false; // 전역변수 , DOMContentLOaded에 넣으면 계속 false가 된다.
 
 	document.addEventListener("DOMContentLoaded", function() {
-		let form = document.joinForm; // 폼은 그냥 받을 수 있음
+		let form = document.updateForm; // 폼은 그냥 받을 수 있음
 		let id = form.id;
 		let pwd = form.pwd;
 		let pwd2 = form.pwd2;
@@ -50,18 +48,6 @@ span { font-size: 0.8em;}
 		let address = form.address;
 		let address2 = form.address2;
 		
-		// ID 중복 체크 버튼 - DB 작업 : member 테이블에 똑같은 id가 있는지를 검사
-		let btn_chk_id = document.getElementById("btn_chk_id");
-		btn_chk_id.addEventListener("click", function() {
-			isChk = true;
-			if(id.value.length < 4) { // 아이디를 4글자 이상 입력했을 때
-				alert('아이디를 4글자 이상 입력해 주세요');
-				id.focus();
-			} else { // 아이디를 4글자 이상 입력했을 때
-				location = 'memberIdCheck.jsp?id='+id.value;
-			}
-		})
-
 		// 비밀번호 - pwd
 		// 비밀번호 유효성 검사 - 8글자 이상의 비밀번호를 생성하도록 함
 		let chk_pwd = document.getElementById("chk_pwd");
@@ -120,18 +106,9 @@ span { font-size: 0.8em;}
 		})
 		
 		// 회원가입 페이지의 전체 내용 입력 유무에 따른 페이지 이동 처리
-		let btn_insert = document.getElementById("btn_insert");
-		btn_insert.addEventListener("click", function() {
-			if(id.value.length == 0) {
-				alert(`아이디를 입력하고, 아이디 중복 체크를 하세요!`);
-				id.focus();
-				return;
-			}
-			if(!isChk) {
-				alert(`아이디 중복 체크를 하시오.`);
-				id.focus();
-				return;
-			}
+		let btn_update = document.getElementById("btn_update");
+		btn_update.addEventListener("click", function() {
+	
 			if(pwd.value.length == 0) {
 				alert(`비밀번호를 입력하세요!`);
 				pwd.focus();
@@ -178,18 +155,21 @@ span { font-size: 0.8em;}
 </script>
 </head>
 <body>
+<%
+request.setCharacterEncoding("utf-8");
+
+
+%>
 <div id="container">
 	<div class="m_title"><a href="#">EZEN MALL</a></div>
-	<div class="s_title">회원가입</div>
+	<div class="s_title">회원 정보 수정</div>
 	
-	<form action="memberJoinPro.jsp" method="post" name="joinForm">
+	<form action="memberUpdatePro.jsp" method="post" name="updateForm">
 		<table>
 			<tr>
 				<th>아이디</th>
 				<td>
 					<input type="text" name="id" size="15">
-					<input type="button" value="ID중복체크" id="btn_chk_id"> <br>
-					<span id="chk_id"></span>
 				</td>
 			</tr>
 			<tr>
@@ -232,12 +212,13 @@ span { font-size: 0.8em;}
 			</tr>
 		</table>
 		<div class="btns">
-			<input type="button" value="회원가입" id="btn_insert"> &emsp;
+			<input type="button" value="회원수정" id="btn_update"> &emsp;
 			<input type="button" value="취소" id="btn_cancel">
 		</div>
 	
 	</form>
 </div>
+
 
 </body>
 </html>
