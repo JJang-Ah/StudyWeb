@@ -32,8 +32,8 @@ if(memberId == null) { // 세션이 null인 경우
 
 	<div class="m_title"><a href="#">EZEN MALL</a></div>
 	<div class="s_title">전체 게시판</div> <br>
-	<div class="top_info"><span class="s_id"><a href="#"><%=memberId %>님</a></span>&ensp;
-	 | &ensp;<a href="#">로그아웃</a>
+	<div class="top_info"><span class="s_id"><a href="../member/memberInfoForm.jsp"><%=memberId %>님</a></span>&ensp;
+	 | &ensp;<a href="../logon/memberLogout.jsp">로그아웃</a>
 	
 	</div>
 	

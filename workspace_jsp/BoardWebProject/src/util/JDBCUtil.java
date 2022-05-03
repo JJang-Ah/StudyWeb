@@ -20,7 +20,7 @@ public class JDBCUtil {
 		return ds.getConnection();
 	}
 	
-	// Connection, PReparedStatement 닫는 메소드 - insert, update, delete 작업
+	// Connection, PreparedStatement 닫는 메소드 - insert, update, delete 작업
 	public static void close(Connection conn, PreparedStatement pstmt) {
 		if(pstmt != null) {
 			try {
