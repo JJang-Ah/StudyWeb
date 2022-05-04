@@ -57,7 +57,7 @@ show tables;
 - timestamp: 4B, 날짜와 시간
 5. 기타 데이터 타입
 - blob(binary large object): 바이너리 데이터 중에서 아주 큰 데이터
-- text: 문자의 아주 큰 데이터
+- text: 문자의 아주 큰 데이터, oracle에서는 clob타입, 2B, 2의 16승, 65536 문자까지 저장
 
 
 < 사원 테이블 설계 >
