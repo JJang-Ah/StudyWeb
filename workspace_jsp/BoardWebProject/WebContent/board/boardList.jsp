@@ -17,7 +17,7 @@
 a { text-decoration: none; color: black;}
 /* 상단 - 메인, 서브 타이틀 */
 .m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
-.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px}
+.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 20px}
 .top_info { text-align: right;}
 .s_id, .s_logout, .s_write { font-weight: bold;}
 .s_logout a { color: #c84557;}
@@ -29,14 +29,18 @@ tr { height: 30px;}
 th, td { border: 1px solid black;}
 th { background: #ced4da;}
 td { }
+tr:nth-child(2n+1) { background-color: #f8f9fa;}
 .center { text-align: center;}
 .left { padding-left: 5px;}
+.left a:hover { font-weight: bold; color: #32708d;}
 
 </style>
 </head>
 <body>
 
 <%
+request.setCharacterEncoding("utf-8");
+
 String memberId = (String)session.getAttribute("memberId");
 if(memberId == null) { // 세션이 null인 경우
 	out.print("<script>location='../logon/memberLoginForm.jsp'</script>");
@@ -53,7 +57,7 @@ int number = boardList.size();
 %>
 <div id="container">
 
-	<div class="m_title"><a href="#">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
 	<div class="s_title">전체 게시판</div> <br>
 	<div class="top_info">
 	<span class="s_id"><a href="../member/memberInfoForm.jsp"><%=memberId %>님</a></span>

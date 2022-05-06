@@ -1,3 +1,4 @@
+<%@page import="java.text.*"%>
 <%@page import="board.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,7 +14,7 @@
 a { text-decoration: none; color: black;}
 /* 상단 - 메인, 서브 타이틀 */
 .m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
-.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px}
+.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px;}
 
 /* 본문 - 테이블 */
 table { width: 100%; border: 1px solid black; border-collapse: collapse;}
@@ -22,6 +23,7 @@ th, td { border: 1px solid black;}
 th { background: #ced4da;}
 td { padding: 5px;}
 .content_row { height: 300px;}
+.content_row td { vertical-align: baseline;}
 
 /* 하단 - 버튼  */
 .btns { text-align: center; margin-top: 20px;}
@@ -33,11 +35,44 @@ td { padding: 5px;}
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.contentForm;
-		
-		// 글 등록 버튼을 클릭할 때
+		let num = form.num.value;
 		let btn_update = document.getElementById("btn_update");
+		let btn_delete = document.getElementById("btn_delete");
+		
+		if(form.id.value != form.writer.value) {
+			// 로그인한 회원이 글 작성자가 아닐때 수정,삭제버튼을 나타내지 않는다.
+			btn_update.style.display = "none";
+			btn_delete.style.display = "none";
+		}
+		
+		
+		// 글 수정 버튼을 클릭할 때
 		btn_update.addEventListener("click", function() {
-	
+			// 로그인한 회원이 글작성자인지를 파악하는 구문 -> 같지않으면 이동 불가
+			if(form.id.value == form.writer.value) { 
+				location = 'boardUpdateForm.jsp?num=' + num; // get 방식으로 num값이 같이 넘어간다.
+			} else {
+				alert('글작성자가 아니면 글을 수정할 수 없습니다.');
+				return;
+			}
+			
+		})
+		
+		// 글 삭제 버튼을 클릭할 때
+		btn_delete.addEventListener("click", function() {
+			// 로그인한 회원이 글작성자인지를 파악하는 구문 -> 같지않으면 이동불가
+			if(form.id.value == form.writer.value) {
+				location = 'boardDeleteForm.jsp?num=' + num;
+			} else {
+				alert('글작성자가 아니면 글을 삭제할 수 없습니다.');
+				return;
+			}
+		})
+		
+		// 댓글 작성 버튼을 클릭할 때
+		let btn_review = document.getElementById("btn_review");
+		btn_review.addEventListener("click", function() {
+			
 		})
 		
 		// 전체 게시글 버튼을 클릭할 때
@@ -52,16 +87,26 @@ td { padding: 5px;}
 </head>
 <body>
 <%
+String memberId = (String)session.getAttribute("memberId");
+if(memberId == null) {
+	out.print("<script>location='../logon/memberLoginForm.jsp';</script>");
+}
+
+
 int num = Integer.parseInt(request.getParameter("num")); //넘어오는 num의 값을 받는다.
 BoardDAO boardDAO = BoardDAO.getInstance();
 BoardDTO board = boardDAO.getBoard(num);
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
 %>
 <div id="container">
 	<div class="m_title"><a href="#">EZEN MALL</a></div>
-	<div class="s_title">글 정보</div> <br>
+	<div class="s_title">글 상세 보기</div> <br>
 	
 	<form action="" method="post" name="contentForm">
+		<input type="hidden" name="num" id="num" value="<%=board.getNum() %>">
+		<input type="hidden" name="id" value="<%=memberId%>"> <%-- 로그인한 멤버 --%>
+		<input type="hidden" name="writer" value="<%=board.getWriter()%>"> <%-- 작성자 --%>
 		<table>
 			<tr>
 				<th width="15%">글 번호</th>
@@ -81,7 +126,7 @@ BoardDTO board = boardDAO.getBoard(num);
 			</tr>
 			<tr>
 				<th>등록일</th>
-				<td><%=board.getRegDate() %></td>
+				<td><%=sdf.format(board.getRegDate()) %></td>
 			</tr>
 			<tr>
 				<th>조회수</th>

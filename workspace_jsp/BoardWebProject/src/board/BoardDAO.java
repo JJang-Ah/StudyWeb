@@ -26,8 +26,11 @@ public class BoardDAO {
 	
 	// 게시판 글등록 메소드 (원글)
 	public void insertBoard(BoardDTO board) {
+		// 작업1: board에서 가장 큰 글번호를 구함 - 이번호로 그룹화 아이디 값을 결정
 		String sql1 = "select max(num) from board";
+		// 작업2: 같은 그룹화 아이디(ref)이고, 글순서(re_step)이 크다면 글순서(re_step)을 1증가함.
 		String sql2 = "update board set re_step=re_step+1 where ref=? and re_step>?";
+		// 작업3: 최종적으로 원글 또는 댓글을 추가함.
 		String sql3 = "insert into board(writer, subject, content, ref, re_step, re_level) values(?, ?, ?, ?, ?, ?)";
 			
 		int num = board.getNum();
@@ -74,7 +77,7 @@ public class BoardDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCUtil.close(conn, pstmt, rs);
 		}
 	}
 	// 게시판 글보기(전체) 메소드
@@ -109,15 +112,23 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	// 게시판 글보기(1건) 메소드
+	// 게시판 글보기(1건, 상세보기) 메소드
 	public BoardDTO getBoard(int num) {
 		BoardDTO board = new BoardDTO();
-		String sql = "select * from board where num = ?";
+		String sql1 = "update board set readcount=readcount+1 where num=?";
+		String sql2 = "select * from board where num = ?";
 		
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			
+			// 조회수 증가
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			// 글 상세 보기
+			pstmt = conn.prepareStatement(sql2);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
@@ -127,7 +138,7 @@ public class BoardDAO {
 				board.setSubject(rs.getString("subject"));
 				board.setContent(rs.getString("content"));
 				board.setRegDate(rs.getTimestamp("regDate"));
-				board.setReadcount(rs.getInt("readcound"));
+				board.setReadcount(rs.getInt("readcount"));
 				board.setRef(rs.getInt("ref"));
 				board.setRe_step(rs.getInt("rd_step"));
 				board.setRe_level(rs.getInt("rd_level"));
@@ -141,9 +152,84 @@ public class BoardDAO {
 		return board;
 	}
 	
+	// 게시판 글수정 폼에서 글보기 메소드
+	public BoardDTO getBoardUpdateForm(int num) {
+		BoardDTO board = new BoardDTO();
+		String sql = "select * from board where num=?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 글 수정 폼에서 수정하는 2가지 정보
+				board.setSubject(rs.getString("subject"));
+				board.setContent(rs.getString("content"));
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		
+		return board;
+	}
+	
 	// 게시판 글수정 메소드
+	public void updateBoard(BoardDTO board) {
+		String sql = "update board set subject=?, content=? where num=?";
+		
+		try { 
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getSubject());
+			pstmt.setString(2, board.getContent());
+			pstmt.setInt(3, board.getNum());
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
 	// 게시판 글삭제 메소드
+	public int deleteBoard(int num, String writer, String pwd) throws Exception {
+		String sql1 = "select pwd from member where id=?";
+		String sql2 = "delete from board where num=?";
+		int cnt = 0;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			// 1단계: member 테이블에서 id(writer)에 해당하는 dbPwd를 구함
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			
+			// 2단계: pwd와 dbPwd가 일치할 때 num에 해당하는 글을 삭제
+			if(rs.next()) { // 아이디(작성자)가 있다면
+				String dbPwd = rs.getString("pwd");
+				if(pwd.equals(dbPwd)) { // 비밀번호가 일치한다면 -> 삭제
+					pstmt = conn.prepareStatement(sql2);
+					pstmt.setInt(1, num);
+					cnt = pstmt.executeUpdate();
+				}
+			}
+			
+		} catch(Exception e) {
+			// 트랜잭션 처리시에 예외가 발생했을 때 롤백을 함
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return cnt;
+	}
 	
 	
 }

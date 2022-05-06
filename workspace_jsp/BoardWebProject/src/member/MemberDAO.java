@@ -159,16 +159,39 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	// 회원 삭제(회원 탈퇴)
+	// 회원 삭제(회원 탈퇴) 메소드 -> 해당 회원이 남긴 게시판의 글도 모두 삭제되도록 변경
 	public int deleteMember(String id, String pwd) {
-		String sql = "delete from member where id=? and pwd=?";
+		String sql1 = "delete from member where id=? and pwd=?";
+		String sql2 = "delete from board where writer = ?";
 		int cnt = 0;
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			
+			// 트랜잭션(transaction) 처리 - DML(insert, update, delete) 작업이 2개 이상 함께 처리되어야 할때
+			// 모두 처리되든지, 모두 처리되지 않게 하는 방법
+			// All or Nothing
+			
+			
+			// 트랜잭션 처리 1단계 - autocommit 기능을 끔
+			conn.setAutoCommit(false);
+			
+			// 1작업: 회원 삭제(탈퇴)
+			pstmt = conn.prepareStatement(sql1);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			cnt = pstmt.executeUpdate();
+			
+			// 2작업: 해당 회원이 남긴 게시판 글 모두 삭제
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			
+			// 트랜잭션 처리 2단계 - 모든 작업이 완료되었을 때 커밋을 함.
+			conn.commit();
+			
+			// 트랜잭션 처리 3단계 - autocommit기능을 다시 설정해 놓는다.
+			conn.setAutoCommit(true);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

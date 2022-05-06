@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="member.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -181,9 +182,15 @@ span { font-size: 0.8em;}
 				form.pwd2.focus();
 				return;
 			}
-			// 폼의 액션을 바꾸는 방법!!
-			form.action = 'memberDeletePro.jsp';
-			form.submit();
+			
+			let answer = confirm('정말 회원 탈퇴하시겠습니까????????');
+			if(answer) {
+				// 폼의 액션을 바꾸는 방법!!
+				form.action = 'memberDeletePro.jsp';
+				form.submit();
+			} else {
+				return;
+			}
 			
 			
 		})
@@ -205,10 +212,12 @@ MemberDAO memberDAO = MemberDAO.getInstance();
 MemberDTO member = new MemberDTO();
 member = memberDAO.getMember(memberId);
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 %>
 
 <div id="container">
-	<div class="m_title"><a href="#">EZEN MALL</a></div>
+	<div class="m_title"><a href="../board/boardList.jsp">EZEN MALL</a></div>
 	<div class="s_title">회원정보 확인</div>
 	
 	<form action="memberUpdatePro.jsp" method="post" name="infoForm">
@@ -260,7 +269,7 @@ member = memberDAO.getMember(memberId);
 			</tr>
 			<tr>
 				<th>가입 일시</th>
-				<td><%=member.getRegDate() %></td>
+				<td><%=sdf.format(member.getRegDate()) %></td>
 			</tr>
 		</table>
 		<div class="btns">

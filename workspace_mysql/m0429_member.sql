@@ -47,5 +47,7 @@ insert into member values('bbb2222', '1234', '신효범', 'shinhb@naver.com', '0
 '서울시 서초구 서초대로 20', now());
 insert into member values('ccc3333', '1234', '송은이', 'songee@naver.com', '010-3333-3333', 
 '서울시 마포구 마포대로 30', now());
+insert into member values('eee5555', '1234', '최승현', 'shoish@naver.com', '010-5555-5555', 
+'서울시 마포구 마포대로 30', now());
 select * from member;
 
