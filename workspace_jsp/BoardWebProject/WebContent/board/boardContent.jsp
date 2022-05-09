@@ -50,7 +50,9 @@ td { padding: 5px;}
 		btn_update.addEventListener("click", function() {
 			// 로그인한 회원이 글작성자인지를 파악하는 구문 -> 같지않으면 이동 불가
 			if(form.id.value == form.writer.value) { 
-				location = 'boardUpdateForm.jsp?num=' + num; // get 방식으로 num값이 같이 넘어간다.
+// 				location = 'boardUpdateForm.jsp?num=' + num; // get 방식으로 num값이 같이 넘어간다.
+				form.action = 'boardUpdateForm.jsp'; // form의 pageNum을 포함한 모든값을 넘긴다.
+				form.submit();
 			} else {
 				alert('글작성자가 아니면 글을 수정할 수 없습니다.');
 				return;
@@ -62,7 +64,9 @@ td { padding: 5px;}
 		btn_delete.addEventListener("click", function() {
 			// 로그인한 회원이 글작성자인지를 파악하는 구문 -> 같지않으면 이동불가
 			if(form.id.value == form.writer.value) {
-				location = 'boardDeleteForm.jsp?num=' + num;
+// 				location = 'boardDeleteForm.jsp?num=' + num;
+				form.action = 'boardDeleteForm.jsp';
+				form.submit();
 			} else {
 				alert('글작성자가 아니면 글을 삭제할 수 없습니다.');
 				return;
@@ -70,15 +74,15 @@ td { padding: 5px;}
 		})
 		
 		// 댓글 작성 버튼을 클릭할 때
-		let btn_review = document.getElementById("btn_review");
 		btn_review.addEventListener("click", function() {
-			
+			form.submit();
 		})
 		
 		// 전체 게시글 버튼을 클릭할 때
+		let pageNum = form.pageNum.value;
 		let btn_boardList = document.getElementById("btn_boardList");
 		btn_boardList.addEventListener("click", function() {
-			location='boardList.jsp';
+			location='boardList.jsp?pageNum=' + pageNum;
 		})
 		
 	})
@@ -92,21 +96,34 @@ if(memberId == null) {
 	out.print("<script>location='../logon/memberLoginForm.jsp';</script>");
 }
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
+
+String pageNum = request.getParameter("pageNum");
 
 int num = Integer.parseInt(request.getParameter("num")); //넘어오는 num의 값을 받는다.
 BoardDAO boardDAO = BoardDAO.getInstance();
 BoardDTO board = boardDAO.getBoard(num);
 
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
+// 원글의 정보
+int ref = board.getRef();
+int re_step = board.getRe_step();
+int re_level = board.getRe_level();
+
 %>
 <div id="container">
-	<div class="m_title"><a href="#">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
 	<div class="s_title">글 상세 보기</div> <br>
 	
-	<form action="" method="post" name="contentForm">
-		<input type="hidden" name="num" id="num" value="<%=board.getNum() %>">
+	<form action="boardWriteForm.jsp" method="post" name="contentForm">
+		<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		<input type="hidden" name="num" id="num" value="<%=board.getNum() %>"> <%-- 수정과 삭제에 사용 --%>
+		<%-- id와 writer를 사용하여 로그인한 회원과 글작성자를 확인 --%>
 		<input type="hidden" name="id" value="<%=memberId%>"> <%-- 로그인한 멤버 --%>
 		<input type="hidden" name="writer" value="<%=board.getWriter()%>"> <%-- 작성자 --%>
+		<%-- 댓글 처리: ref, re_step, re_level --%>
+		<input type="hidden" name="ref" value="<%=ref %>">
+		<input type="hidden" name="re_step" value="<%=re_step %>">
+		<input type="hidden" name="re_level" value="<%=re_level %>">
 		<table>
 			<tr>
 				<th width="15%">글 번호</th>

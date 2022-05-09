@@ -11,7 +11,8 @@
 a { text-decoration: none; color: black;}
 /* 상단 - 메인, 서브 타이틀 */
 .m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
-.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 20px;}
+.s_title, .s_title_re { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 20px;}
+.s_title_re { color:  #706523;}
 
 /* 본문 - 테이블 */
 table { width: 100%; border: 1px solid black; border-collapse: collapse;}
@@ -26,6 +27,7 @@ td { padding-left: 5px;}
 .btns { text-align: center; margin-top: 20px;}
 .btns input { width: 100px; height: 35px; border: none; background: black; color: white;
  font-weight: bold; cursor: pointer;}
+ .btns .btn_write_re { background: #705e7b;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -69,7 +71,6 @@ int num = 0, ref = 1, re_step=0, re_level = 0;
 String re = "";
 
 // 글번호가 없다면 원글, 글번호가 있다면 댓글
-
 // 글번호(num)이 있다면, 다시 말하면 댓글이라면 num, ref, re_step, re_level을 저장
 // 글번호가 없다면 위에서 선언한 기본값을 가진다.
 if(request.getParameter("num") != null) {
@@ -77,14 +78,17 @@ if(request.getParameter("num") != null) {
 	ref = Integer.parseInt(request.getParameter("ref"));
 	re_step = Integer.parseInt(request.getParameter("re_step"));
 	re_level = Integer.parseInt(request.getParameter("re_level"));
-	re = "[댓글]"; // 댓글이면 제목란에 찍힘.
+	re = "[re] "; // 댓글이면 제목란에 찍힘.
 	
 }
 %>
 <div id="container">
 	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
-	<div class="s_title">글 등록</div> <br>
-	
+	<%if(request.getParameter("num") == null) { %>
+		<div class="s_title">글 등록</div> <br>
+	<%} else { %>
+		<div class="s_title_re">댓글 등록</div> <br>
+	<%} %>
 	<form action="boardWritePro.jsp" method="post" name="writeForm">
 		<input type="hidden" name="num" value="<%=num %>">
 		<input type="hidden" name="ref" value="<%=ref %>">
@@ -105,7 +109,11 @@ if(request.getParameter("num") != null) {
 			</tr>
 		</table>
 		<div class="btns">
-			<input type="button" value="글 등록" id="btn_write">&emsp;&emsp;
+			<%if(request.getParameter("num") == null) { %>
+				<input type="button" value="글 등록" id="btn_write" >&emsp;&emsp;
+			<%} else { %>
+				<input type="button" value="댓글 등록" id="btn_write" class="btn_write_re">&emsp;&emsp;
+			<%} %>
 			<input type="button" value="게시글 보기" id="btn_boardList">
 		</div>
 	</form>
