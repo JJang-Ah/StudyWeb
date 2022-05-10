@@ -17,10 +17,11 @@ request.setCharacterEncoding("utf-8");
 
 
 <%
+String pageNum = request.getParameter("pageNum");
 BoardDAO boardDAO = BoardDAO.getInstance();
 boardDAO.insertBoard(board);
 
-response.sendRedirect("boardList.jsp");
+response.sendRedirect("boardList.jsp?pageNum=" + pageNum);
 
 
 %>

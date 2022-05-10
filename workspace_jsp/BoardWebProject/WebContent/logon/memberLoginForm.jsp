@@ -100,7 +100,7 @@ a { text-decoration: none; color: black;}
 <body>
 
 <div id="container">
-	<div class="m_title"><a href="#">EZEN MALL</a></div>
+	<div class="m_title"><a href="../board/boardList.jsp">EZEN MALL</a></div>
 	<div class="s_title">LOGIN</div>
 	
 	<form action="memberLoginPro.jsp" method="post" name="loginForm">

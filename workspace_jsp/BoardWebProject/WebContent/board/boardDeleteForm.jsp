@@ -45,10 +45,10 @@ a { text-decoration: none; color: black;}
 			}
 		})
 		
-// 		let pageNum = form.pageNum.value;
+		let pageNum = form.pageNum.value;
 		let btn_boardList = document.getElementById("btn_boardList");
 		btn_boardList.addEventListener("click", function() {
-			location = 'boardList.jsp';
+			location = 'boardList.jsp?pageNum=' + pageNum;
 		})
 	})
 
@@ -61,9 +61,9 @@ if(memberId == null) {
 	out.print("<script>location = '../logon/memberLoginForm.jsp';</script>");
 }
 
+String pageNum = request.getParameter("pageNum");
 int num = Integer.parseInt(request.getParameter("num"));
 
-// String pageNum = request.getParameter("pageNum");
 
 %>
 <div id="container">
@@ -72,7 +72,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 	
 	<form action="boardDeletePro.jsp" method="post" name="deleteForm">
 		<input type="hidden" name="num" value="<%=num%>">
-<%-- 		<input type="hidden" name="pageNum" value="<%=pageNum%>">		 --%>
+		<input type="hidden" name="pageNum" value="<%=pageNum%>">		
 		<div class="c_login">
 			<div class="c_writer">
 				<label>작성자</label><input type="text" name="writer" id="writer" value="<%=memberId %>" readonly>

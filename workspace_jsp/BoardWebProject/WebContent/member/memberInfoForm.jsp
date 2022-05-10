@@ -24,7 +24,6 @@ th { background: #ced4da;}
 .s_id { color: red; font-size: 0.9em;}
 .addr_row {height: 100px;}
 .addr_row input { margin: 2px 0;}
- color: white; font-size: 12px; cursor: pointer; border-radius: 3px; margin-left: 10px;}
 #btn_address { width: 100px; height: 28px; border: none; background: #76af7b;
  color: white; font-size: 12px; cursor: pointer; border-radius: 3px;}
 span { font-size: 0.8em;}
@@ -173,7 +172,7 @@ span { font-size: 0.8em;}
 				return;
 			}
 			if(!form.pwd2.value) {
-				alert('비밀번호 확일을 입력하시오~!');
+				alert('비밀번호 확인을 입력하시오~!');
 				form.pwd2.focus();
 				return;
 			}

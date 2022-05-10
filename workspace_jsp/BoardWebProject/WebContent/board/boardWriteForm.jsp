@@ -52,7 +52,7 @@ td { padding-left: 5px;}
 		// 전체 게시글 버튼을 클릭할 때
 		let btn_boardList = document.getElementById("btn_boardList");
 		btn_boardList.addEventListener("click", function() {
-			location='boardList.jsp';
+			location='boardList.jsp?pageNum=' + pageNum;
 		})
 	})
 
@@ -63,8 +63,11 @@ td { padding-left: 5px;}
 String memberId = (String)session.getAttribute("memberId");
 
 if(memberId == null) {
-	out.print("<script>location='..//logon/memberLoginForm.jsp';</script>");
+	out.print("<script>location='../logon/memberLoginForm.jsp';</script>");
 }
+
+String pageNum = request.getParameter("pageNum");
+if(pageNum == null) pageNum = "1"; 
 
 // 댓글 처리 변수 선언
 int num = 0, ref = 1, re_step=0, re_level = 0;
@@ -79,7 +82,6 @@ if(request.getParameter("num") != null) {
 	re_step = Integer.parseInt(request.getParameter("re_step"));
 	re_level = Integer.parseInt(request.getParameter("re_level"));
 	re = "[re] "; // 댓글이면 제목란에 찍힘.
-	
 }
 %>
 <div id="container">
@@ -90,6 +92,7 @@ if(request.getParameter("num") != null) {
 		<div class="s_title_re">댓글 등록</div> <br>
 	<%} %>
 	<form action="boardWritePro.jsp" method="post" name="writeForm">
+		<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		<input type="hidden" name="num" value="<%=num %>">
 		<input type="hidden" name="ref" value="<%=ref %>">
 		<input type="hidden" name="re_step" value="<%=re_step %>">
@@ -101,7 +104,7 @@ if(request.getParameter("num") != null) {
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td class="c_text"><input type="text" name="subject" id="subject" value="<%=re %>" size="54"></td>
+				<td class="c_text"><input type="text" name="subject" id="subject" value="<%=re%>" size="54"></td>
 			</tr>
 			<tr>
 				<th>내용</th>

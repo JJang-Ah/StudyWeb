@@ -50,7 +50,6 @@ td { padding: 5px;}
 		btn_update.addEventListener("click", function() {
 			// 로그인한 회원이 글작성자인지를 파악하는 구문 -> 같지않으면 이동 불가
 			if(form.id.value == form.writer.value) { 
-// 				location = 'boardUpdateForm.jsp?num=' + num; // get 방식으로 num값이 같이 넘어간다.
 				form.action = 'boardUpdateForm.jsp'; // form의 pageNum을 포함한 모든값을 넘긴다.
 				form.submit();
 			} else {

@@ -37,7 +37,6 @@ span { font-size: 0.8em;}
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 
 <script>
-	let isChk = false; // 전역변수 , DOMContentLOaded에 넣으면 계속 false가 된다.
 
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.joinForm; // 폼은 그냥 받을 수 있음
@@ -53,7 +52,6 @@ span { font-size: 0.8em;}
 		// ID 중복 체크 버튼 - DB 작업 : member 테이블에 똑같은 id가 있는지를 검사
 		let btn_chk_id = document.getElementById("btn_chk_id");
 		btn_chk_id.addEventListener("click", function() {
-			isChk = true;
 			if(id.value.length < 4) { // 아이디를 4글자 이상 입력했을 때
 				alert('아이디를 4글자 이상 입력해 주세요');
 				id.focus();
@@ -63,7 +61,7 @@ span { font-size: 0.8em;}
 		})
 
 		// 비밀번호 - pwd
-		// 비밀번호 유효성 검사 - 8글자 이상의 비밀번호를 생성하도록 함
+		// 비밀번호 유효성 검사 - 4글자 이상의 비밀번호를 생성하도록 함
 		let chk_pwd = document.getElementById("chk_pwd");
 		pwd.addEventListener("keyup", function() {
 			if (pwd.value.length < 4) {
@@ -124,11 +122,6 @@ span { font-size: 0.8em;}
 		btn_insert.addEventListener("click", function() {
 			if(id.value.length == 0) {
 				alert(`아이디를 입력하고, 아이디 중복 체크를 하세요!`);
-				id.focus();
-				return;
-			}
-			if(!isChk) {
-				alert(`아이디 중복 체크를 하시오.`);
 				id.focus();
 				return;
 			}
