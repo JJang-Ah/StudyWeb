@@ -81,8 +81,8 @@ drop table product;
 -- (3) product 테이블 -> 수업: 책, 학생: 개인별 아이템(?)
 create table product (
 product_id bigint primary key auto_increment,
-product_name varchar(100) not null,
 product_kind varchar(3) not null,
+product_name varchar(100) not null,
 product_price int not null,
 product_count int not null,
 author varchar(50) not null,
@@ -94,11 +94,11 @@ discount_rate int default 10,
 reg_date datetime default now()
 );
 
-insert into product(product_name, product_kind, product_price, product_count, author, 
+insert into product(product_kind, product_name, product_price, product_count, author, 
 publishing_com, publishing_date, product_content)
 values (
-'스마일', 
-'100',
+'100', 
+'스마일',
 14000,
 100,
 '김중혁',

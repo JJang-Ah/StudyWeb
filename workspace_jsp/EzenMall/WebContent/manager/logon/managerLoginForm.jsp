@@ -15,14 +15,34 @@ a { text-decoration: none; color: black;}
 
 /* 중단 - 로그인 박스 */
 .b_box { border: 1px solid lightgray; padding: 5px; margin: 10px;}
-.b_box input[type='text'], .b_box input[type='password'] { height: 30px; padding-left: 35px;}
-.b_box input[type='text'] { background: url('../../icons/login_id.png') no-repeat;}
-.b_box input[type='password'] { background: url('../../icons/login_pwd.png') no-repeat;}
-
+.b_box input[type='text'], .b_box input[type='password'] { height: 30px; padding-left: 35px; border: none;}
+.b_box input[type='text']:focus, .b_box input[type='password']:focus { outline: none;} 
+.b_box input[type='text'] { background: url('../../icons/login_id.png') no-repeat; background-size: 25px; background-position: left center;}
+.b_box input[type='password'] { background: url('../../icons/login_pwd.png') no-repeat; background-size: 22px; background-position: left center;}
+.c_box { padding: 0; margin: 10px;}
+.c_box input[type='button'] { width: 280px; height: 45px; border: none; background: #5e869c; color: #fff; font-weight: bold; font-size: 1.03em;}
 </style>
 
 <script>
 
+document.addEventListener("DOMContentLoaded", function() {
+	let form = document.managerLoginForm;
+	
+	let btn_login = document.getElementById("btn_login");
+	btn_login.addEventListener("click", function() {
+		if(!form.managerId.value) {
+			alert('아이디를 입력하시오.');
+			form.managerId.focus();
+			return;
+		}
+		if(!form.managerPwd.value) {
+			alert('비밀번호를 입력하시오.');
+			form.managerPwd.focus();
+			return;
+		}
+		form.submit();
+	})
+})
 
 </script>
 </head>
@@ -41,7 +61,7 @@ a { text-decoration: none; color: black;}
 			<div class="b_box">
 				<input type="password" name="managerPwd" id="managerPwd" placeholder="비밀번호" size="28">
 			</div>
-			<div class="b_box">
+			<div class="c_box">
 				<input type="button" value="로그인" id="btn_login">
 			</div>
 		</div>
