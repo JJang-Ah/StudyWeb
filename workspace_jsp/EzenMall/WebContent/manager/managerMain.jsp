@@ -34,7 +34,7 @@ tr { height: 50px;}
 th { border: 1px solid black;}
 .logout_row { background: #dddce9;}
 .title_row { background: #dee2e6; font-size: 1.1em;}
-.a_row { background: #dddce9; opacity: 0.5;}
+.a_row { background: #dddce9; opacity: 0.5; cursor: pointer;}
 </style>
 </head>
 <body>
@@ -51,7 +51,7 @@ if(managerId == null) {
 	<table>
 		<tr class="title_row"><th>상품 관리</th></tr>
 		<tr class="a_row"><th><a href="product/productRegisterForm.jsp">상품 등록</a></th></tr>
-		<tr class="a_row"><th><a href="">상품 목록(수정/삭제)</a></th></tr>
+		<tr class="a_row"><th><a href="product/productList.jsp">상품 목록(수정/삭제)</a></th></tr>
 		<tr class="title_row"><th>주문 관리</th></tr>
 		<tr class="a_row"><th><a href="">주문 목록(수정/삭제)</a></th></tr>
 		<tr class="title_row"><th>회원 관리</th></tr>

@@ -1,10 +1,11 @@
+<%@page import="manager.product.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품등록 폼</title>
+<title>상품 상세 보기</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Paytone+One&display=swap');
 #container { width: 550px; margin: 20px auto;}
@@ -35,81 +36,25 @@ input::file-selector-button { width: 90px; height: 27px; background: #2f9e77; co
  border: none; border-radius: 5px;}
 .btns { text-align: center; margin-top: 10px;}
 .btns input { width: 100px; height: 35px; border: none; background: #495057; color: #fff; 
-font-weight: bold; margin: 5px; cursor: pointer;}
+font-weight: bold; margin: 5px; cursor: pointer; border-radius: 5px;}
 .btns input:nth-child(1) { background: #2f9277;}
 .btns input:nth-child(1):hover { border: 2px solid #2f9277; background: #fff; color: #2f9e77;
 font-weight: bold;}
 </style>
-<script>
-
-	// 상품 등록
-	document.addEventListener("DOMContentLoaded", function() {
-		let form = document.registerForm;
-		let btn_register = document.getElementById("btn_register");
-		btn_register.addEventListener("click", function() {
-				
-			if(!form.product_name.value) {
-				alert('상품 제목을 입력하시오.');
-				return;
-			}
-			if(!form.product_price.value) {
-				alert('상품 가격을 입력하시오.');
-				return;
-			}
-			if(!form.product_count.value) {
-				alert('상품 수량을 입력하시오.');
-				return;
-			}
-			if(!form.author.value) {
-				alert('저자를 입력하시오.');
-				return;
-			}
-			if(!form.publishing_com.value) {
-				alert('출판사를 입력하시오.');
-				return;
-			}
-			if(!form.publishing_date.value) {
-				alert('출판일을 입력하시오.');
-				return;
-			}
-			if(!form.product_content.value) {
-				alert('상품 내용을 입력하시오.');
-				return;
-			}
-			if(!form.discount_rate.value) {
-				alert('할인율을 입력하시오.');
-				return;
-			}
-			form.submit();
-		})
-		
-		//상품 목록 페이지로 이동
-		let btn_list = document.getElementById("btn_list");
-		btn_list.addEventListener("click", function() {
-			location = "productList.jsp";
-		})
-		
-		// 관리자 페이지로 이동
-		let btn_main = document.getElementById("btn_main");
-		btn_main.addEventListener("click", function() {
-			location = "../managerMain.jsp";
-		})
-	})
-
-</script>
-
 </head>
 <body>
 <%
-String managerId = (String)session.getAttribute("managerId");
-if(managerId == null) {%>
-	<script>
-	location = "../managerMain.jsp";
-	</script>
-<%}%>
+int product_id = Integer.parseInt(request.getParameter("product_id"));
+
+// DB 연결, 질의 
+ProductDAO productDAO = ProductDAO.getInstance();
+ProductDTO product = productDAO.getProduct(product_id);
+
+
+%>
 <div id="container">
 	<div class="m_title"><a href="../managerMain.jsp">AH MALL</a></div>
-	<div class="s_title">상품 등록</div>
+	<div class="s_title">상품 정보 확인</div>
 	
 	<form action="productRegisterPro.jsp" method="post" name="registerForm" enctype="multipart/form-data">
 	<%-- enctype="multipart/form-data" 파일 업로드하는 폼 >> 그래서 다른 프로퍼티들이 Pro로 넘어가지 않는다. --%>
@@ -141,27 +86,27 @@ if(managerId == null) {%>
 			</tr>
 			<tr>
 				<th>상품 제목</th>
-				<td><input type="text" name="product_name" size="56"></td>
+				<td><input type="text" name="product_name" size="56" value="<%=product.getProduct_name()%>"></td>
 			</tr>
 			<tr>
 				<th>상품 가격</th>
-				<td><input type="number" name="product_price" min="1000" max="1000000" size="30">원</td>
+				<td><input type="number" name="product_price" min="1000" max="1000000" value="<%=product.getProduct_price()%>">원</td>
 			</tr>
 			<tr>
 				<th>상품 수량</th>
-				<td><input type="number" name="product_count" min="0" max="100000" size="30">권</td>
+				<td><input type="number" name="product_count" min="0" max="100000" value="<%=product.getProduct_count()%>">권</td>
 			</tr>
 			<tr>
 				<th>저자</th>
-				<td><input type="text" name="author">
+				<td><input type="text" name="author" value="<%=product.getAuthor()%>">
 			</tr>
 			<tr>
 				<th>출판사</th>
-				<td><input type="text" name="publishing_com"></td>
+				<td><input type="text" name="publishing_com" value="<%=product.getPublishing_com()%>"></td>
 			</tr>
 			<tr>
 				<th>출판일</th>
-				<td><input type="date" name="publishing_date"></td>
+				<td><input type="date" name="publishing_date" value="<%=product.getPublishing_date()%>"></td>
 			</tr>
 			<tr>
 				<th>상품 이미지</th>
@@ -169,21 +114,22 @@ if(managerId == null) {%>
 			</tr>
 			<tr>
 				<th>상품 내용</th>
-				<td><textarea name="product_content" rows="15" cols="60"></textarea></td>
+				<td><textarea name="product_content" rows="15" cols="60"><%=product.getProduct_content() %></textarea></td>
 			</tr>
 			<tr>
 				<th>할인율</th>
-				<td><input type="number" name="discount_rate" min="0" max="90">%</td>
+				<td><input type="number" name="discount_rate" min="0" max="90" value="<%=product.getDiscount_rate()%>">%</td>
 			</tr>
 		</table>
 		<div class="btns">
-			<input type="button" value="상품 등록" id="btn_register">
+			<input type="button" value="상품 정보 수정" id="btn_register">
 			<input type="reset" value="다시 입력">
 			<input type="button" value="상품 목록" id="btn_list">
 			<input type="button" value="관리자 페이지" id="btn_main">
 		</div>
 	</form>
 </div>
+
 
 </body>
 </html>
