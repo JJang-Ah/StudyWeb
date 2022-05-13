@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="manager.product.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,11 +23,14 @@ a { text-decoration: none; font-size: 0.95em; font-weight: bold;}
 table { width: 100%; border: 1px solid gray; border-collapse: collapse;
 border-top: 5px; border-bottom: 5px; border-left: hidden; border-right: hidden;}
 tr { height: 35px;}
-td, th { border: 1px solid gray;}
-th { background: #d8f4e6;}
+td, th { border: 1px solid #705e7b;}
+th { background: #e6c9e1;}
 td { padding-left: 5px;}
 
 /* 중단 - 테이블 안의 입력상자*/
+.c_p_id, .c_p_reg_date { background: #dee2e6;}
+.s_p_id, .s_p_reg_date { color: #f00; font-size: 0.8em; font-weight: bold; margin-left: 10px;}
+.s_p_image { color: #00f; font-size: 0.8em;}
 input[type="number"] { width: 100px;}
 textarea { margin-top: 5px;}
 
@@ -37,13 +41,97 @@ input::file-selector-button { width: 90px; height: 27px; background: #2f9e77; co
 .btns { text-align: center; margin-top: 10px;}
 .btns input { width: 100px; height: 35px; border: none; background: #495057; color: #fff; 
 font-weight: bold; margin: 5px; cursor: pointer; border-radius: 5px;}
-.btns input:nth-child(1) { background: #2f9277;}
+.btns input:nth-child(1), .btns input:nth-child(2) { background: #2f9277;}
 .btns input:nth-child(1):hover { border: 2px solid #2f9277; background: #fff; color: #2f9e77;
 font-weight: bold;}
 </style>
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+	let form = document.updateForm;
+	let btn_update = document.getElementById("btn_update");
+	
+	// 상품 분류가 선택되도록 설정 ex) 자기계발이면 330
+	let product_kind = form.product_kind; // select 
+	let p_kind = form.p_kind;		// ex) 자기계발: 310이 있는 option
+	for(let i=0; i<product_kind.length; i++) {
+		if(p_kind.value == product_kind[i].value) {
+			product_kind[i].selected = true;
+			break;
+		}
+	}
+	
+	// 상품 수정 처리 페이지로 이동
+	btn_update.addEventListener("click", function() {
+			
+		if(!form.product_name.value) {
+			alert('상품 제목을 입력하시오.');
+			return;
+		}
+		if(!form.product_price.value) {
+			alert('상품 가격을 입력하시오.');
+			return;
+		}
+		if(!form.product_count.value) {
+			alert('상품 수량을 입력하시오.');
+			return;
+		}
+		if(!form.author.value) {
+			alert('저자를 입력하시오.');
+			return;
+		}
+		if(!form.publishing_com.value) {
+			alert('출판사를 입력하시오.');
+			return;
+		}
+		if(!form.publishing_date.value) {
+			alert('출판일을 입력하시오.');
+			return;
+		}
+		if(!form.product_content.value) {
+			alert('상품 내용을 입력하시오.');
+			return;
+		}
+		if(!form.discount_rate.value) {
+			alert('할인율을 입력하시오.');
+			return;
+		}
+		form.submit();
+	})
+	
+	// 상품 삭제 처리 페이지로 이동
+	let product_id = form.product_id.value;
+	let pageNum = form.pageNum.value;
+	let btn_delete = document.getElementById("btn_delete");
+	btn_delete.addEventListener("click", function() {
+		location = 'productDeletePro.jsp?product_id=' + product_id + '&pageNum=' + pageNum;
+	})
+	
+	//상품 목록 페이지로 이동
+	let btn_list = document.getElementById("btn_list");
+	btn_list.addEventListener("click", function() {
+		location = "productList.jsp?pageNum=" + pageNum;
+	})
+	
+	// 관리자 페이지로 이동
+	let btn_main = document.getElementById("btn_main");
+	btn_main.addEventListener("click", function() {
+		location = "../managerMain.jsp";
+	})
+})
+
+</script>
 </head>
 <body>
 <%
+String managerId = (String)session.getAttribute("managerId");
+if(managerId == null) {
+	out.print("<script>location='../logon/managerLoginForm.jsp';</script>");
+}
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
+
+String pageNum = request.getParameter("pageNum");
 int product_id = Integer.parseInt(request.getParameter("product_id"));
 
 // DB 연결, 질의 
@@ -56,12 +144,21 @@ ProductDTO product = productDAO.getProduct(product_id);
 	<div class="m_title"><a href="../managerMain.jsp">AH MALL</a></div>
 	<div class="s_title">상품 정보 확인</div>
 	
-	<form action="productRegisterPro.jsp" method="post" name="registerForm" enctype="multipart/form-data">
+	<form action="productUpdatePro.jsp" method="post" name="updateForm" enctype="multipart/form-data">
 	<%-- enctype="multipart/form-data" 파일 업로드하는 폼 >> 그래서 다른 프로퍼티들이 Pro로 넘어가지 않는다. --%>
+		<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		<table>
+		<tr>
+			<th>상품번호</th>
+			<td>
+				<input type="text" name="product_id" value="<%=product.getProduct_id() %>" size="10" readonly class="c_p_id"> 
+				<span class="s_p_id">상품번호는 변경불가</span>
+			</td>
+		</tr>
 			<tr>
 				<th>상품 분류</th>
 				<td>
+					<input type="hidden" name="p_kind" value="<%=product.getProduct_kind()%>">
 					<select name="product_kind">
 						<option value="110">소설/시</option>
 						<option value="120">에세이</option>
@@ -70,8 +167,10 @@ ProductDTO product = productDAO.getProduct(product_id);
 						<option value="230">종교</option>
 						<option value="240">사회</option>
 						<option value="250">과학</option>
-						<option value="310">자기계발</option>
+						<option value="310">경제/경영</option>
+						<option value="320">자기계발</option>
 						<option value="410">여행</option>
+						<option value="420">만화</option>
 						<option value="510">잡지</option>
 						<option value="610">어린이</option>
 						<option value="620">육아</option>
@@ -110,7 +209,12 @@ ProductDTO product = productDAO.getProduct(product_id);
 			</tr>
 			<tr>
 				<th>상품 이미지</th>
-				<td><input type="file" name="product_image"></td>
+				<td>
+					<input type="file" name="product_image"> <br>
+					<span class="s_p_image">상품 이미지를 다시 선택해 주세요</span>
+				</td>
+				
+				<%-- file타입은 보안상의 이유로 value값을 찍을수 없다. --%>
 			</tr>
 			<tr>
 				<th>상품 내용</th>
@@ -120,10 +224,17 @@ ProductDTO product = productDAO.getProduct(product_id);
 				<th>할인율</th>
 				<td><input type="number" name="discount_rate" min="0" max="90" value="<%=product.getDiscount_rate()%>">%</td>
 			</tr>
+			<tr>
+				<th>등록일</th>
+				<td>
+					<input type="text" name="reg_date" value="<%=sdf.format(product.getReg_date())%>" size="15" class="c_p_reg_date">
+					<span class="s_p_reg_date">등록일은 변경불가</span>
+				</td>
+			</tr>
 		</table>
 		<div class="btns">
-			<input type="button" value="상품 정보 수정" id="btn_register">
-			<input type="reset" value="다시 입력">
+			<input type="button" value="상품 정보 수정" id="btn_update">
+			<input type="button" value="상품 정보 삭제" id="btn_delete">
 			<input type="button" value="상품 목록" id="btn_list">
 			<input type="button" value="관리자 페이지" id="btn_main">
 		</div>

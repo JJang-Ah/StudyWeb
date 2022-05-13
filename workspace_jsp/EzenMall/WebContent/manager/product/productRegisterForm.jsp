@@ -125,8 +125,10 @@ if(managerId == null) {%>
 						<option value="230">종교</option>
 						<option value="240">사회</option>
 						<option value="250">과학</option>
-						<option value="310">자기계발</option>
+						<option value="310">경제/경영</option>
+						<option value="320">자기계발</option>
 						<option value="410">여행</option>
+						<option value="420">만화</option>
 						<option value="510">잡지</option>
 						<option value="610">어린이</option>
 						<option value="620">육아</option>

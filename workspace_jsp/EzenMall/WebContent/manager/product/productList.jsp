@@ -36,6 +36,17 @@ th { background: #dee2e6;}
 .center { text-align: center;}
 .left { text-align: left; padding-left: 2px;}
 .right { text-align: right; padding-right: 5px;}
+.img_update:hover { content: url('../../icons/update2.png');}
+.img_delete:hover { content: url('../../icons/delete2.png');}
+
+
+/* 하단 - 페이징 영역*/
+#paging { text-align: center; margin-top: 20px;}
+#pBox { display: inline-block; width: 22px; height: 22px; padding: 5px; margin: 5px;}
+#pBox:hover { background: #495057; color: white; font-weight: bold; border-radius: 10px;}
+.pBox_c { background: #495057; color: white; font-weight: bold; border-radius: 10px;}
+.pBox_b { font-weight: 900;}
+
 </style>
 <script>
 
@@ -53,16 +64,31 @@ if(managerId == null) {
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 DecimalFormat df = new DecimalFormat("#,###,###");
 String product_kindName = "";
+
+
+//################ 페이징(paging) 처리 
+//페이징(paging) 처리를 위한 변수 선언
+int pageSize = 10; // 1페이지에 10건의 게시글을 표시
+String pageNum = request.getParameter("pageNum");
+if(pageNum == null) pageNum = "1";
+
+int currentPage = Integer.parseInt(pageNum); // 현재 페이지
+int startRow = (currentPage -1) * pageSize + 1; // 현재 페이지의 첫번째 행
+int endRow = currentPage * pageSize; 	// 현재 페이지의 마지막 행
+
+//################
+
 // DB 연결, 질의 처리
 ProductDAO productDAO = ProductDAO.getInstance();
 
 // 전체 상품수 조회
 int cnt = productDAO.getProductCount();
 
-// 전체 상품 조회
-List<ProductDTO> productList = productDAO.getProductList();
+// 전체 상품 조회 - paging 처리한 상품 목록
+List<ProductDTO> productList = productDAO.getProductList(startRow, pageSize);
 
-int number = cnt;
+//매 페이지마다 전체 상품수에 대한 역순 번호
+int number = cnt - ((currentPage-1) * pageSize); 
 %>
 <div id="container">
 	<div class="m_title"><a href="../managerMain.jsp">AH MALL</a></div>
@@ -79,7 +105,7 @@ int number = cnt;
 		<tr>
 			<th width="4%">No</th>
 			<th width="9%">분류</th>
-			<th width="5%">상품사진</th>
+			<th width="5%">사진</th>
 			<th width="20%">제목</th>
 			<th width="7%">가격</th>
 			<th width="5%">재고</th>
@@ -102,8 +128,10 @@ int number = cnt;
 				case "230": product_kindName = "종교"; break;
 				case "240": product_kindName = "사회"; break;
 				case "250": product_kindName = "과학"; break;
-				case "310": product_kindName = "자기계발"; break;
+				case "310": product_kindName = "경제/경영"; break;
+				case "320": product_kindName = "자기계발"; break;
 				case "410": product_kindName = "여행"; break;
+				case "420": product_kindName = "만화"; break;
 				case "510": product_kindName = "잡지"; break;
 				case "610": product_kindName = "어린이"; break;
 				case "620": product_kindName = "육아"; break;
@@ -117,14 +145,14 @@ int number = cnt;
 		%>
 		<tr>
 			<td class="center"><%=number-- %></td>	
-			<td class="center"><%=product_kindName %></td>	
+			<td class="center"><a href=""><%=product_kindName %></a></td>	
 			<td class="center">
-				<a href="productContent.jsp?product_id=<%=product.getProduct_id()%>">
-					<img src=<%="/images_ezenmall/" + product.getProduct_image()%> width="55px" height="80px">
+				<a href="productContent.jsp?product_id=<%=product.getProduct_id()%>&pageNum=<%=pageNum%>">
+					<img src=<%="/images_ezenmall/" + product.getProduct_image()%> width="35px" height="50px">
 				</a>
 			</td>	
 			<td class="left">
-				<a href="productContent.jsp?product_id=<%=product.getProduct_id()%>"><%=product.getProduct_name() %></a>
+				<a href="productContent.jsp?product_id=<%=product.getProduct_id()%>&pageNum=<%=pageNum%>"><%=product.getProduct_name() %></a>
 			</td>	
 			<td class="right"><%=df.format(product.getProduct_price()) %>원</td>
 			<td class="right"><%=df.format(product.getProduct_count()) %>권</td>
@@ -133,10 +161,64 @@ int number = cnt;
 			<td class="center"><%=product.getPublishing_date() %></td>
 			<td class="center"><%=product.getDiscount_rate() %></td>	
 			<td class="center"><%=sdf.format(product.getReg_date()) %></td>	
-			<td class="center">수정 | 삭제</td>	
+			<td class="center">
+				<a href="productContent.jsp?product_id=<%=product.getProduct_id() %>&pageNum=<%=pageNum%>"><img src="../../icons/update1.png" width="30" class="img_update"></a>&nbsp;&nbsp;
+				<a href="productDeletePro.jsp?product_id=<%=product.getProduct_id() %>&pageNum=<%=pageNum%>"><img src="../../icons/delete1.png" width="30" class="img_delete"></a>
+			</td>	
 		</tr>
 		<%} }%>
 	</table>
+	
+	<%-- 페이징 처리 --%>
+	<div id="paging">
+	<%
+	if(cnt > 0) {
+		// 전체 페이지수 계산
+		int pageCount = cnt / pageSize + (cnt%pageSize==0? 0 : 1);
+		int startPage = 1; //시작페이지 번호
+		int pageBlock = 10; //페이징의 개수 
+		
+		// 시작 페이지 설정
+		if(currentPage % 10 != 0) startPage = (currentPage/10)*10 +1;
+		else startPage = (currentPage/10 -1) * 10 +1;
+			
+		// 끝 페이지 설정
+		int endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		// 맨처음 페이지 이동 처리
+		if(startPage > 10) {
+			out.print("<a href='productList.jsp?pageNum=1'><div id='pBox' class='pBox_b' title='첫 페이지'>" + "〈〈" + "</div></a>");
+		}
+		
+		// 이전 페이지 처리
+		if(startPage > 10 ) {
+			out.print("<a href='productList.jsp?pageNum=" + (currentPage-10) + "'><div id='pBox' class='pBox_b' title='이전 10페이지'>" + "〈" + "</div></a>");
+		}
+		// 페이징 블럭 출력 처리
+		for(int i=startPage; i<=endPage; i++) {
+			if(currentPage == i) { // 선택된 페이지가 현재 페이지일 때
+				out.print("<div id='pBox' class='pBox_c'>" + i + "</div>");
+			} else {		// 선택된 페이지가 다른 페이지일 떄 -> 이동에 대한 링크 설정
+				out.print("<a href='productList.jsp?pageNum=" + i + "'><div id='pBox'>" + i + "</div></a>");	
+			}
+		}
+		
+		// 다음 페이지 처리 
+		if(endPage < pageCount) {
+			int movePage = currentPage + 10;
+			if(movePage > pageCount) movePage=pageCount;
+			out.print("<a href='productList.jsp?pageNum=" + movePage + "'><div id='pBox' class='pBox_b' title='다음 10페이지'>" + "〉" + "</div></a>");
+		}
+		
+		// 맨 끝 페이지 이동처리
+		if(endPage < pageCount) {
+			out.print("<a href='productList.jsp?pageNum=" + pageCount + "'><div id='pBox' class='pBox_b' title='끝 페이지'>" + "〉〉" + "</div></a>");
+		}
+	}
+	%>
+	</div>
+	
 </div>
 </body>
 </html>

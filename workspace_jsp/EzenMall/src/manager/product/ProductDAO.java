@@ -71,14 +71,16 @@ public class ProductDAO {
 	}
 	
 	// 전체 상품 조회 메소드
-	public List<ProductDTO> getProductList() {
+	public List<ProductDTO> getProductList(int startRow, int pageSize) {
 		List<ProductDTO> productList = new ArrayList<ProductDTO>();
 		ProductDTO product = null;
-		String sql = "select * from product";
+		String sql = "select * from product order by product_id desc limit ?, ?";
 		
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -142,6 +144,53 @@ public class ProductDAO {
 		}
 		return product;
 	}
+	
+	// 상품 수정 메소드
+	public void updateProduct(ProductDTO product) {
+		String sql = "update product set product_kind=?, product_name=?, product_price=?, product_count=?, author=?, "
+				+ "publishing_com=?, publishing_date=?, product_image=?, product_content=?, discount_rate=? "
+				+ "where product_id=?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product.getProduct_kind());
+			pstmt.setString(2, product.getProduct_name());
+			pstmt.setInt(3, product.getProduct_price());
+			pstmt.setInt(4, product.getProduct_count());
+			pstmt.setString(5, product.getAuthor());
+			pstmt.setString(6, product.getPublishing_com());
+			pstmt.setString(7, product.getPublishing_date());
+			pstmt.setString(8, product.getProduct_image());
+			pstmt.setString(9, product.getProduct_content());
+			pstmt.setInt(10, product.getDiscount_rate());
+			pstmt.setInt(11, product.getProduct_id());
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("updateProduct 메소드: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
+	
+	// 상품 정보 삭제 메소드
+	public void deleteProduct(int product_id) {
+		String sql = "delete from product where product_id=?";
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, product_id);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("deleteProduct 메소드: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
+	
 	
 	
 }
