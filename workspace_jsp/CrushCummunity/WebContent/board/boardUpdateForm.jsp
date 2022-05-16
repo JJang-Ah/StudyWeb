@@ -8,7 +8,7 @@
 <title>글 수정 폼</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Paytone+One&display=swap');
-#container { width: 500px; margin: 0 auto;}
+#container { width: 1000px; margin: 0 auto;}
 a { text-decoration: none; color: black;}
 /* 상단 - 메인, 서브 타이틀 */
 .m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
@@ -75,7 +75,7 @@ BoardDTO board = boardDAO.getBoardUpdateForm(num);
 
 %>
 <div id="container">
-	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">Crush 팬 카페</a></div>
 	<div class="s_title">글 수정</div> <br>
 	
 	<form action="boardUpdatePro.jsp" method="post" name="updateForm">

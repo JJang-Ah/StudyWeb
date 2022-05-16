@@ -7,7 +7,7 @@
 <title>글 등록 폼</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Paytone+One&display=swap');
-#container { width: 500px; margin: 0 auto;}
+#container { width:1000px; margin: 0 auto;}
 a { text-decoration: none; color: black;}
 /* 상단 - 메인, 서브 타이틀 */
 .m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
@@ -52,7 +52,7 @@ td { padding-left: 5px;}
 		// 전체 게시글 버튼을 클릭할 때
 		let btn_boardList = document.getElementById("btn_boardList");
 		btn_boardList.addEventListener("click", function() {
-			location='boardList.jsp?pageNum=' + pageNum;
+			location='boardList.jsp';
 		})
 	})
 
@@ -85,7 +85,7 @@ if(request.getParameter("num") != null) {
 }
 %>
 <div id="container">
-	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">Crush 팬 카페</a></div>
 	<%if(request.getParameter("num") == null) { %>
 		<div class="s_title">글 등록</div> <br>
 	<%} else { %>
@@ -108,7 +108,7 @@ if(request.getParameter("num") != null) {
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td class="c_text"><textarea rows="22" cols="56" name="content"></textarea></td>
+				<td class="c_text"><textarea rows="22" cols="116" name="content"></textarea></td>
 			</tr>
 		</table>
 		<div class="btns">

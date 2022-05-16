@@ -153,8 +153,8 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
         
      	<Context docBase="c:/Users/tw5hy/바탕 화면/이젠 아카데미/images_ezenmall" path="/images_ezenmall" reloadable="true"/>
-      <Context docBase="EzenMall" path="/EzenMall" reloadable="true" source="org.eclipse.jst.jee.server:EzenMall"/>
-      </Host>
+      
+      <Context docBase="EzenMall" path="/EzenMall" reloadable="true" source="org.eclipse.jst.jee.server:EzenMall"/></Host>
     </Engine>
   </Service>
 </Server>

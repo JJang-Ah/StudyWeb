@@ -49,6 +49,7 @@ span { font-size: 0.8em;}
 		let address = form.address;
 		let address2 = form.address2;
 		
+		
 		// ID 중복 체크 버튼 - DB 작업 : member 테이블에 똑같은 id가 있는지를 검사
 		let btn_chk_id = document.getElementById("btn_chk_id");
 		btn_chk_id.addEventListener("click", function() {
@@ -172,7 +173,7 @@ span { font-size: 0.8em;}
 </head>
 <body>
 <div id="container">
-	<div class="m_title"><a href="../board/boardList.jsp">EZEN MALL</a></div>
+	<div class="m_title"><a href="../board/boardList.jsp">Crush 팬 카페</a></div>
 	<div class="s_title">회원가입</div>
 	
 	<form action="memberJoinPro.jsp" method="post" name="joinForm">

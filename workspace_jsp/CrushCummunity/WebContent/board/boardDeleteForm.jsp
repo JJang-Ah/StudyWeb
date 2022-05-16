@@ -67,7 +67,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 
 %>
 <div id="container">
-	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">Crush 팬 카페</a></div>
 	<div class="s_title">글 삭제</div> <br>
 	
 	<form action="boardDeletePro.jsp" method="post" name="deleteForm">

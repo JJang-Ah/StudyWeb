@@ -82,7 +82,7 @@ int number = cnt - ((currentPage-1) * pageSize);
 %>
 <div id="container">
 
-	<div class="m_title"><a href="boardList.jsp">EZEN MALL</a></div>
+	<div class="m_title"><a href="boardList.jsp">Crush 팬 카페</a></div>
 	<div class="s_title">전체 게시판</div> <br>
 	<div class="top_info">
 		<span class="s_cnt">전체글수: <%=cnt %> </span>&ensp;&ensp;
