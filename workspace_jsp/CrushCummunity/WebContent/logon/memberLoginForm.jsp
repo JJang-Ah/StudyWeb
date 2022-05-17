@@ -46,6 +46,24 @@ a { text-decoration: none; color: black;}
 				form.pwd.focus();
 				return;
 			}
+			
+			// 아이디 기억하기
+			let now = new Date(); // 오늘 날짜
+			let name = "cookieId"; // 쿠키 이름
+			let value = form.id.value; // 쿠키 값
+			
+			if(form.chk.checked == true) { // 체크박스를 체크했을 때 -> 쿠키 생성
+				// 만료시간: 지금으로부터 7일 후로 설정, 만료시간으로 사용
+				now.setDate(now.getDate() + 7); 
+			} else { // 체크박스를 해제했을 때 -> 쿠키 삭제
+				// 만료시간: 지금 시간으로 설정
+				now.setDate(now.getDate() + 0);
+			}
+			
+			// 쿠키 생성시에 필요한 정보 - 쿠키의 이름과 값, 위치, 만료시간
+			// ;path=/;expires= : 현재 페이지의 위치
+			document.cookie = name + "=" + escape(value) + ";path=/;expires=" +now.toGMTString() + ";";
+			
 			form.submit();
 		})	
 		
@@ -77,7 +95,7 @@ a { text-decoration: none; color: black;}
 		// 쉼표, 세미콜론 등과 같은 문자가 쿠키에서 사용되는 문자열과 충돌을 방지하기 위해 사용
 		let chk = document.getElementById("chk");
 		chk.addEventListener("click", function() {
-			let now = new Date(); // 오늘 날짜
+			/* let now = new Date(); // 오늘 날짜
 			let name = "cookieId"; // 쿠키 이름
 			let value = form.id.value; // 쿠키 값
 			
@@ -91,7 +109,7 @@ a { text-decoration: none; color: black;}
 			
 			// 쿠키 생성시에 필요한 정보 - 쿠키의 이름과 값, 위치, 만료시간
 			// ;path=/;expires= : 현재 페이지의 위치
-			document.cookie = name + "=" + escape(value) + ";path=/;expires=" +now.toGMTString() + ";";
+			document.cookie = name + "=" + escape(value) + ";path=/;expires=" +now.toGMTString() + ";"; */
 		})
 		
 	})
@@ -109,7 +127,7 @@ a { text-decoration: none; color: black;}
 			<div class="f_pwd"><input type="password" id="pwd" name="pwd" class="c_pwd" placeholder="비밀번호" size="55"></div>
 			<div class="f_chk">
 				<input type="checkbox" id="chk" class="c_chk" size="55" name="chk">&nbsp;
-				<label for="chk">로그인 상태 유지</label>
+				<label for="chk">아이디 기억하기</label>
 			</div>
 			<div class="f_submit"><input type="button" value="로그인" id="btn_Login"></div>
 		</div>

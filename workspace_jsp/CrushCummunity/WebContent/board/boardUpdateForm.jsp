@@ -92,7 +92,7 @@ BoardDTO board = boardDAO.getBoardUpdateForm(num);
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td class="c_text"><textarea rows="22" cols="56" name="content" id="content"><%=board.getContent() %></textarea></td>
+				<td class="c_text"><textarea rows="22" cols="116" name="content" id="content"><%=board.getContent() %></textarea></td>
 			</tr>
 		</table>
 		<div class="btns">

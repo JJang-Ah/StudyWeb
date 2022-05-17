@@ -119,7 +119,7 @@ int number = cnt - ((currentPage-1) * pageSize);
 <div id="container">
    <%-- 상단: 타이틀 --%>
    <div class="m_title"><a href="../managerMain.jsp">AH MALL</a></div>
-   <div class="s_title">상품 목록</div>
+   <div class="s_title"><a href="productList.jsp">상품 목록</a></div>
    
    <%-- 상단: 아이디, 로그아웃, 상품등록 --%>
    <div class="top_info">
@@ -191,7 +191,7 @@ int number = cnt - ((currentPage-1) * pageSize);
       %>
       <tr>
          <td class="center"><%=number-- %></td>   
-         <td class="center"><a href=""><%=product_kindName %></a></td>   
+         <td class="center"><%=product_kindName %></td>   
          <td class="center">
             <a href="productContent.jsp?product_id=<%=product.getProduct_id()%>&pageNum=<%=pageNum%>">
                <img src=<%="/images_ezenmall/" + product.getProduct_image()%> width="35px" height="50px">
@@ -234,7 +234,7 @@ int number = cnt - ((currentPage-1) * pageSize);
       
       // 맨처음 페이지 이동 처리
       if(startPage > 10) {
-         out.print("<a href='productList.jsp?pageNum=1&search='"+search+"&s_search="+s_search+"&i_search="+i_search+"'><div id='pBox' class='pBox_b' title='첫 페이지'>"+"〈〈"+"</div></a>");
+         out.print("<a href='productList.jsp?pageNum=1&search="+search+"&s_search="+s_search+"&i_search="+i_search+"'><div id='pBox' class='pBox_b' title='첫 페이지'>"+"〈〈"+"</div></a>");
       }
       
       // 이전 페이지 처리

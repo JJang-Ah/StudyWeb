@@ -195,15 +195,13 @@ public class ProductDAO {
 	public ProductDTO getProduct(int product_id) {
 		ProductDTO product = new ProductDTO();
 		String sql = "select * from product where product_id = ?";
-		
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, product_id);
 			rs = pstmt.executeQuery();
-			
 			rs.next();
-			
+		
 			// product상품에 대한 12가지의 필드의 정보를 담는다.
 			product.setProduct_id(rs.getInt("product_id"));
 			product.setProduct_kind(rs.getString("product_kind"));
@@ -273,6 +271,69 @@ public class ProductDAO {
 		}
 	}
 	
+	//#################################
+	// mall에서 사용하는 메소드
 	
+	// 1. chk가 1일때 - shop에서 100번대, 200번대 신상품 3개씩을 리스트에 담아서 리턴하는 메소드
+	// "110", "120", "210", "220", "230", "240", "250"
+	// 신상품의 기준: 출판일(publishing_date)
 	
+	// 2. chk가 2일때 - 모든 상품 종류별로 신상품 1개씩을 리스트에 담아서 리턴하는 메소드
+	public List<ProductDTO> getProductList(String[] nProducts, int chk) {
+		List<ProductDTO> productList = new ArrayList<ProductDTO>();
+		ProductDTO product = null;
+		String sql1 = "select * from product where product_kind = ? order by publishing_date desc limit 3";
+		String sql2 = "select * from product where product_kind = ? order by publishing_date desc limit 1";
+		try {
+			conn = JDBCUtil.getConnection();
+			for(String s : nProducts) {
+				if(chk == 1) pstmt = conn.prepareStatement(sql1);
+				else if(chk == 2) pstmt = conn.prepareStatement(sql2);
+				
+				pstmt.setString(1, s);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					product = new ProductDTO();
+					product.setProduct_id(rs.getInt("product_id"));
+					product.setProduct_image(rs.getString("product_image"));
+					productList.add(product);
+				}
+			}
+		} catch(Exception e) {
+			System.out.println("getProductList 메소드: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return productList;
+	}
+	
+	// 각 분류마다에서 가장 최신 상품들을 리스트에 담아서 리턴
+	public List<ProductDTO> getGoodProductList() {
+		List<ProductDTO> goodProductList = new ArrayList<ProductDTO>();
+		ProductDTO product = null;
+		String sql = "select * from product where product_id in (select max(product_id)" + 
+				"from product group by product_kind)" + 
+				"order by product_kind";
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				product = new ProductDTO();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_image(rs.getString("product_image"));
+				product.setProduct_kind(rs.getString("product_kind"));
+				
+				goodProductList.add(product);
+			}
+		} catch(Exception e) {
+			System.out.println("getNewProducts 메소드: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return goodProductList;
+	}
 }

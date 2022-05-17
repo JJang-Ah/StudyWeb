@@ -23,4 +23,15 @@
 1. JDBCUtil, ManagerDAO 클래스 작성 -> 관리자 로그인 확인
 2. managerMain.jsp
 
+# 2022년 05월 17일(화) 작업 일지.
+1. 사용자 영역인 mall안에 shopping 영역안에 작업을 시작
+- 상품의 메인 페이지, 상품에 대한 상세 페이지
+
+2. 상품의 메인 페이지의 구성
+- 상단과 하단의 2영역은 모든 페이지에 같은 형태로 존재
+- shopAll안에 shopTop + shopMain + shopBottom
+- 상단: shopTop -> 쇼핑몰의 모든 페이지 상단에 존재
+- 본문: shopMain -> 쇼핑몰에서 상품을 나열하는 본문 페이지
+- 하단: shopBottom -> 쇼핑몰의 모든 페이지 하단에 존재
+
 
