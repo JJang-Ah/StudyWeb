@@ -65,8 +65,9 @@ List<ProductDTO> goodProductList = productDAO.getGoodProductList();
 		<header><jsp:include page="../common/shopTop.jsp"/></header>
 	</div>
 	<div> <%-- 메인(본문) --%>
-		<main>
-			<article class="new_items"> <%-- 메인1: 100번대와 200번대에서 신상품을 3개씩 가져와서 bx-slider로 노출 --%>
+		<main> <%-- 메인1: 100번대와 200번대에서 신상품을 3개씩 가져와서 bx-slider로 노출 --%>
+			<%--
+			<article class="new_items">
 				<h3>신상품</h3>
 				<div class="slider">
 				<%for(ProductDTO product : newProductList) {%>
@@ -74,6 +75,7 @@ List<ProductDTO> goodProductList = productDAO.getGoodProductList();
 				<%}%>
 				</div>
 			</article>
+			--%>
 			<article class="good_items"> <%-- 메인2: 모든 상품에서 신상품 1개씩을 가져와서 slick으로 노출  --%>
 				<h3>추천상품</h3>
 				<div class="slider">

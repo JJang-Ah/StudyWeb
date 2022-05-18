@@ -336,4 +336,37 @@ public class ProductDAO {
 		}
 		return goodProductList;
 	}
+	
+	// 상품 분류별 보기 메소드 - shopMain.jsp
+	public List<ProductDTO> getProductList(String product_kind) {
+		List<ProductDTO> productList = new ArrayList<ProductDTO>();
+		ProductDTO product = null;
+		String sql = "select * from product where product_kind = ?";
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product_kind);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				product = new ProductDTO();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_kind(rs.getString("product_kind"));
+				product.setProduct_name(rs.getString("product_name"));
+				product.setProduct_price(rs.getInt("product_price"));
+				product.setAuthor(rs.getString("author"));
+				product.setPublishing_com(rs.getString("publishing_com"));
+				product.setProduct_image(rs.getString("product_image"));
+				product.setDiscount_rate(rs.getInt("discount_rate"));
+				productList.add(product);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getProductList(product_kind) 메소드: "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return productList;
+		
+	}
 }

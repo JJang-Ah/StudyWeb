@@ -13,12 +13,8 @@ public class BoardDAO {
 
 	// 싱글톤
 	// 디폴트생성자를 private로 막음 - 외부에서 new로 못만듦
-	private BoardDAO() {
-		
-	}
-	
-	private static BoardDAO boardDAO = new BoardDAO();
-	
+	private BoardDAO() { }
+	private static BoardDAO boardDAO = new BoardDAO();	
 	public static BoardDAO getInstance( ) {
 		return boardDAO;
 	}
@@ -32,7 +28,7 @@ public class BoardDAO {
 	public void insertBoard(BoardDTO board) { // 리턴 타입 없음
 		// 작업1 : board에서 가장 큰 글의 번호를 구함 -> 이 번호로 그룹화 할 아이디 값을 결정한다.
 		String sql1 = "SELECT MAX(num) FROM board";
-		// 작업2 : 같은 그룹의 아이디(ref)이고, 글 순서(re_step)이  크다면 글순서(re_step)을 1증가함.
+		// 작업2 : 같은 그룹의 아이디(ref)이고, 글 순서(re_step)가  크다면 글순서(re_step)을 1증가함.
 		String sql2 = "UPDATE board SET re_step = re_step+1 WHERE ref =? AND re_step > ?";
 		// 작업3 : 최종으로 원글 또는 댓글을 추가한다.
 		String sql3 = "INSERT INTO board(writer, subject, content, ref, re_step, re_level) VALUES(?,?,?,?,?,?)";
@@ -124,7 +120,7 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	// 게시판 글보기(1건) 메소드
+	// 글(1건) 상세 보기 메소드
 	public BoardDTO getBoard(int num) {
 		BoardDTO board = new BoardDTO();
 		

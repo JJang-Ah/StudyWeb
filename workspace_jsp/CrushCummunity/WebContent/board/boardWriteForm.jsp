@@ -73,15 +73,15 @@ if(pageNum == null) pageNum = "1";
 int num = 0, ref = 1, re_step=0, re_level = 0;
 String re = "";
 
-// 글번호가 없다면 원글, 글번호가 있다면 댓글
-// 글번호(num)이 있다면, 다시 말하면 댓글이라면 num, ref, re_step, re_level을 저장
+// 글번호가 없다면 원글, 글번호가 있다면 답글
+// 글번호(num)이 있다면, 다시 말하면 답글이라면 num, ref, re_step, re_level을 저장
 // 글번호가 없다면 위에서 선언한 기본값을 가진다.
 if(request.getParameter("num") != null) {
 	num = Integer.parseInt(request.getParameter("num"));
 	ref = Integer.parseInt(request.getParameter("ref"));
 	re_step = Integer.parseInt(request.getParameter("re_step"));
 	re_level = Integer.parseInt(request.getParameter("re_level"));
-	re = "[re] "; // 댓글이면 제목란에 찍힘.
+	re = "[re] "; // 답글이면 제목란에 찍힘.
 }
 %>
 <div id="container">
@@ -89,7 +89,7 @@ if(request.getParameter("num") != null) {
 	<%if(request.getParameter("num") == null) { %>
 		<div class="s_title">글 등록</div> <br>
 	<%} else { %>
-		<div class="s_title_re">댓글 등록</div> <br>
+		<div class="s_title_re">답글 등록</div> <br>
 	<%} %>
 	<form action="boardWritePro.jsp" method="post" name="writeForm">
 		<input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -115,7 +115,7 @@ if(request.getParameter("num") != null) {
 			<%if(request.getParameter("num") == null) { %>
 				<input type="button" value="글 등록" id="btn_write" >&emsp;&emsp;
 			<%} else { %>
-				<input type="button" value="댓글 등록" id="btn_write" class="btn_write_re">&emsp;&emsp;
+				<input type="button" value="답글 등록" id="btn_write" class="btn_write_re">&emsp;&emsp;
 			<%} %>
 			<input type="button" value="게시글 보기" id="btn_boardList">
 		</div>

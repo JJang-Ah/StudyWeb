@@ -91,12 +91,11 @@ td { padding: 5px;}
 <body>
 <%
 String memberId = (String)session.getAttribute("memberId");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
+
 if(memberId == null) {
 	out.print("<script>location='../logon/memberLoginForm.jsp';</script>");
 }
-
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
-
 String pageNum = request.getParameter("pageNum");
 
 int num = Integer.parseInt(request.getParameter("num")); //넘어오는 num의 값을 받는다.
@@ -152,7 +151,7 @@ int re_level = board.getRe_level();
 		<div class="btns">
 			<input type="button" value="글 수정" id="btn_update">&ensp;
 			<input type="button" value="글 삭제" id="btn_delete">&ensp;
-			<input type="button" value="댓글 작성" id="btn_review">&ensp;
+			<input type="button" value="답글 작성" id="btn_review">&ensp;
 			<input type="button" value="게시글 보기" id="btn_boardList">
 		</div>
 	</form>

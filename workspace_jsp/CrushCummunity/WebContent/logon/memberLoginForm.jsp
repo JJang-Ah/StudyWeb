@@ -93,8 +93,8 @@ a { text-decoration: none; color: black;}
 		// - session: 연결 정보를 서버 쪽에 저장
 		// escape() 함수: *, -, _, +, ., / 를 제외한 모든 문자를 16진수로 변환하는 함수
 		// 쉼표, 세미콜론 등과 같은 문자가 쿠키에서 사용되는 문자열과 충돌을 방지하기 위해 사용
-		let chk = document.getElementById("chk");
-		chk.addEventListener("click", function() {
+// 		let chk = document.getElementById("chk");
+// 		chk.addEventListener("click", function() {
 			/* let now = new Date(); // 오늘 날짜
 			let name = "cookieId"; // 쿠키 이름
 			let value = form.id.value; // 쿠키 값
@@ -110,7 +110,7 @@ a { text-decoration: none; color: black;}
 			// 쿠키 생성시에 필요한 정보 - 쿠키의 이름과 값, 위치, 만료시간
 			// ;path=/;expires= : 현재 페이지의 위치
 			document.cookie = name + "=" + escape(value) + ";path=/;expires=" +now.toGMTString() + ";"; */
-		})
+// 		})
 		
 	})
 </script>
