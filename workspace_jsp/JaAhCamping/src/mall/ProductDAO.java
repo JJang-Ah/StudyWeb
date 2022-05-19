@@ -1,4 +1,4 @@
-package manager.product;
+package mall;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

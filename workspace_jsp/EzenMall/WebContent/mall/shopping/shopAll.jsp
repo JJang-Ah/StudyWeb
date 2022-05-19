@@ -13,13 +13,20 @@
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <style>
-#container { width: 1300px; margin: 0 auto;}
+#container { width: 1300px; margin: 20px auto;}
 /* 신상품 */
 .new_items { text-align: center;}
-.new_items .slider { }
+.new_items div:nth-of-type(1) { display: inline-block;}
+.c_new_img { transition: transform, 0.5s}
+.c_new_img:hover { transform: scale(1.1);}
 
 /* 추천상품 */
-.good_items { text-align: center; }
+.good_items { text-align: center;}
+.good_items div:nth-of-type(1) { display: inline-block;}
+.c_good_img { transition: transform, 0.5s}
+.c_good_img:hover { transform: scale(1.1);}
+
+
 </style>
 <script>
 // 슬라이더(slider), 카로섹(carosel)
@@ -66,26 +73,26 @@ List<ProductDTO> goodProductList = productDAO.getGoodProductList();
 	</div>
 	<div> <%-- 메인(본문) --%>
 		<main> <%-- 메인1: 100번대와 200번대에서 신상품을 3개씩 가져와서 bx-slider로 노출 --%>
-			<%--
+			
 			<article class="new_items">
 				<h3>신상품</h3>
 				<div class="slider">
 				<%for(ProductDTO product : newProductList) {%>
-					<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="../../../../images_ezenmall/<%=product.getProduct_image()%>"></a>
+					<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="../../../../images_ezenmall/<%=product.getProduct_image()%>" class="c_new_img"></a>
 				<%}%>
 				</div>
 			</article>
-			--%>
+			
 			<article class="good_items"> <%-- 메인2: 모든 상품에서 신상품 1개씩을 가져와서 slick으로 노출  --%>
 				<h3>추천상품</h3>
 				<div class="slider">
 				<%for(ProductDTO product : goodProductList) {%>
-					<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="../../../../images_ezenmall/<%=product.getProduct_image()%>"></a>
+					<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="../../../../images_ezenmall/<%=product.getProduct_image()%>" class="c_good_img"></a>
 				<%}%>
 				</div>
 			</article>
+			<hr>
 			<article class="best_items"> <%-- 메인3: 베스트셀러(주문수량이  가장 많은 상품 20개를 가져와서 노출) --%>
-		
 			</article>
 			<article class=""> <%-- 메인4: 상품 종류별로 나열되도록 설정한 영역 --%>
 				<jsp:include page="shopMain.jsp"/>
