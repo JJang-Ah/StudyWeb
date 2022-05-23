@@ -71,6 +71,7 @@ List<ProductDTO> goodProductList = productDAO.getGoodProductList();
 	<div> <%-- 상단 --%>
 		<header><jsp:include page="../common/shopTop.jsp"/></header>
 	</div>
+	<hr>
 	<div> <%-- 메인(본문) --%>
 		<main> <%-- 메인1: 100번대와 200번대에서 신상품을 3개씩 가져와서 bx-slider로 노출 --%>
 			

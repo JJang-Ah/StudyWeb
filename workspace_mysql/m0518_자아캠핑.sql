@@ -22,20 +22,31 @@ PetLove 쇼핑몰이라는 가정하에
 productList.jsp부터 차례대로 완성해 나가시오.
 4. mall/shopping/ 안에 shopAll.jsp, shopMain.jsp를 만들어서 확인
 */
--- 상품 테이블 생성
+-- (1) 상품 테이블 생성
+use db02;
 create table product (
-product_num bigint primary key auto_increment,
+product_id bigint primary key auto_increment,
 product_kind varchar(3) not null,
 product_name varchar(100) not null,
-product_image varchar(30) default 'nothing.jpg',
+product_price int not null,
+product_count int not null,
+brand varchar(50) not null,
 product_size varchar(30),
 product_weight varchar(15),
-product_content varchar(30) not null,
-product_brand varchar(30) not null,
-product_count int not null,
-product_price int not null,
-product_discount_rate int default 0,
+product_image varchar(30) default 'nothing.jpg',
+product_content varchar(50) not null,
+discount_rate int default 0,
 reg_date datetime default now()
 );
 
+-- (2) member 테이블
+create table member (
+id varchar(50) primary key,
+pwd varchar(20) not null,
+name varchar(30) not null,
+email varchar(30) not null,
+tel varchar(20) not null,
+address varchar(100) not null,
+regDate datetime not null
+);
 
