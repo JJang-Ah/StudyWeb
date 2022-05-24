@@ -19,7 +19,7 @@ int cnt = managerDAO.checkManager(managerId, managerPwd);
 out.print("<script>");
 if(cnt==1) { // cnt가 1일때 -> 세션 생성
 	session.setAttribute("managerId", managerId);
-	out.print("alert('로그인에 성공하였습니다.');location='../managerMain.jsp';");
+	out.print("alert('로그인에 성공하였습니다.');location='../shopping/shopAll.jsp';");
 } else { // cnt가 0일때
 	out.print("alert('로그인에 실패하였습니다.');history.back();");
 }

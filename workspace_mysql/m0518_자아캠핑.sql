@@ -31,7 +31,7 @@ product_name varchar(100) not null,
 product_price int not null,
 product_count int not null,
 brand varchar(50) not null,
-product_size varchar(30),
+product_size varchar(100),
 product_weight varchar(15),
 product_image varchar(30) default 'nothing.jpg',
 product_content varchar(50) not null,
@@ -49,4 +49,15 @@ tel varchar(20) not null,
 address varchar(100) not null,
 regDate datetime not null
 );
+
+-- (2) manager 테이블
+create table manager (
+managerId varchar(50) primary key,
+managerPwd varchar(20) not null
+);
+
+insert into manager values('admin', 1234);
+
+select * from manager;
+select * from product;
 

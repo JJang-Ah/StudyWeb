@@ -3,21 +3,21 @@
 
 <%-- 쇼핑몰 상단 페이지 : 쇼핑몰의 모든 페이지 상단에 포함되는 페이지 --%>
 
-<<style>
+<style>
 
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Pen+Script&family=PT+Serif:ital,wght@1,700&display=swap');
-
+#container { width: 1200px; margin: 0 auto;}
 /* 전체 레이아웃 */
 .top a { text-decoration: none; color: #000;}
 .t_box1, .t_box2, .t_box3, .t_box4 { display: inline-block; padding: 2%;}
-.t_box1, .t_box3 { width: 65%;}
-.t_box2, .t_box4 { width: 25%;}
+.t_box1, .t_box3 { width: 60%;}
+.t_box2, .t_box4 { width: 30%;}
 
 /* 구역1(상단 좌측): 타이틀, 검색 */
 .t_box1 .m_title { font-family:'PT Serif', serif; font-size: 40px; text-align: center;}
 .t_box1 .s_title { font-family: 'Nanum Pen Script', cursive; font-size: 20px; text-align: center;}
-.t_box1 .t_search { width: 400px; text-align: center; margin-top: 15px; width: 360px; margin-left: 200px;}
-.t_box1 .t_search form { border: 1px solid #000; padding: 5px;}
+.t_box1 .t_search { width: 400px; text-align: center; margin-top: 15px; width: 360px; margin-left: 175px;}
+.t_box1 .t_search form { border: 1px solid #000; padding: 5px; border-radius: 15px;}
 .t_box1 .t_search #keyword { height: 35px; width: 300px; border: none;}
 .t_box1 .t_search #keyword:focus { border: none;}
 .t_box1 .t_search button { border: none; background: #fff;}
@@ -27,7 +27,6 @@
 .t_box2 .t_b2_img1:hover { content: url('../../icons/user2.png');}
 .t_box2 .t_b2_img2:hover { content: url('../../icons/buy2.png');}
 .t_box2 .t_b2_img3:hover { content: url('../../icons/cart2.png');}
-
 
 /* 구역3(하단 좌측): 메인메뉴(하위메뉴) */
 .t_box3 { float: left; position: relative;}
@@ -48,19 +47,23 @@
 .s_menu div { padding: 10px 0;}
 .s_menu div a { font-family: '고딕'; font-size: 0.9em; color: #000;}
 .s_menu div a:hover { font-family: bold; font-size: 1.0em; text-shadow: 2px 2px 2px gray;}
-/* .mm1:hover .sm1 { display: black;} */
 
 /* 구역4(하단 우측): 로그인, 회원가입, 고객센터 */
 .t_box4 { float: right; text-align: right;}
+.t_box4 a { color: gray; font-size: 0.9em; font-weight: bold;}
+.top_end { clear: both; border: 1px solid #e9ecef; margin: 20px 0;}
 
-.top_end { claear: both;}
 </style>
-<script>
+<%
+String memberId = (String)session.getAttribute("memberId");
 
-</script>
+if(memberId == null) {
+	
+}
+%>
 <div class="top">
 	<div class="t_box1"> <%-- 구역1(상단 좌측): 타이틀, 검색 --%>
-		<div class="m_title"><a href="shopAll.jsp">EZENMALL</a></div>
+		<div class="m_title"><a href="../shopping/shopAll.jsp">EZENMALL</a></div>
 		<div class="s_title">책과 함꼐 인생의 지혜를...</div>
 		<div class="t_search">
 			<form action="" method="post" name="searchForm">
@@ -70,9 +73,9 @@
 		</div>
 	</div>
 	<div class="t_box2"> <%-- 구역2(상단 우측): 회원정보, 구매정보, 장바구니정보 --%>
-		<a><img src="../../icons/user1.png" width="35" title="회원정보" class="t_b2_img1"></a>
-		<a><img src="../../icons/buy1.png" width="35" title="구매정보" class="t_b2_img2"></a>
-		<a><img src="../../icons/cart1.png" width="35" title="장바구니" class="t_b2_img3"></a>
+		<a href="../member/memberInfoForm.jsp"><img src="../../icons/user1.png" width="35" title="회원정보" class="t_b2_img1"></a>
+		<a href="#"><img src="../../icons/buy1.png" width="35" title="구매정보" class="t_b2_img2"></a>
+		<a href="#"><img src="../../icons/cart1.png" width="35" title="장바구니" class="t_b2_img3"></a>
 	</div>
 	<div class="t_box3"> <%-- 구역3(하단 좌측): 메뉴 (하위메뉴)--%>
 		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" class="m_menu_img" width="30"></a></div>
@@ -122,9 +125,14 @@
 		</div>
 	</div>
 	<div class="t_box4"> <%-- 구역4(하단 우측): 로그인, 회원가입, 고객센터 ... --%>
-		<a href=""><span>로그인</span></a>&ensp; |&ensp;
-		<a href=""><span>회원가입</span></a>&ensp; |&ensp;
+		<%if(memberId == null) {  %>
+			<a href="../logon/memberLoginForm.jsp"><span>로그인</span></a>&ensp; |&ensp;
+		<a href="../member/memberJoinForm.jsp"><span>회원가입</span></a>&ensp; |&ensp;
+		<%} else { %>
+			<a href="../member/memberInfoForm.jsp"><span><%=memberId %>님</span></a>&ensp; |&ensp;
+			<a href="../logon/memberLogout.jsp">로그아웃</a>&ensp; |&ensp;
+		<%} %>
 		<a href=""><span>고객센터</span></a>
 	</div>
-
+	<hr class="top_end">
 </div>

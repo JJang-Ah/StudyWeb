@@ -77,6 +77,7 @@ figcaption div:hover {
 .pBox_c { background: #f1617d; color: white; font-weight: 900; border-radius: 50%;}
 .pBox_b { font-weight: 900;}
 
+.main_end { margin: 50px 0 40px 0;}
 
 </style>
 <script>
@@ -246,4 +247,5 @@ int cnt = productDAO.getProductCount(product_kind);
    
 	</div>
 </div>
+<hr class="main_end">
 
