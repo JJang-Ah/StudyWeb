@@ -15,7 +15,7 @@ input[type="text"], input[type="password"] { height: 20px;}
 /* 상단 - 메인, 서브 타이틀 */
 .t_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px}
 /* 중단 - 입력 테이블 */
-table { width: 500px; border: 1px solid black; border-collapse: collapse;}
+table { width: 500px; border: 1px solid black; border-collapse: collapse; margin: 0 auto;}
 tr { height: 65px;}
 th, td { border: 1px solid black; padding-left: 10px;}
 th { background: #ced4da;}
@@ -41,21 +41,12 @@ span { font-size: 0.8em;}
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.infoForm; // 폼은 그냥 받을 수 있음
-		let id = form.id;
-		let pwd = form.pwd;
-		let pwd2 = form.pwd2;
-		let name = form.name;
-		let email = form.email;
-		let tel = form.tel;
-		let address = form.address;
-		let address2 = form.address2;
-		
 
 		// 비밀번호 - pwd
 		// 비밀번호 유효성 검사 - 8글자 이상의 비밀번호를 생성하도록 함
 		let chk_pwd = document.getElementById("chk_pwd");
-		pwd.addEventListener("keyup", function() {
-			if (pwd.value.length < 4) {
+		form.pwd.addEventListener("keyup", function() {
+			if (form.pwd.value.length < 4) {
 				chk_pwd.innerHTML = "비밀번호는 4글자 이상이어야 합니다.";
 				chk_pwd.style.color = "red";
 			} else {
@@ -67,8 +58,8 @@ span { font-size: 0.8em;}
 		// 비밀번호 확인 - pwd2
 		// 비밀번호와 비밀번호 확인의 글자가 동일한지 유무 판단
 		let chk_pwd2 = document.getElementById("chk_pwd2");
-		pwd2.addEventListener("keyup", function() {
-			if(pwd.value == pwd2.value) {
+		form.pwd2.addEventListener("keyup", function() {
+			if(form.pwd.value == form.pwd2.value) {
 				chk_pwd2.innerHTML = "비밀번호가 일치합니다.";
 				chk_pwd2.style.color = "blue";
 			} else {
@@ -86,7 +77,7 @@ span { font-size: 0.8em;}
 		// 1. '@'문자를 포함하고 있는지의 여부 -> 아이디가 3글자 이상인지를 판별
 		// 2. '@'문자 다음에 '.'을 포함하고 있는지의 여부 -> 회사이름도 3글자 이상인지를 판별
 		let chk_email = document.getElementById("chk_email");
-		email.addEventListener("keyup", function(event) {
+		form.email.addEventListener("keyup", function(event) {
 			let value = event.currentTarget.value;
 			if(isEmail(value)) { // 이메일 형식에 맞을 때
 				chk_email.innerHTML="이메일 형식이 맞습니다. : " + value;
@@ -103,7 +94,7 @@ span { font-size: 0.8em;}
 		btn_address.addEventListener("click", function() {
 			new daum.Postcode({
 				oncomplete: function(data) {
-					address.value = data.address;
+					form.address.value = data.address;
 				}
 			}).open();
 		})
@@ -112,44 +103,44 @@ span { font-size: 0.8em;}
 		let btn_update = document.getElementById("btn_update");
 		btn_update.addEventListener("click", function() {
 			
-			if(pwd.value.length == 0) {
+			if(form.pwd.value.length == 0) {
 				alert(`비밀번호를 입력하세요!`);
-				pwd.focus();
+				form.pwd.focus();
 				return;
 			}
-			if(pwd.value.length == 0) {
+			if(form.pwd.value.length == 0) {
 				alert(`비밀번호 확인을 입력하세요!`);
-				pwd2.focus();
+				form.pwd2.focus();
 				return;
 			}
-			if(pwd.value != pwd2.value) {
+			if(form.pwd.value != form.pwd2.value) {
 				alert(`비밀번호와 비밀번호 확인이 일치하지 않습니다.`);
-				pw2.focus();
+				form.pw2.focus();
 				return;
 			}
-			if(name.value.length == 0) {
+			if(form.name.value.length == 0) {
 				alert(`이름을 입력하세요!`);
-				name.focus();
+				form.name.focus();
 				return;
 			}
-			if(email.value.length == 0) {
+			if(form.email.value.length == 0) {
 				alert(`이메일을 입력하세요!`);
-				email.focus();
+				form.email.focus();
 				return;
 			}
-			if(tel.value.length == 0) {
+			if(form.tel.value.length == 0) {
 				alert(`전화번호를 입력하세요!`);
-				tel.focus();
+				form.tel.focus();
 				return;
 			}
-			if(address.value.length == 0) {
+			if(form.address.value.length == 0) {
 				alert(`주소찾기 버튼을 클릭하여 주소를 선택하세요!`);
-				address.focus();
+				form.address.focus();
 				return;
 			}
-			if(address2.value.length == 0) {
+			if(form.address2.value.length == 0) {
 				alert(`상세주소를 입력하세요!`);
-				address2.focus();
+				form.address2.focus();
 				return;
 			}
 			form.submit();
@@ -201,7 +192,7 @@ span { font-size: 0.8em;}
 String memberId = (String)session.getAttribute("memberId"); // .getAttribute()는 object 타입이기때문
 
 if(memberId == null) {
-	out.print("<script>location='../logon/memberLoginForm.jsp'</script>");
+	out.print("<script>location='../shopping/shopAll.jsp'</script>");
 }
 
 // 아래는 세션 memberId가 있을 때 실행

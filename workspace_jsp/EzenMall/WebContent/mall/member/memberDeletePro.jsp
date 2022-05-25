@@ -14,11 +14,14 @@
 	
 	MemberDAO memberDAO = MemberDAO.getInstance();
 	int cnt = memberDAO.deleteMember(id, pwd);
+	
 	%>
 	<script>
-	<%if(cnt > 0) {%> // 삭제 성공
+	<%if(cnt > 0) { // 삭제 성공
+		session.removeAttribute("memberId");
+	%>
 		alert(`계정이 성공적으로 삭제되었습니다.`);
-		location='../logon/memberLoginForm.jsp';
+		location='../shopping/shopAll.jsp';
 	<%} else {%> // 삭제 실패
 		alert(`계정 탈퇴(삭제)에 실패하였습니다.`);
 		history.back();

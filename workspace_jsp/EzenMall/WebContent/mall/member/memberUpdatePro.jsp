@@ -27,11 +27,11 @@
 	<script>
 	<% if(cnt > 0) {%> <%-- 수정 성공 --%>
 		alert(`회원 정보 수정에 성공하였습니다.`);
-		
+		location='../shopping/shopAll.jsp';
 	<%} else { %> <%-- 수정 실패 --%>
 		alert(`회원 정보 수정에 실패하였습니다.`);
+		history.back();
 	<%} %>		
-	history.back();
 
 	</script>
 </body>

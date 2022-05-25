@@ -13,7 +13,7 @@ a { text-decoration: none; color: black;}
 .t_title { font-family: 'Hammersmith One', sans-serif; font-size: 2.2em; text-align: center; margin: 30px 0;}
 
 /* 중단 - 입력창 */
-.f_input { width: 450px; text-align: center; border: 1px solid #ccc; padding: 10px;}
+.f_input { width: 450px; text-align: center; border: 1px solid #ccc; padding: 10px; margin: 0 auto;}
 .f_input .c_id, .f_input .c_pwd { height: 45px; margin-top: 20px; padding-left: 5px;}
 .f_input .f_chk { text-align: left; margin-top: 10px; font-size: 0.9em; color: gray;}
 .f_input #btn_Login { width: 425px; height: 47px; margin-top: 25px; background: black; color: white;

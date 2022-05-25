@@ -18,7 +18,7 @@
 .b2_s2 { float: right;}
 .c_b2 { margin-bottom: 8px;}
 .c_b2:nth-child(1), .c_b2:nth-child(5) { font-size: 0.9em; color: #495057;}
-.c_b2:nth-child(3) span { border: 1px solid gray; padding: 1px;}
+.c_b2:nth-child(3) span { padding: 1px;}
 .c_b2 span { color: #1e94be; font-weight: bold;}
 
 /* b_box3 */
