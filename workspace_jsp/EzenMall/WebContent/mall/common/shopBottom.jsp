@@ -29,6 +29,7 @@
 
 
 </style>
+<hr class="b_line">
 
 <div class="bottom">
 	<div class="b_box1">

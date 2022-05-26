@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// 상품 분휴 선택에 대한 change 이벤트 처리
 	product_kind.addEventListener("change", function(event) {
 		// product_kind를 가지고 shopAll.jsp로 이동
-		location = 'shopAll.jsp?product_kind=' + product_kind.value;
+		location = 'shopAll.jsp?product_kind=' + product_kind.value + '#t_kind';
 		
 	})
 	
@@ -247,5 +247,4 @@ int cnt = productDAO.getProductCount(product_kind);
    
 	</div>
 </div>
-<hr class="main_end">
 

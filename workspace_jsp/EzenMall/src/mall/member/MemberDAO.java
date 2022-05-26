@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-
 import util.JDBCUtil;
 
 // DAO(Data Access Object) - DB 연결, 해제, 질의를 담당
