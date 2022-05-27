@@ -1,3 +1,6 @@
+<%@page import="product.upload.FileUploadDAO"%>
+<%@page import="java.util.*"%>
+<%@page import="product.upload.FileUploadDTO"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -49,6 +52,8 @@ try {
 	out.print("---------------------------<br>");
 
 	// 실제 업로드한 파일 정보를 출력
+	int i = 0;
+	List<String> fileList = new ArrayList<String>();
 	Enumeration<?> files = mr.getFileNames();
 	while(files.hasMoreElements()) {
 		String name = (String)files.nextElement();
@@ -61,6 +66,7 @@ try {
 		String fileType = mr.getContentType(name);
 		
 		// 업로드되는 파일의 정보 출력
+		out.print("파일번호: " + (i + 1) + "<br>");
 		out.print("파라미터 이름: " + name + "<br>");
 		out.print("원본 파일 이름: " + originFileName + "<br>");
 		out.print("저장 파일 이름: " + saveFileName + "<br>");
@@ -69,8 +75,48 @@ try {
 		// 파일 크기
 		File file = mr.getFile(name);
 		if(file != null) out.print("파일 크기: " + file.length() + "Byte<br>");
+		out.print("-------------<br><br>");		
 		
+		// 업로드된 파일이름을 fileList저장
+		fileList.add(saveFileName);
 	}
+	// 업로드된 파일의 순서를 조정
+	int size = fileList.size();
+	
+	// FileUploadDTO에 정보를 저장하고, fileUpload 테이블에 저장
+	FileUploadDTO file = new FileUploadDTO();
+	file.setWriter(mr.getParameter("writer"));
+	file.setSubject(mr.getParameter("subject"));
+	if(size <= 4) { // 업로드한 파일이 4개일 경우
+			
+		file.setUploadFile1(fileList.get(3));
+		file.setUploadFile2(fileList.get(2));
+		file.setUploadFile3(fileList.get(1));
+		file.setUploadFile4(fileList.get(0));
+	} else if(size <= 8) { // 업로드한 파일이 5개인 경우
+
+		file.setUploadFile1(fileList.get(3));
+		file.setUploadFile2(fileList.get(2));
+		file.setUploadFile3(fileList.get(1));
+		file.setUploadFile4(fileList.get(0));
+		file.setUploadFile5(fileList.get(4));
+	}
+	
+	// fileUpload 테이블에 저장된 내용을 확인 
+	System.out.println(file);
+	
+	// file의 이미지가 null일 때 nothing.jpg로 설정 
+	if(file.getUploadFile1() == null) file.setUploadFile1("nothing.jpg");
+	if(file.getUploadFile2() == null) file.setUploadFile2("nothing.jpg");
+	if(file.getUploadFile3() == null) file.setUploadFile3("nothing.jpg");
+	if(file.getUploadFile4() == null) file.setUploadFile4("nothing.jpg");
+	if(file.getUploadFile5() == null) file.setUploadFile5("nothing.jpg");
+
+
+	// FileUploadDAO의 insertProduct 메소드에서 처리
+	FileUploadDAO uploadDAO = FileUploadDAO.getInstance();
+	uploadDAO.insertProduct(file);
+	
 } catch(Exception e) {
 	e.printStackTrace();
 } finally {

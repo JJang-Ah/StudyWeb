@@ -148,7 +148,7 @@ int cnt = productDAO.getProductCount(product_kind);
 
 %>
 <%-- 분류별 상품을 4개씩 3단으로 처리 --%>
-<div class="t_kind">
+<div class="t_kind" id="t_kind">
 	<div class="d_kind1">
 		<span class="s_kind1"><b class="s_kind11"><%=product_kindName %></b> 분야 상품 목록</span>
 		<span class="s_kind2">
@@ -214,19 +214,19 @@ int cnt = productDAO.getProductCount(product_kind);
 	      
 	      // 맨처음 페이지 이동 처리
 	      if(startPage > 3) {
-	         out.print("<a href='shopAll.jsp?pageNum=1&product_kind="+product_kind+"'><div id='pBox' class='pBox_b' title='첫 페이지'>"+"〈〈"+"</div></a>");
+	         out.print("<a href='shopAll.jsp?pageNum=1&product_kind="+product_kind+"#t_kind'><div id='pBox' class='pBox_b' title='첫 페이지'>"+"〈〈"+"</div></a>");
 	      }
 	      
 	      // 이전 페이지 처리
 	      if(startPage > 3 ) {
-	         out.print("<a href='shopAll.jsp?pageNum="+(currentPage-3)+"&product_kind="+product_kind+"'><div id='pBox' class='pBox_b' title='이전 3페이지'>"+"〈"+"</div></a>");
+	         out.print("<a href='shopAll.jsp?pageNum="+(currentPage-3)+"&product_kind="+product_kind+"#t_kind'><div id='pBox' class='pBox_b' title='이전 3페이지'>"+"〈"+"</div></a>");
 	      }
 	      // 페이징 블럭 출력 처리
 	      for(int i=startPage; i<=endPage; i++) {
 	         if(currentPage == i) { // 선택된 페이지가 현재 페이지일 때
 	            out.print("<div id='pBox' class='pBox_c'>"+i+"</div>");
 	         } else {      // 선택된 페이지가 다른 페이지일 떄 -> 이동에 대한 링크 설정
-	            out.print("<a href='shopAll.jsp?pageNum=" + i+"&product_kind="+product_kind +"'><div id='pBox'>" + i + "</div></a>");   
+	            out.print("<a href='shopAll.jsp?pageNum=" + i+"&product_kind="+product_kind +"#t_kind'><div id='pBox'>" + i + "</div></a>");   
 	         }
 	      }
 	      
@@ -234,12 +234,12 @@ int cnt = productDAO.getProductCount(product_kind);
 	      if(endPage < pageCount) {
 	         int movePage = currentPage + 3;
 	         if(movePage > pageCount) movePage=pageCount;
-	         out.print("<a href='shopAll.jsp?pageNum="+movePage+"&product_kind="+product_kind+"'><div id='pBox' class='pBox_b' title='다음 3페이지'>"+"〉"+"</div></a>");
+	         out.print("<a href='shopAll.jsp?pageNum="+movePage+"&product_kind="+product_kind+"#t_kind'><div id='pBox' class='pBox_b' title='다음 3페이지'>"+"〉"+"</div></a>");
 	      }
 	      
 	      // 맨 끝 페이지 이동처리
 	      if(endPage < pageCount) {
-	         out.print("<a href='shopAll.jsp?pageNum="+pageCount+"&product_kind="+product_kind+"'><div id='pBox' class='pBox_b' title='끝 페이지'>"+"〉〉"+"</div></a>");
+	         out.print("<a href='shopAll.jsp?pageNum="+pageCount+"&product_kind="+product_kind+"#t_kind'><div id='pBox' class='pBox_b' title='끝 페이지'>"+"〉〉"+"</div></a>");
 	      }
 	   }
 	   %>

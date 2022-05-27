@@ -35,10 +35,26 @@ h3 { text-align: center;}
 				<input type="text" name="subject" id="subject">
 			</div>
 			<div class="b_box">
-				<label for="uploadFile">파일명</label>
-				<input type="file" name="uploadFile" id="uploadFile">
+				<label for="uploadFile1">파일명 1</label>
+				<input type="file" name="uploadFile1" id="uploadFile1">
 			</div>
-		</div>
+			<div class="b_box">
+				<label for="uploadFile2">파일명 2</label>
+				<input type="file" name="uploadFile2" id="uploadFile2">
+			</div>
+			<div class="b_box">
+				<label for="uploadFile3">파일명 3</label>
+				<input type="file" name="uploadFile3" id="uploadFile3">
+			</div>
+			<div class="b_box">
+				<label for="uploadFile">파일명 4</label>
+				<input type="file" name="uploadFile4" id="uploadFile4">
+			</div>
+			<div class="b_box">
+				<label for="uploadFile">파일명 5</label>
+				<input type="file" name="uploadFile5" id="uploadFile5">
+			</div>
+			
 		<div class="btns">
 			<input type="submit" value="파일 업로드">
 		</div>
