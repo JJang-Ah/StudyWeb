@@ -1,0 +1,39 @@
+package polymorphism;
+
+public class TVUser {
+
+	public static void main(String[] args) {
+		
+		/*
+		 * < SamsungTV에서 LgTV로 바꾸는 과정 >
+		 * - 1, 2번: Java로 할 수 있는 방법
+		 1. 각각의 클래스
+		 - SamsungTV에서 LgTV로 바꾸는 과정에서 문제점 - > 단점: 고치는 내용이 많아서 유지보수가 어렵다.
+		 2. 개선 - 인터페이스를 만들어 구현하는 관계로 변경 
+		 - 문제점: 소스 코드를 고쳐야 한다.
+		 -------------
+		 
+		 Spring으로 할 수 있는 방법
+		 3. 개선 - Factory 디자인 패턴 사용 
+		 - 소스코드를 고치지 않고 TV를 변경할 수 있음
+		 - Spring에 내포되어 있는 방법
+		 */
+		
+		/* 1, 2번 방법 - Java의 문법으로 처리
+		SamsungTV tv = new SamsungTV();
+		tv.powerOn();
+		tv.volumeUp();
+		tv.volumeDown();
+		tv.powerOff();
+		*/
+		
+		// 3. 아래의 소스코드를 고치지 않음
+		// run -configuration 에서 argument를 바꿔주기만 하면된다.
+		BeanFactory factory = new BeanFactory();
+		TV tv = (TV)factory.getBean(args[0]);
+		tv.powerOn();
+		tv.volumeUp();
+		tv.volumeDown();
+		tv.powerOff();
+	}
+}

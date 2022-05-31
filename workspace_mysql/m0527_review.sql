@@ -21,12 +21,12 @@ readcount int default 0
 );
 */
 
-
+/*
 delimiter $$
-create procedure p_review_insert2() 
+create procedure p_review_insert3() 
 begin
 	declare i int default 1;
-    while i <= 110 do
+    while i <= 80 do
 		insert into review(member_id, product_id, subject, content)
         values('aaa1111', 83, concat('한국 사회에서 공정이란 무엇인가', i, '번'), 
         ' 새로운 대통령을 맞이하는 한국 사회는 그동안 얼마나 공정해졌을까? 2020년  《경향신문》의 여론조사에 따르면, 한국 사회가 공정하다고 생각하는 사람은 응답자 중 30퍼센트에 불과했다. 언론에서는 공정 과 관련된 기사가 쏟아지고, 서점에는 공정에 대한 책이 한두 권이 아니다. 공정에 대한 사람들의 요구가 많아지는 만큼 사회가 더 공정해져야 하는데, 왜 이럴까?
@@ -37,11 +37,12 @@ begin
     end while;
 end $$
 delimiter $$
-
+*/
 
 -- 생성된 프로시저 확인
--- show procedure status;
-
+show procedure status;
+show create procedure p_review_insert250;
+-- drop procedure p_review_insert;
 -- 프로시저 실행
 -- call p_review_insert;
 

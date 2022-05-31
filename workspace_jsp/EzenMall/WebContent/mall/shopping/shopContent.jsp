@@ -26,37 +26,40 @@
 
 /* 구역2: 오른쪽 상단, 상품 기본 정보, 버튼 */
 .s2 { width: 44%; float: left; background: #f8f9fa; padding: 30px;}
-.s2 > div { margin-bottom: 30px;}
+.s2 > div { margin-bottom: 23px;}
 .s2_d1 { font-size: 1.5em; font-weight: bold; color: #32708d;}
 .s2_d2 { font-size: 0.9em; colot: gray;}
 .s2 .ss { display: inline-block; width: 100px; font-size: 0.9em; color: gray;}
 .s2_d3 span:nth-child(2) { font-weight: bold; color: gray;}
 .s2_d4 span:nth-child(2), .s2_d5 span:nth-child(2) { color: #c84557;}
 .s2_d4 b { font-size: 1.5em;}
-.s2_d6 span:not(.ss) { font-size: 0.9em; color: gray;}
+.s2_d7 span:not(.ss) { font-size: 0.9em; color: gray;}
 .s2_d6 b { font-size: 1.05em; color: #1e94be;}
 .s2_d7 span:nth-child(3) { font-size: 0.9em; color: gray;}
 .btns { margin-top: 40px; text-align: center;}
-.btns input[type='button'] { width: 250px; height: 60px; border: 0; font-size: 1.1em; cursor: pointer;}
+.btns input { width: 250px; height: 60px; border: 0; font-size: 1.1em; cursor: pointer;}
 .btns #btn_cart { background: #2f9e77; color: #fff; margin-right: 10px;}
 .btns #btn_cart:hover { background: #fff; color: #2f9e77; border: 2px solid #2f9e77; font-weight: bold;}
 .btns #btn_buy { background: #1e9faa; color: #fff; margin-left: 10px;}
 .btns #btn_buy:hover { background: #fff; color: #2f9e77; border: 2px solid #2f9e77; font-weight: bold;}
 
 /* 구역3: 하단, 상품 내용, 상품 리뷰 */
-.t_line { }
+.t_line { border: 1px solid #eec9ef; margin: 30px 0; clear: both;}
 .s3 { clear: both;}
 .s3_c1 { background: #32708d; padding: 10px; border-radius: 5px; margin-bottom: 30px;}
 .s3_c1 span { display: inline-block; width: 120px; height: 30px; padding: 20px; 
-margin: 0 20px; text-align: center; line-height: 30px; border-radius: 5px; color: #fff; font-size: 1.1em; cursor: pointer;}
+margin: 20px 20px; text-align: center; line-height: 30px; border-radius: 5px; color: #fff; font-size: 1.1em; cursor: pointer;}
 .s3_c1 span:hover { border: 2px solid #fff;	text-shadow:  1px 1px 2px beige;}
 .s3_c2 { line-height: 40px; text-align: justify; padding: 20px;}
 
-.s3_c3 .s3_review { padding: 20px; line-height: 20px; text-align: justify; width: 100%; height: 200px; margin-bottom: 20px;}
-.s3_review .s3_r1 { width: 76%; float: left; border: 1px solid gray;}
-.s3_review .s3_r2 { width: 20%; float: right; border: 1px solid gray;}
+.s3_c3 .s3_review { padding: 20px; line-height: 20px; text-align: justify; width: 100%; height: 200px; margin-bottom: 40px;}
+.s3_review .s3_r1 { width: 70%; float: left; border: 1px solid gray; padding: 20px; background: #f0f0f0; margin-right: 20px;}
+.s3_r1 .s3_subject { font-size: 1.1em; font-weight: bold; margin-bottom: 10px;}
+.s3_r1 .s3_content { width: 100%; height: 110px; white-space: pre-line; overflow: hidden;}
+.s3_r1 .s3_content_all, .s3_r1 .s3_content_part { font-size: 0.9em; color: #1e94be; cursor: pointer;}
+.s3_review .s3_r2 { width: 16%; float: right; border: 1px solid gray; padding: 20px; background: #f8f9fa;}
 
-
+.s3_r2 {font-size: 0.9em; color: gray; height: 180px;}
 /* 하단 - 페이징 영역*/
 #paging { text-align: center; margin-top: 20px;}
 #paging a { color: #000;}
@@ -70,12 +73,41 @@ margin: 0 20px; text-align: center; line-height: 30px; border-radius: 5px; color
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
-		// 이미지 변화 효과 
+// 		// 이미지 변화 효과 
 		let big_img = document.querySelector(".big_img");
 		let thumb_imgs = document.querySelectorAll(".thumb");
 		for(let thumb of thumb_imgs) {
 			thumb.addEventListener("click", function() {
 				big_img.src = thumb.src;
+			})
+		}
+		
+		// 상품 수량을 1이상 100 미만으로 제한하는 효과
+		let buy_count = document.getElementById("buy_count");
+		buy_count.addEventListener("keyup", function(event) {
+			if(buy_count.value < 1) {
+				buy_count.value = 1;
+			} else if(buy_count.value.length > 100) {
+				buy_count.value = 100;
+			}
+		})
+		// 하단 - 상세설명, 상품리뷰 변환 효과
+		let s3_c2 = document.querySelector(".s3_c2");
+		let s3_c3 = document.querySelector(".s3_c3");
+		let ss1 = document.querySelector(".ss1");
+		let ss2 = document.querySelector(".ss2");
+		
+		
+		// 내용 전체보기 효과
+		let content = document.querySeletorAll(".s3_content");
+		let content_all = document.querySelectorAll(".s3_content_all");
+		let content_part = document.querySelectorAll(".s3_content_part");
+		for(let i in content_all) {
+			content_all[i].addEventListener("click", function() {
+				content[i].style.overflow = "visible";
+				content[i].style.height = "200px";
+				content[i].style.display = "block";
+				content_part[i].style.display = "block";
 			})
 		}
 	})
@@ -84,6 +116,8 @@ margin: 0 20px; text-align: center; line-height: 30px; border-radius: 5px; color
 String memberId = (String)session.getAttribute("memberId");
 int product_id = Integer.parseInt(request.getParameter("product_id"));
 String product_kind = request.getParameter("product_kind");
+
+
 // 상품 DB 연결, 질의
 ProductDAO productDAO = ProductDAO.getInstance();
 ProductDTO product = productDAO.getProduct(product_id);
@@ -154,7 +188,7 @@ DecimalFormat df = new DecimalFormat("#,###,###");
 
 //################ 페이징(paging) 처리 
 //페이징(paging) 처리를 위한 변수 선언
-int pageSize = 12; // 1페이지에 12건의 게시글을 표시
+int pageSize = 5; // 1페이지에 12건의 게시글을 표시
 String pageNum = request.getParameter("pageNum");
 if(pageNum == null) pageNum = "1";
 
@@ -229,7 +263,13 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			</div>
 		</div>
 		<%-- 구역2: 오른쪽 상단, 상품 기본정보, 버튼 --%>
-		<form action="" method="post" name="">
+		<form action="../cart/cartInsertPro.jsp" method="post" name="contentForm">
+		<%-- 장바구니로 이동: cart_id, buy_count를 제외한 5가지 필드 정보 --%>
+		<input type="hidden" name="buyer" value="<%=memberId%>">
+		<input type="hidden" name="product_id" value="<%=product_id%>">
+		<input type="hidden" name="product_name" value="<%=product.getProduct_name()%>">
+		<input type="hidden" name="buy_price" value="<%=sale_price%>">
+		<input type="hidden" name="product_image" value="<%=product.getProduct_image()%>">
 		<div class="s2">
 			<div class="s2_d1"><%=product.getProduct_name() %></div>
 			<div class="s2_d2">
@@ -238,15 +278,16 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			<div class="s2_d3"><span class="ss">정가</span><span><%=df.format(product.getProduct_price()) %>원</span></div>
 			<div class="s2_d4"><span class="ss">판매가</span><span><b><%=df.format(sale_price) %></b>원</span></div>
 			<div class="s2_d5"><span class="ss">할인율</span><span><b><%=product.getDiscount_rate()%>%</b></span></div>
-			<div class="s2_d6"><span class="ss">배송안내</span> <br><br>
+			<div class="s2_d6"><span class="ss">구매수량</span><input type="number" name="buy_count" id="buy_count" value="1" min="1" max="99"></div>
+			<div class="s2_d7"><span class="ss">배송안내</span> <br><br>
 			
 				<%if(memberId != null) { %>
 				<span><%=name %>님의 주소로 <b><%=d_day %></b>까지 배송됩니다.</span> <br><br>
 				<span>주소 : <b><%=address %></b></span>
 				<%} else { %>
 				<span>
-					배송일은 서울은 익일, 경기는 2일, 지방은 3일, 제주 및 도서 지역은 평균 5일이 소요됩니다. <br><br>
-					단, 토, 일요일은 배송 업무를 하지 않습니다.
+					배송일은 서울은 익일, 경기는 2일, 지방은 3일, 제주 및 도서 지역은 평균 5일이 소요됩니다.<br>
+					단, 토/일, 공휴일은 배송일에서 제외됩니다.
 				</span>
 				<%} %>
 			</div>
@@ -257,7 +298,7 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			</span>
 			</div>
 			<div class="btns">
-				<input type="button" value="장바구니" id="btn_cart">
+				<input type="submit" value="장바구니" id="btn_cart">
 				<input type="button" value="바로 구매" id="btn_buy">
 			</div>
 		</div>
@@ -271,12 +312,14 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			<%for(ReviewDTO review : reviewList) {%>
 			<div class="s3_review">
 				<div class="s3_r1">
-					<div><%=review.getSubject() %></div>
-					<div><%=review.getContent() %></div>
+					<div class="s3_subject"><%=review.getSubject() %></div>
+					<div class="s3_content"><%=review.getContent() %></div>
+					<div class="s3_content_all">내용 전체 보기∨</div>
+					<div class="s3_content_part">내용접기</div>
 				</div>
 				<div class="s3_r2">
 					<div>작성자: <%=review.getMember_id() %></div>
-					<div>등록일: <%=review.getRegDate() %></div>
+					<div>등록일: <%=sdf.format(review.getRegDate()) %></div>
 					<div>조회수: <%=review.getReadcount() %></div>
 				</div>
 			</div>
@@ -291,8 +334,8 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			      int pageBlock = 5; //페이징의 개수 
 			      
 			      // 시작 페이지 설정
-			      if(currentPage % 5 != 0) startPage = (currentPage/3)*3 +1;
-			      else startPage = (currentPage/3 -1) * 3 +1;
+			      if(currentPage % 5 != 0) startPage = (currentPage/5)*5 +1;
+			      else startPage = (currentPage/5 -1) * 5 +1;
 			         
 			      // 끝 페이지 설정
 			      int endPage = startPage + pageBlock - 1;
@@ -305,7 +348,7 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			      
 			      // 이전 페이지 처리
 			      if(startPage > 5 ) {
-			         out.print("<a href='shopContent.jsp?pageNum="+(currentPage-3)+"&product_kind="+product_kind+"&product_id="+product_id+"#s3'><div id='pBox' class='pBox_b' title='이전 3페이지'>"+"〈"+"</div></a>");
+			         out.print("<a href='shopContent.jsp?pageNum="+(currentPage-5)+"&product_kind="+product_kind+"&product_id="+product_id+"#s3'><div id='pBox' class='pBox_b' title='이전 3페이지'>"+"〈"+"</div></a>");
 			      }
 			      // 페이징 블럭 출력 처리
 			      for(int i=startPage; i<=endPage; i++) {
@@ -318,7 +361,7 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 			      
 			      // 다음 페이지 처리 
 			      if(endPage < pageCount) {
-			         int movePage = currentPage + 3;
+			         int movePage = currentPage + 5;
 			         if(movePage > pageCount) movePage=pageCount;
 			         out.print("<a href='shopContent.jsp?pageNum="+movePage+"&product_kind="+product_kind+"&product_id="+product_id+"#s3'><div id='pBox' class='pBox_b' title='다음 3페이지'>"+"〉"+"</div></a>");
 			      }
