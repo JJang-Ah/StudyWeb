@@ -11,23 +11,31 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-String buyer = request.getParameter("buyer");
-int product_id = Integer.parseInt(request.getParameter("product_id"));
-String product_name = request.getParameter("product_name");
-int buy_price = Integer.parseInt(request.getParameter("buy_price"));
-int buy_count = Integer.parseInt(request.getParameter("buy_count"));
-String product_image = request.getParameter("product_image");
+String memberId = (String)session.getAttribute("memberId");
 
-CartDTO cart = new CartDTO();
-cart.setBuyer(buyer);
-cart.setProduct_id(product_id);
-cart.setProduct_name(product_name);
-cart.setBuy_price(buy_price);
-cart.setBuy_count(buy_count);
-cart.setProduct_image(product_image);
+if(memberId == null) {
+	out.print("<script>alert('로그인을 해주세요.')</script>");
+	out.print("location='../logon/memberLoginForm.jsp';");
+}
+%>
+<jsp:useBean id="cart" class="mall.cart.CartDTO"></jsp:useBean>
+<jsp:setProperty property="*" name="cart"/>
+<%
 
 // 카트 정보확인
 System.out.println(cart);
+
+// DB연결 , 질의
+CartDAO cartDAO = CartDAO.getInstance();
+int check = cartDAO.insertCart(cart);
+
+out.print("<script>");
+if(check == 0) {
+	out.print("alert('장바구니 추가에 실패하였습니다.');history.back();");
+} else {
+	out.print("location='cartList.jsp';");
+}
+out.print("</script>");
 
 %>
 </body>

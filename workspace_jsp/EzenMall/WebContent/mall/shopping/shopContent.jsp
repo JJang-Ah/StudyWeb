@@ -265,9 +265,14 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 		<%-- 구역2: 오른쪽 상단, 상품 기본정보, 버튼 --%>
 		<form action="../cart/cartInsertPro.jsp" method="post" name="contentForm">
 		<%-- 장바구니로 이동: cart_id, buy_count를 제외한 5가지 필드 정보 --%>
-		<input type="hidden" name="buyer" value="<%=memberId%>">
+		<input type="hidden" name="buyer" value="<%=memberId %>">
+		<input type="hidden" name="memberId" value="<%=memberId%>">
 		<input type="hidden" name="product_id" value="<%=product_id%>">
 		<input type="hidden" name="product_name" value="<%=product.getProduct_name()%>">
+		<input type="hidden" name="author" value="<%=product.getAuthor() %>">
+		<input type="hidden" name="publishing_com" value="<%=product.getPublishing_com() %>">
+		<input type="hidden" name="product_price" value="<%=product.getProduct_price() %>">
+		<input type="hidden" name="discount_rate" value="<%=product.getDiscount_rate() %>">
 		<input type="hidden" name="buy_price" value="<%=sale_price%>">
 		<input type="hidden" name="product_image" value="<%=product.getProduct_image()%>">
 		<div class="s2">

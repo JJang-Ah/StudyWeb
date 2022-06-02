@@ -1,6 +1,18 @@
 package polymorphism;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
+@Component("tv")
 public class LgTV implements TV{
+	
+	//@Inject // 자바 자체에서 제공하는 기능
+	//@Autowired
+	//@Qualifier("sony") // 빈이 2개이상이라 예외로 넘어가기 때문에 빈을 명시해준다
+	//@Resource("sony")
+	
+	
 	private Speaker speaker;
 	private int price;
 	

@@ -35,5 +35,11 @@ public class TVUser {
 		tv.volumeUp();
 		tv.volumeDown();
 		tv.powerOff();
+		
+		// 객체 여러번 호출 -> 한번만 실행되고 있음. (스프링은 싱글톤 패턴이 적용되어 있음)
+		//TV tv1 = (TV)factory.getBean("tv");
+		//TV tv2 = (TV)factory.getBean("tv");
+		//TV tv3 = (TV)factory.getBean("tv");
+		
 	}
 }

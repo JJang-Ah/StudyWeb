@@ -75,7 +75,7 @@ if(memberId == null) {
 	<div class="t_box2"> <%-- 구역2(상단 우측): 회원정보, 구매정보, 장바구니정보 --%>
 		<a href="../member/memberInfoForm.jsp"><img src="../../icons/user1.png" width="35" title="회원정보" class="t_b2_img1"></a>
 		<a href="#"><img src="../../icons/buy1.png" width="35" title="구매정보" class="t_b2_img2"></a>
-		<a href="#"><img src="../../icons/cart1.png" width="35" title="장바구니" class="t_b2_img3"></a>
+		<a href="../cart/cartList.jsp"><img src="../../icons/cart1.png" width="35" title="장바구니" class="t_b2_img3"></a>
 	</div>
 	<div class="t_box3"> <%-- 구역3(하단 좌측): 메뉴 (하위메뉴)--%>
 		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" class="m_menu_img" width="30"></a></div>
