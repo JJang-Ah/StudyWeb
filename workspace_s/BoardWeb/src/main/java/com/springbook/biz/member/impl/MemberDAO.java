@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.springframework.stereotype.Component;
+
 import com.springbook.biz.common.JDBCUtil;
 import com.springbook.biz.member.MemberDTO;
 
+@Component("memberDAO")
 public class MemberDAO {
 
 	// DB 연결, 질의 변수
@@ -71,5 +74,29 @@ public class MemberDAO {
 	}
 	
 	// 회원 정보(1건) 보기
+	public MemberDTO getMember(MemberDTO dto) {
+		System.out.println("=> getMember() 메소드 실행 ");
+		MemberDTO member = new MemberDTO();
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(MEMBER_GET);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPassword());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member.setId(rs.getString("id"));
+				member.setPassword(rs.getString("password"));
+				member.setName(rs.getString("name"));
+				member.setRole(rs.getString("role"));
+			}
+				
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return member;
+	}
 	
 }

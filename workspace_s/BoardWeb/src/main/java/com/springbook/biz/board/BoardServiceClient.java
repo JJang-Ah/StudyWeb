@@ -21,6 +21,7 @@ public class BoardServiceClient {
 		dto.setTitle("글등록 1");
 		dto.setWriter("캡틴6");
 		dto.setContent("글등록 테스트 중입니다. 1");
+		boardService.getBoard(dto);
 		
 		// 3-2. 글전체 보기 테스트
 		List<BoardDTO> boardList = boardService.getBoardList(dto);
