@@ -17,6 +17,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void insertBoard(BoardDTO dto) {
+		// 예외 발생
+		if(dto.getWriter().equals("홍길동")) {
+			throw new IllegalArgumentException("홍길동은 글을 등록할 수 없습니다.");
+		}
 		boardDAO.insertBoard(dto);
 	}
 

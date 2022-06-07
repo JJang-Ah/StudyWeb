@@ -19,7 +19,7 @@ public class BoardServiceClient {
 		// 3-1. 글등록 테스트
 		BoardDTO dto = new BoardDTO();
 		dto.setTitle("글등록 1");
-		dto.setWriter("캡틴6");
+		dto.setWriter("홍길동");
 		dto.setContent("글등록 테스트 중입니다. 1");
 		boardService.getBoard(dto);
 		
@@ -40,9 +40,9 @@ public class BoardServiceClient {
 		boardService.updateBoard(dto);
 		
 		// 3-5. 글삭제 테스트
-		dto.setSeq(1);
-		boardService.deleteBoard(dto);
-		
+//		dto.setSeq(1);
+//		boardService.deleteBoard(dto);
+//		
 		// 4. Spring 컨테이너 종료
 		container.close();
 		

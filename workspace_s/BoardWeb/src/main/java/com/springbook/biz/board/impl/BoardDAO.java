@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.common.JDBCUtil;
 
-@Component("boardDAO")
+// @Repository("boardDAO")
 public class BoardDAO {
 
 	// DB ¿¬°á °´Ã¼, ÁúÀÇ °´Ã¼
