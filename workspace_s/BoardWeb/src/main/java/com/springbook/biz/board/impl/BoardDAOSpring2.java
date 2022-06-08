@@ -14,12 +14,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.common.JDBCUtil;
 
 // spring에서 제공하는 DB 연결, 질의 클래스
-@Repository("boardDAO")
+//@Repository("boardDAO")
 public class BoardDAOSpring2 extends JdbcDaoSupport{
 
 	//SQL문 
@@ -33,6 +34,7 @@ public class BoardDAOSpring2 extends JdbcDaoSupport{
 	private JdbcTemplate jdbcTemplate;
 	
 	// 글등록
+
 	public void insertBoard(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 insertBoard() 실행");
 		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter(), dto.getContent());

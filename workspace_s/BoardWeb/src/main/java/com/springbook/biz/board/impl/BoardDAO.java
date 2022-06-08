@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.common.JDBCUtil;
 
-// @Repository("boardDAO")
+ @Repository("boardDAO")
 public class BoardDAO {
 
 	// DB 연결 객체, 질의 객체
@@ -22,6 +22,7 @@ public class BoardDAO {
 	
 	//SQL문 
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval,?,?,?)";
+//	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (?, ?, ?, ?)"; // 트랜젝션 테스트
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	private final String BOARD_GET = "select * from board where seq=?";
 	private final String BOARD_UPDATE = "=update board set title=?, content=? where weq=? ";
@@ -88,6 +89,7 @@ public class BoardDAO {
 				board.setContent(rs.getString("content"));
 				board.setRegdate(rs.getTimestamp("regdate"));
 				board.setCnt(rs.getInt("cnt"));
+				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

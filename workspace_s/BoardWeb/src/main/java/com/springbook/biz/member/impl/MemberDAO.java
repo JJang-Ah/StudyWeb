@@ -76,7 +76,7 @@ public class MemberDAO {
 	// 회원 정보(1건) 보기
 	public MemberDTO getMember(MemberDTO dto) {
 		System.out.println("=> getMember() 메소드 실행 ");
-		MemberDTO member = new MemberDTO();
+		MemberDTO member = null;
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_GET);
@@ -85,6 +85,7 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
+				member = new MemberDTO();
 				member.setId(rs.getString("id"));
 				member.setPassword(rs.getString("password"));
 				member.setName(rs.getString("name"));
