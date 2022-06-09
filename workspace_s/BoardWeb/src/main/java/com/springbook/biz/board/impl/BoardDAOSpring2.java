@@ -1,72 +1,68 @@
 package com.springbook.biz.board.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.springbook.biz.board.BoardDTO;
-import com.springbook.biz.common.JDBCUtil;
 
-// spring¿¡¼­ Á¦°øÇÏ´Â DB ¿¬°á, ÁúÀÇ Å¬·¡½º
-//@Repository("boardDAO")
-public class BoardDAOSpring2 extends JdbcDaoSupport{
-
-	//SQL¹® 
-	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval,?,?,?)";
-	private final String BOARD_LIST = "select * from board order by seq desc";
-	private final String BOARD_GET = "select * from board where seq=?";
-	private final String BOARD_UPDATE = "=update board set title=?, content=? where weq=? ";
-	private final String BOARD_DELETE = "delete board where seq=?";
+// @Repository("boardDAO")
+public class BoardDAOSpring2 {
 	
+	// SQLë¬¸
+	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval, ?, ?, ?)";
+	// private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(?, ?, ?, ?)"; // íŠ¸ëœì­ì…˜ í…ŒìŠ¤íŠ¸
+	private final String BOARD_LIST = "select * from board order by seq desc";
+	private final String BOARD_GET = "select * from board where seq = ?";
+	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
+	private final String BOARD_DELETE = "delete board where seq=? ";
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	// ±Ûµî·Ï
-
+	// ê¸€ë“±ë¡
 	public void insertBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2·Î insertBoard() ½ÇÇà");
-		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter(), dto.getContent());
+		System.out.println("=> Spring JDBC2ë¡œ insertBoard() ì‹¤í–‰");
+		// preparestatementì—ì„œ insertí•˜ëŠ” ë°©ë²•ê³¼ ê°™ì€ ì˜ë¯¸
+		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter());
+		// jdbcTemplate.update(BOARD_INSERT, dto.getSeq() ,dto.getTitle(), dto.getWriter());
+	
 	}
-	// ±Û¼öÁ¤
+		
+	// ê¸€ìˆ˜ì •
 	public void updateBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2·Î updateBoard() ½ÇÇà");
+		System.out.println("=> Spring JDBC2ë¡œ updateBoard() ì‹¤í–‰");
+		// preparestatementì—ì„œ updateí•˜ëŠ” ë°©ë²•ê³¼ ê°™ì€ ì˜ë¯¸
 		jdbcTemplate.update(BOARD_UPDATE, dto.getTitle(), dto.getContent(), dto.getSeq());
 	}
 	
-	
-	// ±Û»èÁ¦
+	// ê¸€ì‚­ì œ
 	public void deleteBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2·Î deleteBoard() ½ÇÇà");
+		System.out.println("=> Spring JDBC2ë¡œ deleteBoard() ì‹¤í–‰");
+		// preparestatementì—ì„œ deleteí•˜ëŠ” ë°©ë²•ê³¼ ê°™ì€ ì˜ë¯¸
 		jdbcTemplate.update(BOARD_DELETE, dto.getSeq());
+		
 	}
-	// ±ÛÀüÃ¼ º¸±â
+	
+	// ê¸€ì „ì²´ ë³´ê¸°
 	public List<BoardDTO> getBoardList() {
-		System.out.println("=> Spring JDBC2·Î getBoardList() ½ÇÇà");
+		System.out.println("=> Spring JDBC2ë¡œ getBoardList() ì‹¤í–‰");
 		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
 	}
-	
-	// ±Û»ó¼¼ º¸±â(1°Ç)
+		
+	// ê¸€ìƒì„¸ ë³´ê¸°(1ê±´)
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2·Î getBoard() ½ÇÇà");
-		Object[] args = {dto.getSeq()};
+		System.out.println("=> Spring JDBC2ë¡œ getBoard() ì‹¤í–‰");	
+		Object[] args = { dto.getSeq() };
 		return jdbcTemplate.queryForObject(BOARD_GET, args, new BoardRowMapper());
 	}
 	
-	// RowMapper Å¬·¡½º »ı¼º - ¸®ÅÏ°ªÀ» ÀÚ¹Ù°´Ã¼¿Í ¸ÅÇÎÇÏ´Â Å¬·¡½º
-	private class BoardRowMapper implements RowMapper<BoardDTO>{
-
+	// RowMapper í´ë˜ìŠ¤ ìƒì„±- ë¦¬í„´ê°’ì„ ìë°”ê°ì²´ì™€ ë§µí•‘í•˜ëŠ” í´ë˜ìŠ¤
+	private class BoardRowMapper implements RowMapper<BoardDTO> {
 		@Override
 		public BoardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			BoardDTO board = new BoardDTO();
@@ -74,12 +70,11 @@ public class BoardDAOSpring2 extends JdbcDaoSupport{
 			board.setTitle(rs.getString("title"));
 			board.setWriter(rs.getString("writer"));
 			board.setContent(rs.getString("content"));
-			board.setRegdate(rs.getTimestamp("regdate"));
+			board.setRegDate(rs.getTimestamp("regdate"));
 			board.setCnt(rs.getInt("cnt"));
-			
 			return board;
 		}
-				
+		
 	}
-	
+		
 }

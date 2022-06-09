@@ -4,46 +4,50 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import com.springbook.biz.common.JDBCUtil;
+import com.springbook.biz.common.JDBCTUtil;
 import com.springbook.biz.member.MemberDTO;
 
-@Component("memberDAO")
+@Repository("memberDAO")
 public class MemberDAO {
-
-	// DB ¿¬°á, ÁúÀÇ º¯¼ö
+	
+	// DB ì—°ê²°, ì§ˆì˜ ë³€ìˆ˜
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	// SQL¹®
+	// SQLë¬¸
 	private final String MEMBER_INSERT = "insert into member values(?, ?, ?, ?)";
-	private final String MEMBER_UPDATE = "update member set name=?, role=? where id=? and password=?";
+	private final String MEMBER_UPDATE = "update member set name= ?, role=? where id=? and password=?";
 	private final String MEMBER_DELETE = "delete member where id=? and password=?";
 	private final String MEMBER_GET = "select * from member where id=? and password=?";
 	
-	// È¸¿ø µî·Ï
-	public void insertMember(MemberDTO dto) {
+	// íšŒì› ë“±ë¡
+	public void insertMember(MemberDTO dto) { 
+		System.out.println("-> insertMemeber ë©”ì†Œë“œ ì‹¤í–‰");
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_INSERT);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPassword());
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getRole());
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+			
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
+		
 	}
 	
-	// È¸¿ø ¼öÁ¤
+	// íšŒì› ìˆ˜ì •
 	public void updateMember(MemberDTO dto) {
+		System.out.println("-> updateMember ë©”ì†Œë“œ ì‹¤í–‰");
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_UPDATE);
 			pstmt.setString(1, dto.getName());
 			pstmt.setString(2, dto.getRole());
@@ -53,32 +57,32 @@ public class MemberDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
 	}
 	
-	// È¸¿ø »èÁ¦
-	public void deleteMember(MemberDTO dto) {
+	// íšŒì› ì‚­ì œ 
+	public void deleteMemeber(MemberDTO dto) {
+		System.out.println("-> deleteMemeber ë©”ì†Œë“œ ì‹¤í–‰");
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_DELETE);
-			pstmt.setString(1, dto.getName());
+			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPassword());
 			pstmt.executeUpdate();
-
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
 	}
 	
-	// È¸¿ø Á¤º¸(1°Ç) º¸±â
+	// íšŒì›ì •ë³´(1ê±´) ë³´ê¸°
 	public MemberDTO getMember(MemberDTO dto) {
-		System.out.println("=> getMember() ¸Þ¼Òµå ½ÇÇà ");
+		System.out.println("-> getMember ë©”ì†Œë“œ ì‹¤í–‰");
 		MemberDTO member = null;
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_GET);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPassword());
@@ -90,14 +94,16 @@ public class MemberDAO {
 				member.setPassword(rs.getString("password"));
 				member.setName(rs.getString("name"));
 				member.setRole(rs.getString("role"));
-			}
 				
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt, rs);
+			JDBCTUtil.close(conn, pstmt, rs);
 		}
+		
 		return member;
 	}
+	
 	
 }

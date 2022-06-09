@@ -1,28 +1,12 @@
 package com.springbook.biz.common;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Service;
 
-//@Service
-//@Aspect
 public class AfterThrowingAdvice {
-	@Pointcut("excution(* com.springbook.biz..*Impl.*(..))")
-	public void allPointcut() {} // ÂüÁ¶ ¸Ş¼Òµå, Æ÷ÀÎÆ®ÄÆ ¸Ş¼Òµå
-	
-	@Pointcut("cxcution(* com.springbook.biz..*Impl.get*(..))")
-	public void getPointcut() {}
-	
-	@AfterThrowing(pointcut="allPoingcut", throwing="exceptObj")
-	public void exceptionLog(JoinPoint jp, Exception exceptObj) {
+	public void execeptionLog(JoinPoint jp, Exception exceptObj) {
 		String method = jp.getSignature().getName();
 		
-		System.out.println("[¿¹¿Ü Ã³¸®] " + method + "() ¸Ş¼Òµå, ¿¹¿Ü Ã³¸® ¸Ş½ÃÁö: " + exceptObj.getMessage());
-		
-		
-		// System.out.println("[¿¹¿Ü Ã³¸®] ºñÁö´Ï½º ·ÎÁ÷ ¼öÇà Áß ¿¹¿Ü ¹ß»ı");
+		System.out.println("[ì˜ˆì™¸ ì²˜ë¦¬] " + method +"() ë©”ì†Œë“œ, ì˜ˆì™¸ì²˜ë¦¬ ë©”ì‹œì§€: "+ exceptObj.toString());
+		// System.out.println("[ì˜ˆì™¸ ì²˜ë¦¬] ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰ ì¤‘ ì˜ˆì™¸ ë°œìƒ ë™ì‘");
 	}
-
 }

@@ -8,43 +8,46 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 public class BoardServiceClient {
 
 	public static void main(String[] args) {
-		// 1. String ÄÁÅ×ÀÌ³Ê¸¦ ±¸µ¿ÇÏ¿© ¼³Á¤ÆÄÀÏÀ» Ã£À½
-		AbstractApplicationContext container = new GenericXmlApplicationContext("boardContext.xml"); //boardContext.xmlÆÄÀÏÀ» ÀĞ´Â ÀÛ¾÷
+		// 1. Spring ì»¨í…Œì´ë„ˆë¥¼ êµ¬ë™í•˜ì—¬ ì„¤ì •íŒŒì¼(xml)ì„ ì°¾ëŠ” í–‰ìœ„ -> look up
+		AbstractApplicationContext container = new GenericXmlApplicationContext("boardContext.xml");
 		
-		// 2. boardService ±¸ÇöÃ¼¸¦ »ı¼º
+		// 2. boardservice êµ¬í˜„ì²´ë¥¼ ìƒì„±(beanì„ ì°¾ì•„ ì„¸íŒ…í•˜ëŠ” ê²ƒ)
 		BoardService boardService = (BoardService)container.getBean("boardService");
 		
-		// 3. °´Ã¼¸¦ »ı¼ºÇÏ¿© Å×ÀÌºí¿¡ »ğÀÔ
+		// 3. ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ í…Œì´ë¸”ì— ì‚½ì…
+		// 3.1 ê¸€ë“±ë¡ í…ŒìŠ¤íŠ¸
 		
-		// 3-1. ±Ûµî·Ï Å×½ºÆ®
 		BoardDTO dto = new BoardDTO();
-		dto.setTitle("±Ûµî·Ï 1");
-		dto.setWriter("È«±æµ¿");
-		dto.setContent("±Ûµî·Ï Å×½ºÆ® ÁßÀÔ´Ï´Ù. 1");
-		boardService.getBoard(dto);
+		dto.setTitle("ê¸€ë“±ë¡ 8");
+		dto.setWriter("ì¥ë¯¼ê·œ");
+		dto.setContent("ê¸€ë“±ë¡ í…ŒìŠ¤íŠ¸ ì¤‘ì…ë‹ˆë‹¤. 8");
+		boardService.insertBoard(dto);
 		
-		// 3-2. ±ÛÀüÃ¼ º¸±â Å×½ºÆ®
-		List<BoardDTO> boardList = boardService.getBoardList(dto);
+		
+		// 3.2 ê¸€ì „ì²´ ë³´ê¸° í…ŒìŠ¤íŠ¸
+		List<BoardDTO> boardList = boardService.getBoardList(dto);	
 		for(BoardDTO board : boardList) {
 			System.out.println(board);
 		}
 		
-		// 3-3. ±Û»ó¼¼(1°Ç) º¸±â Å×½ºÆ®
-		dto.setSeq(2);
-		BoardDTO board = boardService.getBoard(dto);
-		
-		// 3-4. ±Û¼öÁ¤ Å×½ºÆ®
-		dto.setSeq(2);
-		dto.setTitle("½ºÇÁ¸µ ±Ûµî·Ï  1");
-		dto.setContent("½ºÇÁ¸µ ±Ûµî·Ï Å×½ºÆ®ÀÔ´Ï´Ù. 1");
-		boardService.updateBoard(dto);
-		
-		// 3-5. ±Û»èÁ¦ Å×½ºÆ®
+		// 3.3 ê¸€ìƒì„¸(1ê±´) ë³´ê¸° í…ŒìŠ¤íŠ¸
 //		dto.setSeq(1);
-//		boardService.deleteBoard(dto);
-//		
-		// 4. Spring ÄÁÅ×ÀÌ³Ê Á¾·á
-		container.close();
+//		BoardDTO board = boardService.getBoard(dto);
+//		System.out.println(board);
 		
+		// 3.4 ê¸€ ìˆ˜ì • í…ŒìŠ¤íŠ¸
+//		dto.setSeq(2);
+//		dto.setTitle("ìŠ¤í”„ë§ ê¸€ë“±ë¡ 2");
+//		dto.setContent("ìŠ¤í”„ë§ ê¸€ë“±ë¡ í…ŒìŠ¤íŠ¸ ì¤‘ì…ë‹ˆë‹¤. 2");
+//		boardService.updateBoard(dto);
+		
+		// 3.5 ê¸€ ì‚­ì œ í…ŒìŠ¤íŠ¸
+		/*
+		dto.setSeq(1);
+		boardService.deleteBoard(dto);
+		*/
+		// 4. Spring ì»¨í…Œì´ë„ˆ ì¢…ë£Œ
+		container.close();
 	}
+
 }

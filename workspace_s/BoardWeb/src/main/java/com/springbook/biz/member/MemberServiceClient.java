@@ -4,42 +4,48 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MemberServiceClient {
-
+	
 	public static void main(String[] args) {
-		// 1. Spring ÄÁÅ×ÀÌ³Ê¸¦ ±¸µ¿
+		// 1. Spring ì»¨í…Œì´ë„ˆ êµ¬ë™
 		AbstractApplicationContext container = new GenericXmlApplicationContext("boardContext.xml");
 		
-		// 2. MemberService °´Ã¼¸¦ Ã£À½
+		// 2. MemberService ê°ì²´ë¥¼ ì°¾ëŠ” í–‰ìœ„ - look up
 		MemberService memberService = (MemberService)container.getBean("memberService");
 		
-		// 3-1. È¸¿ø µî·Ï
+		
+		// 3-1. íšŒì› ë“±ë¡
+		
 		MemberDTO member = new MemberDTO();
 		member.setId("bbb2222");
 		member.setPassword("1234");
-		member.setName("ÀÌÀÍÁØ");
-		member.setRole("ÀÏ¹İ»ç¿ëÀÚ");
-		memberService.insertMember(member);
+		member.setName("ì´ìµì¤€");
+		member.setRole("ì¼ë°˜ì‚¬ìš©ì");
+		memberService.insertMemeber(member);
 		
-		// 3-2. È¸¿ø Á¤º¸ È®ÀÎ(1°Ç)
+		
+		// 3-2. íšŒì› ì •ë³´ í™•ì¸(1ê±´)
+		
 		member.setId("admin");
 		member.setPassword("1234");
-		MemberDTO m = memberService.getMember(member);
+		MemberDTO m = memberService.getMemeber(member);
 		System.out.println(m);
+	
 		
-		// 3-3. È¸¿ø Á¤º¸ ¼öÁ¤
-		member.setId("aaa1111");
-		member.setPassword("1234");
-		member.setName("Ã¤¼ÛÈ­");
-		member.setRole("°ü¸®ÀÚ");
-		memberService.updateMember(member);
+		// 3-3. íšŒì› ì •ë³´ ìˆ˜ì •
+//		member.setId("aaa1111");
+//		member.setPassword("1234");
+//		member.setName("ì±„ì†¡í™”");
+//		member.setRole("ê´€ë¦¬ì");
+//		memberService.updateMember(member);
 		
-		// 3-4. È¸¿ø Á¤º¸ »èÁ¦
+		// 3-4. íšŒì›ì •ë³´ ì‚­ì œ
+		/*
 		member.setId("bbb2222");
 		member.setPassword("1234");
 		memberService.deleteMember(member);
+		*/
 		
-		// 4. Spring ÄÁÅ×ÀÌ³Ê Á¾·á
+		// 4. Spring ì»¨í…Œì´ë„ˆ ì¢…ë£Œ 
 		container.close();
 	}
-
 }

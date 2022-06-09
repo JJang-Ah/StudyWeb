@@ -1,19 +1,19 @@
 package com.springbook.biz.member.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.springbook.biz.member.MemberDTO;
 import com.springbook.biz.member.MemberService;
 
-@Component("memberSerivce")
+@Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO memberDAO;
 	
 	@Override
-	public void insertMember(MemberDTO dto) {
+	public void insertMemeber(MemberDTO dto) {
 		memberDAO.insertMember(dto);
 	}
 
@@ -25,12 +25,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void deleteMember(MemberDTO dto) {
-		memberDAO.deleteMember(dto);
+		memberDAO.deleteMemeber(dto);
 		
 	}
 
 	@Override
-	public MemberDTO getMember(MemberDTO dto) {
+	public MemberDTO getMemeber(MemberDTO dto) {
 		return memberDAO.getMember(dto);
+		
+		
 	}
+
 }

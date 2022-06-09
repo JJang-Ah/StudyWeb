@@ -1,8 +1,8 @@
 package com.springbook.biz.common;
 
 public class LogAdvice {
-
+	
 	public void printLog() {
-		System.out.println("[°øÅë ·Î±×] ºñÁö´Ï½º ·ÎÁ÷ ¼öÇà Àü µ¿ÀÛ");
+		System.out.println("[ê³µí†µ ë¡œê·¸] ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰ ì „ ë™ì‘");
 	}
 }

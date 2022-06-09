@@ -104,8 +104,19 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
-		// 구매 수량 제한 효과(1~100) -> 수정, 1번만 적용됨
+		let form = document.cartForm;
+		let cart_ids = document.getElementsByName("cart_id");
 		
+		// 주문, 삭제 버튼
+		let btn_buy_select = document.getElementById("btn_buy_select");
+		let btn_buy_select2 = document.getElementById("btn_buy_select2");
+		let btn_buy_select3 = document.getElementById("btn_buy_select3");
+		
+		let btn_delete_select = document.getElementById("btn_delete_select");
+		let btn_delete_select2 = document.getElementById("btn_delete_select2");
+		let btn_delete_select3 = document.getElementById("btn_delete_select3");
+		
+		// 구매 수량 제한 효과(1~100) -> 수정, 1번만 적용됨
 		let buy_counts = document.querySelectorAll(".buy_count");
 		for(let buy_count of buy_counts) {
 			buy_count.addEventListener("keyup", function() {
@@ -119,7 +130,6 @@
 		
 		//각 상품별 삭제 버튼 처리
 		let btn_delete_ones = document.querySelectorAll(".btn_delete_one");
-		let cart_ids = document.getElementsByName("cart_id");
 		for(let i=0; i<btn_delete_ones.length; i++) {
 			btn_delete_ones[i].addEventListener("click", function() {
 				location = 'cartDeletePro.jsp?cart_id=' + cart_ids[i].value;
@@ -137,7 +147,8 @@
 		
 		//////////////////////
 		// 전체 선택 체크박스 처리
-		let ck_count =0 ;
+		let cart_ids_list = []; // 카트 아이디의 배열
+		let ck_count =0 ; // 각 상품별 체크박스의 체크 개수
 		let ck_cart_ones = document.querySelectorAll(".ck_cart_one");
 		let ck_cart_all = document.getElementById("ck_cart_all");
 		ck_cart_all.addEventListener("change", function() {
@@ -145,12 +156,18 @@
 				ck_count = ck_cart_ones.length;
 				for(let i=0; i<ck_cart_ones.length; i++) {
 					ck_cart_ones[i].checked = true;
+					cart_ids_list.push(cart_ids[i]);
 				}
 			} else {				// 전체 선택을 해제하였을 때 -> 하위의 모든 체크 박스를 해제
+				ck_count = 0;
+			cart_ids_list = [];
 				for(let i=0; i<ck_cart_ones.length; i++) {
 					ck_cart_ones[i].checked = false;
-				}
-			}
+				}					
+
+			}			
+			console.log(cart_ids_list);
+
 		})
 		
 		// 각 상품별 체크박스 처리
@@ -162,12 +179,18 @@
 				if(ck_cart_ones[i].checked == false) {
 					ck_cart_all.checked = false;
 					--ck_count;
-				} else if(ck_cart_ones[i].checked == true){
+					cart_ids_list = cart_ids_list.filter((e) => e !== cart_ids[i].value); //해제되지 않은 카트 아이디를 다시 저장
+					
+					cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
+				} else {
 					ck_count++;
+					cart_ids_list.push(cart_ids[i].value);
+					
 				}
 				if(ck_count == ck_cart_ones.length) {
 					ck_cart_all.checked = true;
 				}
+				console.log(cart_ids_list);
 			})
 		}
 		
@@ -175,6 +198,35 @@
 		if(ck_count == ck_cart_ones.length) {
 			ck_cart_all.checked = true;	
 		}	
+		
+		// 삭제 버튼 처리
+		btn_delete_select.addEventListener("click", function() {
+			if(ck_count == 0) {
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			
+			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list ;
+		})
+		btn_delete_select2.addEventListener("click", function() {
+			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list ;	
+		})
+		
+		// 주문 버튼 처리
+		btn_but_select.addEventListener("click", function() {
+			location = '../buy/buyForm.jsp?cart_ids_list' + cart_ids_list;
+		})
+		btn_but_select2.addEventListener("click", function() {
+			location = '../buy/buyForm.jsp?cart_ids_list' + cart_ids_list;
+		})
+		btn_but_select3.addEventListener("click", function() {
+			location = '../buy/buyForm.jsp?cart_ids_list' + cart_ids_list;
+		})
+		
+		// 쇼핑 계속하기 버튼 처리
+		btn_shopping.addEventListener("click", function() {
+			location = '../shopping/shopAll.jsp';
+		})
 	})
 </script>
 </head>

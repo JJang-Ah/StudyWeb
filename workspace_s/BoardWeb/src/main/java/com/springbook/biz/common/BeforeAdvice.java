@@ -2,27 +2,20 @@ package com.springbook.biz.common;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @Aspect
 public class BeforeAdvice {
-	@Pointcut("excution(* com.springbook.biz..*Impl.*(..))")
-	public void allPointcut() {} // ÂüÁ¶ ¸Ş¼Òµå, Æ÷ÀÎÆ®ÄÆ ¸Ş¼Òµå
-	
-	@Pointcut("cxcution(* com.springbook.biz..*Impl.get*(..))")
-	public void getPointcut() {}
-	
-	@Before("allPointcut()")
 	public void beforeLog(JoinPoint jp) {
-		String method = jp.getSignature().getName(); // ºñÁö´Ï½º ¸Ş¼ÒµåÀÇ ÀÌ¸§À» ¾Ë ¼ö ÀÖ´Ù.
-		Object[] args = jp.getArgs(); // ºñÁö´Ï½º ¸Ş¼ÒµåÀÇ ¸Å°³º¯¼öÀÇ ÀÌ¸§
+
+		// @Before("allPointcut()")
+		String method = jp.getSignature().getName(); // í•µì‹¬ê´€ì‹¬ì‚¬ì˜ ë©”ì†Œë“œì˜ ì´ë¦„ì„ ì•Œì•„ëƒ„
+		Object[] args = jp.getArgs(); 				 // í¬ì¸íŠ¸ì»· ë©”ì†Œë“œì˜ ë§¤ê°œë³€ìˆ˜ë¥¼ ì•Œì•„ëƒ„	
 		
-		System.out.println("[»çÀü Ã³¸®] " + method + "() ¸Ş¼Òµå, ¸Å°³º¯¼ö Á¤º¸: " + args[0].toString());
-		//System.out.println("[»çÀü Ã³¸®] ºñÁö´Ï½º ·ÎÁ÷ ¼öÇà Àü µ¿ÀÛ");
+		System.out.println("[ì‚¬ì „ ì²˜ë¦¬]"+ method + "() ë©”ì†Œë“œ, ë§¤ê°œë³€ìˆ˜ ì •ë³´: "+ args[0].toString());
+		//System.out.println("[ì‚¬ì „ ì²˜ë¦¬] ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰ ì „ ë™ì‘");
 	}
 
+	
 }

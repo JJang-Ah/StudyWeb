@@ -6,51 +6,49 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardDTO;
-import com.springbook.biz.common.JDBCUtil;
+import com.springbook.biz.common.JDBCTUtil;
 
- @Repository("boardDAO")
+@Repository("boardDAO")
 public class BoardDAO {
-
-	// DB ¿¬°á °´Ã¼, ÁúÀÇ °´Ã¼
+	// DB ì—°ê²°, ì§ˆì˜ ê°ì²´
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	//SQL¹® 
-	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval,?,?,?)";
-//	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (?, ?, ?, ?)"; // Æ®·£Á§¼Ç Å×½ºÆ®
+	// SQLë¬¸
+	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval, ?, ?, ?)";
 	private final String BOARD_LIST = "select * from board order by seq desc";
-	private final String BOARD_GET = "select * from board where seq=?";
-	private final String BOARD_UPDATE = "=update board set title=?, content=? where weq=? ";
-	private final String BOARD_DELETE = "delete board where seq=?";
-	// ±Ûµî·Ï
+	private final String BOARD_GET = "select * from board where seq = ?";
+	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
+	private final String BOARD_DELETE = "delete board where seq=? ";
+	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
+	
+	// ê¸€ë“±ë¡
 	public void insertBoard(BoardDTO dto) {
-		System.out.println("=> JDBC·Î insertBoard() ½ÇÇà");
+		System.out.println("=> JDBCë¡œ insertBoard() ì‹¤í–‰");
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_INSERT);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getWriter());
 			pstmt.setString(3, dto.getContent());
 			pstmt.executeUpdate();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
 	}
-	// ±ÛÀüÃ¼ º¸±â
-	public List<BoardDTO> getBoardList() {
-		System.out.println("=> JDBC·Î getBoardList() ½ÇÇà");
-
-		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
+	
+	// ê¸€ì „ì²´ ë³´ê¸°
+	public List<BoardDTO> getBoardList(BoardDTO dto) {
+		System.out.println("=> JDBCë¡œ getBoardList() ì‹¤í–‰");
+		List<BoardDTO> boardList = new ArrayList<BoardDTO>();	
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_LIST);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -59,25 +57,29 @@ public class BoardDAO {
 				board.setTitle(rs.getString("title"));
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
-				board.setRegdate(rs.getTimestamp("regdate"));
+				board.setRegDate(rs.getTimestamp("regdate"));
 				board.setCnt(rs.getInt("cnt"));
 				boardList.add(board);
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt, rs);
+			JDBCTUtil.close(conn, pstmt, rs);
 		}
+		
 		return boardList;
 	}
-	
-	// ±Û»ó¼¼ º¸±â(1°Ç)
+		
+	// ê¸€ìƒì„¸ ë³´ê¸°(1ê±´)
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("=> JDBC·Î getBoard() ½ÇÇà");
-
+		System.out.println("=> JDBCë¡œ getBoard() ì‹¤í–‰");
 		BoardDTO board = null;
 		try {
-			conn = JDBCUtil.getConnection();
+			// ì¡°íšŒìˆ˜ ì¦ê°€ ë©”ì†Œë“œ í˜¸ì¶œ
+			updateBoardCnt(dto);
+			
+			conn = JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_GET);
 			pstmt.setInt(1, dto.getSeq());
 			rs = pstmt.executeQuery();
@@ -87,50 +89,66 @@ public class BoardDAO {
 				board.setTitle(rs.getString("title"));
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
-				board.setRegdate(rs.getTimestamp("regdate"));
+				board.setRegDate(rs.getTimestamp("regdate"));
 				board.setCnt(rs.getInt("cnt"));
-				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt, rs);
+			JDBCTUtil.close(conn, pstmt, rs);
 		}
+		
 		return board;
 	}
-	// ±Û¼öÁ¤
-	public void updateBoard(BoardDTO dto) {
-		System.out.println("=> JDBC·Î updateBoard() ½ÇÇà");
-
+	
+	// ì¡°íšŒìˆ˜ ì¦ê°€ -> ê¸€ìƒì„¸ë³´ê¸°ì—ì„œ ì²˜ë¦¬
+	public void updateBoardCnt(BoardDTO dto) {
+		System.out.println("=> JDBCë¡œ updateBoardCnt() ì‹¤í–‰");
+		
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCTUtil.getConnection();
+			pstmt = conn.prepareStatement(BOARD_UPDATE_CNT);
+			pstmt.setInt(1, dto.getSeq());
+			rs = pstmt.executeQuery();
+			
+		} catch(Exception e) {	
+			e.printStackTrace();
+		} finally {
+			JDBCTUtil.close(conn, pstmt);
+		}	
+	}
+	
+	// ê¸€ìˆ˜ì •
+	public void updateBoard(BoardDTO dto) {
+		System.out.println("=> JDBCë¡œ updateBoard() ì‹¤í–‰");
+		try {
+			conn= JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_UPDATE);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setInt(3, dto.getSeq());
-			pstmt.executeUpdate();
+			pstmt.executeQuery();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
 	}
 	
-	
-	// ±Û»èÁ¦
+	// ê¸€ì‚­ì œ
 	public void deleteBoard(BoardDTO dto) {
-		System.out.println("=> JDBC·Î deleteBoard() ½ÇÇà");
-
+		System.out.println("=> JDBCë¡œ deleteBoard() ì‹¤í–‰");
 		try {
-			conn = JDBCUtil.getConnection();
+			conn= JDBCTUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_DELETE);
 			pstmt.setInt(1, dto.getSeq());
-			pstmt.executeQuery();
+			pstmt.executeUpdate();	
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCUtil.close(conn, pstmt);
+			JDBCTUtil.close(conn, pstmt);
 		}
 	}
-	
+		
 }

@@ -1,8 +1,7 @@
 package com.springbook.biz.common;
 
 public class Log4jAdvice {
-
 	public void printLogging() {
-		System.out.println("[°øÅë·Î±×-Log4j] ºñÁö´Ï½º ·ÎÁ÷ ¼öÇà Á¤ µ¿ÀÛ");
+		System.out.println("[ê³µí†µ ë¡œê·¸-log4j] ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰ ì „ ë™ì‘");
 	}
 }

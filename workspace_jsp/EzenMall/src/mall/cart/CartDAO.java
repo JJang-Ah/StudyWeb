@@ -140,6 +140,24 @@ public class CartDAO {
 	}
 	
 	// 장바구니 삭제 (선택한 상품 또는 전체 상품)
+	public void deleteCartList(String[] cart_ids) {
+		String sql = "";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			for(String ids : cart_ids) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(ids));
+				pstmt.executeUpdate();
+			}
+			
+		} catch(Exception e) {
+			System.out.println("=> deleteCartList() 메소드 실행 에러");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
 	// 장바구니 상품 종류 개수
 	

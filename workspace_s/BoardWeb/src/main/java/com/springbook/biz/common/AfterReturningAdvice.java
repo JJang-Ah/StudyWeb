@@ -1,35 +1,25 @@
 package com.springbook.biz.common;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Service;
 
 import com.springbook.biz.member.MemberDTO;
 
-@Service
-@Aspect
+// @Service
+// @Aspect
 public class AfterReturningAdvice {
-	
-	@Pointcut("excution(* com.springbook.biz..*Impl.*(..))")
-	public void allPointcut() {} // ÂüÁ¶ ¸Ş¼Òµå, Æ÷ÀÎÆ®ÄÆ ¸Ş¼Òµå
-	
-	@Pointcut("cxcution(* com.springbook.biz..*Impl.get*(..))")
-	public void getPointcut() {}
-	
-	@AfterReturning(pointcut="getPointcut()", returning="returnObj")
 	public void afterLog(JoinPoint jp, Object returnObj) {
+
+		// @AfterReturning("getPointcut()")
 		String method = jp.getSignature().getName();
 		
 		if(returnObj instanceof MemberDTO) {
 			MemberDTO member = (MemberDTO)returnObj;
 			if(member.getRole().equals("Admin")) {
-				System.out.println(member.getName() + " ·Î±×ÀÎ!");
+				System.out.println(member.getName()+ "ë¡œê·¸ì¸!");
 			}
 		}
-		System.out.println("[»çÈÄ Ã³¸®] " + method + "() ¸Ş¼Òµå, ¸®ÅÏ°ª: " + returnObj.toString());
-		//System.out.println("[»çÈÄ Ã³¸®] ºñÁö´Ï½º ·ÎÁ÷ ¼öÇà ÈÄ µ¿ÀÛ");
+		
+		System.out.println("[ì‚¬í›„ ì²˜ë¦¬]" + method + "() ë©”ì†Œë“œ, ë¦¬í„´ê°’: " + returnObj.toString());
+		// System.out.println("[ì‚¬í›„ ì²˜ë¦¬] ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰ í›„ ë™ì‘");
 	}
-
 }
