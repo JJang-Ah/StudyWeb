@@ -17,6 +17,16 @@ import com.springbook.biz.member.impl.MemberDAO;
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         
+	private HandlerMapping handlerMapping;
+	private ViewResolver viewResolver;
+	
+	@Override
+	public void init() throws ServletException {
+		handlerMapping = new HandlerMapping();
+		viewResolver = new ViewResolver();
+		viewResolver.setPrefix("./");
+		viewResolver.setSuffix(".jsp");
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		process(request, response);
 	}
@@ -26,113 +36,31 @@ public class DispatcherServlet extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 한글 처리
+		request.setCharacterEncoding("utf-8");
+		
 		// 1. 클라이언트의 요청 정보를 통해 *.do를 추출
 		String uri = request.getRequestURI();
 		String path = uri.substring(uri.lastIndexOf("/"));
 		// System.out.println("uri: " + uri);
 		// System.out.println("path:" + path);
 		
-		// 2. 추출된 path에 따라 흐름을 제어
-		if(path.equals("/login.do")) {
-			System.out.println("로그인 처리");
-			// 1. 클라이언트의 입력정보를 획득
-			String memberid = request.getParameter("id");
-			String pwd = request.getParameter("password");
-			// 2. 객체 생성 및 DB 연동
-			MemberDTO dto = new MemberDTO();
-			dto.setId(memberid);
-			dto.setPassword(pwd);
-			MemberDAO memberDAO = new MemberDAO();
-			MemberDTO member = memberDAO.getMember(dto);
-			// 3. 화면 이동 제어
-			// rs에 의해서 결과값이 반환된다면
-			if(member != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("memberid", member.getId());
-				response.sendRedirect("getBoardList.do");
-			} else {
-				response.sendRedirect("login.jsp");
-			}
-			
-		} else if(path.equals("/logout.do")) {
-			System.out.println("로그아웃 처리");
-			// 1. 세션 삭제
-			HttpSession session = request.getSession();
-			session.invalidate();
-			// 2. 화면 이동
-			response.sendRedirect("login.jsp");
-			
-		} else if(path.equals("/insertBoard.do")) {
-			System.out.println("글등록 처리");
-			request.setCharacterEncoding("utf-8");
-			// 1. 요청 정보 획득
-			String title = request.getParameter("title");
-			String writer = request.getParameter("writer");
-			String content = request.getParameter("content");
-			// 2. 객체 생성, DB 연동
-			BoardDTO dto = new BoardDTO();
-			dto.setTitle(title);
-			dto.setWriter(writer);
-			dto.setContent(content);
-			BoardDAO boardDAO = new BoardDAO();
-			boardDAO.insertBoard(dto);
-			// 3. 화면 이동		
-			response.sendRedirect("getBoardList.jsp");
-			
-		} else if(path.equals("/updateBoard.do")) {
-			System.out.println("글수정 처리");	
-			request.setCharacterEncoding("utf-8");
-			// 1. 요청 정보 획득
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			// 2. 객체 생성, DB 연동
-			BoardDTO dto = new BoardDTO();
-			dto.setSeq(seq);
-			dto.setTitle(title);
-			dto.setContent(content);
-			BoardDAO boardDAO = new BoardDAO();
-			boardDAO.updateBoard(dto);
-			// 3. 화면 이동
-			response.sendRedirect("getboardList.jsp");	
-			
-		} else if(path.equals("/deleteBoard.do")) {
-			System.out.println("글삭제 처리");
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			// 2. 
-			BoardDTO dto = new BoardDTO();
-			dto.setSeq(seq);
-			BoardDAO boardDAO = new BoardDAO();
-			boardDAO.deleteBoard(dto);
-			// 3. 화면이동
-			response.sendRedirect("getboardList.jsp");
-			
-		} else if(path.equals("/getBoard.do")) {
-			System.out.println("글상세 조회");
-			// 1. 요청 정보 획득
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			// 2. 객체 생성, DB 연동
-			BoardDTO dto = new BoardDTO();
-			dto.setSeq(seq);
-			BoardDAO boardDAO = new BoardDAO();
-			BoardDTO board = boardDAO.getBoard(dto);
-			// 3. 화면 이동
-			HttpSession session = request.getSession();
-			session.setAttribute("board", board);
-			response.sendRedirect("getBoard.jsp");
-			
-		} else if(path.equals("/getBoardList.do")) {
-			System.out.println("글목록 조회");
-			// 1.DB 연동
-			BoardDTO dto = new BoardDTO();
-			BoardDAO boardDAO = new BoardDAO();
-			List<BoardDTO> boardList = boardDAO.getBoardList(dto);
-			// 2. 세션 생성 및 화면 이동
-			// jsp session.get...와 비슷함.
-			HttpSession session = request.getSession();
-			session.setAttribute("boardList", boardList);
-			response.sendRedirect("getBoardList.jsp");
-		}			
+		// 2. HandlerMapping에서 path에 해당하는 Controller를 찾음
+		Controller ctrl =  handlerMapping.getController(path);
+		
+		// 3. 검색한 Controller를 실행
+		String viewName = ctrl.handleRequest(request, response);
+		
+		// 4. ViewResolver를 통해서 완전한 viewName을 생성
+		String view = null;
+		if(!viewName.contains(".do")) { // .do로 끝나지 않는다면 
+			view = viewResolver.getView(viewName);
+		} else {			// .do를 포함 한다면
+			view = viewName;
+		}
+		
+		// 5. 화면 이동
+		response.sendRedirect(view);
 		
 	}
 	

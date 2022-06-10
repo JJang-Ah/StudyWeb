@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.springbook.biz.board.*" %>
-<%@ page import="java.text.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,10 +44,6 @@ table .title { width: 300px; height: 20px; }
 </script>
 </head>
 <body>
-<%
-BoardDTO board = (BoardDTO)session.getAttribute("board");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-%>
 
 <div class="container">
 	<h1>글상세</h1>
@@ -58,27 +53,27 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 	<table>
 		<tr>
 			<th width="20%">번호</th>
-			<td width="80%">><input type="text" name="seq" value="<%=board.getSeq()%>" readonly class="seq"></td>
+			<td width="80%">><input type="text" name="seq" value="${board.seq }" readonly class="seq"></td>
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" value="<%=board.getTitle()%>" class="title"> </td>
+			<td><input type="text" name="title" value="${board.title }" class="title"> </td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><%=board.getWriter() %></td>
+			<td>${board.writer }</td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" rows="15" cols="52"><%=board.getContent() %></textarea></td>
+			<td><textarea name="content" rows="15" cols="52">${board.content }</textarea></td>
 		</tr>
 		<tr>
 			<th>등록일</th>
-			<td><%=sdf.format(board.getRegDate()) %></td>
+			<td>${board.regDate }</td>
 		</tr>
 		<tr>
 			<th>조회수</th>
-			<td><%=board.getCnt() %></td>
+			<td>${board.cnt }</td>
 		</tr>
 	</table>
 	<div class="btns">

@@ -43,20 +43,11 @@ for(CartDTO dto : cartList) {
 }
 
 if(cart_id == 0) { // 카트에 새 상품을 추가
-	
+	cartDAO.insertCart(cart);
 } else { // 이미 존재하는 상품의 수량을 수정
-	
+	cartDAO.updateCart(cart_id, buy_count+cart.getBuy_count());// 존재하는 상품 수량 + 새로더하는 상품 수량
 }
-
-int check = cartDAO.insertCart(cart);
-
-out.print("<script>");
-if(check == 0) {
-	out.print("alert('장바구니 추가에 실패하였습니다.');history.back();");
-} else {
-	out.print("location='cartList.jsp';");
-}
-out.print("</script>");
+response.sendRedirect("cartList.jsp");
 
 %>
 </body>

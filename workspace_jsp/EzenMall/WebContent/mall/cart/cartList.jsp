@@ -12,14 +12,14 @@
 .container { width: 1200px; margin: 0 auto;}
 .cart_list { width: 100%;}
 /* 상단1 */
-.d1 { width: 40%; padding: 15px; margin: 15px 45px; float: left;}
+.d1 { width: 40%; padding: 15px; margin: 15px 45px; float: right;}
 .d1 .s1 { font-size: 1.1em; font-weight: bold; margin-right: 30px;}
 .d1 .s2, .d1 .s3 { display: inline-box; width: 150px; text-align: center; padding: 6px 17px; border: 1px solid #333; font-size: 0.8em; border-radius: 15px; font-weight: bold;}
-.d1 .s2 { width: 300px; background: #333; color: #fff; z-index: 10; position: relative;}
+.d1 .s2 { width: 300px; background: #443cc3; color: #fff; z-index: 10; position: relative;}
 .d1 .s3 { width: 300px; background: #fff; color: #333; margin-left: 0px; z-index: -10; position: relative;}
 
 /* 상단2 */
-.d2 { width: 40%; padding: 15px; margin: 5px 45px; float: right; display: inline-block; text-align: right;}
+.d2 { width: 40%; padding: 15px; margin: 5px 45px; float: left; display: inline-block; text-align: left;}
 .d_line { clear: both; width: 90%; border: 1px solid lightgray;}
 
 /* 상단3 */
@@ -43,6 +43,7 @@
 .td0 { text-align: center; font-weight: bold; font-size: 1.1em; padding: 30px 0;}
 .td1 .check_cart_one { zoom: 1.5;}
 .td3 .s1 { font-weight: bold; color: #1e94be;}
+.td3 .s1 a { text-decoration: none; color: ##1e94be;}
 .td3 .s2 { font-size: 0.9em; color: black;}
 .td3 .s3 { font-size: 0.9em; color: gray; text-decoration: line-through;}
 .td3 .s4 { font-weight: bold; color: #c84557;}
@@ -160,7 +161,7 @@
 				}
 			} else {				// 전체 선택을 해제하였을 때 -> 하위의 모든 체크 박스를 해제
 				ck_count = 0;
-			cart_ids_list = [];
+				cart_ids_list = [];
 				for(let i=0; i<ck_cart_ones.length; i++) {
 					ck_cart_ones[i].checked = false;
 				}					
@@ -289,7 +290,7 @@ int p_count = 0; // 주문 상품 총 개수
 			<span class="s3">아침배송</span>
 		</div>
 		<div class="d2">
-			<img src="../../icons/progress01.PNG" width="300" heigh="45">
+			<img src="../../icons/progress01.PNG" width="400" heigh="60">
 		</div>
 		<hr class="d_line">
 		<div class="d3">
@@ -332,9 +333,11 @@ int p_count = 0; // 주문 상품 총 개수
 				<input type="hidden" name="product_id" value="<%=cart.getProduct_id() %>">
 				<tr>
 					<td class="center td1" width="3%"><input type="checkbox" name="check_cart_one" class="ck_cart_one"></td>
-					<td class="center td2" width="8%"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></td>
+					<td class="center td2" width="8%">
+					<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a>
+					</td>
 					<td class="left td3" width="48%">
-						<span class="s1"><%=cart.getProduct_name() %></span><br>
+						<span class="s1"><a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><%=cart.getProduct_name() %></a></span><br>
 						<span class="s2"><%=cart.getAuthor() %></span> | <span class="s2"><%=cart.getPublishing_com() %></span><br>
 						<span class="s3"><%=df.format(cart.getBuy_price()) %>원</span> | <span class="s4"><%=df.format(buy_price) %> (<%=cart.getDiscount_rate() %>%)</span>
 					</td>

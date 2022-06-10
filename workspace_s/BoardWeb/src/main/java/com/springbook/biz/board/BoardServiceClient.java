@@ -19,7 +19,7 @@ public class BoardServiceClient {
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setTitle("글등록 8");
-		dto.setWriter("장민규");
+		dto.setWriter("네이마르");
 		dto.setContent("글등록 테스트 중입니다. 8");
 		boardService.insertBoard(dto);
 		

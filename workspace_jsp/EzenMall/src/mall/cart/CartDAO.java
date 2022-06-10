@@ -141,7 +141,7 @@ public class CartDAO {
 	
 	// 장바구니 삭제 (선택한 상품 또는 전체 상품)
 	public void deleteCartList(String[] cart_ids) {
-		String sql = "";
+		String sql = "delete from cart where cart_id = ?";
 		
 		try {
 			conn = JDBCUtil.getConnection();

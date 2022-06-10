@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.springbook.biz.board.*" %>
-<%@ page import="java.util.*, java.text.*" %>
+<%@ page import="java.util.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +29,10 @@ th { background: #e9ecef; }
 </style>
 </head>
 <body>
-<%
-List<BoardDTO> boardList = (List<BoardDTO>)session.getAttribute("boardList");
-String memberId = (String)session.getAttribute("memberId");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-%>
 <div class="container">
 	<h1>게시판 목록</h1>
 	<div class="d1">
-		<div class="d1_1"><h3><%=memberId %>테스트님 환영합니다...<a href="logout.do">LOGOUT</a></h3></div> 
+		<div class="d1_1"><h3>${memberId }님 환영합니다...<a href="logout.do">LOGOUT</a></h3></div> 
 		<div class="d1_2"><a href="insertBoard.jsp">글등록</a></div>
 	</div>
 	<form action="getBoardList.do" method="post">
@@ -61,15 +57,16 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			<th width="15%">등록일</th>
 			<th width="10%">조회수</th>
 		</tr>
-		<%for(BoardDTO board : boardList){ %>
+		<c:forEach var="board" items="${boardList }">
 		<tr>
-			<td class="center"><%=board.getSeq() %></td>
-			<td class="left"><a href="getBoard.do?seq=<%=board.getSeq()%>"><%=board.getTitle()%></a></td>
-			<td class="center"><%=board.getWriter()%></td>
-			<td class="center"><%=sdf.format(board.getRegDate())%></td>
-			<td class="center"><%=board.getCnt()%></td>
+			<td class="center">${board.seq }</td>
+			<td class="left"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
+			<td class="center">${board.writer }</td>
+			<td class="center">${board.regDate }</td>
+			<td class="center">${board.cnt }</td>
 		</tr>
-		<%} %>
+		
+		</c:forEach>
 	</table>
 </div>
 </body>
