@@ -154,7 +154,7 @@
         
      	<Context docBase="c:/Users/tw5hy/바탕 화면/이젠 아카데미/images_ezenmall" path="/images_ezenmall" reloadable="true"/>
       
-      <Context docBase="EzenMall" path="/EzenMall" reloadable="true" source="org.eclipse.jst.jee.server:EzenMall"/><Context docBase="SwBasicTest01" path="/SwBasicTest01" reloadable="true" source="org.eclipse.jst.jee.server:SwBasicTest01"/><Context docBase="IntegrationImplTest" path="/IntegrationImplTest" reloadable="true" source="org.eclipse.jst.jee.server:IntegrationImplTest"/></Host>
+      <Context docBase="EzenMall" path="/EzenMall" reloadable="true" source="org.eclipse.jst.jee.server:EzenMall"/><Context docBase="SwBasicTest01" path="/SwBasicTest01" reloadable="true" source="org.eclipse.jst.jee.server:SwBasicTest01"/><Context docBase="IntegrationImplTest" path="/IntegrationImplTest" reloadable="true" source="org.eclipse.jst.jee.server:IntegrationImplTest"/><Context docBase="ELTest01" path="/ELTest01" reloadable="true" source="org.eclipse.jst.jee.server:ELTest01"/></Host>
     </Engine>
   </Service>
 </Server>

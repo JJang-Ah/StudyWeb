@@ -193,6 +193,7 @@ String memberId = (String)session.getAttribute("memberId"); // .getAttribute()�
 
 if(memberId == null) {
 	out.print("<script>location='../shopping/shopAll.jsp'</script>");
+	return;
 }
 
 // 아래는 세션 memberId가 있을 때 실행

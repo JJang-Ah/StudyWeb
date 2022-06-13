@@ -147,27 +147,62 @@
 		}
 		
 		//////////////////////
+		// 판매가 계산 
+		let p_sums = document.getElementByName("p_sum");
+		let p_s1 = 0;
+		let c1_s1 = document.quertySelector(".c1_s1");
+		let c2_s1 = document.quertySelector(".c2_s1");
+		let c3_s1 = document.quertySelector(".c3_s1");
+		
+		// 원가 계산
+		let p_sum2 = document.getElementByName("p_sum2");
+		let p_s2 = 0;
+		let c1_s2 = document.querySelector(".c1_s2");
+		
+		// 할인 금액 계산
+		let p_sum3 = document.getElementByName("p_sum3");
+		let p_s3 = 0;
+		let c1_s3 = document.querySelector(".c1_s3");
+		
+		
 		// 전체 선택 체크박스 처리
 		let cart_ids_list = []; // 카트 아이디의 배열
 		let ck_count =0 ; // 각 상품별 체크박스의 체크 개수
 		let ck_cart_ones = document.querySelectorAll(".ck_cart_one");
 		let ck_cart_all = document.getElementById("ck_cart_all");
 		ck_cart_all.addEventListener("change", function() {
+			p_s1 = 0;
+			p_s2 = 0;
+			p_s3 = 0;
 			if(ck_cart_all.checked == true) { // 전체 선택을 체크하였을 때 -> 하위의 모든 체크 박스를 선택 
 				ck_count = ck_cart_ones.length;
 				for(let i=0; i<ck_cart_ones.length; i++) {
 					ck_cart_ones[i].checked = true;
 					cart_ids_list.push(cart_ids[i]);
+					p_s1 += Integer.parseInt(p_sums[i].value);
+					p_s2 += Integer.parseInt(p_sums2[i].value);
+					p_s3 += Integer.parseInt(p_sums3[i].value);
 				}
 			} else {				// 전체 선택을 해제하였을 때 -> 하위의 모든 체크 박스를 해제
 				ck_count = 0;
 				cart_ids_list = [];
 				for(let i=0; i<ck_cart_ones.length; i++) {
 					ck_cart_ones[i].checked = false;
+					p_s1 = 0;
+					p_s2 = 0;
+					p_s3 = 0;
 				}					
 
 			}			
-			console.log(cart_ids_list);
+			c1_s1.innerHTML = p_s1.toLocaleString() + '원';
+			c2_s1.innerHTML = p_s2.toLocaleString() + '원';
+			c3_s1.innerHTML = p_s1.toLocaleString() + '원';
+			c1_s2innerHTML = p_s1.toLocaleString() + '원';
+			c1_s3.innerHTML = p_s1.toLocaleString() + '원';
+			
+			console.log(cart_ids_list);		
+			cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
+
 
 		})
 		
@@ -181,16 +216,34 @@
 					ck_cart_all.checked = false;
 					--ck_count;
 					cart_ids_list = cart_ids_list.filter((e) => e !== cart_ids[i].value); //해제되지 않은 카트 아이디를 다시 저장
+					p_s1 -= parseInt(p_sums[i].value);
+					p_s2 -= parseInt(p_sums2[i].value);
+					p_s3 -= parseInt(p_sums3[i].value);
+					--k_count;
+					p_count -= parseInt(buy_counts[i].value);
 					
-					cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
 				} else {
 					ck_count++;
 					cart_ids_list.push(cart_ids[i].value);
-					
+					p_s1 += parseInt(p_sums[i].value);
+					p_s2 += parseInt(p_sums2[i].value);
+					p_s3 += parseInt(p_sums3[i].value);
+					++k_count;
+					p_cont += parseInt(buy_counts[i].value);
 				}
 				if(ck_count == ck_cart_ones.length) {
 					ck_cart_all.checked = true;
 				}
+				cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
+	
+				c1_s1.innerHTML = p_s1.toLocaleString() + '원';
+				c2_s1.innerHTML = p_s2.toLocaleString() + '원';
+				c3_s1.innerHTML = p_s1.toLocaleString() + '원';
+				c1_s2innerHTML = p_s1.toLocaleString() + '원';
+				c1_s3.innerHTML = p_s1.toLocaleString() + '원';
+				c1_s4.innerHTML = k_count + '종';
+				c1_s5.innerHTML = p_count + '개';
+				
 				console.log(cart_ids_list);
 			})
 		}
@@ -238,6 +291,7 @@ String memberId = (String)session.getAttribute("memberId");
 if(memberId == null) {
 	out.print("<script>alert('로그인을 해주세요.');");
 	out.print("location='../logon/memberLoginForm.jsp';</script>");
+	return;
 }
 
 SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
@@ -248,6 +302,8 @@ MemberDAO memberDAO = MemberDAO.getInstance();
 MemberDTO member = memberDAO.getMember(memberId);
 
 String address = member.getAddress();
+String local = address.substring(0, 2);
+
 
 
 // 장바구니 DB 연결, 질의
@@ -265,6 +321,7 @@ int p_tot = 0; // 주문 상품의 총합계(할인 가격)
 
 int p_sum2 = 0; // 각 상품의 합계(원가)
 int p_tot2 = 0; // 주문 상품의 총합계(원가)
+
 
 int d_count = 0; // 실제 할인된 금액
 int p_sum3 = 0; // 각 상품의 실제 할인된 금액의 합계
@@ -331,6 +388,9 @@ int p_count = 0; // 주문 상품 총 개수
 				<form action="cartUpdatePro.jsp" method="post" name="cartForm">
 				<input type="hidden" name="cart_id" value="<%=cart.getCart_id() %>">
 				<input type="hidden" name="product_id" value="<%=cart.getProduct_id() %>">
+				<input type="hidden" name="p_sum" value="<%=p_sum%>">
+				<input type="hidden" name="p_sum2" value="<%=p_sum2%>">
+				<input type="hidden" name="p_sum3" value="<%=p_sum3%>">
 				<tr>
 					<td class="center td1" width="3%"><input type="checkbox" name="check_cart_one" class="ck_cart_one"></td>
 					<td class="center td2" width="8%">
@@ -356,7 +416,7 @@ int p_count = 0; // 주문 상품 총 개수
 			<%}} %>
 			
 			<tr>
-				<td colspan="7">EZEN MALL 배송 상품 총 금액 : <b><%=df.format(p_tot) %></b> 원(+배송비 <b>0원</b>)</td>
+				<td colspan="7">EZEN MALL 배송 상품 총 금액 : <b class="c1_s1"><%=df.format(p_tot) %></b> 원(+배송비 <b>0원</b>)</td>
 			</tr>
 		</table>
 		<div class="d4">
@@ -366,17 +426,17 @@ int p_count = 0; // 주문 상품 총 개수
 		</div>
 		<table class="t_cart_tot">
 			<tr>
-				<th>총 상품금액<br><span class="s1"><%=df.format(p_tot) %></span>원</th>
+				<th>총 상품금액<br><span class="s1 c2_s1"><%=df.format(p_tot2) %></span>원</th>
 				<th><img src="../../icons/plus.PNG" width="60"></th>
 				<th>총 추가금액<br><span class="s2"><%=0 %></span>원</th>
 				<th><img src="../../icons/minus.PNG" width="60"></th>
-				<th>총 할인금액<br><span class="s3"><%=0 %></span>원</th>
+				<th>총 할인금액<br><span class="s3"><%=df.format(p_tot3) %></span>원</th>
 				<th><img src="../../icons/equal.PNG" width="60"></th>
-				<th>최종 결제금액<br><span class="s4"><%=df.format(p_tot) %></span>원</th>
+				<th>최종 결제금액<br><span class="s4 c3_s1"><%=df.format(p_tot) %></span>원</th>
 			</tr>
 			<tr>
 				<th colspan="7">
-					<span>정가: <b><%=p_tot2 %></b>원</span><br>
+					<span>정가: <b class="c1_s2">0원</b>에서<b class="c1_s3">0원 </b> 할인</span><br>
 					<span>할인: <b><%=p_tot3 %></b>원</span><br>
 					<span><%=k_count %>종  (<%=p_count %>)개</span>
 				</th>
