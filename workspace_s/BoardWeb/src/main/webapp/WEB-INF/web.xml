@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
-
   <!-- 한글 인코딩 설정 -->
   <filter>
   	<filter-name>characterEncoding</filter-name>
@@ -12,16 +11,15 @@
   	</init-param>
   </filter>
   <filter-mapping>
-  	<filter-name>charcterEncoding</filter-name>
+  	<filter-name>characterEncoding</filter-name>
   	<url-pattern>*.do</url-pattern>
   </filter-mapping>
-  
-    <!-- DispathcherServelet 설정 -->
-    <!-- 2. Spring에서 제공하는 DispatcherServlet을 사용 -->
-    <!-- action-servlet.xml을 생성하고 경로를 변경하고, 이름을 presentation-layer.xml로 변경 -->
+ 
+  <!-- DispatcherServlet 설정 -->
+  <!-- 2. Spring에서 제공하는 DispatcherServlet 사용 -->
+  <!-- action-servlet.xml을 생성하고 경로를 변경하고, 이름을 presentation-layer.xml로 변경 -->
   <servlet>
-    <description></description>
-    <display-name>action</display-name>
+    <servlet-name>action</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
     	<param-name>contextConfigLocation</param-name>
@@ -33,10 +31,8 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
-  
-  
   <!-- 1. 직접 만든 DispatcherServlet을 사용 -->
- <!--  <servlet>
+<!--   <servlet>
     <description></description>
     <display-name>DispatcherServlet</display-name>
     <servlet-name>DispatcherServlet</servlet-name>
@@ -46,4 +42,5 @@
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping> -->
+  
 </web-app>

@@ -10,18 +10,18 @@
 </head>
 <body>
 <%
-// 1.
+// 1. 요청 정보 획득
 int seq = Integer.parseInt(request.getParameter("seq"));
 
-// 2. 
+// 2. 객체 생성, DB 연동
 BoardDTO dto = new BoardDTO();
 dto.setSeq(seq);
 
 BoardDAO boardDAO = new BoardDAO();
 boardDAO.deleteBoard(dto);
 
-// 3. 화면이동
-response.sendRedirect("getboardList.jsp");
+// 3. 화면 이동
+response.sendRedirect("getBoardList.jsp");
 %>
 </body>
 </html>

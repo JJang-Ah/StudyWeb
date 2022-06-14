@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.board.impl.BoardDAO;
 
-public class InsertBoardController implements Controller{
+public class InsertBoardController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -22,9 +22,8 @@ public class InsertBoardController implements Controller{
 		dto.setContent(content);
 		BoardDAO boardDAO = new BoardDAO();
 		boardDAO.insertBoard(dto);
-			
-		return "getBoardList.do"; 
+		// 3. 화면 이동
+		return "getBoardList.do";
 	}
-	
 
 }

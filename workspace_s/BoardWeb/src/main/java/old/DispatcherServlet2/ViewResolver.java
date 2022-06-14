@@ -16,6 +16,4 @@ public class ViewResolver {
 	public String getView(String viewName) {
 		return prefix + viewName + suffix;
 	}
-	
-
 }

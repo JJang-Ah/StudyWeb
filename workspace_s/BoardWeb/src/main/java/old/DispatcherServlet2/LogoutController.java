@@ -15,6 +15,5 @@ public class LogoutController implements Controller {
 		// 2. 화면 이동
 		return "login";
 	}
-	
 
 }

@@ -10,58 +10,52 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.springbook.biz.board.BoardDTO;
 
-// @Repository("boardDAO")
+//@Repository("boardDAO")
 public class BoardDAOSpring2 {
-	
 	// SQL문
-	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval, ?, ?, ?)";
-	// private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(?, ?, ?, ?)"; // 트랜잭션 테스트
+	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
+	//private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (?, ?, ?, ?)"; // 트랙잭션 테스트
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	private final String BOARD_GET = "select * from board where seq = ?";
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
-	private final String BOARD_DELETE = "delete board where seq=? ";
-
+	private final String BOARD_DELETE = "delete board where seq = ?";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	// 글등록
 	public void insertBoard(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 insertBoard() 실행");
-		// preparestatement에서 insert하는 방법과 같은 의미
-		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter());
-		// jdbcTemplate.update(BOARD_INSERT, dto.getSeq() ,dto.getTitle(), dto.getWriter());
-	
+		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter(), dto.getContent());
+		//jdbcTemplate.update(BOARD_INSERT, dto.getSeq(), dto.getTitle(), dto.getWriter(), dto.getContent()); // 트랜잭션 테스트
 	}
-		
+	
 	// 글수정
 	public void updateBoard(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 updateBoard() 실행");
-		// preparestatement에서 update하는 방법과 같은 의미
 		jdbcTemplate.update(BOARD_UPDATE, dto.getTitle(), dto.getContent(), dto.getSeq());
 	}
 	
 	// 글삭제
 	public void deleteBoard(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 deleteBoard() 실행");
-		// preparestatement에서 delete하는 방법과 같은 의미
 		jdbcTemplate.update(BOARD_DELETE, dto.getSeq());
-		
 	}
 	
 	// 글전체 보기
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 getBoardList() 실행");
 		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
 	}
-		
+	
 	// 글상세 보기(1건)
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 getBoard() 실행");	
-		Object[] args = { dto.getSeq() };
+		System.out.println("=> Spring JDBC2로 getBoard() 실행");
+		Object[] args = {dto.getSeq()};
 		return jdbcTemplate.queryForObject(BOARD_GET, args, new BoardRowMapper());
 	}
 	
-	// RowMapper 클래스 생성- 리턴값을 자바객체와 맵핑하는 클래스
+	// RowMapper 클래스 생성 - 리턴값을 자바객체와 매핑하는 클래스
 	private class BoardRowMapper implements RowMapper<BoardDTO> {
 		@Override
 		public BoardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -70,11 +64,10 @@ public class BoardDAOSpring2 {
 			board.setTitle(rs.getString("title"));
 			board.setWriter(rs.getString("writer"));
 			board.setContent(rs.getString("content"));
-			board.setRegDate(rs.getTimestamp("regdate"));
+			board.setRegdate(rs.getTimestamp("regdate"));
 			board.setCnt(rs.getInt("cnt"));
 			return board;
 		}
-		
 	}
-		
+	
 }

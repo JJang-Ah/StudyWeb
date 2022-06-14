@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.springbook.biz.member.*" %>
+<%@ page import="com.springbook.biz.member.*"%>
 <%@ page import="com.springbook.biz.member.impl.*" %>
 <!DOCTYPE html>
 <html>
@@ -10,25 +10,25 @@
 </head>
 <body>
 <%
-// 1. 클라이언트의 입력정보를 획득
+// 1. 클라이언트의 입력정보 획득
 String id = request.getParameter("id");
-String pwd = request.getParameter("password");
+String password = request.getParameter("password");
 
 // 2. 객체 생성 및 DB 연동
 MemberDTO dto = new MemberDTO();
 dto.setId(id);
-dto.setPassword(pwd);
+dto.setPassword(password);
 
 MemberDAO memberDAO = new MemberDAO();
 MemberDTO member = memberDAO.getMember(dto);
 
 // 3. 화면 이동 제어
-// rs에 의해서 결과값이 반환된다면
-if(member != null) { 
+if(member != null) {
 	response.sendRedirect("getBoardList.jsp");
 } else {
 	response.sendRedirect("login.jsp");
 }
 %>
+
 </body>
 </html>

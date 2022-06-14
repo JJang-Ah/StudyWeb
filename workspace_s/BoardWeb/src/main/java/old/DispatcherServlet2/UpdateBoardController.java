@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.board.impl.BoardDAO;
 
-public class UpdateBoardController implements Controller{
+public class UpdateBoardController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("글수정 처리");	
+		System.out.println("글수정 처리");
 		// 1. 요청 정보 획득
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		String title = request.getParameter("title");
@@ -22,9 +22,8 @@ public class UpdateBoardController implements Controller{
 		dto.setContent(content);
 		BoardDAO boardDAO = new BoardDAO();
 		boardDAO.updateBoard(dto);
-		
+		// 3. 화면 이동
 		return "getBoardList.do";
 	}
-	
 
 }

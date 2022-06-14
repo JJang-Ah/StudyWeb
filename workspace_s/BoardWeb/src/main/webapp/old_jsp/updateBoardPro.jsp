@@ -27,7 +27,7 @@ BoardDAO boardDAO = new BoardDAO();
 boardDAO.updateBoard(dto);
 
 // 3. 화면 이동
-response.sendRedirect("getboardList.jsp");
+response.sendRedirect("getBoardList.jsp");
 %>
 </body>
 </html>

@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardDTO;
-import com.springbook.biz.common.JDBCTUtil;
+import com.springbook.biz.common.JDBCUtil;
 
 @Repository("boardDAO")
 public class BoardDAO {
@@ -19,18 +19,18 @@ public class BoardDAO {
 	private ResultSet rs = null;
 	
 	// SQL문
-	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(board_seq.nextval, ?, ?, ?)";
+	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	private final String BOARD_GET = "select * from board where seq = ?";
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
-	private final String BOARD_DELETE = "delete board where seq=? ";
+	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
-	
+
 	// 글등록
 	public void insertBoard(BoardDTO dto) {
 		System.out.println("=> JDBC로 insertBoard() 실행");
 		try {
-			conn = JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_INSERT);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getWriter());
@@ -39,16 +39,16 @@ public class BoardDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt);
+			JDBCUtil.close(conn, pstmt);
 		}
 	}
 	
 	// 글전체 보기
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
 		System.out.println("=> JDBC로 getBoardList() 실행");
-		List<BoardDTO> boardList = new ArrayList<BoardDTO>();	
+		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		try {
-			conn = JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_LIST);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -57,20 +57,18 @@ public class BoardDAO {
 				board.setTitle(rs.getString("title"));
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
-				board.setRegDate(rs.getTimestamp("regdate"));
+				board.setRegdate(rs.getTimestamp("regdate"));
 				board.setCnt(rs.getInt("cnt"));
 				boardList.add(board);
 			}
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt, rs);
+			JDBCUtil.close(conn, pstmt, rs);
 		}
-		
 		return boardList;
 	}
-		
+	
 	// 글상세 보기(1건)
 	public BoardDTO getBoard(BoardDTO dto) {
 		System.out.println("=> JDBC로 getBoard() 실행");
@@ -79,7 +77,7 @@ public class BoardDAO {
 			// 조회수 증가 메소드 호출
 			updateBoardCnt(dto);
 			
-			conn = JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_GET);
 			pstmt.setInt(1, dto.getSeq());
 			rs = pstmt.executeQuery();
@@ -89,50 +87,46 @@ public class BoardDAO {
 				board.setTitle(rs.getString("title"));
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
-				board.setRegDate(rs.getTimestamp("regdate"));
+				board.setRegdate(rs.getTimestamp("regdate"));
 				board.setCnt(rs.getInt("cnt"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt, rs);
+			JDBCUtil.close(conn, pstmt, rs);
 		}
-		
 		return board;
 	}
 	
 	// 조회수 증가 -> 글상세보기에서 처리
 	public void updateBoardCnt(BoardDTO dto) {
 		System.out.println("=> JDBC로 updateBoardCnt() 실행");
-		
 		try {
-			conn = JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_UPDATE_CNT);
 			pstmt.setInt(1, dto.getSeq());
-			rs = pstmt.executeQuery();
-			
-		} catch(Exception e) {	
+			pstmt.executeUpdate();
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt);
-		}	
+			JDBCUtil.close(conn, pstmt);
+		}
 	}
 	
 	// 글수정
 	public void updateBoard(BoardDTO dto) {
 		System.out.println("=> JDBC로 updateBoard() 실행");
 		try {
-			conn= JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_UPDATE);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setInt(3, dto.getSeq());
-			pstmt.executeQuery();
-			
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt);
+			JDBCUtil.close(conn, pstmt);
 		}
 	}
 	
@@ -140,15 +134,15 @@ public class BoardDAO {
 	public void deleteBoard(BoardDTO dto) {
 		System.out.println("=> JDBC로 deleteBoard() 실행");
 		try {
-			conn= JDBCTUtil.getConnection();
+			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(BOARD_DELETE);
 			pstmt.setInt(1, dto.getSeq());
-			pstmt.executeUpdate();	
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTUtil.close(conn, pstmt);
+			JDBCUtil.close(conn, pstmt);
 		}
 	}
-		
+	
 }

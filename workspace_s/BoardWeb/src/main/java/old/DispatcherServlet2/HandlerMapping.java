@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HandlerMapping {
-
+	
 	private Map<String, Controller> mappings;
 	
 	public HandlerMapping() {
@@ -16,10 +16,10 @@ public class HandlerMapping {
 		mappings.put("/insertBoard.do", new InsertBoardController());
 		mappings.put("/updateBoard.do", new UpdateBoardController());
 		mappings.put("/deleteBoard.do", new DeleteBoardController());
-		
 	}
 	
 	public Controller getController(String path) {
 		return mappings.get(path);
 	}
+
 }

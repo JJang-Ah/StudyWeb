@@ -61,3 +61,31 @@ insert into manager values('admin', 1234);
 select * from manager;
 select * from product;
 
+-- 0612
+use db02;
+show tables;
+
+create table cart (
+cart_id bigint primary key auto_increment,
+buyer varchar(50) not null,
+product_id bigint not null,
+product_name varchar(100) not null,
+brand varchar(50) not null,
+product_price int not null,
+discount_rate int not null,
+buy_price int null,
+buy_count int not null,
+product_image varchar(30) not null
+);
+
+
+create table review (
+num int primary key auto_increment,
+member_id varchar(50) not null,
+product_id bigint not null,
+subject varchar(100) not null,
+content text not null,
+regDate datetime default now(),
+readcount int default 0
+);
+

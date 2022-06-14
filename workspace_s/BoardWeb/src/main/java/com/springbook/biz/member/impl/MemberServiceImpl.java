@@ -8,32 +8,28 @@ import com.springbook.biz.member.MemberService;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
-
+	
 	@Autowired
 	private MemberDAO memberDAO;
-	
+
 	@Override
-	public void insertMemeber(MemberDTO dto) {
+	public void insertMember(MemberDTO dto) {
 		memberDAO.insertMember(dto);
 	}
 
 	@Override
 	public void updateMember(MemberDTO dto) {
 		memberDAO.updateMember(dto);
-		
 	}
 
 	@Override
 	public void deleteMember(MemberDTO dto) {
-		memberDAO.deleteMemeber(dto);
-		
+		memberDAO.deleteMember(dto);
 	}
 
 	@Override
-	public MemberDTO getMemeber(MemberDTO dto) {
+	public MemberDTO getMember(MemberDTO dto) {
 		return memberDAO.getMember(dto);
-		
-		
 	}
 
 }

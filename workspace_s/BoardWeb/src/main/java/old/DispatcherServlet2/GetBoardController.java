@@ -7,11 +7,10 @@ import javax.servlet.http.HttpSession;
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.board.impl.BoardDAO;
 
-public class GetBoardController implements Controller{
+public class GetBoardController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-
 		System.out.println("글상세 조회");
 		// 1. 요청 정보 획득
 		int seq = Integer.parseInt(request.getParameter("seq"));
@@ -25,6 +24,5 @@ public class GetBoardController implements Controller{
 		session.setAttribute("board", board);
 		return "getBoard";
 	}
-	
 
 }
