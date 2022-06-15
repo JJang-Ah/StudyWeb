@@ -47,8 +47,44 @@ public class CartDAO {
 		}
 		return check;
 	}
+	// 장바구니 주문(각 상품별로)
+	public CartDTO getCart(int cart_id) {
+		String sql = "select * from cart where cart_id=?";
+		CartDTO cart = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cart_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cart = new CartDTO();
+				cart.setCart_id(rs.getInt("cart_id"));
+				cart.setBuyer(rs.getString("buyer"));
+				cart.setProduct_id(rs.getInt("product_id"));
+				cart.setProduct_name(rs.getString("product_name"));
+				cart.setAuthor(rs.getString("author"));
+				cart.setPublishing_com(rs.getString("publishing_com"));
+				cart.setProduct_price(rs.getInt("product_price"));
+				cart.setDiscount_rate(rs.getInt("discount_rate"));
+				cart.setBuy_price(rs.getInt("buy_price"));
+				cart.setBuy_count(rs.getInt("buy_count"));
+				cart.setProduct_image(rs.getString("product_image"));				
+			}
+			
+		} catch(Exception e) {
+			System.out.println("=> getCart() 메소드 실행 에러");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return cart;
+	}
 	
-	// 장바구니 목록 확인
+	// 장바구니 주문 (선택한 상품 또는 전체 상품)
+	
+	// 장바구니 목록 확인 (사용자의 모든 장바구니)
 	public List<CartDTO> getCartList(String buyer) {
 		String sql = "select * from cart where buyer = ?";
 		List<CartDTO> cartList = new ArrayList<CartDTO>();

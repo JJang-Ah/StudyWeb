@@ -2,15 +2,19 @@ package com.springbook.view.member;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springbook.biz.member.MemberDTO;
-import com.springbook.biz.member.impl.MemberDAO;
+import com.springbook.biz.member.MemberService;
 
 @Controller
 public class LogonController {
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 로그인 처리(폼으로 화면이동) -> GET
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
@@ -21,9 +25,9 @@ public class LogonController {
 	
 	// 로그인 처리(DB 처리) -> POST
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public String login(MemberDTO dto, MemberDAO memberDAO, HttpSession session) {
+	public String login(MemberDTO dto, HttpSession session) {
 		System.out.println("로그인 처리(DB 처리)");
-		MemberDTO member = memberDAO.getMember(dto);
+		MemberDTO member = memberService.getMember(dto);
 		if(member != null) {
 			session.setAttribute("memberId", member.getId());
 			return "getBoardList.do";

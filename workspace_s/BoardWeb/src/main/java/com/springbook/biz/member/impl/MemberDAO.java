@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.springbook.biz.common.JDBCUtil;
 import com.springbook.biz.member.MemberDTO;
 
-@Repository("memberDAO")
+//@Repository("memberDAO")
 public class MemberDAO {
 	
 	// DB 연결, 질의 변수

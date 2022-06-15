@@ -48,9 +48,15 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
 		return boardDAO.getBoardList(dto);
 	}
+	
+	@Override
+	public void updateBoardCnt(BoardDTO dto) {
+		boardDAO.updateBoardCnt(dto);
+	}
 
 	@Override
 	public BoardDTO getBoard(BoardDTO dto) {
+		updateBoardCnt(dto);
 		return boardDAO.getBoard(dto);
 	}
 

@@ -7,10 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardDTO;
 
-//@Repository("boardDAO")
+@Repository("boardDAO")
 public class BoardDAOSpring2 {
 	// SQL문
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
@@ -19,6 +20,8 @@ public class BoardDAOSpring2 {
 	private final String BOARD_GET = "select * from board where seq = ?";
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
+	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
+
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -46,6 +49,12 @@ public class BoardDAOSpring2 {
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
 		System.out.println("=> Spring JDBC2로 getBoardList() 실행");
 		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
+	}
+	
+	// 조회수 증가 -> 글상세보기에서 동작
+	public void updateBoardCnt(BoardDTO dto) {
+		System.out.println("=> Spring JDBC2로 updateBoardCnt() 실행");
+		jdbcTemplate.update(BOARD_UPDATE_CNT, dto.getSeq());
 	}
 	
 	// 글상세 보기(1건)

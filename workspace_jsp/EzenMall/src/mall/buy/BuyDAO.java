@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 public class BuyDAO {
 	// 싱글톤 패턴
 	private BuyDAO() {}
-	private BuyDAO instance = new BuyDAO();
-	public BuyDAO getInstance() {
+	private static BuyDAO instance = new BuyDAO();
+	public static BuyDAO getInstance() {
 		return instance;
 	}
 	

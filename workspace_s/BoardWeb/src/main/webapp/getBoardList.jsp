@@ -38,9 +38,11 @@ th { background: #e9ecef;}
 	<table class="t1">
 		<tr>
 			<td width="60%">
-				<select name="searchCondition">
-					<option value="title">제목</option>
-					<option value="content">내용</option>
+				<select name="searchCondition">	
+					<c:forEach var="option" items="${conditionMap }">
+						<option value="${option.value }">${option.key }</option>
+					
+					</c:forEach>
 				</select>
 			</td>
 			<td width="30%"><input type="text" name="searchKeyword"></td>

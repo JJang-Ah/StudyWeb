@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.common.JDBCUtil;
 
-@Repository("boardDAO")
+//@Repository("boardDAO")
 public class BoardDAO {
 	// DB 연결, 질의 객체
 	private Connection conn = null;
@@ -22,7 +22,7 @@ public class BoardDAO {
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	private final String BOARD_GET = "select * from board where seq = ?";
-	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
+	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
 
@@ -121,7 +121,8 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(BOARD_UPDATE);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
-			pstmt.setInt(3, dto.getSeq());
+			pstmt.setString(3, dto.getWriter());
+			pstmt.setInt(4, dto.getSeq());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
