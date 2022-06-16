@@ -21,6 +21,10 @@ public class BoardDAOSpring2 {
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
+	// 검색 기능 SQL 문 - TITLE, CONTENT, WRITER
+	private final String BOARD_LIST_TITLE = "select * from board where title like '%'||?||'%' order by seq desc";
+	private final String BOARD_LIST_CONTENT = "select * from board where content like '%'||?||'%' order by seq desc";
+	private final String BOARD_LIST_WRITER = "select * from board where writer like '%'||?||'%' order by seq desc";
 
 	
 	@Autowired
@@ -28,38 +32,49 @@ public class BoardDAOSpring2 {
 	
 	// 글등록
 	public void insertBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 insertBoard() 실행");
+		System.out.println("===> BoardDAOSpring2 - insertBoard()");
 		jdbcTemplate.update(BOARD_INSERT, dto.getTitle(), dto.getWriter(), dto.getContent());
 		//jdbcTemplate.update(BOARD_INSERT, dto.getSeq(), dto.getTitle(), dto.getWriter(), dto.getContent()); // 트랜잭션 테스트
 	}
 	
 	// 글수정
 	public void updateBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 updateBoard() 실행");
+		System.out.println("===> BoardDAOSpring2 - updateBoard()");
 		jdbcTemplate.update(BOARD_UPDATE, dto.getTitle(), dto.getContent(), dto.getSeq());
 	}
 	
 	// 글삭제
 	public void deleteBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 deleteBoard() 실행");
+		System.out.println("===> BoardDAOSpring2 - deleteBoard()");
 		jdbcTemplate.update(BOARD_DELETE, dto.getSeq());
 	}
 	
-	// 글전체 보기
+	// 글전체 보기 -> 검색 기능 추가
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 getBoardList() 실행");
-		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
+		System.out.println("===> BoardDAOSpring2 - getBoardList()");
+		//return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
+		
+		Object[] args = {dto.getSearchKeyword()};
+		if(dto.getSearchCondition().equals("TITLE")) {
+			return jdbcTemplate.query(BOARD_LIST_TITLE, args, new BoardRowMapper());
+		} else if(dto.getSearchCondition().equals("CONTENT")) {
+			return jdbcTemplate.query(BOARD_LIST_CONTENT, args, new BoardRowMapper());
+		} else if(dto.getSearchCondition().equals("WRITER")) {
+			return jdbcTemplate.query(BOARD_LIST_WRITER, args, new BoardRowMapper());
+		}
+		return null;
+		
 	}
 	
 	// 조회수 증가 -> 글상세보기에서 동작
 	public void updateBoardCnt(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 updateBoardCnt() 실행");
+		System.out.println("===> BoardDAOSpring2 - updateBoardCnt()");
 		jdbcTemplate.update(BOARD_UPDATE_CNT, dto.getSeq());
 	}
 	
 	// 글상세 보기(1건)
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("=> Spring JDBC2로 getBoard() 실행");
+		System.out.println("===> BoardDAOSpring2 - getBoard()");
 		Object[] args = {dto.getSeq()};
 		return jdbcTemplate.queryForObject(BOARD_GET, args, new BoardRowMapper());
 	}

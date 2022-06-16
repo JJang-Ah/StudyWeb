@@ -19,14 +19,14 @@ public class LogonController {
 	// 로그인 처리(폼으로 화면이동) -> GET
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login() {
-		System.out.println("로그인 화면이동");
+		System.out.println("=> LogonController - 로그인 화면이동");
 		return "login.jsp";
 	}
 	
 	// 로그인 처리(DB 처리) -> POST
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(MemberDTO dto, HttpSession session) {
-		System.out.println("로그인 처리(DB 처리)");
+		System.out.println("=> LogonController - 로그인 처리(DB 처리)");
 		MemberDTO member = memberService.getMember(dto);
 		if(member != null) {
 			session.setAttribute("memberId", member.getId());
@@ -38,8 +38,8 @@ public class LogonController {
 	
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
-		System.out.println("로그아웃 처리");
+		System.out.println("=> LogonController - 로그아웃 처리");
 		session.invalidate();
-		return "login.jsp";
+		return "redirect:login.jsp";
 	}
 }

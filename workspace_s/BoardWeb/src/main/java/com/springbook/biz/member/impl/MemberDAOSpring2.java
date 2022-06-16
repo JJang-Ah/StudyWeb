@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.member.MemberDTO;
 
-@Repository("memberDAO")
+//@Repository("memberDAO")
 public class MemberDAOSpring2 {
 	
 	@Autowired
@@ -31,25 +31,25 @@ public class MemberDAOSpring2 {
 	
 	// 회원 등록
 	public void insertMember(MemberDTO dto) {
-		System.out.println("=> Spring JDBC2 insertMember() 메소드 실행");
+		System.out.println("=> MemberDAOSpring2 - insertMember()");
 		jdbcTemplate.update(MEMBER_INSERT, dto.getId(), dto.getPassword(), dto.getName(), dto.getRole());
 	}
 	
 	// 회원 수정
 	public void updateMember(MemberDTO dto) {
-		System.out.println("=> Spring JDBC2 updateMember() 메소드 실행");
+		System.out.println("=> MemberDAOSpring2 -  updateMember()");
 		jdbcTemplate.update(MEMBER_UPDATE, dto.getName(), dto.getRole(), dto.getId(), dto.getPassword());
 	}
 	
 	// 회원 삭제
 	public void deleteMember(MemberDTO dto) {
-		System.out.println("=> Spring JDBC2 deleteMember() 메소드 실행");
+		System.out.println("=> MemberDAOSpring2 -  deleteMember()");
 		jdbcTemplate.update(MEMBER_DELETE, dto.getId(), dto.getPassword());
 	}
 	
 	// 회원정보(1건) 보기
 	public MemberDTO getMember(MemberDTO dto) {
-		System.out.println("=> Spring JDBC2 getMember() 메소드 실행");
+		System.out.println("=> MemberDAOSpring2 -  getMember()");
 		Object[] args = {dto.getId(), dto.getPassword()};
 		return jdbcTemplate.queryForObject(MEMBER_GET, args, new MemberRowMapper());
 	}

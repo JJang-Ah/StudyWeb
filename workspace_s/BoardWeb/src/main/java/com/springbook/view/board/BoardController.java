@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.springbook.biz.board.BoardDTO;
@@ -28,11 +29,18 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping(value="/insertBoard.do")
+
+	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
+	public String insertMethod() { 
+		System.out.println("=> BoardController - 글등록 화면이동");
+		return "insertBoard.jsp";
+	}
+	
+	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
 	public String insertMethod(BoardDTO dto/*, BoardDAO boardDAO*/) { // autowired로 boardDAO를 따로 넣어주지 않아도 된다.
-		System.out.println("글등록 처리");
+		System.out.println("=> BoardController - 글등록 처리(DB 처리)");
 		boardService.insertBoard(dto);
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
 	}
 	
 	
@@ -40,7 +48,7 @@ public class BoardController {
 	@RequestMapping(value="/updateBoard.do")
 	public String updateBoard(@ModelAttribute("board") BoardDTO dto/*, BoardDAO boardDAO*/) {
 		// @MeodelAttribute("board") 로 객체를 만들어서 @SessionAtrribues로 세션으로 만들겟다
-		System.out.println("글수정 처리");
+		System.out.println("=> BoardController - 글수정 처리");
 //		System.out.println("번호: " + dto.getSeq());
 //		System.out.println("제목: " + dto.getTitle());
 //		System.out.println("작성자: " + dto.getWriter());
@@ -48,19 +56,19 @@ public class BoardController {
 //		System.out.println("등록일: " + dto.getRegdate());
 //		System.out.println("조회수: " + dto.getCnt());
 		boardService.updateBoard(dto);
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
 	}
 	
 	@RequestMapping(value="/deleteBoard.do")
 	public String deleteBoard(BoardDTO dto/*, BoardDAO boardDAO*/) {
-		System.out.println("글삭제 처리");
+		System.out.println("=> BoardController - 글삭제 처리");
 		boardService.deleteBoard(dto);
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
 	}
 	
 	@RequestMapping(value="/getBoard.do")
 	public String getBoard(BoardDTO dto/*, BoardDAO boardDAO*/, Model model) {
-		System.out.println("글상세 조회");
+		System.out.println("=> BoardController - 글상세 조회");
 		model.addAttribute("board", boardService.getBoard(dto));
 		return "getBoard.jsp";
 	}
@@ -77,7 +85,13 @@ public class BoardController {
 	
 	@RequestMapping(value="/getBoardList.do")
 	public String getBoardList(BoardDTO dto/*, BoardDAO boardDAO*/, Model model) {
-		System.out.println("글목록 조회");
+		System.out.println("=> BoardController - 글목록 조회");
+		
+		// 검색 확인 - searchCondition, searchKeyword 가 null일 때의 처리
+		if(dto.getSearchCondition() == null) dto.setSearchCondition("TITLE");
+		if(dto.getSearchKeyword() == null) dto.setSearchKeyword("");
+		
+		
 		model.addAttribute("boardList", boardService.getBoardList(dto));
 		return "getBoardList.jsp";
 	}

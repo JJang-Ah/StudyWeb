@@ -13,11 +13,12 @@ import com.springbook.biz.board.BoardService;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardDAO boardDAO;
+	private BoardDAOSpring2 boardDAO;
 	
 	@Override
 	@Transactional("txManager")
 	public void insertBoard(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - insertBoard()");
 		// 예외 발생 - AfterThrowing 테스트
 //		if(dto.getWriter().equals("홍길동")) {
 //			throw new IllegalArgumentException("홍길동은 글을 등록할 수 없습니다.");
@@ -36,26 +37,31 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoard(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - updateBoard()");
 		boardDAO.updateBoard(dto);
 	}
 
 	@Override
 	public void deleteBoard(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - deleteBoard()");
 		boardDAO.deleteBoard(dto);
 	}
 	
 	@Override
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - getBoardList()");
 		return boardDAO.getBoardList(dto);
 	}
 	
 	@Override
 	public void updateBoardCnt(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - updateBoardCnt()");
 		boardDAO.updateBoardCnt(dto);
 	}
 
 	@Override
 	public BoardDTO getBoard(BoardDTO dto) {
+		System.out.println("=> BoardServiceImpl - getBoard()");
 		updateBoardCnt(dto);
 		return boardDAO.getBoard(dto);
 	}

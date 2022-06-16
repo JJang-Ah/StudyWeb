@@ -34,3 +34,13 @@ delivery_tel varchar(20) not null,
 delivery_address varchar(100) not null,
 delivery_state varchar(20) default '상품 준비중'
 );
+desc buy;
+select * from buy;
+/*
+은행(bank) 테이블의 필드 구성
+- 카드번호, 카드회사(은행), 사용자아이디, 사용자이름
+- cart_no : varchar(20), not null
+- card_com : varchar(20), not null
+- member_id : varchar(50), not null
+- member_name : varchar(50), not null
+*/

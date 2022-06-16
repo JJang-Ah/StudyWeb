@@ -25,7 +25,13 @@ public class BoardDAO {
 	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
+	// 검색 기능 SQL 문 - TITLE, CONTENT, WRITER
+	private final String BOARD_LIST_TITLE = "select * from board where title like '%'||?||'%' order by seq desc";
+	private final String BOARD_LIST_CONTENT = "select * from board where content like '%'||?||'%' order by seq desc";
+	private final String BOARD_LIST_WRITER = "select * from board where writer like '%'||?||'%' order by seq desc";
 
+	
+	
 	// 글등록
 	public void insertBoard(BoardDTO dto) {
 		System.out.println("=> JDBC로 insertBoard() 실행");
@@ -49,7 +55,15 @@ public class BoardDAO {
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(BOARD_LIST);
+			//pstmt = conn.prepareStatement(BOARD_LIST);
+			if(dto.getSearchCondition().equals("TITLE")) {
+				pstmt = conn.prepareStatement(BOARD_LIST_TITLE);
+			} else if(dto.getSearchCondition().equals("CONTENT")) {
+				pstmt = conn.prepareStatement(BOARD_LIST_CONTENT);
+			} else if(dto.getSearchCondition().equals("WRITER")) {
+				pstmt = conn.prepareStatement(BOARD_LIST_WRITER);
+			}
+			pstmt.setString(1, dto.getSearchKeyword());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO board = new BoardDTO();

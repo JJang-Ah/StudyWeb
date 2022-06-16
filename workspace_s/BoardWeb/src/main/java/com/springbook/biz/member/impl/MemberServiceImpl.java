@@ -14,21 +14,25 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insertMember(MemberDTO dto) {
+		System.out.println("=> MemberServiceImpl - insertMember()");
 		memberDAO.insertMember(dto);
 	}
 
 	@Override
 	public void updateMember(MemberDTO dto) {
+		System.out.println("=> MemberServiceImpl - updateMember()");
 		memberDAO.updateMember(dto);
 	}
 
 	@Override
 	public void deleteMember(MemberDTO dto) {
+		System.out.println("=> MemberServiceImpl - deleteMember()");
 		memberDAO.deleteMember(dto);
 	}
 
 	@Override
 	public MemberDTO getMember(MemberDTO dto) {
+		System.out.println("=> MemberServiceImpl - getMember()");
 		return memberDAO.getMember(dto);
 	}
 
