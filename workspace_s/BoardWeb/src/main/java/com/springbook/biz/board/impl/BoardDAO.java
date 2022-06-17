@@ -22,7 +22,7 @@ public class BoardDAO {
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	private final String BOARD_GET = "select * from board where seq = ?";
-	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=? where seq=?";
+	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=?, uploadFile=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
 	// 검색 기능 SQL 문 - TITLE, CONTENT, WRITER
@@ -136,7 +136,8 @@ public class BoardDAO {
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setString(3, dto.getWriter());
-			pstmt.setInt(4, dto.getSeq());
+			pstmt.setString(4, dto.getUploadFile().getOriginalFilename());
+			pstmt.setInt(5, dto.getSeq());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

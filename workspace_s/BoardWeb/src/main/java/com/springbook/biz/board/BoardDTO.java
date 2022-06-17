@@ -2,6 +2,8 @@ package com.springbook.biz.board;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardDTO {
 	// property
 	private int seq;
@@ -13,6 +15,10 @@ public class BoardDTO {
 	// 검색기능 property
 	private String searchCondition;
 	private String searchKeyword;
+	// 파일업로드 property
+	private MultipartFile uploadFile;
+	
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -61,12 +67,19 @@ public class BoardDTO {
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	@Override
 	public String toString() {
 		return "BoardDTO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content
 				+ ", regdate=" + regdate + ", cnt=" + cnt + ", searchCondition=" + searchCondition + ", searchKeyword="
-				+ searchKeyword + "]";
+				+ searchKeyword + ", uploadFile=" + uploadFile + "]";
 	}
+	
 	
 	
 }

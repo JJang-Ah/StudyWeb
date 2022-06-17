@@ -387,7 +387,7 @@ for(CartDTO cart : cartList){
 			<span class="s3">아침배송</span>
 		</div>
 		<div class="d2">
-			<img src="../../icons/progress01.png" width="400" height="60">
+			<img src="../../icons/progress01.PNG" width="400" height="60">
 		</div>
 		<hr class="d_line">
 		

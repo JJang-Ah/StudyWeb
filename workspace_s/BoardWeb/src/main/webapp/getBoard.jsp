@@ -16,7 +16,7 @@ th, td { border: 1px solid black;}
 th { background: #e9ecef;}
 td { padding: 5px;}
 table .seq { width: 100px; height: 20px; background: #f1f3f5;}
-table .title { width: 380px; height: 20px;}
+table .title , table .writer{ width: 380px; height: 20px;}
 .btns { margin-top: 20px; text-align: center;}
 .btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer;}
 .btns input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
@@ -58,12 +58,17 @@ table .title { width: 380px; height: 20px;}
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${board.writer }</td>
+			<td><input type="text" name="writer" value="${board.writer }" class="writer"></td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td><textarea name="content" cols="52" rows="15">${board.content }</textarea></td>
 		</tr>
+		<tr>
+			<th>업로드파일</th>
+			<td><input type="file" name="uploadFile"></td>
+		</tr>
+		
 		<tr>
 			<th>등록일</th>
 			<td>${board.regdate }</td>

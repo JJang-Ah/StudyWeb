@@ -23,6 +23,14 @@
 	</repositories>
 	
 	<dependencies>
+		<!-- AOP 파이브러리 설정/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+	
 		<!-- AOP 라이브러리 추가 (aspectjweaver) -->
 		<dependency>
 		    <groupId>org.aspectj</groupId>

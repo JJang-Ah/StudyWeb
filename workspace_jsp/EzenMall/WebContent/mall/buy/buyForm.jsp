@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mall.member.*, mall.cart.*, mall.bank.*" %>
+<%@ page import="mall.member.*, mall.cart.*, mall.bank.*, java.text.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +33,56 @@
 .d3 .t1 td { }
 .d3 .t1 tr:last-child { font-weight: normal;}
 .d3 .t1 input[type=number] { width: 80px;}
-.left { text-align: left; margin-left: 10px;}
-.center { text-align: center;}
+.left { text-align: left; padding-left: 10px;}
+.right { text-align: right; padding-right: 30x;}
+.center { text-align: center; padding: 5px;}
+
+
+/* number 화살표 항상 보이는 효과 */
+.d3 input[type=number]::-webkit-inner-spin-button, 
+.d3 input[type=number]::-webkit-outer-spin-button {-webkit-appearance: "Always Show Up/Down Arrows"; opacity: 1;}
+.d3 a { text-decoration: none; color: #adb5bd;}
+.d3 .s1 { color: #32708d; font-weight: bold; font-size: 1.1em; margin-bottom: 10px; display: inline-block;}
+.d3 .s2 { color: #adb5bd; font-size: 0.95em;}
+.d3 .s3 { color: #1e94be; font-weight: bold;}
+.d3 .s4 { color: #c84557; font-weight: bold;}
+.d3 .s6 { color: #99424f; font-weight: bold; font-size: 1.05em;}
+
+/* 중단 - d4, 총 구매정보 */
+.d4 { margin-top: }
+.d4 
+
+.d4 .t2 { width: 90%; border: 1px solid gray; border-collapse: collapse; margin: 0 auto; text-size: 0.9em;
+			border-left: none; border-right: none; clear: both;}
+.d4 .t2 tr { height: 60px;}
+.d4 .t2 td, .d4 .t2 th { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; border-right: none; border-left: none;}
+.d4 .t2 th { background: #eeb558; font-size: 1.1em; color: #fff;}
+.d4 .t2 td { text-align: center; background: #f7f8f0;}
+.d4 .s1 { color: #c84557; font-size: 1.3em; font-weight: bold;}
+.d4 .s2 { color: #1e94be; font-size: 1.3em; font-weight: bold;}
+.d4 .s3 { color: #99424f; font-size: 1.3em; font-weight: bold;}
+.d4 .s4, .d4 .s5 { color: #1e94be; font-size: 1.1em; font-weight: bold;}
+
 
 </style>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+	// 구매 수량 제한 효과(1~100) -> 수정 필요
+// 	let buy_counts = document.querySelectorAll(".buy_count");
+// 	for(let buy_count of buy_counts){
+// 		buy_count.addEventListener("keyup", function(){
+// 			if(buy_count.value < 1 ){
+// 				buy_count.value = 1;
+// 			}else if(buy_count.value > 100){
+// 				buy_count.value = 100;
+// 			}
+// 		})
+// 	}
+
+	
+
+})
 
 </script>
 </head>
@@ -47,6 +92,10 @@
 request.setCharacterEncoding("utf-8");
 
 String memberId = (String)session.getAttribute("memberId");
+
+
+SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+DecimalFormat df = new DecimalFormat("#,###,###");
 
 if(memberId == null) {
 	out.print("<script>alert('로그인을 해주세요.');");
@@ -84,6 +133,12 @@ List<BankDTO> bankList = bankDAO.getBankList(memberId);
 // Member DB 연동
 MemberDAO memberDAO = MemberDAO.getInstance();
 
+
+int d_day=0;
+
+
+// 총 상품금액, 총 할인금액, 총 구매금액, 구매 상품 종류, 구매 상품 개수
+int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 %>
 
 <div class="container">
@@ -109,19 +164,29 @@ MemberDAO memberDAO = MemberDAO.getInstance();
 					<th>배송일</th>
 				</tr>
 				<%for(CartDTO cart : cartList) {
+					int p_sum1 = cart.getProduct_price() * cart.getBuy_count(); // 정가 합계금액
+					int p_sum3 = cart.getBuy_price() * cart.getBuy_count(); // 판매가 합계 금액
+					int p_sum2 = p_sum1 - p_sum3; // 할인 합계 금액
+					tot1 += p_sum1;
+					tot2 += p_sum2;
+					tot3 += p_sum3;
+					++cnt1;
+					cnt2 += cart.getBuy_count();
+					
 				%>
 				<tr>
-					<td width="8"><img src="/images_ezenmall/<%=cart.getProduct_image()%>"></td>
-					<td width="50">
-						<span><%=cart.getProduct_name() %></span>
-						<span><%=cart.getAuthor() %> | <%=cart.getPublishing_com() %></span>
+					<td width="8" class="center">
+						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>"></a>
 					</td>
-					<td width="8"><span><%=cart.getProduct_price() %></span></td>
-					<td width="8"><span><%=cart.getBuy_price() %></span></td>
-					<td width="8"><span><input type="number" name="buy_count" value="<%=cart.getBuy_count()%>"></span></td>
-					<td width="8"><span><%=cart.getBuy_price() * cart.getBuy_count() %></span></td>
-					<td width="10"><span><%=cart.getBuy_price() %></span></td>
-					
+					<td width="40" class="left">
+						<span class="s1"><%=cart.getProduct_name() %></span><br><br>
+						<span class="s2"><%=cart.getAuthor() %> | <%=cart.getPublishing_com() %></span>
+					</td>
+					<td width="10" class="right"><span class="s3"><%=df.format(cart.getProduct_price()) %></span></td>
+					<td width="10" class="right"><span class="s4"><%=df.format(cart.getBuy_price()) %></span></td>
+					<td width="10" class="center"><span class="s5"><input type="number" name="buy_count" value="<%=cart.getBuy_count()%>" max="100" min="1"></span></td>
+					<td width="10" class="right"><span class="s6"><%=df.format(p_sum2) %></span></td>
+					<td width="10" class="center"><span class="s7"><%=d_day %></span></td>
 				
 				</tr>
 				<%} %>
@@ -129,9 +194,46 @@ MemberDAO memberDAO = MemberDAO.getInstance();
 		
 		</div>
 		<div class="d4"> <!-- 구매 총 정보 -->
-		
+			<table class="t2">
+				<tr>
+					<th width="33%">총 상품금액</th>
+					<th width="33%">총 할인금액</th>
+					<th width="33%">총 구매금액</th>
+				</tr>
+				<tr>
+					<td><span class="s1"><%=df.format(tot1) %></span></td>
+					<td><span class="s2"><%=df.format(tot2) %></span></td>
+					<td><span class="s3"><%=df.format(tot3) %></span></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						구매 상품 종류: <%=cnt1 %>종 | 구매 상품 개수: <%=cnt2 %>개
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="d5"> <!-- 배송지 정보 -->
+			<table>
+				<tr>
+					<th colspan="2">배송 정보</th>
+				</tr>
+				<tr>
+					<th width="20%">수령인</th>
+					<td width="80%"><input type="text" name="delivery_name" value="<%=member.getName()%>"></td>
+				</tr>
+				<tr>
+					<th>배송지 연락처</th>
+					<td><input type="text" name="delivery_tel" value="<%=member.getTel%>"></td>
+				</tr>
+				<tr>
+					<th>배송지 주소</th>
+					<td>
+						<input type="button" value="주소 찾기" id="btn_address"><br><br>
+						<input type="text" value="delivery_address1"><br><br>
+						<input type="text" value="delivery_address2">
+					</td>
+				</tr>
+			</table>
 		
 		</div>
 		<div class="d6"> <!-- 주문자 정보 -->

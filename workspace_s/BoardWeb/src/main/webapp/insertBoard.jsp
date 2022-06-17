@@ -40,7 +40,7 @@ table .writer { width: 150px; height: 20px;}
 <div class="container">
 	<h1>글등록</h1>
 	<div class="d1"><a href="logout.do">LOGOUT</a></div>
-	<form action="insertBoard.do" method="post" name="insertForm">
+	<form action="insertBoard.do" method="post" name="insertForm" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th width="20%">제목</th>
@@ -53,6 +53,11 @@ table .writer { width: 150px; height: 20px;}
 		<tr>
 			<th>내용</th>
 			<td><textarea name="content" cols="52" rows="20"></textarea></td>
+		</tr>
+		<tr>
+			<th>업로드 파일</th>
+			<td><input type="file" name="uploadFile"></td>
+			
 		</tr>
 	</table>
 	<div class="btns">

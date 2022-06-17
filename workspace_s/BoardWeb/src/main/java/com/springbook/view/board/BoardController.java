@@ -1,15 +1,19 @@
 package com.springbook.view.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.board.BoardService;
@@ -30,15 +34,25 @@ public class BoardController {
 	private BoardService boardService;
 	
 
-	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
+	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
+	@GetMapping(value="/insertBoard.do")
 	public String insertMethod() { 
 		System.out.println("=> BoardController - 글등록 화면이동");
 		return "insertBoard.jsp";
 	}
 	
-	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
-	public String insertMethod(BoardDTO dto/*, BoardDAO boardDAO*/) { // autowired로 boardDAO를 따로 넣어주지 않아도 된다.
+	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
+	@PostMapping(value="/insertBoard.do")
+	public String insertMethod(BoardDTO dto/*, BoardDAO boardDAO*/) throws IOException { // autowired로 boardDAO를 따로 넣어주지 않아도 된다.
 		System.out.println("=> BoardController - 글등록 처리(DB 처리)");
+		
+		// 파일 업로드 처리
+		MultipartFile uploadFile = dto.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("c:/tmp/" + fileName));
+		}
+		
 		boardService.insertBoard(dto);
 		return "redirect:getBoardList.do";
 	}
