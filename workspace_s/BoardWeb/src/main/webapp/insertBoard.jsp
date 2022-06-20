@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,31 +40,31 @@ table .writer { width: 150px; height: 20px;}
 </head>
 <body>
 <div class="container">
-	<h1>글등록</h1>
-	<div class="d1"><a href="logout.do">LOGOUT</a></div>
+	<h1><spring:message code="message.board.insert.title"/></h1>
+	<div class="d1"><a href="logout.do"><spring:message code="message.board.insert.logout"/></a></div>
 	<form action="insertBoard.do" method="post" name="insertForm" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th width="20%">제목</th>
+			<th width="20%"><spring:message code="message.board.insert.table.head.title"/></th>
 			<td width="80%"><input type="text" name="title" class="title"></td>
 		</tr>
 		<tr>
-			<th>작성자</th>
+			<th><spring:message code="message.board.insert.table.head.writer"/></th>
 			<td><input type="text" name="writer" class="writer"></td>
 		</tr>
 		<tr>
-			<th>내용</th>
+			<th><spring:message code="message.board.insert.table.head.content"/></th>
 			<td><textarea name="content" cols="52" rows="20"></textarea></td>
 		</tr>
 		<tr>
-			<th>업로드 파일</th>
+			<th><spring:message code="message.board.insert.table.head.upload"/></th>
 			<td><input type="file" name="uploadFile"></td>
 			
 		</tr>
 	</table>
 	<div class="btns">
-		<input type="submit" value="글등록">&ensp;
-		<input type="button" value="글목록" id="btn_board_list">
+		<input type="submit" value="<spring:message code="message.board.insert.insertButton"/>">&ensp;
+		<input type="button" value="<spring:message code="message.board.insert.boardListButton"/>" id="btn_board_list">
 	</div>
 	</form>
 </div>

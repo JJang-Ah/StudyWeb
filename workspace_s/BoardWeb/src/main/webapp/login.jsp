@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <style>
 .container { width: 300px; margin: 20px auto;}
 h1 { text-align: center;}
+.a_tags a { text-decoration: none; text-align: center; color: #000;}
 table { width: 100%; border: 1px solid black; border-collapse: collapse;}
 tr { height: 50px;}
 th, td { border: 1px solid black;}
@@ -20,20 +22,25 @@ input[type=submit] { width: 100px; height: 35px; font-size: 1.03em; font-weight:
 </head>
 <body>
 <div class="container">
-	<h1>로그인</h1>
+	<h1><spring:message code="message.member.login.title"/></h1>
+	<hr>
+	<div class="a_tags">
+		<a href="login.do?lang=en"><spring:message code="message.member.login.language.en"></spring:message></a> |
+		<a href="login.do?lang=ko"><spring:message code="message.member.login.language.ko"></spring:message></a>
+	</div>
 	<hr>
 	<form action="login.do" method="post">
 	<table>
 		<tr>
-			<th width="30%">아이디</th>
+			<th width="30%"><spring:message code="message.member.login.id"/></th>
 			<td width="70%"><input type="text" name="id"></td>
 		</tr>
 		<tr>
-			<th>비밀번호</th>
+			<th><spring:message code="message.member.login.password"/></th>
 			<td><input type="password" name="password"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="로그인"></td>
+			<td colspan="2"><input type="submit" value="<spring:message code="message.member.login.loginButton"/>"></td>
 		</tr>
 	</table>
 	</form>

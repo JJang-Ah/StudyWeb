@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +35,20 @@ public class BoardController {
 	private BoardService boardService;
 	
 
+	//JSON 형식으로 글목록 보기
+	@RequestMapping(value="/getBoardListJson.do")
+	@ResponseBody // 자바 객체를 Http 응답 프로토콜에 적용하도록 하는 어노테이션
+	public String getBoardListJson(BoardDTO dto, Model model){
+		System.out.println("=> BoardController - 글목록 조회(JSON)");
+		
+		// 검색 확인 - searchCondition, searchKeyword가 null일 때의 처리
+		if(dto.getSearchCondition() == null) dto.setSearchCondition("TITLE");
+		if(dto.getSearchKeyword() == null) dto.setSearchKeyword("");
+		
+		model.addAttribute("boardList", boardService.getBoardList(dto));
+		return "getBoardList.jsp";
+	}
+	
 	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
 	@GetMapping(value="/insertBoard.do")
 	public String insertMethod() { 

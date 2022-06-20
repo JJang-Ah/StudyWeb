@@ -54,6 +54,6 @@ public class LogonController {
 	public String logout(HttpSession session) {
 		System.out.println("=> LogonController - 로그아웃 처리");
 		session.invalidate();
-		return "redirect:login.jsp";
+		return "login.jsp";
 	}
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,45 +39,46 @@ table .title , table .writer{ width: 380px; height: 20px;}
 		// 글목록 버튼 처리
 		let btn_board_list = document.getElementById("btn_board_list");
 		btn_board_list.addEventListener("click", function() {
-			form.action = "getBoardList.do";
-			form.submit();
+// 			form.action = "getBoardList.do";
+// 			form.submit();
+			location = "getBoardList.do";
 		})
 	})
 </script>
 </head>
 <body>
 <div class="container">
-	<h1>글상세</h1>
-	<div class="d1"><a href="logout.do">LOGOUT</a></div>
+	<h1><spring:message code="message.board.detail.title"/></h1>
+	<div class="d1"><a href="logout.do"><spring:message code="message.board.detail.logout"/></a></div>
 	<form action="updateBoard.do" method="post" name="detailForm">
 	<table>
 		<tr>
-			<th width="20%">번호</th>
+			<th width="20%"><spring:message code="message.board.detail.table.head.seq"/></th>
 			<td width="80%"><input type="text" name="seq" value="${board.seq }" readonly class="seq"></td>
 		</tr>
 		<tr>
-			<th>제목</th>
+			<th><spring:message code="message.board.detail.table.head.title"/></th>
 			<td><input type="text" name="title" value="${board.title }" class="title"></td>
 		</tr>
 		<tr>
-			<th>작성자</th>
+			<th><spring:message code="message.board.detail.table.head.writer"/></th>
 			<td><input type="text" name="writer" value="${board.writer }" class="writer"></td>
 		</tr>
 		<tr>
-			<th>내용</th>
+			<th><spring:message code="message.board.detail.table.head.content"/></th>
 			<td><textarea name="content" cols="52" rows="15">${board.content }</textarea></td>
 		</tr>
 		<tr>
-			<th>업로드파일</th>
+			<th><spring:message code="message.board.detail.table.head.upload"/></th>
 			<td><input type="file" name="uploadFile"></td>
 		</tr>
 		
 		<tr>
-			<th>등록일</th>
+			<th><spring:message code="message.board.detail.table.head.regdate"/></th>
 			<td>${board.regdate }</td>
 		</tr>
 		<tr>
-			<th>조회수</th>
+			<th><spring:message code="message.board.detail.table.head.cnt"/></th>
 			<td>${board.cnt }</td>
 		</tr>
 	</table>

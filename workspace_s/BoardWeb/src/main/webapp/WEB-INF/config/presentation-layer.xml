@@ -9,20 +9,43 @@
 
 	<!-- ##### 2. annotation 기반으로 Controller 영역의 처리 ##### -->
 	<context:component-scan base-package="com.springbook.view"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- 다국어 처리 -->
+	<!-- resources에 있는 messageSource에있는 파일을 읽어온다 -->
+	<!-- 1. messageSource 설정: 다국어 처리 파일을 읽어들임 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.messageSource</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 2. LocaleResolver 등록: http의 헤드에 포함된 local정보를 파악 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+	
+	<!-- 3. LocaleChangeInterceptor 등록: 언어를 변화할 수 있도록 하는 역할 -->
+	<mvc:interceptors>
+		<bean id="" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang"> <!-- lang이라는 키워드를 가지고 영어,한글 등으로 판단한다. -->
+			</property>
+		</bean>
+	</mvc:interceptors>
 	
 	<!-- 예외 처리: 1. Annotation 기반 -->
 <!-- 	<mvc:annotation-driven></mvc:annotation-driven> -->
 
 	<!-- 예외 처리: 2. xml 기반 -->
-	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="java.lang.IllegalArgumentException">common/illegalArgumentException.jsp</prop>
-				<prop key="java.lang.NullpointerException">common/nullPointerError.jsp</prop>
-			</props>
-		</property>
-		<property name="defaultErrorView" value="common/error.jsp"></property>
-	</bean>
+<!-- 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> -->
+<!-- 		<property name="exceptionMappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="java.lang.IllegalArgumentException">common/illegalArgumentException.jsp</prop> -->
+<!-- 				<prop key="java.lang.NullpointerException">common/nullPointerError.jsp</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 		<property name="defaultErrorView" value="common/error.jsp"></property> -->
+<!-- 	</bean> -->
 
 	<!--  파일 업로드 설정 -->
 	<!-- 파일 업로드 최대크기: 2MB로 설정, 최대크기를 정하지 않으면 무제한 -->

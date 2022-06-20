@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,8 @@
 .container { width: 1000px; margin: 20px auto;}
 h1 { text-align: center;}
 a { text-decoration: none; color: #196ab3; font-weight: bold; font-size: 0.95em;}
+.a_tags a { text-decoration: none; text-align: center; color: #000;}
+
 .d1 { width: 100%; padding-bottom: 40px;}
 .d1 div { display: inline-block;}
 .d1 .d1_1 { float: left;}
@@ -29,10 +32,17 @@ th { background: #e9ecef;}
 </head>
 <body>
 <div class="container">
-	<h1>게시판 목록</h1>
+	<h1><spring:message code="message.board.list.title"/></h1>
+	
+	<div class="a_tags">
+		<a href="getBoardList.do?lang=en"><spring:message code="message.member.login.language.en"></spring:message></a> |
+		<a href="getBoardList.do?lang=ko"><spring:message code="message.member.login.language.ko"></spring:message></a>
+	</div>
+	
 	<div class="d1">
-		<div class="d1_1">${memberId }님 환영합니다..&emsp;<a href="logout.do">LOGOUT</a></div>
-		<div class="d1_2"><a href="insertBoard.do">글등록</a></div>
+		<div class="d1_1">${memberId }<spring:message code="message.board.list.welcomeMessage"/>&emsp;
+		<a href="logout.do"><spring:message code="message.board.list.logout"/></a></div>
+		<div class="d1_2"><a href="insertBoard.do"><spring:message code="message.board.list.insertBoard"/></a></div>
 	</div>
 	<form action="getBoardList.do" method="post">
 	<table class="t1">
@@ -46,17 +56,17 @@ th { background: #e9ecef;}
 				</select>
 			</td>
 			<td width="30%"><input type="text" name="searchKeyword"></td>
-			<td width="10%"><input type="submit" value="검색"></td>
+			<td width="10%"><input type="submit" value="<spring:message code="message.board.list.searchButton"/>"></td>
 		</tr>
 	</table>
 	</form>
 	<table class="t2">
 		<tr>
-			<th width="10%">번호</th>
-			<th width="50%">제목</th>
-			<th width="15%">작성자</th>
-			<th width="15%">등록일</th>
-			<th width="10%">조회수</th>
+			<th width="10%"><spring:message code="message.board.list.table.head.seq"/></th>
+			<th width="50%"><spring:message code="message.board.list.table.head.title"/></th>
+			<th width="15%"><spring:message code="message.board.list.table.head.writer"/></th>
+			<th width="15%"><spring:message code="message.board.list.table.head.regdate"/></th>
+			<th width="10%"><spring:message code="message.board.list.table.head.cnt"/></th>
 		</tr>
 		<c:forEach var="board" items="${boardList }">
 		<tr>

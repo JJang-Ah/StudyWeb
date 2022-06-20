@@ -23,6 +23,15 @@
 	</repositories>
 	
 	<dependencies>
+		<!-- JSON 데이터 처리 라이브러리 설정 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.13.3</version>
+		</dependency>
+		
+	
 		<!-- AOP 파이브러리 설정/commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>

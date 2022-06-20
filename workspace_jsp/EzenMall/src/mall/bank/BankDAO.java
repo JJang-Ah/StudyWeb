@@ -26,6 +26,22 @@ public class BankDAO {
 	// 카드수정
 	
 	// 카드 삭제
+	public void deleteBank(String member_id, String card_no) {
+		String sql = "delete from bank where member_id=? and card_no=?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			pstmt.setString(2, card_no);
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("=> deleteBank() 에러");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
 	// 카드 전체 보기
 	public List<BankDTO> getBankList(String member_id) {
