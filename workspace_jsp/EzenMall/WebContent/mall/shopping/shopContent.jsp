@@ -91,6 +91,13 @@ margin: 20px 20px; text-align: center; line-height: 30px; border-radius: 5px; co
 				buy_count.value = 100;
 			}
 		})
+		
+		// 구매하기 버튼
+		let btn_buy = document.getElementById("btn_buy");
+		btn_buy.addEventListener("click", function() {
+			
+		})
+		
 		// 하단 - 상세설명, 상품리뷰 변환 효과
 		let s3_c2 = document.querySelector(".s3_c2");
 		let s3_c3 = document.querySelector(".s3_c3");
@@ -264,6 +271,10 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 		</div>
 		<%-- 구역2: 오른쪽 상단, 상품 기본정보, 버튼 --%>
 		<form action="../cart/cartInsertPro.jsp" method="post" name="contentForm">
+		<%-- buyForm.jsp(구매하기)로 이동: product_id --%>
+		<input type="hidden" name="">
+		
+		
 		<%-- 장바구니로 이동: cart_id, buy_count를 제외한 5가지 필드 정보 --%>
 		<input type="hidden" name="buyer" value="<%=memberId %>">
 		<input type="hidden" name="memberId" value="<%=memberId%>">

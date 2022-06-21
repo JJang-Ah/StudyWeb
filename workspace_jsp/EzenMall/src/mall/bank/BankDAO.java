@@ -22,6 +22,25 @@ public class BankDAO {
 	private ResultSet rs = null;
 	
 	// 카드 추가
+	public void insertBank(BankDTO dto) {
+		String sql = "insert into bank(card_no, card_com, member_id, member_name) values(?, ?, ?, ?)";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getCard_no());
+			pstmt.setString(2, dto.getCard_com());
+			pstmt.setString(3, dto.getMember_id());
+			pstmt.setString(4, dto.getMember_name());
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("=> insertBank() 에러");
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
 	// 카드수정
 	

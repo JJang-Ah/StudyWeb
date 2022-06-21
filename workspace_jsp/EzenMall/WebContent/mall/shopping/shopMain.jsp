@@ -188,7 +188,7 @@ int cnt = productDAO.getProductCount(product_kind);
 				 | <span>(<span class="s_p_discount"><%=product.getDiscount_rate() %>%할인</span>)</span></div>
 			</a>
 			<figcaption>
-				<a href="#"><div class="buy">구매</div></a>
+				<a href="../buy/buyForm.jsp?product_id=<%=product.getProduct_id()%>"><div class="buy">구매</div></a>
 				<a href="shopContent.jsp?product_id=<%=product.getProduct_id() %>"><div class="info">상세</div></a>	
 			</figcaption>
 			

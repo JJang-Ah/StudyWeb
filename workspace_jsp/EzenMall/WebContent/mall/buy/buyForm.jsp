@@ -62,8 +62,10 @@ height: 30px; font-size: 0.95em; }
 height: 30px; font-size: 0.95em; }
 .d6 .account { width: 250px; height: 25px;}
 #btn_delete_bank, #btn_regist_bank { width: 80px; height: 25px; color: #fff;}
-#btn_delete_bank { background: #c84557; border: 1px solid #c84557;}
+#btn_delete_bank { background: #c84557; border: 1px solid #c84557; margin-left: 60px;}
 #btn_regist_bank { background: #2f9e77; border: 1px solid #2f9e77;}
+
+
 /* 중단 - d7, 최종결제 버튼 */
 .d7 { margin-top: 20px;}
 .d7 .t5 { width: 90%; border: 1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; }
@@ -82,7 +84,7 @@ height: 50px; font-size: 1.15em; }
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.buyForm;
-
+		let cart_id = form.cart_id.value;
 		// 구매 수량 제한 효과 (1~100)	
  		let buy_counts = document.querySelectorAll(".buy_count");
 		for(let buy_count of buy_counts) {
@@ -110,12 +112,26 @@ height: 50px; font-size: 1.15em; }
 		let card_id = document.getElementById("cart_id");
 		let btn_delete_bank = document.getElementById("btn_delete_bank");
 		btn_delete_bank.addEventListener("click", function() {
-			let account = document.querySelector(".account");
+			let account = document.querySelector(".account").options[account.selectedIndex].value;
+			let value = account.options[account.selectedIndex].value;
+			let card_no = value.substring(0, 19);
 			account.remove(account.selectedIndex);
-			
-			location = "../bank/bankDeletePro.jsp?cart_id=" + card_id.value+ "&card_no=" + card_no;
+			location = "../bank/bankDeletePro.jsp?cart_id=" + card_id+ "&card_no=" + card_no;
 			
 		})
+		
+		// 카드 등록 버튼
+		let btn_regist_bank = document.getElementById("btn_regist_bank");
+		let cart_no = document.querySelector(".card_no").value;
+		let cart_com = document.querySelector(".card_com").value;
+		let member_id = document.querySelector(".member_id").value;
+		let member_name = document.querySelector(".member_name").value;
+		btn_regist_bank.addEventListener("click", function() {
+			location = "../bank/bankInsertPro.jsp?cart_id="+cart_id+"&card_no="+card_no+"&card_com="+card_com+"&member_id="+member_id;
+		})
+		
+		// 최종 결제 버튼
+		
 	});
 </script>
 </head>
@@ -132,8 +148,13 @@ if(memberId == null) {
 	return;
 } 
 
-// cartList.jsp에서 넘어오는 cart_id를 확인, 배열로 저장 -> 리스트로 저장
-String cart_id_str = request.getParameter("cart_ids_list");
+// 2. shopMain.jsp, shopContent.jsp에서 buyForm.jsp로 넘어오는 경우
+// - product_id 를 확인하여 처리
+
+
+// 1. cartList.jsp에서 buyForm.jsp로 넘어오는 경우
+// - cart_id를 확인, 배열로 저장 -> 리스트로 저장
+String cart_id_str = request.getParameter("cart_id");
 String[] cart_id_arr = cart_id_str.split(",");
 List<Integer> cart_id_list = new ArrayList<Integer>();
 for(String c : cart_id_arr) {
@@ -223,6 +244,9 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 		</div>
 		<hr class="d_line">
 		<form action="buyList.jsp" method="post" name="buyForm">
+		<!-- cart_id, buy_count, account, delivery_name, delivery_tel, delivery_address -->
+		<input type="hidden" name="cart_id" id="cart_id" value="<%=cart_id_str%>">
+		
 		<div class="d3"> <!-- 카트 정보 -->
 			<table class="t1">
 				<tr>
@@ -245,7 +269,7 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
  				%>
 				<tr>
 					<td width="10%">
-						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a> 
+						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a>
 					</td>
 					<td width="40%">
 						<span class="s1"><a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><%=cart.getProduct_name() %></a></span><br>
@@ -321,18 +345,28 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 					<td width="28%">
 						<select name="account" class="account">
 						<%if(bankList.size() == 0)  {%>
-							<option>등록 카드 없음</option>	
+							<option value="0">등록 카드 없음</option>	
 						<%} else { 
 						for(BankDTO bank : bankList) { 
 							String account = bank.getCard_no() + " " + bank.getCard_com();
 						%>
-							<option value="<%=bank.getCard_no()%>"><%=account %></option>
+							<option value="<%=account%>"><%=account %></option>
 						<%} } %>
 						</select>
 					</td>
 					<td>
 						<input type="button" value="카드 삭제" id="btn_delete_bank">
-						<input type="button" value="카드 추가" id="btn_regist_bank">
+						<input type="button" value="카드 등록" id="btn_regist_bank">
+					</td>
+				</tr>
+				<tr class="tr_card">
+					<th>카드 등록</th>
+					<td colspan="2">
+						<input type="hidden" class="member_id" value="<%=member.getId() %>">
+						<input type="hidden" class="member_name" value="<%=member.getName() %>">
+						<input type="text" class="card_no" placeholder="카드번호 입력">
+						<input type="text" class="card_com" placeholder="발행은행 입력">
+						<input type="button" value="카드 등록" id="btn_regist_bank">
 					</td>
 				</tr>
 			</table>
