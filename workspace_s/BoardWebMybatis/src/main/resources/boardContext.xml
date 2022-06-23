@@ -26,6 +26,17 @@
 	<property name="dataSource" ref="dataSource"></property>
 </bean>
 
+<!-- Spring과 Mybatis 연동 -->
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="configLocation" value="classpath:sql-map-config.xml"></property>
+</bean>
+
+
+<!-- Mybatis의 SqlSession 설정 -->
+<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlSession"></constructor-arg>
+</bean>
 
 <!-- #################### -->
 <!-- 2. 트랜잭션 설정 (annotation 기반) -->

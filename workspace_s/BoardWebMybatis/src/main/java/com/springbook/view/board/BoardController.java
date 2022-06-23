@@ -24,8 +24,6 @@ import com.springbook.biz.board.BoardService;
 RequestMapping - 클라이언트의 요청경로를 컨트롤러에서 찾도록 하는 역할
 ModelAttribute - RequestMapping 이전에 동작하며, 해당 내용을 모델(객체)로 만들어 주는 역할
 SessionAttributes - 객체를 세션으로 등록하여 사용하도록 하는 역할
-
- 
  */
 @Controller
 @SessionAttributes("board") // 세션을 board로 만들어주겟다
@@ -51,15 +49,19 @@ public class BoardController {
 	
 	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
 	@GetMapping(value="/insertBoard.do")
-	public String insertMethod() { 
+	public String insertBoard() { 
 		System.out.println("=> BoardController - 글등록 화면이동");
 		return "insertBoard.jsp";
 	}
 	
 	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
 	@PostMapping(value="/insertBoard.do")
-	public String insertMethod(BoardDTO dto/*, BoardDAO boardDAO*/) throws IOException { // autowired로 boardDAO를 따로 넣어주지 않아도 된다.
+	public String insertBoard(BoardDTO dto/*, BoardDAO boardDAO*/) throws IOException { // autowired로 boardDAO를 따로 넣어주지 않아도 된다.
 		System.out.println("=> BoardController - 글등록 처리(DB 처리)");
+		
+		if(dto.getTitle().equals("")) return "insertBoard.jsp";
+		if(dto.getWriter().equals("")) return "insertBoard.jsp";
+		if(dto.getContent().equals("")) return "insertBoard.jsp";
 		
 		boardService.insertBoard(dto);
 		return "redirect:getBoardList.do";

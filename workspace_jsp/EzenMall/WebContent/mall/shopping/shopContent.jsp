@@ -73,6 +73,8 @@ margin: 20px 20px; text-align: center; line-height: 30px; border-radius: 5px; co
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
+		let form = document.contentForm;
+		
 // 		// 이미지 변화 효과 
 		let big_img = document.querySelector(".big_img");
 		let thumb_imgs = document.querySelectorAll(".thumb");
@@ -95,7 +97,7 @@ margin: 20px 20px; text-align: center; line-height: 30px; border-radius: 5px; co
 		// 구매하기 버튼
 		let btn_buy = document.getElementById("btn_buy");
 		btn_buy.addEventListener("click", function() {
-			
+			location = "../buy/buyForm.jsp?product_id=" + form.product_id.value;
 		})
 		
 		// 하단 - 상세설명, 상품리뷰 변환 효과
@@ -272,13 +274,11 @@ if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(
 		<%-- 구역2: 오른쪽 상단, 상품 기본정보, 버튼 --%>
 		<form action="../cart/cartInsertPro.jsp" method="post" name="contentForm">
 		<%-- buyForm.jsp(구매하기)로 이동: product_id --%>
-		<input type="hidden" name="">
-		
-		
+		<input type="hidden" name="product_id" value="<%=product.getProduct_id()%>">
+				
 		<%-- 장바구니로 이동: cart_id, buy_count를 제외한 5가지 필드 정보 --%>
 		<input type="hidden" name="buyer" value="<%=memberId %>">
 		<input type="hidden" name="memberId" value="<%=memberId%>">
-		<input type="hidden" name="product_id" value="<%=product_id%>">
 		<input type="hidden" name="product_name" value="<%=product.getProduct_name()%>">
 		<input type="hidden" name="author" value="<%=product.getAuthor() %>">
 		<input type="hidden" name="publishing_com" value="<%=product.getPublishing_com() %>">

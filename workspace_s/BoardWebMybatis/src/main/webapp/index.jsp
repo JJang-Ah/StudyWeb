@@ -12,7 +12,7 @@
 <body>
 
 <div class="container">
-	<a href="login.do">로그인</a>
+	<a href="login.do">로그인</a><br><br>
 	<a href="getBoardListJson.do">JSON 형식으로 글목록 읽기</a>
 
 </div>

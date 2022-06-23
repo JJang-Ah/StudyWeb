@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,8 +7,8 @@
 <meta charset="UTF-8">
 <title>글등록</title>
 <style>
-.container { width: 500px; margin: 20px auto;}
-h1, .d1 { text-align: center;}
+.container, .d1 { width: 500px; margin: 20px auto;}
+h1 { text-align: center;}
 .d1 { margin-bottom: 20px;}
 a { text-decoration: none; color: #196ab3; font-weight: bold; font-size: 1.05em;}
 table { width: 100%; border: 1px solid black; border-collapse: collapse;}
@@ -23,7 +22,7 @@ table .writer { width: 150px; height: 20px;}
 .btns { margin-top: 20px; text-align: center;}
 .btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer;}
 .btns input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
-.btns input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+.btns input[type=reset] { background: #868e96; color: #fff; border: 1px solid #868e96;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -40,26 +39,26 @@ table .writer { width: 150px; height: 20px;}
 </head>
 <body>
 <div class="container">
-	<h1><spring:message code="message.board.insert.title"/></h1>
-	<div class="d1"><a href="logout.do"><spring:message code="message.board.insert.logout"/></a></div>
+	<h1>글등록</h1>
+	<div class="d1"><a href="logout.do">로그아웃</a></div>
 	<form action="insertBoard.do" method="post" name="insertForm">
 	<table>
 		<tr>
-			<th width="20%"><spring:message code="message.board.insert.table.head.title"/></th>
+			<th width="20%">제목</th>
 			<td width="80%"><input type="text" name="title" class="title"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.insert.table.head.writer"/></th>
+			<th>작성자</th>
 			<td><input type="text" name="writer" class="writer"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.insert.table.head.content"/></th>
+			<th>내용</th>
 			<td><textarea name="content" cols="52" rows="20"></textarea></td>
 		</tr>
 	</table>
 	<div class="btns">
-		<input type="submit" value="<spring:message code="message.board.insert.insertButton"/>">&ensp;
-		<input type="button" value="<spring:message code="message.board.insert.boardListButton"/>" id="btn_board_list">
+		<input type="submit" value="글등록">&ensp;
+		<input type="button" value="글목록">
 	</div>
 	</form>
 </div>

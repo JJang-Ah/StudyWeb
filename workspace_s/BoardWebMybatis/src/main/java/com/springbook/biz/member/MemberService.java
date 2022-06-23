@@ -6,5 +6,6 @@ public interface MemberService {
 	void updateMember(MemberDTO dto);
 	void deleteMember(MemberDTO dto);
 	MemberDTO getMember(MemberDTO dto);
-
+	MemberDTO loginMember(MemberDTO dto);
+	
 }

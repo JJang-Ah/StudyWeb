@@ -1,3 +1,5 @@
+<%@page import="manager.product.ProductDTO"%>
+<%@page import="manager.product.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="mall.member.*, mall.cart.*, mall.bank.*, java.util.*, java.text.*" %>
@@ -85,6 +87,8 @@ height: 50px; font-size: 1.15em; }
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.buyForm;
 		let cart_id = form.cart_id.value;
+		let product_id = form.product_id.value;
+		
 		// 구매 수량 제한 효과 (1~100)	
  		let buy_counts = document.querySelectorAll(".buy_count");
 		for(let buy_count of buy_counts) {
@@ -112,26 +116,67 @@ height: 50px; font-size: 1.15em; }
 		let card_id = document.getElementById("cart_id");
 		let btn_delete_bank = document.getElementById("btn_delete_bank");
 		btn_delete_bank.addEventListener("click", function() {
-			let account = document.querySelector(".account").options[account.selectedIndex].value;
+			let account = form.account.value;
+			
+			if(account.value == 0) {
+				alert("삭제할 카드를 선택해 주세요");
+				return;
+			}
+			
 			let value = account.options[account.selectedIndex].value;
 			let card_no = value.substring(0, 19);
 			account.remove(account.selectedIndex);
-			location = "../bank/bankDeletePro.jsp?cart_id=" + card_id+ "&card_no=" + card_no;
+			location = "../bank/bankDeletePro.jsp?product_id=" + product_id+ "&card_no=" + card_no;
 			
 		})
 		
 		// 카드 등록 버튼
 		let btn_regist_bank = document.getElementById("btn_regist_bank");
-		let cart_no = document.querySelector(".card_no").value;
-		let cart_com = document.querySelector(".card_com").value;
-		let member_id = document.querySelector(".member_id").value;
-		let member_name = document.querySelector(".member_name").value;
 		btn_regist_bank.addEventListener("click", function() {
-			location = "../bank/bankInsertPro.jsp?cart_id="+cart_id+"&card_no="+card_no+"&card_com="+card_com+"&member_id="+member_id;
+			let cart_no = document.querySelector(".card_no").value;
+			let cart_com = document.querySelector(".card_com").value;
+			let member_id = document.querySelector(".member_id").value;
+			let member_name = document.querySelector(".member_name").value;
+			
+			if(!card_no) {
+				alert("카드번호를 입력해 주세요.");
+				return;
+			}
+			
+			if(!card_com) {
+				alert("발행은행을 입력해 주세요.");
+				return;
+			}
+			
+			location = "../bank/bankInsertPro.jsp?cart_id="+cart_id+"&buy_count=" + buy_count+"&card_no="+card_no+"&card_com="+card_com+"&member_id="+member_id;
 		})
 		
 		// 최종 결제 버튼
-		
+		let btn_buy = document.getElementById("btn_buy");
+		btn_buy.addEventListener("click", function() {
+			if(!form.delivery_name.value) {
+				alert('수령인 이름을 입력하세요!');
+				return;
+			}
+			if(!form.delivery_tel.value) {
+				alert('수령인 전화번호을 입력하세요!');
+				return;
+			}
+			if(!form.delivery_address1.value) {
+				alert('수령인 기본주소를 입력하세요!');
+				return;
+			}
+			if(!form.delivery_address2.value) {
+				alert('수령인 상세주소를 입력하세요!');
+				return;
+			}
+			if(!form.account.value) {
+				alert('결제카드를 선택하세요!');
+				return;
+			}
+			
+			
+		})
 	});
 </script>
 </head>
@@ -140,8 +185,8 @@ height: 50px; font-size: 1.15em; }
 // buyForm.jsp -> 구매정보 확인폼(구매 여부를 결정하는 폼), buyList.jsp -> 구매 목록 폼(최종 구매 확인 폼)
 request.setCharacterEncoding("utf-8");
 DecimalFormat df = new DecimalFormat("#,###,###");
-
 String memberId = (String)session.getAttribute("memberId");
+
 if(memberId == null) {
 	out.print("<script>alert('로그인을 해주세요.'); location='../logon/memberLoginForm.jsp';");
 	out.print("</script>");
@@ -151,35 +196,78 @@ if(memberId == null) {
 // 2. shopMain.jsp, shopContent.jsp에서 buyForm.jsp로 넘어오는 경우
 // - product_id 를 확인하여 처리
 
+// ##############################################
+// 1. part=1일때 -> shopMain.jsp에서 product_id를 가지고 넘오는 경우
+// 2. part=2일때 -> shopContent.jsp에서 product_id와 buy_count를 가지고 넘어오는 경우
+// 3. part=3일떄 -> cartList.jsp에서 cart_id를 가지고 넘어오는 경우
 
-// 1. cartList.jsp에서 buyForm.jsp로 넘어오는 경우
-// - cart_id를 확인, 배열로 저장 -> 리스트로 저장
-String cart_id_str = request.getParameter("cart_id");
-String[] cart_id_arr = cart_id_str.split(",");
-List<Integer> cart_id_list = new ArrayList<Integer>();
-for(String c : cart_id_arr) {
-	cart_id_list.add(Integer.parseInt(c));
+int part = Integer.parseInt(request.getParameter("part"));
+int product_id = 0;
+int buy_count = 1;
+ProductDAO productDAO = null;
+
+// part=3일때 변수 선언
+String cart_id_str = null;
+String[] cart_id_arr = null;
+List<Integer> cart_id_list = null;
+CartDAO cartDAO = null;
+List<CartDTO> cartList = null;
+
+if(part==1 || part==2) {
+	product_id = Integer.parseInt(request.getParameter("product_id"));
+	if(part==2) buy_count = Integer.parseInt(request.getParameter("buy_count"));
+	cartList = new ArrayList<CartDTO>();
+	productDAO = ProductDAO.getInstance();
+	ProductDTO product = productDAO.getProduct(product_id);
+	int product_price = product.getProduct_price();
+	int discount_rate = product.getDiscount_rate();
+	int buy_price = product_price - (product_price*discount_rate /100);
+	
+	CartDTO cart = new CartDTO();
+	cart.setBuyer(memberId);
+	cart.setProduct_id(product_id);
+	cart.setProduct_name(product.getProduct_name());
+	cart.setAuthor(product.getAuthor());
+	cart.setPublishing_com(product.getPublishing_com());
+	cart.setProduct_price(product.getProduct_price());
+	cart.setDiscount_rate(discount_rate);
+	cart.setBuy_price(buy_price); // 판매가, 할인된 가격 
+	cart.setProduct_image(product.getProduct_image());
+	cartList.add(cart);
+} else if(part == 3) {
+	
+	// 1. cartList.jsp에서 buyForm.jsp로 넘어오는 경우
+	// - cart_id를 확인, 배열로 저장 -> 리스트로 저장
+	cart_id_str = request.getParameter("cart_ids_list");
+	cart_id_arr = cart_id_str.split(",");
+	cart_id_list = new ArrayList<Integer>();
+	for(String c : cart_id_arr) {
+		cart_id_list.add(Integer.parseInt(c));
+	}
+	//회원 DB 연결, 질의 -> 주소 정보 활용
+	MemberDAO memberDAO = MemberDAO.getInstance();
+	MemberDTO member = memberDAO.getMember(memberId); // 멤버아이디 정보 확인
+	String address = member.getAddress();
+	String local = address.substring(0, 2); // ex) 서울, 주소에 첫번째에서 두번째 자리의 문자열을 가져옴; 
+	
+	//카트 아이디 확인
+	/* System.out.println("카트:" + Arrays.toString(cart_id_arr));
+	System.out.println("카트 리스트:" + cart_id_list); */
+	
+	//Cart DB 연동 - cartList에서 넘어오는 정보 받기 -> 1개 또는 여러개(전체)
+	cartDAO = CartDAO.getInstance();
+	cartList = cartDAO.getCartList(cart_id_list);
+	
+	//cartList 확인
+	/*
+	for(CartDTO c : cartList) {
+		System.out.println(c);
+	}
+	*/
 }
-//회원 DB 연결, 질의 -> 주소 정보 활용
-MemberDAO memberDAO = MemberDAO.getInstance();
-MemberDTO member = memberDAO.getMember(memberId); // 멤버아이디 정보 확인
-String address = member.getAddress();
-String local = address.substring(0, 2); // ex) 서울, 주소에 첫번째에서 두번째 자리의 문자열을 가져옴; 
+session.setAttribute("cartList", cartList);
+//#########################################3
 
-//카트 아이디 확인
-/* System.out.println("카트:" + Arrays.toString(cart_id_arr));
-System.out.println("카트 리스트:" + cart_id_list); */
-
-//Cart DB 연동 - cartList에서 넘어오는 정보 받기 -> 1개 또는 여러개(전체)
-CartDAO cartDAO = CartDAO.getInstance();
-List<CartDTO> cartList = cartDAO.getCartList(cart_id_list);
-
-//cartList 확인
-/*
-for(CartDTO c : cartList) {
-	System.out.println(c);
-}
-*/
 //장바구니 상품 종류 개수
 int cartListCount = cartDAO.getCartListCount(memberId);
 
@@ -246,6 +334,8 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 		<form action="buyList.jsp" method="post" name="buyForm">
 		<!-- cart_id, buy_count, account, delivery_name, delivery_tel, delivery_address -->
 		<input type="hidden" name="cart_id" id="cart_id" value="<%=cart_id_str%>">
+		<input type="hidden" name="product_id" value="<%=product_id%>">
+		<input type="hidden" name="part" value="<%=part%>">
 		
 		<div class="d3"> <!-- 카트 정보 -->
 			<table class="t1">

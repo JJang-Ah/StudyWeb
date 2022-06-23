@@ -264,21 +264,21 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list + "&part=3";
 		})
 		btn_buy_select2.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list + "&part=3";
 		})
 		btn_buy_select3.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list + "&part=3";
 		})
 		
 		// 쇼핑계속하기 버튼 처리

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
     
     
 <!DOCTYPE html>
@@ -48,33 +47,33 @@ table .title , table .writer{ width: 380px; height: 20px;}
 </head>
 <body>
 <div class="container">
-	<h1><spring:message code="message.board.detail.title"/></h1>
-	<div class="d1"><a href="logout.do"><spring:message code="message.board.detail.logout"/></a></div>
+	<h1>글상세</h1>
+	<div class="d1"><a href="logout.do">로그아웃</a></div>
 	<form action="updateBoard.do" method="post" name="detailForm">
 	<table>
 		<tr>
-			<th width="20%"><spring:message code="message.board.detail.table.head.seq"/></th>
+			<th width="20%">글 번호</th>
 			<td width="80%"><input type="text" name="seq" value="${board.seq }" readonly class="seq"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.detail.table.head.title"/></th>
+			<th>제ㄱ</th>
 			<td><input type="text" name="title" value="${board.title }" class="title"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.detail.table.head.writer"/></th>
+			<th>작성자</th>
 			<td><input type="text" name="writer" value="${board.writer }" class="writer"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.detail.table.head.content"/></th>
+			<th>내용</th>
 			<td><textarea name="content" cols="52" rows="15">${board.content }</textarea></td>
 		</tr>
 		
 		<tr>
-			<th><spring:message code="message.board.detail.table.head.regdate"/></th>
+			<th>등록일</th>
 			<td>${board.regdate }</td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.board.detail.table.head.cnt"/></th>
+			<th>조회수</th>
 			<td>${board.cnt }</td>
 		</tr>
 	</table>

@@ -20,7 +20,8 @@
 	String memberId = (String)session.getAttribute("memberId");
 	memberId = null;
 	*/
-	session.removeAttribute("memberId");
+	session.invalidate();
+// 	session.removeAttribute("memberId");
 
 	%>
 	<script>

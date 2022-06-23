@@ -10,30 +10,37 @@ import com.springbook.biz.member.MemberService;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberDAO memberDAO;
+	private MemberDAOMybatis2 memberDAO;
 
 	@Override
 	public void insertMember(MemberDTO dto) {
-		System.out.println("=> MemberServiceImpl - insertMember()");
+		System.out.println("==> MemberServiceImpl - insertMember()");
 		memberDAO.insertMember(dto);
 	}
 
 	@Override
 	public void updateMember(MemberDTO dto) {
-		System.out.println("=> MemberServiceImpl - updateMember()");
+		System.out.println("==> MemberServiceImpl - updateMember()");
 		memberDAO.updateMember(dto);
 	}
 
 	@Override
 	public void deleteMember(MemberDTO dto) {
-		System.out.println("=> MemberServiceImpl - deleteMember()");
+		System.out.println("==> MemberServiceImpl - deleteMember()");
 		memberDAO.deleteMember(dto);
 	}
 
 	@Override
 	public MemberDTO getMember(MemberDTO dto) {
-		System.out.println("=> MemberServiceImpl - getMember()");
+		System.out.println("==> MemberServiceImpl - getMember()");
 		return memberDAO.getMember(dto);
 	}
+
+	@Override
+	public MemberDTO loginMember(MemberDTO dto) {
+		System.out.println("==> MemberServiceImpl - loginMember()");
+		return null;
+	}
+	
 
 }

@@ -9,7 +9,6 @@
 <style>
 .container { width: 300px; margin: 20px auto;}
 h1 { text-align: center;}
-.a_tags a { text-decoration: none; text-align: center; color: #000;}
 table { width: 100%; border: 1px solid black; border-collapse: collapse;}
 tr { height: 50px;}
 th, td { border: 1px solid black;}
@@ -18,33 +17,34 @@ td { padding-left: 5px;}
 tr:nth-of-type(3) td { text-align: center;}
 input[type=text], input[type=password] { width: 190px; height: 25px;}
 input[type=submit] { width: 100px; height: 35px; font-size: 1.03em; font-weight: bold;}
+.a_tags { text-align: center;}
+.a_tags a { text-decoration: none; color: gray;}
 </style>
 </head>
 <body>
 <div class="container">
-	<h1><spring:message code="message.member.login.title"/></h1>
+	<h1>로그인</h1>
 	<hr>
-	<div class="a_tags">
-		<a href="login.do?lang=en"><spring:message code="message.member.login.language.en"></spring:message></a> |
-		<a href="login.do?lang=ko"><spring:message code="message.member.login.language.ko"></spring:message></a>
-	</div>
 	<hr>
 	<form action="login.do" method="post">
 	<table>
 		<tr>
-			<th width="30%"><spring:message code="message.member.login.id"/></th>
+			<th width="30%">아이디</th>
 			<td width="70%"><input type="text" name="id"></td>
 		</tr>
 		<tr>
-			<th><spring:message code="message.member.login.password"/></th>
+			<th>비밀번호</th>
 			<td><input type="password" name="password"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="<spring:message code="message.member.login.loginButton"/>"></td>
+			<td colspan="2"><input type="submit" value="로그인"></td>
 		</tr>
 	</table>
 	</form>
 	<hr>
+	<div class="a_Tags">
+		<a href="insertMember.do">회원가입</a>
+	</div>
 </div>
 </body>
 </html>

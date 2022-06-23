@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.springbook.biz.common.JDBCUtil;
 import com.springbook.biz.member.MemberDTO;
 
-@Repository("memberDAO")
+//@Repository("memberDAO")
 public class MemberDAO {
 	
 	// DB 연결, 질의 변수
@@ -18,8 +18,8 @@ public class MemberDAO {
 	private ResultSet rs = null;
 	
 	// SQL문
-	private final String MEMBER_INSERT = "insert into member values(?, ?, ?, ?)";
-	private final String MEMBER_UPDATE = "update member set name=?, role=? where id=? and password=?";
+	private final String MEMBER_INSERT = "insert into member(id, password, name, email, tel, address) values(?, ?, ?, ?, ?, ?)";
+	private final String MEMBER_UPDATE = "update member set password=?, name=?, email=?, tel=?, address=? where id=?";
 	private final String MEMBER_DELETE = "delete member where id=? and password=?";
 	private final String MEMBER_GET = "select * from member where id=? and password=?";
 	
@@ -32,7 +32,9 @@ public class MemberDAO {
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPassword());
 			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getRole());
+			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(5, dto.getTel());
+			pstmt.setString(6, dto.getAddress());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -47,10 +49,12 @@ public class MemberDAO {
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(MEMBER_UPDATE);
-			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getRole());
-			pstmt.setString(3, dto.getId());
-			pstmt.setString(4, dto.getPassword());
+			pstmt.setString(1, dto.getPassword());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getTel());
+			pstmt.setString(5, dto.getAddress());
+			pstmt.setString(6, dto.getId());
 			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -91,7 +95,10 @@ public class MemberDAO {
 				member.setId(rs.getString("id"));
 				member.setPassword(rs.getString("password"));
 				member.setName(rs.getString("name"));
-				member.setRole(rs.getString("role"));
+				member.setEmail(rs.getString("email"));
+				member.setTel(rs.getString("tel"));
+				member.setAddress(rs.getString("address"));
+				member.setRegdate(rs.getTimestamp("regdate"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

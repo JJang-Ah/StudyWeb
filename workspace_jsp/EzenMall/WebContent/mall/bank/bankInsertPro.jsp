@@ -20,10 +20,22 @@ if(memberId == null) {
 	return;
 } 
 
-String cart_id = request.getParameter("cart_id");
+String cart_id = null;
+String product_id = null;
+String buy_count = null;
+
+cart_id = request.getParameter("cart_id");
+product_id = request.getParameter("product_id");
+buy_count = request.getParameter("buy_count");
+
 BankDAO bankDAO = BankDAO.getInstance();
 bankDAO.insertBank(bank);
-response.sendRedirect("../buy/buyForm.jsp?cart_id" + cart_id);
+
+if(cart_id != null) {
+	response.sendRedirect("../buy/buyForm.jsp?cart_id" + cart_id);
+} else if(product_id != null) {
+	response.sendRedirect("../buy/buyForm.jsp?product_id=" + product_id +"&buy_count=" + buy_count);
+}
 
 %>
 

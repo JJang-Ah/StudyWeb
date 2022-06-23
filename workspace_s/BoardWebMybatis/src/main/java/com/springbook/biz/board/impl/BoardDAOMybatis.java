@@ -1,61 +1,58 @@
 package com.springbook.biz.board.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.jdbc.core.RowMapper;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.util.SqlSessionFactoryBean;
 
-public class BoardDAOMybatis {
+//@Repository("boardDAO")
+public class BoardDAOMybatis extends SqlSessionDaoSupport {
 
-	private SqlSession mybatis;
-	
-	public BoardDAOMybatis() {
-		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
+	@Autowired
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	
 	// 글등록
 	public void insertBoard(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - insertBoard()");
-		mybatis.insert("BoardDAO.insertBoard", dto); // (namespace).(id)
-		mybatis.commit();
+		System.out.println("===> BoardDAOSMybatis - insertBoard()");
+		this.getSqlSession().insert("BoardDAO.insertBoard", dto); // (namespace).(id)
 	}
 	
 	// 글수정
 	public void updateBoard(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - updateBoard()");
-		mybatis.update("BoardDAO.updateBoard", dto);
-		mybatis.commit();
+		System.out.println("===> BoardDAOMybatis - updateBoard()");
+		this.getSqlSession().update("BoardDAO.updateBoard", dto);
 	}
 	
 	// 글삭제
 	public void deleteBoard(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - deleteBoard()");
-		mybatis.delete("BoardDAO.deleteBoard", dto);
-		mybatis.commit();
+		System.out.println("===> BoardDAOMybatis - deleteBoard()");
+		this.getSqlSession().delete("BoardDAO.deleteBoard", dto);
 	}
 	
 	// 글전체 보기 -> 검색 기능 추가
 	public List<BoardDTO> getBoardList(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - getBoardList()");
-		return mybatis.selectList("BoardDAO.getBoardList", dto);
+		System.out.println("===> BoardDAOMybatis - getBoardList()");
+		return this.getSqlSession().selectList("BoardDAO.getBoardList", dto);
 	}
 	
 	// 조회수 증가 -> 글상세보기에서 동작
 	public void updateBoardCnt(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - updateBoardCnt()");
-		mybatis.update("BoardDAO.updateBoardCnt", dto);
+		System.out.println("===> BoardDAOMybatis - updateBoardCnt()");
+		this.getSqlSession().update("BoardDAO.updateBoardCnt", dto);
 	}
 	
 	// 글상세 보기(1건)
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("===> BoardDAOSpring2 - getBoard()");
+		System.out.println("===> BoardDAOMybatis - getBoard()");
 		updateBoardCnt(dto);
-		return mybatis.selectOne("BoardDAO.getBoard");
+		return this.getSqlSession().selectOne("BoardDAO.getBoard");
 	}
 	
 	

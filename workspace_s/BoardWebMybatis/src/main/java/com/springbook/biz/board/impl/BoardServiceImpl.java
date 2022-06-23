@@ -13,7 +13,7 @@ import com.springbook.biz.board.BoardService;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardDAOSpring2 boardDAO;
+	private BoardDAOMybatis2 boardDAO;
 	
 	@Override
 	@Transactional("txManager")
