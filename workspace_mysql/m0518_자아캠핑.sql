@@ -50,7 +50,7 @@ address varchar(100) not null,
 regDate datetime not null
 );
 
--- (2) manager 테이블
+-- (3) manager 테이블
 create table manager (
 managerId varchar(50) primary key,
 managerPwd varchar(20) not null
@@ -65,6 +65,7 @@ select * from product;
 use db02;
 show tables;
 
+-- (4)장바구니 테이블
 create table cart (
 cart_id bigint primary key auto_increment,
 buyer varchar(50) not null,
@@ -79,6 +80,7 @@ product_image varchar(30) not null
 );
 
 
+-- (5) 리뷰 테이블
 create table review (
 num int primary key auto_increment,
 member_id varchar(50) not null,

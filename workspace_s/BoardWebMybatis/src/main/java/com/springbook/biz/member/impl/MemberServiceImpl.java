@@ -11,6 +11,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberDAOMybatis2 memberDAO;
+	
+	@Override
+	public MemberDTO checkIdMember(MemberDTO dto) {
+		System.out.println("==> MemberServiceImpl - checkIdMember()");
+		return memberDAO.checkIdMember(dto);
+	}
 
 	@Override
 	public void insertMember(MemberDTO dto) {

@@ -53,3 +53,25 @@ cnt number(20) default 0
 );
 select * from board;
 commit;
+
+-- 5. member 테이블 수정
+desc member;
+-- id, password, name, email, tel, address, regdate
+drop table member;
+
+create table member (
+id varchar2(20) primary key, 
+password varchar2(20) not null, 
+name varchar2(30) not null,
+email varchar2(30) not null,
+tel varchar2(20) not null,
+address varchar2(300) not null,
+regdate date default sysdate
+);
+
+insert into member(id, password, name, email, tel, address) 
+values('aaa1111', '1234', '이용진', 'leeyj@gmail.com', 
+'010-1111-1111', '서울시 강남구 강남동 강남아파트 101동 101호');
+
+select * from member;
+commit;

@@ -19,6 +19,12 @@ public class MemberDAOMybatis2 {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
+
+	// 회원 아이디 중복 체크
+	public MemberDTO checkIdMember(MemberDTO dto) {
+		System.out.println("===> MemberDAOMybatis2 - checkIdMember()");
+		return mybatis.selectOne("MemberDAO.checkIdMember", dto);
+	}
 	
 	// 회원 등록
 	public void insertMember(MemberDTO dto) {

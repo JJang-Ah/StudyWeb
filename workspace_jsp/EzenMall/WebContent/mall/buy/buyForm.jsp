@@ -1,8 +1,6 @@
-<%@page import="manager.product.ProductDTO"%>
-<%@page import="manager.product.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mall.member.*, mall.cart.*, mall.bank.*, java.util.*, java.text.*" %>
+<%@ page import="mall.member.*, mall.cart.*, mall.bank.*, java.util.*, java.text.*, manager.product.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,12 +60,10 @@ height: 30px; font-size: 0.95em; }
 .d6 .t4 span { color: #707fa0; font-weight: bold; margin-right: 20px; }
 .d6 .t4 #btn_address { background: #63647f; border: 1px solid #63647f; color: #fff; border-radius: 3px; width: 100px; 
 height: 30px; font-size: 0.95em; }
-.d6 .account { width: 250px; height: 25px;}
-#btn_delete_bank, #btn_regist_bank { width: 80px; height: 25px; color: #fff;}
-#btn_delete_bank { background: #c84557; border: 1px solid #c84557; margin-left: 60px;}
-#btn_regist_bank { background: #2f9e77; border: 1px solid #2f9e77;}
-
-
+.d6 .account { width: 250px; height: 25px; }
+#btn_delete_bank, #btn_regist_bank { width: 80px; height: 25px; color: #fff; }
+#btn_delete_bank { background: #cc1e1b; border: none; margin-left: 65px; }
+#btn_regist_bank { background: #eb991c; border: none; margin-left: 5px;}
 /* 중단 - d7, 최종결제 버튼 */
 .d7 { margin-top: 20px;}
 .d7 .t5 { width: 90%; border: 1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; }
@@ -80,6 +76,7 @@ height: 30px; font-size: 0.95em; }
 .d7 .t5 #btn_buy { background: #a9ce7d; border:none; color: #fff; border-radius: 3px; width: 150px; 
 height: 50px; font-size: 1.15em; }
 .d7 .t5 #btn_buy:hover { background: #eb78cd; cursor: pointer; }
+
 </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
@@ -88,6 +85,7 @@ height: 50px; font-size: 1.15em; }
 		let form = document.buyForm;
 		let cart_id = form.cart_id.value;
 		let product_id = form.product_id.value;
+		let part = form.part.value;
 		
 		// 구매 수량 제한 효과 (1~100)	
  		let buy_counts = document.querySelectorAll(".buy_count");
@@ -113,70 +111,83 @@ height: 50px; font-size: 1.15em; }
 		})
 		
 		// 카드 삭제 버튼
-		let card_id = document.getElementById("cart_id");
 		let btn_delete_bank = document.getElementById("btn_delete_bank");
-		btn_delete_bank.addEventListener("click", function() {
-			let account = form.account.value;
+		btn_delete_bank.addEventListener("click", function() {				
+			let account = document.querySelector(".account");
 			
-			if(account.value == 0) {
-				alert("삭제할 카드를 선택해 주세요");
+			if(account.value==0) {
+				alert('삭제할 카드를 선택해주세요');
 				return;
 			}
 			
 			let value = account.options[account.selectedIndex].value;
 			let card_no = value.substring(0, 19);
-			account.remove(account.selectedIndex);
-			location = "../bank/bankDeletePro.jsp?product_id=" + product_id+ "&card_no=" + card_no;
+			account.remove(account.selectedIndex);	
 			
-		})
+			if(part==1) {
+				location='../bank/bankDeletePro.jsp?cart_id='+cart_id+'&card_no='+card_no+"&part=1";
+			} else if(part==2) {
+				location='../bank/bankDeletePro.jsp?cart_id='+cart_id+'&card_no='+card_no+"&part=2";
+			} else if(part==3) {
+				location='../bank/bankDeletePro.jsp?cart_id='+cart_id+'&card_no='+card_no+"&part=3";
+			}
+							
+		});
 		
-		// 카드 등록 버튼
 		let btn_regist_bank = document.getElementById("btn_regist_bank");
-		btn_regist_bank.addEventListener("click", function() {
-			let cart_no = document.querySelector(".card_no").value;
-			let cart_com = document.querySelector(".card_com").value;
-			let member_id = document.querySelector(".member_id").value;
-			let member_name = document.querySelector(".member_name").value;
+		btn_regist_bank.addEventListener("click", function() {	
+			let account = document.querySelector(".account");
+			let card_no = document.querySelector(".card_no").value.substring(0,19);
+			let card_com = document.querySelector(".card_com");
+			let member_id = document.querySelector(".member_id");
+			let member_name = document.querySelector(".member_name");
 			
 			if(!card_no) {
-				alert("카드번호를 입력해 주세요.");
+				alert('카드번호를 입력해 주세요.');
 				return;
 			}
 			
 			if(!card_com) {
-				alert("발행은행을 입력해 주세요.");
+				alert('발행은행을 입력해 주세요.');
 				return;
 			}
 			
-			location = "../bank/bankInsertPro.jsp?cart_id="+cart_id+"&buy_count=" + buy_count+"&card_no="+card_no+"&card_com="+card_com+"&member_id="+member_id;
-		})
+			location='../bank/bank_insertPro.jsp?cart_id='+cart_id
+			+'&card_no='+card_no+'&card_com='+card_com.value
+			+'&member_name='+member_name.value + '&member_id=' + member_id.value;
+			
+		});
 		
-		// 최종 결제 버튼
+		// 최종결제 버튼
 		let btn_buy = document.getElementById("btn_buy");
 		btn_buy.addEventListener("click", function() {
 			if(!form.delivery_name.value) {
-				alert('수령인 이름을 입력하세요!');
+				alert("수령인을 입력하시오.");
 				return;
 			}
+			
 			if(!form.delivery_tel.value) {
-				alert('수령인 전화번호을 입력하세요!');
+				alert("배송지 연락처를 입력하시오.");
 				return;
 			}
+			
 			if(!form.delivery_address1.value) {
-				alert('수령인 기본주소를 입력하세요!');
+				alert("기본주소를 입력하시오.");
 				return;
 			}
+			
 			if(!form.delivery_address2.value) {
-				alert('수령인 상세주소를 입력하세요!');
+				alert("상세주소를 입력하시오.");
 				return;
 			}
+			
 			if(!form.account.value) {
-				alert('결제카드를 선택하세요!');
+				alert("결제카드를 선택하시오.");
 				return;
 			}
-			
-			
-		})
+			form.submit();
+		});
+		
 	});
 </script>
 </head>
@@ -185,8 +196,8 @@ height: 50px; font-size: 1.15em; }
 // buyForm.jsp -> 구매정보 확인폼(구매 여부를 결정하는 폼), buyList.jsp -> 구매 목록 폼(최종 구매 확인 폼)
 request.setCharacterEncoding("utf-8");
 DecimalFormat df = new DecimalFormat("#,###,###");
-String memberId = (String)session.getAttribute("memberId");
 
+String memberId = (String)session.getAttribute("memberId");
 if(memberId == null) {
 	out.print("<script>alert('로그인을 해주세요.'); location='../logon/memberLoginForm.jsp';");
 	out.print("</script>");
@@ -194,34 +205,37 @@ if(memberId == null) {
 } 
 
 // 2. shopMain.jsp, shopContent.jsp에서 buyForm.jsp로 넘어오는 경우
-// - product_id 를 확인하여 처리
+// - 
 
-// ##############################################
-// 1. part=1일때 -> shopMain.jsp에서 product_id를 가지고 넘오는 경우
-// 2. part=2일때 -> shopContent.jsp에서 product_id와 buy_count를 가지고 넘어오는 경우
-// 3. part=3일떄 -> cartList.jsp에서 cart_id를 가지고 넘어오는 경우
+// --------------------------------------------------
+// 1. part1=1일 때, shopMain.jsp에서 product_id를 가지고 넘어오는 경우
+// 2. part=2일 때, shopContent.jsp에서 product_id와 buy_count를 가지고 넘어오는 경우
+// 3. part=3일 때, cartList.jsp에서 cart_id를 가지고 넘어오는 경우
 
 int part = Integer.parseInt(request.getParameter("part"));
-int product_id = 0;
-int buy_count = 1;
+
+// part1, part2일때 변수 선언
+int product_id =0;
+int buy_count =1;
 ProductDAO productDAO = null;
 
-// part=3일때 변수 선언
+// part3일 때 변수 선언
 String cart_id_str = null;
 String[] cart_id_arr = null;
 List<Integer> cart_id_list = null;
 CartDAO cartDAO = null;
 List<CartDTO> cartList = null;
 
-if(part==1 || part==2) {
+if(part == 1 || part == 2) {
 	product_id = Integer.parseInt(request.getParameter("product_id"));
 	if(part==2) buy_count = Integer.parseInt(request.getParameter("buy_count"));
 	cartList = new ArrayList<CartDTO>();
 	productDAO = ProductDAO.getInstance();
 	ProductDTO product = productDAO.getProduct(product_id);
+	
 	int product_price = product.getProduct_price();
-	int discount_rate = product.getDiscount_rate();
-	int buy_price = product_price - (product_price*discount_rate /100);
+	int discount = product.getDiscount_rate();
+	int buy_price = product_price - (product_price * discount/100);
 	
 	CartDTO cart = new CartDTO();
 	cart.setBuyer(memberId);
@@ -229,26 +243,21 @@ if(part==1 || part==2) {
 	cart.setProduct_name(product.getProduct_name());
 	cart.setAuthor(product.getAuthor());
 	cart.setPublishing_com(product.getPublishing_com());
-	cart.setProduct_price(product.getProduct_price());
-	cart.setDiscount_rate(discount_rate);
-	cart.setBuy_price(buy_price); // 판매가, 할인된 가격 
+	cart.setProduct_price(product_price);
+	cart.setDiscount_rate(discount);
+	cart.setBuy_price(buy_price);
+	cart.setBuy_count(buy_count);
 	cart.setProduct_image(product.getProduct_image());
 	cartList.add(cart);
-} else if(part == 3) {
 	
-	// 1. cartList.jsp에서 buyForm.jsp로 넘어오는 경우
-	// - cart_id를 확인, 배열로 저장 -> 리스트로 저장
+} else if(part == 3) {
+	// cartList.jsp에서 넘어오는 cart_id를 확인, 배열로 저장 -> 리스트로 저장
 	cart_id_str = request.getParameter("cart_ids_list");
 	cart_id_arr = cart_id_str.split(",");
 	cart_id_list = new ArrayList<Integer>();
 	for(String c : cart_id_arr) {
 		cart_id_list.add(Integer.parseInt(c));
 	}
-	//회원 DB 연결, 질의 -> 주소 정보 활용
-	MemberDAO memberDAO = MemberDAO.getInstance();
-	MemberDTO member = memberDAO.getMember(memberId); // 멤버아이디 정보 확인
-	String address = member.getAddress();
-	String local = address.substring(0, 2); // ex) 서울, 주소에 첫번째에서 두번째 자리의 문자열을 가져옴; 
 	
 	//카트 아이디 확인
 	/* System.out.println("카트:" + Arrays.toString(cart_id_arr));
@@ -266,14 +275,20 @@ if(part==1 || part==2) {
 	*/
 }
 session.setAttribute("cartList", cartList);
-//#########################################3
 
-//장바구니 상품 종류 개수
-int cartListCount = cartDAO.getCartListCount(memberId);
+
+// ------------------------------------------
+
 
 //Bank DB 연동, 은행 계좌 정보 확인
 BankDAO bankDAO = BankDAO.getInstance();
 List<BankDTO> bankList = bankDAO.getBankList(memberId);
+
+//회원 DB 연결, 질의 -> 주소 정보 활용
+MemberDAO memberDAO = MemberDAO.getInstance();
+MemberDTO member = memberDAO.getMember(memberId); // 멤버아이디 정보 확인
+String address = member.getAddress();
+String local = address.substring(0, 2); // ex) 서울, 주소에 첫번째에서 두번째 자리의 문자열을 가져옴; 
 
 
 
@@ -331,12 +346,11 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 			<span class="s3">아침배송</span>		
 		</div>
 		<hr class="d_line">
-		<form action="buyList.jsp" method="post" name="buyForm">
+		<form action="buyInsertPro.jsp" method="post" name="buyForm">
 		<!-- cart_id, buy_count, account, delivery_name, delivery_tel, delivery_address -->
-		<input type="hidden" name="cart_id" id="cart_id" value="<%=cart_id_str%>">
-		<input type="hidden" name="product_id" value="<%=product_id%>">
+		<input type="hidden" name="cart_id" value="<%=cart_id_str %>">
+		<input type="hidden" name="product_id" value="<%= product_id%>">
 		<input type="hidden" name="part" value="<%=part%>">
-		
 		<div class="d3"> <!-- 카트 정보 -->
 			<table class="t1">
 				<tr>
@@ -359,7 +373,7 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
  				%>
 				<tr>
 					<td width="10%">
-						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a>
+						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a> 
 					</td>
 					<td width="40%">
 						<span class="s1"><a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id()%>"><%=cart.getProduct_name() %></a></span><br>
@@ -417,7 +431,7 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 		</div>
 		<div class="d6"> <!-- 주문자 정보 : 결제 정보 포함 -->
 			<table class="t4">
-				<tr><th colspan="2">주문자 정보</th></tr>
+				<tr><th colspan="3">주문자 정보</th></tr>
 				<tr>
 					<th width="20%">주문자 이름</th>
 					<td width="80%" colspan="2"><%=member.getName() %></td>
@@ -434,30 +448,29 @@ int tot1 = 0, tot2 = 0, tot3 = 0, cnt1 = 0, cnt2 = 0;
 					<th>결제 카드</th>
 					<td width="28%">
 						<select name="account" class="account">
-						<%if(bankList.size() == 0)  {%>
-							<option value="0">등록 카드 없음</option>	
-						<%} else { 
-						for(BankDTO bank : bankList) { 
+						<%if(bankList.size() == 0) { %>
+							<option value="0">등록 카드 없음</option>
+						<%} else {
+							for(BankDTO bank : bankList) { 
 							String account = bank.getCard_no() + " " + bank.getCard_com();
 						%>
-							<option value="<%=account%>"><%=account %></option>
-						<%} } %>
+							<option value="<%=account%>" class="card_no"><%=account %></option>
+						<%} }%>
 						</select>
 					</td>
 					<td>
 						<input type="button" value="카드 삭제" id="btn_delete_bank">
-						<input type="button" value="카드 등록" id="btn_regist_bank">
 					</td>
 				</tr>
-				<tr class="tr_card">
+				<tr>
 					<th>카드 등록</th>
-					<td colspan="2">
-						<input type="hidden" class="member_id" value="<%=member.getId() %>">
-						<input type="hidden" class="member_name" value="<%=member.getName() %>">
+					<td colspan="2">				
+						<input type="hidden" class="member_id" value="<%=member.getId()%>">
+						<input type="hidden" class="member_name" value="<%=member.getName()%>">
 						<input type="text" class="card_no" placeholder="카드번호 입력">
 						<input type="text" class="card_com" placeholder="발행은행 입력">
 						<input type="button" value="카드 등록" id="btn_regist_bank">
-					</td>
+					</td>			
 				</tr>
 			</table>
 		</div>

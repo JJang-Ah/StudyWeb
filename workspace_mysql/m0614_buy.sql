@@ -19,8 +19,11 @@
 - delivery_state: 배송상태, varchar
 */
 use db01;
+
+drop table buy;
+
 create table buy (
-buy_id bigint primary key auto_increment,
+buy_id varchar(20) not null,
 buyer varchar(50) not null,
 product_id bigint not null,
 product_name varchar(100) not null,
@@ -34,6 +37,10 @@ delivery_tel varchar(20) not null,
 delivery_address varchar(100) not null,
 delivery_state varchar(20) default '상품 준비중'
 );
+
+-- buy_id를 varchar2(20)로 변경 -> 자바로 하나의 카트에 담겨있는 여러개의 상품에 고유한 아이디를 부여하기 위해
+
+
 desc buy;
 select * from buy;
 /*

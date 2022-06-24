@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,17 +24,35 @@ table .name {width: 150px; height: 20px;}
 table .email {width: 150px; height: 20px;}
 table .tel {width: 200px; height: 20px;}
 table .address {width: 380px; height: 20px;}
+.ss { margin-top: 5px; font-size: 0.8em; font-weight: bold; display: none;}
+.s1 { color: #00f;}
+.s2 { color: red;}
 .btns { margin-top: 20px; text-align: center;}
-.btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer;}
-.btns input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
-.btns input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer;}
+input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
+input[type=reset], input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+#btn_id_check { width: 130px; height: 30px; font-size: 0.9em; border: 1px solid #196ab3;
+border-radius: 27px; background: #196ab3; color: #fff; cursor: pointer;}
+
 
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
+		let form = document.insertMemberForm;
+		
+		// 돌아가기 버튼
 		let btn_back = document.getElementById("btn_back");
 		btn_back.addEventListener("click", function() {
 			location = "login.do";
+		})
+		
+		// 아이디 중복 체크 버튼
+		let ss = document.querySelector(".ss");
+		let btn_id_check = document.getElementById("btn_id_check");
+		btn_id_check.addEventListener("click", function() {
+			ss.style.display = "block";
+			form.action = "checkIdMember.do";
+			form.submit();
 		})
 	})
 </script>
@@ -43,8 +62,26 @@ table .address {width: 380px; height: 20px;}
 	<form action="insertMember.do" method="post" name="insertMemberForm">
 	<table>
 		<tr>
-			<th>아이디</th>
-			<td><input type="text" name="id" class="id"></td>
+			<th width="20%">아이디</th>
+			<td width="80%">
+				<c:if test="${checkMember == null }">
+					<input type="text" name="id" class="id" value="${checkId}">
+				</c:if>
+				<c:if test="${checkMember != null }">
+					<input type="text" name="id" class="id">
+				</c:if>
+				<input type="button" value="아이디 중복확인" id="btn_id_check"> <br>
+				<c:if test="${checkId != null }">
+					<c:if test="${checkMember == null }">
+					<div class="ss s1">사용할 수 있는 아이디입니다.</div>
+					</c:if>
+					<c:if test="${checkMember != null }">
+					<div class="ss s2">사용할 수 없는 아이디입니다.</div>
+					</c:if>
+				</c:if>
+				
+				
+			</td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>

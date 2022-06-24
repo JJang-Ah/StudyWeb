@@ -26,7 +26,8 @@ table .address {width: 380px; height: 20px;}
 .btns { margin-top: 20px; text-align: center;}
 .btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer;}
 .btns input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
-.btns input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+.btns input[type=button], input[type=reset] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+#btn_delete { background: #c84557; border: 1px solid #c84557;}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {

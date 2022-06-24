@@ -21,8 +21,9 @@ public class memberController {
 	// 로그인 처리(폼으로 화면이동) -> GET
 	//@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	@GetMapping(value="/login.do") // 위와 같은 기능
-	public String login() {
+	public String login(HttpSession session) {
 		System.out.println("=> memberController - 로그인 화면이동");
+		session.invalidate();
 		return "login.jsp";
 	}
 	
@@ -60,6 +61,14 @@ public class memberController {
 	
 	//#################################333
 	// 회원가입, 수정, 삭제, 상세확인
+	
+	@RequestMapping("/checkIdMember.do")
+	public String checkIdMember(MemberDTO dto, Model model) {
+		System.out.println("=> MemberController - 회원아이디 중복 체크");
+		model.addAttribute("member", memberService.checkIdMember(dto));
+		return "insertMember.jsp";
+	}
+	
 	@GetMapping("/insertMember.do")
 	public String insertMember() {
 		System.out.println("=> memberController - 회원가입화면 이동");
@@ -87,4 +96,19 @@ public class memberController {
 		model.addAttribute("member", memberService.getMember(dto));
 		return "getMember";
 	}
+	
+	@RequestMapping("/updateMember.do")
+	public String updateMember(MemberDTO dto) {
+		 System.out.println("=> MemberController - 회원정보 수정");
+		 memberService.updateMember(dto);
+		 return "redirect:getMember.jsp";
+	}
+	
+	@RequestMapping("/deleteMember.do")
+	public String deleteMember(MemberDTO dto) {
+		System.out.println("=> MemberController - 회원 정보삭제(회원탈퇴)");
+		memberService.deleteMember(dto);
+		return "login.jsp";
+	}
+	
 }

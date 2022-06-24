@@ -157,10 +157,11 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	// 회원 삭제(회원 탈퇴) 메소드 -> 해당 회원이 남긴 게시판의 글도 모두 삭제되도록 변경
+	// 회원 삭제(회원 탈퇴) 메소드 -> 해당 회원이 남긴 리뷰, 카트 정보도 모두 삭제, 구매 정보는 삭제하지 않는다. 
 	public int deleteMember(String id, String pwd) {
 		String sql1 = "delete from member where id=? and pwd=?";
-		String sql2 = "delete from board where writer = ?";
+		String sql2 = "delete from board where member_id = ?";
+		String sql3 = "delete from cart where buyer=?";
 		int cnt = 0;
 		try {
 			conn = JDBCUtil.getConnection();
@@ -177,18 +178,23 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(sql1);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-			cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
-			// 2작업: 해당 회원이 남긴 게시판 글 모두 삭제
+			// 2작업: 해당 회원이 남긴 리뷰 모두 삭제
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
+			
+			// 3작업: 회원의 모든 카트 정보 삭제
+			pstmt = conn.prepareStatement(sql3);
+			pstmt.setString(1, id);
 			
 			// 트랜잭션 처리 2단계 - 모든 작업이 완료되었을 때 커밋을 함.
 			conn.commit();
 			
 			// 트랜잭션 처리 3단계 - autocommit기능을 다시 설정해 놓는다.
 			conn.setAutoCommit(true);
+			cnt = 1;
 			
 		} catch(Exception e) {
 			e.printStackTrace();

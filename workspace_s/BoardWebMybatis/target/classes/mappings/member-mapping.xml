@@ -42,7 +42,11 @@
 		<result property="address" column="address"/>
 		<result property="regdate" column="regdate"/>
 	</resultMap>
-	
+	<select id="checkIdMember" resultMap="memberResult">
+		<![CDATA[
+		select * from member where id=#{id}
+		]]>
+	</select>
 	<insert id="insertMember" parameterType="board"> <!-- sql-map-config.xml에서 알리아스를 설정했기 때문에 board로 사용가능 / param은 생략가능-->
 		<![CDATA[
 		insert into member(id, password, name, email, tel, address) values(#{id}, #{password}, #{name}, #{email}, #{tel}, #{adderss})
