@@ -10,7 +10,6 @@
 .container { width: 1000px; margin: 20px auto;}
 h1 { text-align: center;}
 a { text-decoration: none; color: #196ab3; font-weight: bold; font-size: 0.95em;}
-
 .d1 { width: 100%; padding-bottom: 40px;}
 .d1 div { display: inline-block;}
 .d1 .d1_1 { float: left;}
@@ -32,23 +31,23 @@ th { background: #e9ecef;}
 <div class="container">
 	<h1>게시판 목록</h1>
 	<div class="d1">
-		<div class="d1_1"><a href="getMember.do?id=${member.id}">${member.id }</a>님 환영합니다.&emsp;
-		<a href="logout.do">로그아웃</a></div>
+		<div class="d1_1"><a href="getMember.do?id=${member.id}">${member.id }</a>님 환영합니다!&emsp;
+			<a href="logout.do">로그아웃</a>
+		</div>
 		<div class="d1_2"><a href="insertBoard.do">글등록</a></div>
 	</div>
 	<form action="getBoardList.do" method="post">
 	<table class="t1">
 		<tr>
 			<td width="60%">
-				<select name="searchCondition">	
+				<select name="searchCondition">
 					<c:forEach var="option" items="${conditionMap }">
 						<option value="${option.value }">${option.key }</option>
-					
 					</c:forEach>
 				</select>
 			</td>
 			<td width="30%"><input type="text" name="searchKeyword"></td>
-			<td width="10%"><input type="submit" value="<spring:message code="message.board.list.searchButton"/>"></td>
+			<td width="10%"><input type="submit" value="검색"></td>
 		</tr>
 	</table>
 	</form>

@@ -9,7 +9,6 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-
 <context:component-scan base-package="com.springbook.biz"/>
 
 <!-- DBCP 설정 -->
@@ -31,7 +30,6 @@
 	<property name="dataSource" ref="dataSource"></property>
 	<property name="configLocation" value="classpath:sql-map-config.xml"></property>
 </bean>
-
 
 <!-- Mybatis의 SqlSession 설정 -->
 <bean class="org.mybatis.spring.SqlSessionTemplate">
@@ -69,7 +67,7 @@
 
 <!-- #################### -->
 <!-- 2. AOP 설정 (annotation 기반) -->
-<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 <!-- 1. AOP 설정 (xml 기반) -->
 <!--

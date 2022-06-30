@@ -1,84 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
 <!-- 
-	// SQL문
-	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values (board_seq.nextval, ?, ?, ?)";
-	private final String BOARD_LIST = "select * from board order by seq desc";
-	private final String BOARD_GET = "select * from board where seq = ?";
-	private final String BOARD_UPDATE = "update board set title=?, content=?, writer=?, uploadFile=? where seq=?";
-	private final String BOARD_DELETE = "delete board where seq = ?";
-	private final String BOARD_UPDATE_CNT = "update board set cnt=cnt+1 where seq=?";
-	// 검색 기능 SQL 문 - TITLE, CONTENT, WRITER
-	private final String BOARD_LIST_TITLE = "select * from board where title like '%'||?||'%' order by seq desc";
-	private final String BOARD_LIST_CONTENT = "select * from board where content like '%'||?||'%' order by seq desc";
-	private final String BOARD_LIST_WRITER = "select * from board where writer like '%'||?||'%' order by seq desc";
- -->
- 
- <!-- 
- 
- 1. parameterType="board" -> 생략
- 2. resultType="board" -> 필수, select 에서 사용!
- 3. resultType의 문제점
- - join 구문을 포함할 때는 사용할 수 없음.
- - 자바객체의 프로퍼티명과 테이블의 컬럼명이 일치하지 않을 때는 사용할 수 없다.
- 4. resultType 대신에 resultMap을 사용하면 위의 문제점을 해결할 수 있음
- - result로 property와 column을 매핑
- - PK는 result 대신에 id를 사용할 수 있음.
- 5. mapper 파일에서 sql문을 사용할 때의 문제점
- - <, > 연산자를 태그로 인식하는 문제점
- - CDATA(Character DATA) section을 사용하면 연산자를 인식하게 된다.
- 6. Dynamic SQL
- - SQL에서 선택적으로 실행할 내용을 구현하기 위해서 Mybatis에서 사용하는 문법
- - CDATA와 함께 사용할 수는 없음.
- 
-  -->
+
+1. parameterType="board" -> 생략할 수 있음.
+2. resultType="board" -> 필수, select에서 사용.
+3. resultType의 문제점
+- join 구문을 포함할 때는 사용할 수 없음.
+- 자바객체의 프로퍼티명과 테이블의 컬럼명이 일치하지 않을 때는 사용할 수 없음.
+4. resultType 대신에 resultMap을 사용하면 위의 문제점을 해결할 수 있음.
+- result로 property와 column을 매핑.
+- PK는 result 대신에 id를 사용할 수 있음.
+
+5. mapper 파일에서 sql문을 사용할 때의 문제점
+- >, < 연산자를 태그로 인식하는 문제점
+- CDATA section을 사용, Charater DATA
+
+6. Dynamic SQL
+- SQL에서 선택적으로 실행할 내용을 구현하기 위해서 Mybatis에서 사용하는 문법
+- CDATA와 함께 사용할 수는 없음.
+
+-->
+						
 <mapper namespace="BoardDAO">
 	<resultMap type="board" id="boardResult">
-		<result property="seq" column="seq"/>
+		<id property="seq" column="seq"/>
 		<result property="title" column="title"/>
 		<result property="writer" column="writer"/>
 		<result property="content" column="content"/>
 		<result property="regdate" column="regdate"/>
 		<result property="cnt" column="cnt"/>
 	</resultMap>
-	<insert id="insertBoard" parameterType="board"> <!-- sql-map-config.xml에서 알리아스를 설정했기 때문에 board로 사용가능 / param은 생략가능-->
+
+	<insert id="insertBoard">
 		<![CDATA[
 		insert into board(seq, title, writer, content) values(board_seq.nextval, #{title}, #{writer}, #{content})
 		]]>
 	</insert>
+	
 	<update id="updateBoard">
 		<![CDATA[
 		update board set title=#{title}, content=#{content}, writer=#{writer} where seq=#{seq}
 		]]>
 	</update>
+
+	<!-- 글번호에 의한 글삭제 -->
 	<delete id="deleteBoard">
 		<![CDATA[
-		DELETE BOARD WHERE SEQ=#{seq}
+		delete board where seq=#{seq}
 		]]>
 	</delete>
-<!-- 	<delete id="deleteBoard"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		delete board where seq < 100 -->
-<!-- 		]]> -->
-<!-- 	</delete> -->
+		
+	<!-- 회원탈퇴에 대한 회원의 글전체 삭제 - 트랜잭션 처리 -->
+	<delete id="deleteBoardById">
+		<![CDATA[
+		delete board where writer=#{writer}
+		]]>
+	</delete>
+	
 	<update id="updateBoardCnt">
 		<![CDATA[
 		update board set cnt=cnt+1 where seq=#{seq}
 		]]>
 	</update>
 	
-	
-	<select id="getBoard" resultMap="boardResult"><!-- rs로 받아야하기 때문에 resultType설정/ 생략 불가  -->
+	<select id="getBoard" resultMap="boardResult">
+		<![CDATA[
 		select * from board where seq=#{seq}
+		]]>
 	</select>
 	
-	<!--  아래 3개 합친 getBoardList -->
-	<!-- 다이나믹 sql문 적용 -->
+	<!-- Dynamin SQL 적용 -->
 	<select id="getBoardList" resultMap="boardResult">
-		select * from board where 1=1
+		select * from board where 1 = 1 
 		<if test="searchCondition == 'TITLE'">
 		and title like '%'||#{searchKeyword}||'%'
 		</if>
@@ -91,29 +86,4 @@
 		order by seq desc
 	</select>
 	
-<!-- 	<select id="getBoardList_T" resultMap="boardResult"> -->
-<!-- 		select * from board -->
-<!-- 		where title like '%'||#{searchKeyword}||'%' -->
-<!-- 		order by seq desc -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="getBoardList_C" resultMap="boardResult"> -->
-<!-- 		select * from board -->
-<!-- 		where content like '%'||#{searchKeyword}||'%' -->
-<!-- 		order by seq desc -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="getBoardList_W" resultMap="boardResult"> -->
-<!-- 		select * from board -->
-<!-- 		where writer like '%'||#{searchKeyword}||'%' -->
-<!-- 		order by seq desc -->
-<!-- 	</select> -->
-	
 </mapper>
-
-
-
-
-			
-			
-			

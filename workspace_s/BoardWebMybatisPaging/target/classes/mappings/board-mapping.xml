@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<!-- 
+
+1. parameterType="board" -> 생략할 수 있음.
+2. resultType="board" -> 필수, select에서 사용.
+3. resultType의 문제점
+- join 구문을 포함할 때는 사용할 수 없음.
+- 자바객체의 프로퍼티명과 테이블의 컬럼명이 일치하지 않을 때는 사용할 수 없음.
+4. resultType 대신에 resultMap을 사용하면 위의 문제점을 해결할 수 있음.
+- result로 property와 column을 매핑.
+- PK는 result 대신에 id를 사용할 수 있음.
+
+5. mapper 파일에서 sql문을 사용할 때의 문제점
+- >, < 연산자를 태그로 인식하는 문제점
+- CDATA section을 사용, Charater DATA
+
+6. Dynamic SQL
+- SQL에서 선택적으로 실행할 내용을 구현하기 위해서 Mybatis에서 사용하는 문법
+- CDATA와 함께 사용할 수는 없음.
+
+-->
+						
+<mapper namespace="BoardDAO">
+	<resultMap type="board" id="boardResult">
+		<id property="seq" column="seq"/>
+		<result property="title" column="title"/>
+		<result property="writer" column="writer"/>
+		<result property="content" column="content"/>
+		<result property="regdate" column="regdate"/>
+		<result property="cnt" column="cnt"/>
+	</resultMap>
+
+	<insert id="insertBoard">
+		<![CDATA[
+		insert into board(seq, title, writer, content) values(board_seq.nextval, #{title}, #{writer}, #{content})
+		]]>
+	</insert>
+	
+	<update id="updateBoard">
+		<![CDATA[
+		update board set title=#{title}, content=#{content}, writer=#{writer} where seq=#{seq}
+		]]>
+	</update>
+
+	<!-- 글번호에 의한 글삭제 -->
+	<delete id="deleteBoard">
+		<![CDATA[
+		delete board where seq=#{seq}
+		]]>
+	</delete>
+		
+	<!-- 회원탈퇴에 대한 회원의 글전체 삭제 - 트랜잭션 처리 -->
+	<delete id="deleteBoardById">
+		<![CDATA[
+		delete board where writer=#{writer}
+		]]>
+	</delete>
+	
+	<update id="updateBoardCnt">
+		<![CDATA[
+		update board set cnt=cnt+1 where seq=#{seq}
+		]]>
+	</update>
+	
+	<select id="getBoard" resultMap="boardResult">
+		<![CDATA[
+		select * from board where seq=#{seq}
+		]]>
+	</select>
+	
+	<!-- Dynamin SQL 적용 -->
+	<select id="getBoardList" parameterType="Map" resultMap="boardResult">
+		<![CDATA[
+		select * from (
+			select b.*, row_number() over(order by regdate dsc) as rnum from board b
+			where 1 = 1 
+		]]>
+		
+		<if test="searchCondition == 'TITLE'">
+		and title like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'CONTENT'">
+		and content like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'WRITER'">
+		and writer like '%'||#{searchKeyword}||'%'
+		</if>
+		<![CDATA[
+		) where rnum >= #{block.startNum} and rnum <= (#{block.startNum}-1)*#{block.amount} and rnum <= (#{block.pageNum}* #{block.amount}) 
+		]]>
+	</select>
+	
+	<!-- 페이징에서 사용할 전체 페이지수를 구함 -->
+	<select id="getBoardListCount" resultType="int">
+		select count(*) from board
+		where 1 = 1
+		<if test="searchCondition == 'TITLE'">
+		and title like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'CONTENT'">
+		and content like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'WRITER'">
+		and writer like '%'||#{searchKeyword}||'%'
+		</if>
+		order by regdate desc
+	</select>
+	
+</mapper>

@@ -1,0 +1,19 @@
+-- spring BoardMybatisPaging 프로젝트에서 Paging 구현을 위한 대량 데이터 삽입
+/*
+create or replace procedure p_paging
+is
+begin 
+    for i in 1..255 loop
+        insert into board(seq, title, writer, content) values(
+        board_seq.nextval,
+        concat('게시판 테스트 ', i),
+        concat('작성자 1', i),
+        concat('게시판을 테스트하는 중입니다.', i)
+        );
+    end loop;
+end;
+*/
+
+
+execute p_paging;
+select * from board order by seq desc;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.member.MemberDTO;
 
-//@Repository("memberDAO")
+@Repository("memberDAO")
 public class MemberDAOSpring2 {
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class MemberDAOSpring2 {
 			member.setId(rs.getString("id"));
 			member.setPassword(rs.getString("password"));
 			member.setName(rs.getString("name"));
-			member.setRole(rs.getString("role"));
+//			member.setRole(rs.getString("role"));
 			return member;
 		}
 	}

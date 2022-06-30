@@ -68,10 +68,10 @@ table .title , table .writer{ width: 380px; height: 20px;}
 			<th><spring:message code="message.board.detail.table.head.content"/></th>
 			<td><textarea name="content" cols="52" rows="15">${board.content }</textarea></td>
 		</tr>
-		<tr>
-			<th><spring:message code="message.board.detail.table.head.upload"/></th>
-			<td><input type="file" name="uploadFile"></td>
-		</tr>
+<!-- 		<tr> -->
+<%-- 			<th><spring:message code="message.board.detail.table.head.upload"/></th> --%>
+<!-- 			<td><input type="file" name="uploadFile"></td> -->
+<!-- 		</tr> -->
 		
 		<tr>
 			<th><spring:message code="message.board.detail.table.head.regdate"/></th>

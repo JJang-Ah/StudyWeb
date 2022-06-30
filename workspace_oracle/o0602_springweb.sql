@@ -37,7 +37,8 @@ insert into member values('aaa1111', '1234', '최정직', '일반사용자');
 commit;
 
 select * from member;
-
+desc member;
+select * from member;
 -- 4. 게시판 테이블 수정 -> 업로드 파일 추가
 -- uploadFile varchar(100) 필드 추가
 
@@ -52,6 +53,7 @@ regdate date default sysdate,
 cnt number(20) default 0
 );
 select * from board;
+desc board;
 commit;
 
 -- 5. member 테이블 수정

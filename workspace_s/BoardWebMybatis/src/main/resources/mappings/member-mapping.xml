@@ -1,40 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-		
- 
- <!-- 
- 
- 1. parameterType="board" -> 생략
- 2. resultType="board" -> 필수, select 에서 사용!
- 3. resultType의 문제점
- - join 구문을 포함할 때는 사용할 수 없음.
- - 자바객체의 프로퍼티명과 테이블의 컬럼명이 일치하지 않을 때는 사용할 수 없다.
- 4. resultType 대신에 resultMap을 사용하면 위의 문제점을 해결할 수 있음
- - result로 property와 column을 매핑
- - PK는 result 대신에 id를 사용할 수 있음.
- 5. mapper 파일에서 sql문을 사용할 때의 문제점
- - <, > 연산자를 태그로 인식하는 문제점
- - CDATA(Character DATA) section을 사용하면 연산자를 인식하게 된다.
- 6. Dynamic SQL
- - SQL에서 선택적으로 실행할 내용을 구현하기 위해서 Mybatis에서 사용하는 문법
- - CDATA와 함께 사용할 수는 없음.
- 
-  -->
-  				
-<!-- 
-	// SQL문
-	private final String MEMBER_INSERT = "insert into member(id, password, name, email, tel, address) values(?, ?, ?, ?, ?, ?)";
-	private final String MEMBER_UPDATE = "update member set password=?, name=?, email=?, tel=?, address=? where id=?";
-	private final String MEMBER_DELETE = "delete member where id=? and password=?";
-	private final String MEMBER_GET = "select * from member where id=? and password=?";
-
- -->
- <!--  table과 DTO 파일을 매핑 -->
+						
 <mapper namespace="MemberDAO">
 	<resultMap type="member" id="memberResult">
-		<result property="id" column="id"/>
+		<id property="id" column="id"/>
 		<result property="password" column="password"/>
 		<result property="name" column="name"/>
 		<result property="email" column="email"/>
@@ -42,49 +12,41 @@
 		<result property="address" column="address"/>
 		<result property="regdate" column="regdate"/>
 	</resultMap>
+	
 	<select id="checkIdMember" resultMap="memberResult">
 		<![CDATA[
 		select * from member where id=#{id}
 		]]>
 	</select>
-	<insert id="insertMember" parameterType="board"> <!-- sql-map-config.xml에서 알리아스를 설정했기 때문에 board로 사용가능 / param은 생략가능-->
+
+	<insert id="insertMember">
 		<![CDATA[
-		insert into member(id, password, name, email, tel, address) values(#{id}, #{password}, #{name}, #{email}, #{tel}, #{adderss})
+		insert into member(id, password, name, email, tel, address) values(#{id}, #{password}, #{name}, #{email}, #{tel}, #{address})
 		]]>
 	</insert>
+	
 	<update id="updateMember">
 		<![CDATA[
 		update member set password=#{password}, name=#{name}, email=#{email}, tel=#{tel}, address=#{address} where id=#{id}
 		]]>
 	</update>
-	<delete id="deleteBoard">
+
+	<delete id="deleteMember">
 		<![CDATA[
-		DELETE MEMBER WHERE ID=#{id} and PASSWORD=#{password}
+		delete member where id=#{id} and password=#{password}
 		]]>
 	</delete>
-<!-- 	<delete id="deleteBoard"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		delete board where seq < 100 -->
-<!-- 		]]> -->
-<!-- 	</delete> -->
-	
-	<select id="getMember" resultMap="memberResult"><!-- rs로 받아야하기 때문에 resultType설정/ 생략 불가  -->
+		
+	<select id="getMember" resultMap="memberResult">
 		<![CDATA[
-		select * from member from id=#{id}
-		]]>
-	</select>
-	<select id="loginMember" resultMap="memberResult"><!-- rs로 받아야하기 때문에 resultType설정/ 생략 불가  -->
-		<![CDATA[
-		select * from member from id=#{id} and password=#{password}
+		select * from member where id=#{id}
 		]]>
 	</select>
 	
-	
+	<select id="loginMember" resultMap="memberResult">
+		<![CDATA[
+		select * from member where id=#{id} and password=#{password}
+		]]>
+	</select>
+		
 </mapper>
-
-
-
-
-			
-			
-			

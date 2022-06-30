@@ -10,7 +10,7 @@ import com.springbook.biz.member.MemberService;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberDAO memberDAO;
+	private MemberDAOSpring2 memberDAO;
 
 	@Override
 	public void insertMember(MemberDTO dto) {

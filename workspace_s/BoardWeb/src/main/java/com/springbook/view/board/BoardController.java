@@ -28,7 +28,7 @@ SessionAttributes - 객체를 세션으로 등록하여 사용하도록 하는 �
  
  */
 @Controller
-@SessionAttributes("board") // 세션을 board로 만들어주겟다
+@SessionAttributes("board") // board를 세션으로 만들어주겟다
 public class BoardController {
 	
 	@Autowired

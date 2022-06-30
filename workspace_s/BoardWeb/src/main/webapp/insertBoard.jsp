@@ -56,11 +56,11 @@ table .writer { width: 150px; height: 20px;}
 			<th><spring:message code="message.board.insert.table.head.content"/></th>
 			<td><textarea name="content" cols="52" rows="20"></textarea></td>
 		</tr>
-		<tr>
-			<th><spring:message code="message.board.insert.table.head.upload"/></th>
-			<td><input type="file" name="uploadFile"></td>
+<!-- 		<tr> -->
+<%-- 			<th><spring:message code="message.board.insert.table.head.upload"/></th> --%>
+<!-- 			<td><input type="file" name="uploadFile"></td> -->
 			
-		</tr>
+<!-- 		</tr> -->
 	</table>
 	<div class="btns">
 		<input type="submit" value="<spring:message code="message.board.insert.insertButton"/>">&ensp;
