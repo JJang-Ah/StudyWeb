@@ -71,25 +71,25 @@
 		]]>
 	</select>
 	
+	<!-- 게시판 전체 보기, 검색, 페이징 -->
 	<!-- Dynamin SQL 적용 -->
 	<select id="getBoardList" parameterType="Map" resultMap="boardResult">
 		<![CDATA[
 		select * from (
-			select b.*, row_number() over(order by regdate dsc) as rnum from board b
-			where 1 = 1 
+			select b.*, row_number() over(order by seq desc) as rnum from board b
+			where 1 = 1
 		]]>
-		
-		<if test="searchCondition == 'TITLE'">
-		and title like '%'||#{searchKeyword}||'%'
+		<if test="board.searchCondition == 'TITLE'">
+		and title like '%'||#{board.searchKeyword}||'%'
 		</if>
-		<if test="searchCondition == 'CONTENT'">
-		and content like '%'||#{searchKeyword}||'%'
+		<if test="board.searchCondition == 'CONTENT'">
+		and content like '%'||#{board.searchKeyword}||'%'
 		</if>
-		<if test="searchCondition == 'WRITER'">
-		and writer like '%'||#{searchKeyword}||'%'
+		<if test="board.searchCondition == 'WRITER'">
+		and writer like '%'||#{board.searchKeyword}||'%'
 		</if>
 		<![CDATA[
-		) where rnum >= #{block.startNum} and rnum <= (#{block.startNum}-1)*#{block.amount} and rnum <= (#{block.pageNum}* #{block.amount}) 
+		) where rnum >= ((#{block.pageNum}-1) * #{block.amount} + 1) and rnum <= (#{block.pageNum} * #{block.amount})
 		]]>
 	</select>
 	

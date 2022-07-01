@@ -32,17 +32,6 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("==> BoardServiceImpl - deleteBoard()");
 		boardDAO.deleteBoard(dto);
 	}
-
-	@Override
-	public List<BoardDTO> getBoardList(BoardDTO dto, BlockDTO block) {
-		System.out.println("==> BoardServiceImpl - getBoardList()");
-		return boardDAO.getBoardList(dto, block);
-	}
-	@Override
-	public int getBoardListCount(BoardDTO dto) {
-		System.out.println("==> BoardServiceImpl - getBoardList()");
-		return boardDAO.getBoardListCount(dto);
-	}
 	
 	@Override
 	public void updateBoardCnt(BoardDTO dto) {
@@ -55,6 +44,18 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("==> BoardServiceImpl - getBoard()");
 		updateBoardCnt(dto);
 		return boardDAO.getBoard(dto);
+	}
+	
+	@Override
+	public List<BoardDTO> getBoardList(BoardDTO dto, BlockDTO block) {
+		System.out.println("==> BoardServiceImpl - getBoardList()");		
+		return boardDAO.getBoardList(dto, block);
+	}
+
+	@Override
+	public int getBoardListCount(BoardDTO dto) {
+		System.out.println("==> BoardServiceImpl - getBoardListCount()");
+		return boardDAO.getBoardListCount(dto);
 	}
 	
 }

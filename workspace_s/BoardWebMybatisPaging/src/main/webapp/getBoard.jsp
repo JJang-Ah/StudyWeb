@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,18 +28,19 @@ table .writer { width: 380px; height: 20px; background: lightgray;}
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.detailForm;
+		let pageNum = form.pageNum.value;
 		
 		// 글목록 버튼 처리
 		let btn_board_list = document.getElementById("btn_board_list");
 		btn_board_list.addEventListener("click", function() {
-			form.action = "getBoardList.do";
+			form.action = "getBoardList.do?pageNum=" + pageNum;
 			form.submit();
 		})
 		
 		// 글삭제 버튼 처리
 		let btn_delete = document.getElementById("btn_delete");
 		btn_delete.addEventListener("click", function() {
-			form.action = "deleteBoard.do";
+			form.action = "deleteBoard.do?pageNum=" + pageNum;
 			form.submit();
 		})
 		
@@ -50,6 +52,7 @@ table .writer { width: 380px; height: 20px; background: lightgray;}
 	<h1>글상세</h1>
 	<div class="d1"><a href="logout.do">로그아웃</a></div>
 	<form action="updateBoard.do" method="post" name="detailForm">
+	<input type="hidden" name="pageNum" value="${param.pageNum }">
 	<table>
 		<tr>
 			<th width="20%">번호</th>
@@ -69,7 +72,7 @@ table .writer { width: 380px; height: 20px; background: lightgray;}
 		</tr>
 		<tr>
 			<th>등록일</th>
-			<td>${board.regdate }</td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate }"/></td>
 		</tr>
 		<tr>
 			<th>조회수</th>

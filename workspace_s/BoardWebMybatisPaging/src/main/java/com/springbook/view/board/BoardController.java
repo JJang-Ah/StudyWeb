@@ -1,7 +1,6 @@
 package com.springbook.view.board;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.springbook.biz.board.BlockDTO;
@@ -31,20 +29,6 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
-	// JSON 형식으로 글목록 보기
-	@RequestMapping(value="/getBoardListJson.do")
-	@ResponseBody // 자바객체를 Http 응답 프로토콜에 적용하도록 설정하는 애노테이션 
-	public List<BoardDTO> getBoardListJson(BoardDTO dto, Model model, BlockDTO block) {
-		System.out.println("=> BoardController - 글목록 조회(JSON)");
-		
-		// 검색 확인 - searchCondition, searchKeyword가 null일 때의 처리
-		if(dto.getSearchCondition() == null) dto.setSearchCondition("TITLE");
-		if(dto.getSearchKeyword() == null) dto.setSearchKeyword("");
-		
-		List<BoardDTO> boardList = boardService.getBoardList(dto, block);
-		return boardList;
-	}
 	
 	//@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
 	@GetMapping(value="/insertBoard.do")
@@ -68,17 +52,17 @@ public class BoardController {
 	
 	// SessionAttributes와 ModelAttribute 애노테이션을 사용하여 update할 때 발생하는 null 업데이트를 방지할 수 있음.
 	@RequestMapping(value="/updateBoard.do")
-	public String updateBoard(@ModelAttribute("board") BoardDTO dto) {
+	public String updateBoard(@ModelAttribute("board") BoardDTO dto, BlockDTO block) {
 		System.out.println("=> BoardController - 글수정 처리");
 		boardService.updateBoard(dto);
-		return "redirect:getBoardList.do";
+		return "redirect:getBoardList.do?pageNum=" + block.getPageNum();
 	}
 	
 	@RequestMapping(value="/deleteBoard.do")
-	public String deleteBoard(BoardDTO dto) {
+	public String deleteBoard(BoardDTO dto, BlockDTO block) {
 		System.out.println("=> BoardController - 글삭제 처리");
 		boardService.deleteBoard(dto);
-		return "redirect:getBoardList.do";
+		return "redirect:getBoardList.do?pageNum=" + block.getPageNum();
 	}
 	
 	@RequestMapping(value="/getBoard.do")
@@ -99,18 +83,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="getBoardList.do")
-	public String getBoardList(BoardDTO dto, Model model, BlockDTO block) {
+	public String getBoardList(BoardDTO dto, BlockDTO block, Model model) {
 		System.out.println("=> BoardController - 글목록 조회");
 		
 		// 검색 확인 - searchCondition, searchKeyword가 null일 때의 처리
 		if(dto.getSearchCondition() == null) dto.setSearchCondition("TITLE");
 		if(dto.getSearchKeyword() == null) dto.setSearchKeyword("");
 		
-		int tot = boardService.getBoardListCount(dto);
-		System.out.println("tot: " + tot);
+		int tot = boardService.getBoardListCount(dto); // 페이징에서 사용할 전체 페이지수
+		System.out.println("tot: " + tot) ;
 		
 		PageDTO pageDTO = new PageDTO(block, tot);
-		
 		model.addAttribute("boardList", boardService.getBoardList(dto, block));
 		model.addAttribute("pageDTO", pageDTO);
 		

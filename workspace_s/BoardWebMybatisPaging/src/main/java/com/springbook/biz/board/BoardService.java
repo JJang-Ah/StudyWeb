@@ -7,8 +7,8 @@ public interface BoardService {
 	void insertBoard(BoardDTO dto);
 	void updateBoard(BoardDTO dto);
 	void deleteBoard(BoardDTO dto);
-	List<BoardDTO> getBoardList(BoardDTO dto, BlockDTO block);
 	void updateBoardCnt(BoardDTO dto);
 	BoardDTO getBoard(BoardDTO dto);
-	int getBoardListCount(BoardDTO dto);
+	List<BoardDTO> getBoardList(BoardDTO dto, BlockDTO block);
+	int getBoardListCount(BoardDTO dto); // 페이징에서 사용할 전체 페이지수를 구함
 }
