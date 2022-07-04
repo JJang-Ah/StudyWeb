@@ -9,13 +9,15 @@ import java.util.List;
 import util.JDBCUtil;
 
 public class BankDAO {
-	// 싱글톤 패턴
+	
 	private BankDAO() {}
+	
 	private static BankDAO instance = new BankDAO();
+	
 	public static BankDAO getInstance() {
 		return instance;
 	}
-
+	
 	// DB 연결 변수
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -33,18 +35,17 @@ public class BankDAO {
 			pstmt.setString(3, dto.getMember_id());
 			pstmt.setString(4, dto.getMember_name());
 			pstmt.executeUpdate();
-			
 		} catch(Exception e) {
+			System.out.println("=> insertBank() 에러");
 			e.printStackTrace();
 		} finally {
-			System.out.println("=> insertBank() 에러");
 			JDBCUtil.close(conn, pstmt);
 		}
 	}
 	
-	// 카드수정
+	// 카드 삭제(전체) -> 회원 탈퇴시에 트랜잭션 처리
 	
-	// 카드 삭제
+	// 카드 삭제(1개)
 	public void deleteBank(String member_id, String card_no) {
 		String sql = "delete from bank where member_id=? and card_no=?";
 		
@@ -64,7 +65,7 @@ public class BankDAO {
 	
 	// 카드 전체 보기
 	public List<BankDTO> getBankList(String member_id) {
-		String sql = "select * from bank where member_id=?";
+		String sql = "select * from bank where member_id = ?";
 		List<BankDTO> bankList = new ArrayList<BankDTO>();
 		BankDTO bank = null;
 		

@@ -4,50 +4,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품등록 폼</title>
+<title>상품 등록 폼</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Paytone+One&display=swap');
-#container { width: 550px; margin: 20px auto;}
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+#container { width: 550px; margin: 0 auto;}
 a { text-decoration: none; color: black;}
-
 /* 상단 - 메인, 서브 타이틀 */
-.m_title { font-family:'Paytone One', sans-serif; font-size: 3em; text-align: center;}
-.s_title { font-family:'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px}
-a { text-decoration: none; font-size: 0.95em; font-weight: bold;}
-.c_logout { text-align: right; margin-bottom: 10px;}
+.m_title { font-family: 'Paytone One', sans-serif; font-size: 3em; text-align: center;}
+.s_title { font-family: 'Do Hyeon', sans-serif; font-size: 2em; text-align: center; margin-bottom: 30px;}
+a { text-decoration: none; color: #59637f; font-size: 0.95em; font-weight: bold;}
+.c_logout { text-align: center; margin-bottom: 10px;}
 .c_logout a { color: #99424f;}
-
-/* 중단 - 상품 등록 테이블*/
-table { width: 100%; border: 1px solid gray; border-collapse: collapse;
-border-top: 5px; border-bottom: 5px; border-left: hidden; border-right: hidden;}
+/* 중단 - 상품 등록 테이블 */
+table { width: 100%; border: 1px solid #2f9e77; border-collapse: collapse; 
+border-top: 3px solid #2f9e77; border-bottom: 3px solid #2f9e77; border-left: hidden; border-right: hidden;}
 tr { height: 35px;}
-td, th { border: 1px solid gray;}
+td, th { border: 1px solid #2f9e77;}
 th { background: #d8f4e6;}
 td { padding-left: 5px;}
-
-/* 중단 - 테이블 안의 입력상자*/
+/* 중단 - 테이블 안의 입력상자 */
 input[type="number"] { width: 100px;}
 textarea { margin-top: 5px;}
-
 /* 하단 - 버튼 */
 select { height: 24px;}
-input::file-selector-button { width: 90px; height: 27px; background: #2f9e77; color: #fff;
- border: none; border-radius: 5px;}
+input::file-selector-button { width: 90px; height: 28px; background: #2f9e77; color: #fff; border: none;
+border-radius: 3px; font-weight: bold; cursor: pointer;}
 .btns { text-align: center; margin-top: 10px;}
-.btns input { width: 100px; height: 35px; border: none; background: #495057; color: #fff; 
+.btns input { width: 100px; height: 37px; border: none; background: #495057; color: #fff; 
 font-weight: bold; margin: 5px; cursor: pointer;}
-.btns input:nth-child(1) { background: #2f9277;}
-.btns input:nth-child(1):hover { border: 2px solid #2f9277; background: #fff; color: #2f9e77;
-font-weight: bold;}
+.btns input:nth-child(1) { background: #2f9e77;}
+.btns input:nth-child(1):hover { border: 2px solid #2f9e77; background: #fff; color: #2f9e77; font-weight: bold;}
 </style>
 <script>
-
-	// 상품 등록
 	document.addEventListener("DOMContentLoaded", function() {
 		let form = document.registerForm;
+		
+		// 상품 등록 처리 페이지로 이동
 		let btn_register = document.getElementById("btn_register");
 		btn_register.addEventListener("click", function() {
-				
 			if(!form.product_name.value) {
 				alert('상품 제목을 입력하시오.');
 				return;
@@ -83,42 +78,39 @@ font-weight: bold;}
 			form.submit();
 		})
 		
-		//상품 목록 페이지로 이동
+		// 상품 목록 페이지로 이동
 		let btn_list = document.getElementById("btn_list");
 		btn_list.addEventListener("click", function() {
-			location = "productList.jsp";
+			location = 'productList.jsp';
 		})
 		
 		// 관리자 페이지로 이동
 		let btn_main = document.getElementById("btn_main");
 		btn_main.addEventListener("click", function() {
-			location = "../managerMain.jsp";
+			location = '../managerMain.jsp';
 		})
+		
 	})
-
 </script>
-
 </head>
 <body>
 <%
 String managerId = (String)session.getAttribute("managerId");
-if(managerId == null) {%>
-	<script>
-	location = "../managerMain.jsp";
-	</script>
-<%}%>
+if(managerId == null) {
+	out.print("<script>location='../logon/managerLoginForm.jsp';</script>");
+}
+%>
 <div id="container">
-	<div class="m_title"><a href="../managerMain.jsp">AH MALL</a></div>
+	<div class="m_title"><a href="../managerMain.jsp">EZEN MALL</a></div>
 	<div class="s_title">상품 등록</div>
 	
 	<form action="productRegisterPro.jsp" method="post" name="registerForm" enctype="multipart/form-data">
-	<%-- enctype="multipart/form-data" 파일 업로드하는 폼 >> 그래서 다른 프로퍼티들이 Pro로 넘어가지 않는다. --%>
 		<table>
 			<tr>
-				<th>상품 분류</th>
-				<td>
+				<th width="20%">상품 분류</th>
+				<td width="80%">
 					<select name="product_kind">
-						<option value="110">소설/시</option>
+						<option value="110" selected>소설/시</option>
 						<option value="120">에세이</option>
 						<option value="210">역사</option>
 						<option value="220">예술</option>
@@ -147,19 +139,19 @@ if(managerId == null) {%>
 			</tr>
 			<tr>
 				<th>상품 가격</th>
-				<td><input type="number" name="product_price" min="1000" max="1000000" size="30">원</td>
+				<td><input type="number" name="product_price" min="1000" max="1000000">원</td>
 			</tr>
 			<tr>
 				<th>상품 수량</th>
-				<td><input type="number" name="product_count" min="0" max="100000" size="30">권</td>
+				<td><input type="number" name="product_count" min="0" max="100000">권</td>
 			</tr>
 			<tr>
 				<th>저자</th>
-				<td><input type="text" name="author">
+				<td><input type="text" name="author" size="56"></td>
 			</tr>
 			<tr>
 				<th>출판사</th>
-				<td><input type="text" name="publishing_com"></td>
+				<td><input type="text" name="publishing_com" size="56"></td>
 			</tr>
 			<tr>
 				<th>출판일</th>
@@ -171,7 +163,7 @@ if(managerId == null) {%>
 			</tr>
 			<tr>
 				<th>상품 내용</th>
-				<td><textarea name="product_content" rows="15" cols="60"></textarea></td>
+				<td><textarea name="product_content" rows="13" cols="58"></textarea></td>
 			</tr>
 			<tr>
 				<th>할인율</th>
@@ -186,6 +178,5 @@ if(managerId == null) {%>
 		</div>
 	</form>
 </div>
-
 </body>
 </html>

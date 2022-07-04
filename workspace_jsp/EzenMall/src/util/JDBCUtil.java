@@ -9,16 +9,16 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class JDBCUtil {
-
-	// 1~2 단계 - Connection Pool 사용
+	
+	// 1~2단계 - Connection Pool 사용
 	public static Connection getConnection() throws Exception {
 		Context initCtx = new InitialContext();
-		Context envCtx = (Context)initCtx.lookup("java:comp/env"); // 라이브러리 설정(환경)을 찾는다.
+		Context envCtx = (Context)initCtx.lookup("java:comp/env");
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/db01");
-		return ds.getConnection();
+	    return ds.getConnection();
 	}
 	
-	// Connection, PreparedStatement 닫는 메소드 - insert, update, delete 작업
+	// Connection, PreparedStatement 객체를 닫는 메소드 - insert, update, delete 작업
 	public static void close(Connection conn, PreparedStatement pstmt) {
 		if(pstmt != null) {
 			try {
@@ -36,7 +36,8 @@ public class JDBCUtil {
 			}
 		}
 	}
-	// Connection, PReparedStatement, ResultSet 객체를 닫는 메소드 - select 작업
+	
+	// Connection, PreparedStatement, ResultSet 객체를 닫는 메소드 - select 작업
 	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		if(rs != null) {
 			try {
@@ -45,6 +46,7 @@ public class JDBCUtil {
 				e.printStackTrace();
 			}
 		}
+		
 		if(pstmt != null) {
 			try {
 				pstmt.close();
@@ -61,4 +63,5 @@ public class JDBCUtil {
 			}
 		}
 	}
+
 }

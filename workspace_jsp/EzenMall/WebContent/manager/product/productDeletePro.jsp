@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="manager.product.*"%>
+<%@ page import="manager.product.*, java.util.*" %>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +17,5 @@ ProductDAO productDAO = ProductDAO.getInstance();
 productDAO.deleteProduct(product_id);
 response.sendRedirect("productList.jsp?pageNum=" + pageNum);
 %>
-
 </body>
 </html>

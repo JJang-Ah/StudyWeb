@@ -4,17 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 로그아웃</title>
+<title>관리자 로그아웃 처리</title>
 </head>
 <body>
 <%
 // 세션 삭제
 session.removeAttribute("managerId");
 %>
-
 <script>
-	alert('로그아웃하였습니다.');
-	location = "managerLoginForm.jsp";
+	alert('로그아웃 하였습니다.');
+	location = 'managerLoginForm.jsp';
 </script>
 </body>
 </html>

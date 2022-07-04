@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mall.cart.*, mall.buy.*, java.text.*, java.util.*, java.sql.*" %>
+<%@ page import="mall.cart.*, mall.buy.*, java.util.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,35 +10,34 @@
 <body>
 <%
 request.setCharacterEncoding("utf-8");
-DecimalFormat df = new DecimalFormat("#,###,###");
 
 String memberId = (String)session.getAttribute("memberId");
-if(memberId == null) {
-	out.print("<script>alert('로그인을 해주세요.'); location='../logon/memberLoginForm.jsp';");
-	out.print("</script>");
-	return;
-} 
 
-// 정보 확인 - buy_count ? 
+if(memberId == null) { 
+	out.print("<script>alert('로그인을 해주세요.');");
+	out.print("location='../logon/memberLoginForm.jsp';</script>");
+	return;
+}
+
+// 정보 확인 - buy_count ?
 List<CartDTO> cartList = (List<CartDTO>)session.getAttribute("cartList");
 String account = request.getParameter("account");
 String delivery_name = request.getParameter("delivery_name");
 String delivery_tel = request.getParameter("delivery_tel");
 String delivery_address = request.getParameter("delivery_address1") + " " + request.getParameter("delivery_address2");
 
-// 고유한 구매 아이디를 생성 (하나의 카트에 담겨 있는 모든 상품에 대한 )
-// 구매 아이디(buy_id) : 날짜 8자리 + 고유한 숫자 12자리 -> 20자리의 고유한 구매 아이디를 생성 
+// 고유한 구매 아이디를 생성 (하나의 카트에 담겨 있는 모든 상품에 대한)
+// 구매 아이디(buy_id): 날짜 8자리 + 고유한 숫자 12자리 -> 20자리의 고유한 구매 아이디를 생성
 // 1. 날짜 8자리
 Timestamp now = new Timestamp(System.currentTimeMillis());
-String n =now.toString();
-String s1 = n.substring(0, 4) + n.substring(5, 7) + n.substring(8, 10) ; // 연도 + 월 + 일
-
+String n = now.toString();
+String s1 = n.substring(0, 4) + n.substring(5, 7) + n.substring(8, 10);
 // 2. 고유한 숫자 12자리
 UUID uuid = UUID.randomUUID();
-String s2 = uuid.toString().replace("-", "").substring(0,12);
+String s2 = uuid.toString().replace("-", "").substring(0, 12);
 String buy_id = s1 + s2;
 
-// 구매리스트
+// 구매 리스트에 저장 
 List<BuyDTO> buyList = new ArrayList<BuyDTO>();
 BuyDTO buy = null;
 for(CartDTO cart : cartList) {
@@ -54,16 +53,14 @@ for(CartDTO cart : cartList) {
 	buy.setDelivery_name(delivery_name);
 	buy.setDelivery_tel(delivery_tel);
 	buy.setDelivery_address(delivery_address);
-	buyList.add(buy);	
+	buyList.add(buy);
 }
 session.setAttribute("buyList", buyList);
 
 // buyList 확인
-/*
-for(BuyDTO b: buyList) {
-	System.out.println("b:" + b);
-}
-*/
+/* for(BuyDTO b : buyList) {
+	System.out.println(b);
+} */
 
 // BuyDAO 연동
 BuyDAO buyDAO = BuyDAO.getInstance();

@@ -3,7 +3,7 @@ package mall.review;
 import java.sql.Timestamp;
 
 public class ReviewDTO {
-
+	// property
 	private int num;
 	private String member_id;
 	private int product_id;

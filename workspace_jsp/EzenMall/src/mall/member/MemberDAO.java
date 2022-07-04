@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import util.JDBCUtil;
 
-// DAO(Data Access Object) - DB 연결, 해제, 질의를 담당
+// DAO(Data Access Object) - DB 연결, 해제, 질의를 담담
 public class MemberDAO {
 	
 	// Singleton Pattern(싱글톤 패턴) - 클래스의 인스턴스 하나만 생성하는 방법
@@ -23,8 +23,8 @@ public class MemberDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	// 회원가입 메소드
-	// 같은 패키지이기 때문에 따로 import 안해도 된다.
+	
+	// 회원 가입 메소드
 	public int insertMember(MemberDTO member) {
 		String sql = "insert into member values(?, ?, ?, ?, ?, ?, now())";
 		int cnt = 0; // 성공 여부
@@ -39,9 +39,6 @@ public class MemberDAO {
 			pstmt.setString(5, member.getTel());
 			pstmt.setString(6, member.getAddress());
 			cnt = pstmt.executeUpdate();
-			rs = pstmt.executeQuery();
-			
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -51,21 +48,18 @@ public class MemberDAO {
 	}
 	
 	// 회원 ID 중복 체크
-	public int checkId(String id) {
-		
-		int cnt = 0;
+	public int checkID(String id) {
 		String sql = "select * from member where id = ?";
+		int cnt = 0; // 성공 여부
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) { // 아이디가 있음 -> 사용할 수 없는 아이디
-				cnt = 0;
-			} else { // 아이디가 없음 -> 사용할 수 있는 아이디
-				cnt = 1;
-			}
+			if(rs.next()) cnt = 0; // 아이디가 이미 존재 -> 사용할 수 없는 아이디	
+			else cnt = 1;          // 아이디가 없음 -> 사용할 수 있는 아이디
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -78,7 +72,8 @@ public class MemberDAO {
 	// 로그인 메소드
 	public int login(String id, String pwd) {
 		String sql = "select * from member where id = ?";
-		int cnt = -1; // -1: 아이디가 없음, 0: 아이디는 있고 비밀번호가 다르다, 1: 아이디와 비밀번호가 모두 일치
+		int cnt = -1; // -1: 아이디가 없음, 0: 아이디는 있고, 비밀번호가 다름, 1: 아이디와 비밀번호가 모두 일치
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -87,14 +82,15 @@ public class MemberDAO {
 			
 			if(rs.next()) { // 아이디가 있을 때
 				String dbPwd = rs.getString("pwd");
-				if(pwd.equals(dbPwd)) { // 아이디와 비밀번호 모두 일치할 때
+				if(pwd.equals(dbPwd)) { // 비밀번호도 일치할 때
 					cnt = 1;
-				} else { // 아이디는 있지만 비밀번호가 일치하지 않을 때
+				} else {                // 비밀번호가 일치하지 않을 때
 					cnt = 0;
 				}
-			} else { // 아이디가 없을 때
+			} else {        // 아이디가 없을 때
 				cnt = -1;
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -102,10 +98,11 @@ public class MemberDAO {
 		}
 		return cnt;
 	}
-	// 회원 정보 보기(1명, 자신의 정보)
+	
+	// 회원 정보 보기(1명, 자신의 정보) 메소드
 	public MemberDTO getMember(String id) {
 		String sql = "select * from member where id = ?";
-		MemberDTO member = new MemberDTO();
+		MemberDTO member = null;
 		
 		try {
 			conn = JDBCUtil.getConnection();
@@ -115,6 +112,7 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				// 가입일을 제외한 정보를 member 테이블로부터 가져와서 member 객체에 저장
+				member = new MemberDTO();
 				member.setId(rs.getString("id"));
 				member.setPwd(rs.getString("pwd"));
 				member.setName(rs.getString("name"));
@@ -122,7 +120,6 @@ public class MemberDAO {
 				member.setTel(rs.getString("tel"));
 				member.setAddress(rs.getString("address"));
 				member.setRegDate(rs.getTimestamp("regDate"));
-
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -133,9 +130,9 @@ public class MemberDAO {
 	}
 	
 	// 회원 정보 수정 메소드
-	public int UpdateMember(MemberDTO member) {
-		String sql ="update member set pwd=?, name=?, email=?, tel=?, address=? where id=?";
-		int cnt = 0; // 업데이트 성공 여부
+	public int updateMember(MemberDTO member) {
+		String sql = "update member set pwd=?, name=?, email=?, tel=?, address=? where id=?";
+		int cnt = 0; // 성공 여부
 		
 		try {
 			conn = JDBCUtil.getConnection();
@@ -147,8 +144,6 @@ public class MemberDAO {
 			pstmt.setString(5, member.getAddress());
 			pstmt.setString(6, member.getId());
 			cnt = pstmt.executeUpdate();
-			
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -157,21 +152,22 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	// 회원 삭제(회원 탈퇴) 메소드 -> 해당 회원이 남긴 리뷰, 카트 정보도 모두 삭제, 구매 정보는 삭제하지 않는다. 
-	public int deleteMember(String id, String pwd) {
+ 	// 회원 삭제(탈퇴) 메소드 -> 해당 회원이 남긴 리뷰, 카트 정보도 모두 삭제, 구매정보는 삭제하지 않음
+	// 트랜잭션(Transaction) 처리
+	public int deleteMember(String id, String pwd) throws Exception {
 		String sql1 = "delete from member where id=? and pwd=?";
-		String sql2 = "delete from board where member_id = ?";
+		String sql2 = "delete from review where member_id=?";
 		String sql3 = "delete from cart where buyer=?";
-		int cnt = 0;
+		int cnt = 0; // 성공 여부
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			
-			// 트랜잭션(transaction) 처리 - DML(insert, update, delete) 작업이 2개 이상 함께 처리되어야 할때
+			// 트랙잭션(transaction) 처리 - DML(insert, update, delete) 작업이 2개 이상 함께 처리되어야 할 때
 			// 모두 처리되든지, 모두 처리되지 않게 하는 방법
 			// All or Nothing
 			
-			
-			// 트랜잭션 처리 1단계 - autocommit 기능을 끔
+			// 트랜잭션 1단계 - autocommit 기능을 끔.
 			conn.setAutoCommit(false);
 			
 			// 1작업: 회원 삭제(탈퇴)
@@ -180,7 +176,7 @@ public class MemberDAO {
 			pstmt.setString(2, pwd);
 			pstmt.executeUpdate();
 			
-			// 2작업: 해당 회원이 남긴 리뷰 모두 삭제
+			// 2작업: 회원이 남긴 모든 리뷰 삭제
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
@@ -188,21 +184,22 @@ public class MemberDAO {
 			// 3작업: 회원의 모든 카트 정보 삭제
 			pstmt = conn.prepareStatement(sql3);
 			pstmt.setString(1, id);
+			pstmt.executeUpdate();
 			
-			// 트랜잭션 처리 2단계 - 모든 작업이 완료되었을 때 커밋을 함.
+			// 트랜잭션 2단계 - 모든 작업이 완료되었을 때 커밋을 함.
 			conn.commit();
-			
-			// 트랜잭션 처리 3단계 - autocommit기능을 다시 설정해 놓는다.
+			// 트랜잭션 3단계 - autocommit 기능을 다시 설정함.
 			conn.setAutoCommit(true);
 			cnt = 1;
 			
 		} catch(Exception e) {
+			// 트랜잭션 처리시에 예외가 발생했을 때 롤백을 함.
+			conn.rollback();
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(conn, pstmt);
 		}
 		return cnt;
 	}
-	
-	
+
 }

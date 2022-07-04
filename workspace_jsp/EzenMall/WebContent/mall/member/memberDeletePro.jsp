@@ -5,28 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 탈퇴(삭제) 처리</title>
+<title>회원탈퇴(삭제)</title>
 </head>
 <body>
-	<%
-	String id = request.getParameter("id");
-	String pwd = request.getParameter("pwd");
-	
-	MemberDAO memberDAO = MemberDAO.getInstance();
-	int cnt = memberDAO.deleteMember(id, pwd);
-	
-	%>
-	<script>
-	<%if(cnt > 0) { // 삭제 성공
-		session.removeAttribute("memberId");
-	%>
-		alert(`계정이 성공적으로 삭제되었습니다.`);
-		location='../shopping/shopAll.jsp';
-	<%} else {%> // 삭제 실패
-		alert(`계정 탈퇴(삭제)에 실패하였습니다.`);
-		history.back();
-	<%}%>
-	</script>
+<%
+String id = request.getParameter("id");
+String pwd = request.getParameter("pwd");
 
+MemberDAO memberDAO = MemberDAO.getInstance();
+int cnt = memberDAO.deleteMember(id, pwd);
+
+out.print("<script>");
+if(cnt > 0) {
+	session.removeAttribute("memberId");
+	out.print("alert('회원 탈퇴에 성공하였습니다.');");
+	out.print("location='../shopping/shopAll.jsp';");
+} else {
+	out.print("alert('회원 탈퇴에 실패하였습니다.');");
+	out.print("history.back();");
+}
+out.print("</script>");
+%>
 </body>
 </html>

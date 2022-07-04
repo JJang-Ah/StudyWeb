@@ -2,11 +2,11 @@ package mall.member;
 
 import java.sql.Timestamp;
 
-// DTO, VO, DataBean 
+// DTO, VO, DataBean
 // useBean 액션태그에서 사용 -> 데이터의 이동에서 사용
 public class MemberDTO {
 	// 프로퍼티(property) -> 멤버변수
-	// 아이디, 비밀번호, 이름, 이메일, 전화번호, 주소 
+	// 아이디, 비밀번호, 이름, 이메일, 전화번호, 주소
 	private String id;
 	private String pwd;
 	private String name;
@@ -73,7 +73,7 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", tel=" + tel
+		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", tel=" + tel
 				+ ", address=" + address + ", regDate=" + regDate + "]";
 	}
 

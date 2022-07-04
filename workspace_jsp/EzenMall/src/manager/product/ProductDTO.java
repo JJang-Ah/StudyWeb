@@ -1,3 +1,4 @@
+
 package manager.product;
 
 import java.sql.Timestamp;
@@ -14,7 +15,7 @@ public class ProductDTO {
 	private int product_count;
 	private String author;
 	private String publishing_com;
-	private String publisging_date;
+	private String publishing_date;
 	private String product_image;
 	private String product_content;
 	private int discount_rate;
@@ -49,7 +50,7 @@ public class ProductDTO {
 	}
 
 	public String getPublishing_date() {
-		return publisging_date;
+		return publishing_date;
 	}
 
 	public String getProduct_image() {
@@ -96,8 +97,8 @@ public class ProductDTO {
 		this.publishing_com = publishing_com;
 	}
 
-	public void setPublisging_date(String publisging_date) {
-		this.publisging_date = publisging_date;
+	public void setPublishing_date(String publishing_date) {
+		this.publishing_date = publishing_date;
 	}
 
 	public void setProduct_image(String product_image) {
@@ -120,9 +121,11 @@ public class ProductDTO {
 	public String toString() {
 		return "ProductDTO [product_id=" + product_id + ", product_kind=" + product_kind + ", product_name="
 				+ product_name + ", product_price=" + product_price + ", product_count=" + product_count + ", author="
-				+ author + ", publishing_com=" + publishing_com + ", publisging_date=" + publisging_date
+				+ author + ", publishing_com=" + publishing_com + ", publishing_date=" + publishing_date
 				+ ", product_image=" + product_image + ", product_content=" + product_content + ", discount_rate="
 				+ discount_rate + ", reg_date=" + reg_date + "]";
 	}
 
 }
+	
+
