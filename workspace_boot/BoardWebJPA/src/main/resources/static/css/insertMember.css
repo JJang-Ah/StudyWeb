@@ -1,0 +1,20 @@
+.container { width: 500px; margin: 20px auto;}
+h1 { text-align: center;}
+table { width: 100%; border: 1px solid black; border-collapse: collapse;}
+tr { height: 70px;}
+th, td { border: 1px solid black;}
+th { background: #e9ecef;}
+td { padding: 5px;}
+.id, .password, .name{ width: 150px; height: 20px;}
+.email, .tel { width: 200px; height: 20px;}
+.address { width: 380px; height: 20px;}
+.ss { margin-top: 5px; font-size: 0.8em; font-weight: bold;}
+.s1 { color: blue;}
+.s2 { color: red;}
+.btns { margin-top: 20px; text-align: center;}
+.btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; 
+cursor: pointer; margin: 0 5px;}
+input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
+input[type=reset], input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+#btn_id_check { width: 130px; height: 25px; font-size: 0.7em; background: #196ab3; border: none; 
+border-radius: 25px; color: #fff; cursor: pointer; margin-left: 10px;}

@@ -1,0 +1,18 @@
+#container { width: 1000px; margin: 20px auto;}
+h1 { text-align: center;}
+a { text-decoration: none; color: #196ab3; font-weight: bold; font-size: 0.95em;}
+.d1 { width: 100%; padding-bottom: 40px;}
+.d1 div { display: inline-block;}
+.d1 .d1_1 { float: left;}
+.d1 .d1_2 { float: right; width: 68px; border: 1px solid #196ab3; padding: 3px 10px; border-radius: 3px; margin-right: 5px; text-align: center;}
+table { width: 100%; border: 1px solid black; border-collapse: collapse;}
+tr { height: 30px;}
+th, td { border: 1px solid black;}
+th { background: #e9ecef;}
+.t1 tr td:nth-of-type(1) { text-align: right; padding-right: 5px;}
+.t1 tr td:nth-of-type(2), .t1 tr td:nth-of-type(3) { padding: 0 5px;}
+.t1 select { width: 100px; height: 25px;}
+.t1 input[type=text] { width: 280px; height: 18px; padding-left: 3px;}
+.t1 input[type=submit] { width: 88px; height: 25px; cursor: pointer;}
+.t2 .center { text-align: center;}
+.t2 .left { padding-left: 5px;}

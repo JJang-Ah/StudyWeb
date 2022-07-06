@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시판 전체</title>
+<link rel="stylesheet" href="/css/getBoardList.css">
+<!-- 
+th:each - 반복문
+th:text - 값
+th:href - a태그의 속성값으로 @{이동할경로(name=value, name=value)}	
+-->
+</head>
+<body>
+<div id="container">
+	<h1>게시판 목록</h1>
+	<div class="d1">
+		<div class="d1_1">
+			<a th:href="@{/getMember(id=${session.member.id})}" th:text="${session.member.id }"></a>님 환영합니다!&emsp;
+			<a th:href="@{/logout}">로그아웃</a>
+		</div>
+		<div class="d1_2"><a th:href="@{/insertBoard}">글등록</a></div>
+	</div>
+	<form th:action="getBoardList" method="post">
+	<table class="t1">
+		<tr>
+			<td width="60%">
+				<select name="searchCondition">
+					<option th:each="option : ${conditionMap }" th:value="${option.value}" th:text="${option.key}">
+					</option>
+				</select>
+			</td>
+			<td width="30%"><input type="text" name="searchKeyword"></td>
+			<td width="10%"><input type="submit" value="검색"></td>
+		</tr>
+	</table>
+	</form>
+	<table class="t2">
+		<tr>
+			<th width="10%">번호</th>
+			<th width="50%">제목</th>
+			<th width="15%">작성자</th>
+			<th width="15%">등록일</th>
+			<th width="10%">조회수</th>
+		</tr>
+		<tr th:each="board : ${boardList}">
+			<td th:text="${board.seq}" class="center"></td>
+			<td class="left"><a th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a></td>
+			<td th:text="${board.writer}" class="center"></td>
+			<td th:text="${board.regdate}" class="center"></td>
+			<td th:text="${board.cnt}" class="center"></td>		
+		</tr>
+	</table>
+</div>
+</body>
+</html>

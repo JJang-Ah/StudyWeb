@@ -1,0 +1,19 @@
+.container { width: 500px; margin: 20px auto;}
+h1, .d1 { text-align: center;}
+.d1 { margin-bottom: 20px;}
+a { text-decoration: none; color: #196ab3; font-weight: bold; font-size: 1.05em;}
+table { width: 100%; border: 1px solid black; border-collapse: collapse;}
+tr { height: 70px;}
+th, td { border: 1px solid black;}
+th { background: #e9ecef;}
+td { padding: 5px;}
+.s_id { color: red; font-size: 0.9em;}
+.id { background: lightgray;}
+.id, .password, .name{ width: 150px; height: 20px;}
+.email, .tel { width: 200px; height: 20px;}
+.address { width: 380px; height: 20px;}
+.btns { margin-top: 20px; text-align: center;}
+.btns input { width: 100px; height: 35px; font-size: 1.02em; font-weight: bold; border-radius: 3px; cursor: pointer; margin: 0 5px;}
+input[type=submit] { background: #000; color: #fff; border: 1px solid #000;}
+input[type=reset], input[type=button] { background: #868e96; color: #fff; border: 1px solid #868e96;}
+#btn_delete { background: #c84557; border: 1px solid #c84557;}

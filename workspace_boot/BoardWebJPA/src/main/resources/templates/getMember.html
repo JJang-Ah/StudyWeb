@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원정보</title>
+<link rel="stylesheet" href="/css/getMember.css">
+<script src="/js/getMember.js"></script>
+</head>
+<body>
+<div class="container">
+	<h1>회원정보</h1>
+	<div class="d1"><a th:href="@{/logout}">로그아웃</a></div>
+	<form action="updateMember" method="post" name="detailMemberForm">
+		<table>
+			<tr>
+				<th width="20%">아이디</th>
+				<td width="80%"><input type="text" name="id" class="id" th:value="${session.member.id }" readonly>&emsp;<span class="s_id">아이디는 변경불가</span></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="password" class="password" th:value="${session.member.password }"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" class="name" th:value="${session.member.name }"></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="text" name="email" class="email" th:value="${session.member.email }"></td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td><input type="text" name="tel" class="tel" th:value="${session.member.tel }"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input type="text" name="address" class="address" th:value="${session.member.address }"></td>
+			</tr>
+		</table>
+		<div class="btns">
+			<input type="submit" value="수정">
+			<input type="button" value="탈퇴" id="btn_delete">
+			<input type="button" value="글목록" id="btn_board_list">
+		</div>
+	</form>
+</div>	
+</body>
+</html>

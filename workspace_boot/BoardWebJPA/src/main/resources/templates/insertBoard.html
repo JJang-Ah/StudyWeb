@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글등록</title>
+<link rel="stylesheet" href="/css/insertBoard.css">
+<script src="/js/insertBoard.js"></script>
+</head>
+<body>
+<div class="container">
+	<h1>글등록</h1>
+	<div class="d1"><a th:href="@{/logout}">로그아웃</a></div>
+	<form action="insertBoard" method="post" name="insertForm">
+		<table>
+			<tr>
+				<th width="20%">제목</th>
+				<td width="80%"><input type="text" name="title" class="title"></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="writer" class="writer" th:value="${session.member.id }" readonly></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea name="content" cols="52" rows="20"></textarea></td>
+			</tr>
+		</table>
+		<div class="btns">
+			<input type="submit" value="등록">&ensp;
+			<input type="button" value="글목록" id="btn_board_list">
+		</div>
+	</form>
+</div>
+</body>
+</html>

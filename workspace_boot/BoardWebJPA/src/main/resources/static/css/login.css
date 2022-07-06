@@ -1,0 +1,12 @@
+.container { width: 300px; margin: 20px auto;}
+h1, .d1 { text-align: center;}
+.d1 { margin: 10px 0;}
+a { text-decoration: none; color: #196ab3; font-size: 0.95em;}
+table { width: 100%; border: 1px solid black; border-collapse: collapse;}
+tr { height: 50px;}
+th, td { border: 1px solid black;}
+th { background: #e9ecef;}
+td { padding-left: 5px;}
+tr:nth-of-type(3) td { text-align: center;}
+input[type=text], input[type=password] { width: 190px; height: 25px;}
+input[type=submit] { width: 100px; height: 35px; font-size: 1.03em; font-weight: bold;}
