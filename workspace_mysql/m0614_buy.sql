@@ -51,3 +51,9 @@ select * from buy;
 - member_id : varchar(50), not null
 - member_name : varchar(50), not null
 */
+create table  bank (
+card_no varchar(20) not null,
+card_com varchar(20) not null,
+member_id varchar(50) not null,
+member_name varchar(50) not null
+);

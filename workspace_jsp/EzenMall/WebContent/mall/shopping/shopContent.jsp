@@ -94,7 +94,7 @@ text-align: center; line-height: 30px; border-radius: 5px; color: #fff; font-siz
 		})
 		
 		// 구매하기 버튼
-		let btn_buy = document.getElementById("btn_buy");
+		let btn_buy = document.getElementById("btn_b`uy");
 		btn_buy.addEventListener("click", function() {
 			location = "../buy/buyForm.jsp?product_id="+form.product_id.value+"&buy_count="+form.buy_count.value+"&part=2";
 		})
